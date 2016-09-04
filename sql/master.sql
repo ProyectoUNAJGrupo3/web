@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema unaj_proyecto
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema unaj_proyecto
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `unaj_proyecto` DEFAULT CHARACTER SET utf8 ;
+USE `unaj_proyecto` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Roles`
+-- Table `unaj_proyecto`.`Roles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Roles` (
+CREATE TABLE IF NOT EXISTS `unaj_proyecto`.`Roles` (
   `RolID` INT NOT NULL,
   `Descripcion` VARCHAR(45) NULL,
   PRIMARY KEY (`RolID`))
@@ -28,9 +28,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Personas`
+-- Table `unaj_proyecto`.`Personas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Personas` (
+CREATE TABLE IF NOT EXISTS `unaj_proyecto`.`Personas` (
   `PersonaID` INT NOT NULL,
   `Usuario` VARCHAR(45) NULL,
   `Contraseña` VARCHAR(45) NULL,
@@ -43,18 +43,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Personas` (
   PRIMARY KEY (`PersonaID`),
   CONSTRAINT `fk_Personas_Roles`
     FOREIGN KEY (`RolID`)
-    REFERENCES `mydb`.`Roles` (`RolID`)
+    REFERENCES `unaj_proyecto`.`Roles` (`RolID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Personas_Roles_idx` ON `mydb`.`Personas` (`RolID` ASC);
+CREATE INDEX `fk_Personas_Roles_idx` ON `unaj_proyecto`.`Personas` (`RolID` ASC);
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Vehiculos`
+-- Table `unaj_proyecto`.`Vehiculos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Vehiculos` (
+CREATE TABLE IF NOT EXISTS `unaj_proyecto`.`Vehiculos` (
   `VehiculoID` INT NOT NULL,
   `Matricula` VARCHAR(45) NULL,
   `Modelo` VARCHAR(45) NULL,
@@ -67,9 +67,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Agencias`
+-- Table `unaj_proyecto`.`Agencias`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Agencias` (
+CREATE TABLE IF NOT EXISTS `unaj_proyecto`.`Agencias` (
   `AgenciaID` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `Telefono` VARCHAR(45) NULL,
@@ -82,9 +82,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Turnos`
+-- Table `unaj_proyecto`.`Turnos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Turnos` (
+CREATE TABLE IF NOT EXISTS `unaj_proyecto`.`Turnos` (
   `TurnoID` INT NOT NULL,
   `PersonaID` INT NOT NULL,
   `FechaApertura` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -93,18 +93,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Turnos` (
   PRIMARY KEY (`TurnoID`),
   CONSTRAINT `fk_Turnos_Personas`
     FOREIGN KEY (`PersonaID`)
-    REFERENCES `mydb`.`Personas` (`PersonaID`)
+    REFERENCES `unaj_proyecto`.`Personas` (`PersonaID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Turnos_Personas1_idx` ON `mydb`.`Turnos` (`PersonaID` ASC);
+CREATE INDEX `fk_Turnos_Personas1_idx` ON `unaj_proyecto`.`Turnos` (`PersonaID` ASC);
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Tarifas`
+-- Table `unaj_proyecto`.`Tarifas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Tarifas` (
+CREATE TABLE IF NOT EXISTS `unaj_proyecto`.`Tarifas` (
   `TarifaID` INT NOT NULL,
   `Comision` DOUBLE NULL,
   `AgenciaID` INT NOT NULL,
@@ -117,9 +117,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Viajes`
+-- Table `unaj_proyecto`.`Viajes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Viajes` (
+CREATE TABLE IF NOT EXISTS `unaj_proyecto`.`Viajes` (
   `ViajeID` INT NOT NULL,
   `ChoferID` INT NULL,
   `VehiculoID` INT NULL,
@@ -141,53 +141,53 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Viajes` (
   PRIMARY KEY (`ViajeID`),
   CONSTRAINT `fk_Viajes_Personas`
     FOREIGN KEY (`PersonaID`)
-    REFERENCES `mydb`.`Personas` (`PersonaID`)
+    REFERENCES `unaj_proyecto`.`Personas` (`PersonaID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Viajes_Vehiculos`
     FOREIGN KEY (`VehiculoID`)
-    REFERENCES `mydb`.`Vehiculos` (`VehiculoID`)
+    REFERENCES `unaj_proyecto`.`Vehiculos` (`VehiculoID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Viajes_Agencias`
     FOREIGN KEY (`AgenciaID`)
-    REFERENCES `mydb`.`Agencias` (`AgenciaID`)
+    REFERENCES `unaj_proyecto`.`Agencias` (`AgenciaID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Viajes_Turnos`
     FOREIGN KEY (`TurnoID`)
-    REFERENCES `mydb`.`Turnos` (`TurnoID`)
+    REFERENCES `unaj_proyecto`.`Turnos` (`TurnoID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Viajes_Tarifas1`
     FOREIGN KEY (`TarifaID`)
-    REFERENCES `mydb`.`Tarifas` (`TarifaID`)
+    REFERENCES `unaj_proyecto`.`Tarifas` (`TarifaID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Viajes_Choferes`
     FOREIGN KEY (`ChoferID`)
-    REFERENCES `mydb`.`Personas` (`PersonaID`)
+    REFERENCES `unaj_proyecto`.`Personas` (`PersonaID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Viajes_Vehiculos1_idx` ON `mydb`.`Viajes` (`VehiculoID` ASC);
+CREATE INDEX `fk_Viajes_Vehiculos1_idx` ON `unaj_proyecto`.`Viajes` (`VehiculoID` ASC);
 
-CREATE INDEX `fk_Viajes_Agencias1_idx` ON `mydb`.`Viajes` (`AgenciaID` ASC);
+CREATE INDEX `fk_Viajes_Agencias1_idx` ON `unaj_proyecto`.`Viajes` (`AgenciaID` ASC);
 
-CREATE INDEX `fk_Viajes_Choferes1_idx` ON `mydb`.`Viajes` (`ChoferID` ASC);
+CREATE INDEX `fk_Viajes_Choferes1_idx` ON `unaj_proyecto`.`Viajes` (`ChoferID` ASC);
 
-CREATE INDEX `fk_Viajes_Turnos1_idx` ON `mydb`.`Viajes` (`TurnoID` ASC);
+CREATE INDEX `fk_Viajes_Turnos1_idx` ON `unaj_proyecto`.`Viajes` (`TurnoID` ASC);
 
-CREATE INDEX `fk_Viajes_Tarifas1_idx` ON `mydb`.`Viajes` (`TarifaID` ASC);
+CREATE INDEX `fk_Viajes_Tarifas1_idx` ON `unaj_proyecto`.`Viajes` (`TarifaID` ASC);
 
-CREATE INDEX `fk_Viajes_Personas_idx` ON `mydb`.`Viajes` (`PersonaID` ASC);
+CREATE INDEX `fk_Viajes_Personas_idx` ON `unaj_proyecto`.`Viajes` (`PersonaID` ASC);
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Calificaciones`
+-- Table `unaj_proyecto`.`Calificaciones`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Calificaciones` (
+CREATE TABLE IF NOT EXISTS `unaj_proyecto`.`Calificaciones` (
   `CalificacionID` INT NOT NULL,
   `ViajeID` INT NOT NULL,
   `Quien` INT NOT NULL,
@@ -198,26 +198,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Calificaciones` (
   PRIMARY KEY (`CalificacionID`),
   CONSTRAINT `fk_Calificaciones_PersonasQuien`
     FOREIGN KEY (`Quien`)
-    REFERENCES `mydb`.`Personas` (`PersonaID`)
+    REFERENCES `unaj_proyecto`.`Personas` (`PersonaID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Calificaciones_Viajes`
     FOREIGN KEY (`ViajeID`)
-    REFERENCES `mydb`.`Viajes` (`ViajeID`)
+    REFERENCES `unaj_proyecto`.`Viajes` (`ViajeID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Calificaciones_PersonasParaQuien`
     FOREIGN KEY (`ParaQuien`)
-    REFERENCES `mydb`.`Personas` (`PersonaID`)
+    REFERENCES `unaj_proyecto`.`Personas` (`PersonaID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Calificaciones_Viajes1_idx` ON `mydb`.`Calificaciones` (`ViajeID` ASC);
+CREATE INDEX `fk_Calificaciones_Viajes1_idx` ON `unaj_proyecto`.`Calificaciones` (`ViajeID` ASC);
 
-CREATE INDEX `fk_Calificaciones_PersonasQuien_idx` ON `mydb`.`Calificaciones` (`Quien` ASC);
+CREATE INDEX `fk_Calificaciones_PersonasQuien_idx` ON `unaj_proyecto`.`Calificaciones` (`Quien` ASC);
 
-CREATE INDEX `afds_idx` ON `mydb`.`Calificaciones` (`ParaQuien` ASC);
+CREATE INDEX `afds_idx` ON `unaj_proyecto`.`Calificaciones` (`ParaQuien` ASC);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -225,93 +225,92 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Roles`
+-- Data for table `unaj_proyecto`.`Roles`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Roles` (`RolID`, `Descripcion`) VALUES (1, 'Administrador');
-INSERT INTO `mydb`.`Roles` (`RolID`, `Descripcion`) VALUES (2, 'Recepcionista');
-INSERT INTO `mydb`.`Roles` (`RolID`, `Descripcion`) VALUES (3, 'Chofer');
-INSERT INTO `mydb`.`Roles` (`RolID`, `Descripcion`) VALUES (4, 'Cliente');
+USE `unaj_proyecto`;
+INSERT INTO `unaj_proyecto`.`Roles` (`RolID`, `Descripcion`) VALUES (1, 'Administrador');
+INSERT INTO `unaj_proyecto`.`Roles` (`RolID`, `Descripcion`) VALUES (2, 'Recepcionista');
+INSERT INTO `unaj_proyecto`.`Roles` (`RolID`, `Descripcion`) VALUES (3, 'Chofer');
+INSERT INTO `unaj_proyecto`.`Roles` (`RolID`, `Descripcion`) VALUES (4, 'Cliente');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Personas`
+-- Data for table `unaj_proyecto`.`Personas`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (1, 'emendez', 'emendez', 'Mendez Alejandro Ezequiel', 'Barrio Parana 1111', '{Lat: 1564.81, Lon:1513.35}', '42744254', 'mendezalejandro.e@gmail.com', 1);
-INSERT INTO `mydb`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (2, 'lsilva', 'lsilva', 'Lilian Silva', 'Av Mayo 2222', '{Lat: 1564.31, Lon:31543.354}', '42744466', 'lilian@gmail.com', 2);
-INSERT INTO `mydb`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (3, 'arodriguez', 'arodriguez', 'Aldo Rodriguez', 'Calle Falasa1435', '', NULL, NULL, 3);
-INSERT INTO `mydb`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (4, 'imorales', 'imorales', 'Ignacio Morales', 'Calle Cavegol', NULL, NULL, NULL, 4);
-INSERT INTO `mydb`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (5, 'bvitucci', 'bvitucci', 'Bruno Vitucci', 'Calle El ramirazo 465', '{Lat: 458343.456, Lon: 45435}', NULL, NULL, 4);
+USE `unaj_proyecto`;
+INSERT INTO `unaj_proyecto`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (1, 'emendez', 'emendez', 'Mendez Alejandro Ezequiel', 'Barrio Parana 1111', '{Lat: 1564.81, Lon:1513.35}', '42744254', 'mendezalejandro.e@gmail.com', 1);
+INSERT INTO `unaj_proyecto`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (2, 'lsilva', 'lsilva', 'Lilian Silva', 'Av Mayo 2222', '{Lat: 1564.31, Lon:31543.354}', '42744466', 'lilian@gmail.com', 2);
+INSERT INTO `unaj_proyecto`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (3, 'arodriguez', 'arodriguez', 'Aldo Rodriguez', 'Calle Falasa1435', '', NULL, NULL, 3);
+INSERT INTO `unaj_proyecto`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (4, 'imorales', 'imorales', 'Ignacio Morales', 'Calle Cavegol', NULL, NULL, NULL, 4);
+INSERT INTO `unaj_proyecto`.`Personas` (`PersonaID`, `Usuario`, `Contraseña`, `Nombre`, `Direccion`, `DireccionCoordenada`, `Telefono`, `Email`, `RolID`) VALUES (5, 'bvitucci', 'bvitucci', 'Bruno Vitucci', 'Calle El ramirazo 465', '{Lat: 458343.456, Lon: 45435}', NULL, NULL, 4);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Vehiculos`
+-- Data for table `unaj_proyecto`.`Vehiculos`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Vehiculos` (`VehiculoID`, `Matricula`, `Modelo`, `Marca`, `Estado`, `FechaAlta`, `FechaBaja`) VALUES (1, 'GIM268', '2016', 'Renault', 0, '2016-08-31 23:00:00', NULL);
-INSERT INTO `mydb`.`Vehiculos` (`VehiculoID`, `Matricula`, `Modelo`, `Marca`, `Estado`, `FechaAlta`, `FechaBaja`) VALUES (2, 'TOR345', '2015', 'Fiat Punto', 0, '2016-08-31 23:00:00', NULL);
+USE `unaj_proyecto`;
+INSERT INTO `unaj_proyecto`.`Vehiculos` (`VehiculoID`, `Matricula`, `Modelo`, `Marca`, `Estado`, `FechaAlta`, `FechaBaja`) VALUES (1, 'GIM268', '2016', 'Renault', 0, '2016-08-31 23:00:00', NULL);
+INSERT INTO `unaj_proyecto`.`Vehiculos` (`VehiculoID`, `Matricula`, `Modelo`, `Marca`, `Estado`, `FechaAlta`, `FechaBaja`) VALUES (2, 'TOR345', '2015', 'Fiat Punto', 0, '2016-08-31 23:00:00', NULL);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Agencias`
+-- Data for table `unaj_proyecto`.`Agencias`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Agencias` (`AgenciaID`, `Nombre`, `Telefono`, `Email`, `Direccion`, `DireccionCoordenadas`, `Estado`) VALUES (1, 'Remiseria LA ESTRELLA', '011 4237-1280', 'remiamigos@remis.com.ar', 'Dr. Salvador Sallares 114, 1888 Dr Sallares 114, Buenos Aires', '{Lat:18446,165, Lon:1354,16}', 0);
-INSERT INTO `mydb`.`Agencias` (`AgenciaID`, `Nombre`, `Telefono`, `Email`, `Direccion`, `DireccionCoordenadas`, `Estado`) VALUES (2, 'O\'Clock Remis', '011 4287-7331', 'oclock@remisys.com.ar', 'Bernardo de Monteagudo 2981, B1888ENQ Florencio Varela, Buenos Aires', '{Lat:1564.564 , Long:1354.32 }', 0);
+USE `unaj_proyecto`;
+INSERT INTO `unaj_proyecto`.`Agencias` (`AgenciaID`, `Nombre`, `Telefono`, `Email`, `Direccion`, `DireccionCoordenadas`, `Estado`) VALUES (1, 'Remiseria LA ESTRELLA', '011 4237-1280', 'remiamigos@remis.com.ar', 'Dr. Salvador Sallares 114, 1888 Dr Sallares 114, Buenos Aires', '{Lat:18446,165, Lon:1354,16}', 0);
+INSERT INTO `unaj_proyecto`.`Agencias` (`AgenciaID`, `Nombre`, `Telefono`, `Email`, `Direccion`, `DireccionCoordenadas`, `Estado`) VALUES (2, 'O\'Clock Remis', '011 4287-7331', 'oclock@remisys.com.ar', 'Bernardo de Monteagudo 2981, B1888ENQ Florencio Varela, Buenos Aires', '{Lat:1564.564 , Long:1354.32 }', 0);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Turnos`
+-- Data for table `unaj_proyecto`.`Turnos`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Turnos` (`TurnoID`, `PersonaID`, `FechaApertura`, `FechaCierre`, `Estado`) VALUES (1, 2, '2016-08-25 23:00:00', NULL, 0);
+USE `unaj_proyecto`;
+INSERT INTO `unaj_proyecto`.`Turnos` (`TurnoID`, `PersonaID`, `FechaApertura`, `FechaCierre`, `Estado`) VALUES (1, 2, '2016-08-25 23:00:00', NULL, 0);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Tarifas`
+-- Data for table `unaj_proyecto`.`Tarifas`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Tarifas` (`TarifaID`, `Comision`, `AgenciaID`, `ViajeMinimo`, `KmMinimo`, `PrecioKM`, `Estado`) VALUES (1, 20, 1, 100, 5, 10.50, 0);
-INSERT INTO `mydb`.`Tarifas` (`TarifaID`, `Comision`, `AgenciaID`, `ViajeMinimo`, `KmMinimo`, `PrecioKM`, `Estado`) VALUES (2, 35, 2, 80, 4, 8, 0);
+USE `unaj_proyecto`;
+INSERT INTO `unaj_proyecto`.`Tarifas` (`TarifaID`, `Comision`, `AgenciaID`, `ViajeMinimo`, `KmMinimo`, `PrecioKM`, `Estado`) VALUES (1, 20, 1, 100, 5, 10.50, 0);
+INSERT INTO `unaj_proyecto`.`Tarifas` (`TarifaID`, `Comision`, `AgenciaID`, `ViajeMinimo`, `KmMinimo`, `PrecioKM`, `Estado`) VALUES (2, 35, 2, 80, 4, 8, 0);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Viajes`
+-- Data for table `unaj_proyecto`.`Viajes`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Viajes` (`ViajeID`, `ChoferID`, `VehiculoID`, `TarifaID`, `TurnoID`, `AgenciaID`, `PersonaID`, `FechaEmision`, `FechaSalida`, `ViajeTipo`, `OrigenCoordenadas`, `DestinoCoordenadas`, `OrigenDireccion`, `DestinoDireccion`, `Comentario`, `ImporteTotal`, `Distancia`, `Estado`) VALUES (1, 1, 1, 1, 1, 1, 4, '2016-08-31 23:00:00', '2016-08-31 23:00:00', 0, '{Lat: 1351.153, Lon:1564.2354}', '{Lat:357438.54, Lon:3431.35}', 'Barrio Parana', 'Estacion Florencio Varela', '', 150, 20, 0);
-INSERT INTO `mydb`.`Viajes` (`ViajeID`, `ChoferID`, `VehiculoID`, `TarifaID`, `TurnoID`, `AgenciaID`, `PersonaID`, `FechaEmision`, `FechaSalida`, `ViajeTipo`, `OrigenCoordenadas`, `DestinoCoordenadas`, `OrigenDireccion`, `DestinoDireccion`, `Comentario`, `ImporteTotal`, `Distancia`, `Estado`) VALUES (2, 2, 2, 1, 1, 1, 5, '2016-08-31 23:00:00', '2016-08-31 23:00:00', 0, '{Lat: 1354.654, Lon: 4583.58}', '{Lat:3164.54, Lon:4345.87}', 'Barrio Parana', 'Estacion Quilmes', 'Carga gas en durante el viaje.', 250, 35, 3);
+USE `unaj_proyecto`;
+INSERT INTO `unaj_proyecto`.`Viajes` (`ViajeID`, `ChoferID`, `VehiculoID`, `TarifaID`, `TurnoID`, `AgenciaID`, `PersonaID`, `FechaEmision`, `FechaSalida`, `ViajeTipo`, `OrigenCoordenadas`, `DestinoCoordenadas`, `OrigenDireccion`, `DestinoDireccion`, `Comentario`, `ImporteTotal`, `Distancia`, `Estado`) VALUES (1, 1, 1, 1, 1, 1, 4, '2016-08-31 23:00:00', '2016-08-31 23:00:00', 0, '{Lat: 1351.153, Lon:1564.2354}', '{Lat:357438.54, Lon:3431.35}', 'Barrio Parana', 'Estacion Florencio Varela', '', 150, 20, 0);
+INSERT INTO `unaj_proyecto`.`Viajes` (`ViajeID`, `ChoferID`, `VehiculoID`, `TarifaID`, `TurnoID`, `AgenciaID`, `PersonaID`, `FechaEmision`, `FechaSalida`, `ViajeTipo`, `OrigenCoordenadas`, `DestinoCoordenadas`, `OrigenDireccion`, `DestinoDireccion`, `Comentario`, `ImporteTotal`, `Distancia`, `Estado`) VALUES (2, 2, 2, 1, 1, 1, 5, '2016-08-31 23:00:00', '2016-08-31 23:00:00', 0, '{Lat: 1354.654, Lon: 4583.58}', '{Lat:3164.54, Lon:4345.87}', 'Barrio Parana', 'Estacion Quilmes', 'Carga gas en durante el viaje.', 250, 35, 3);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `mydb`.`Calificaciones`
+-- Data for table `unaj_proyecto`.`Calificaciones`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
-INSERT INTO `mydb`.`Calificaciones` (`CalificacionID`, `ViajeID`, `Quien`, `ParaQuien`, `Puntaje`, `Fecha`, `Comentario`) VALUES (1, 2, 5, 2, 10, '2016-08-31 23:00:00', 'El chofer me toco la jalea pero todo bien igual. Recomendado');
-INSERT INTO `mydb`.`Calificaciones` (`CalificacionID`, `ViajeID`, `Quien`, `ParaQuien`, `Puntaje`, `Fecha`, `Comentario`) VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, NULL, '');
+USE `unaj_proyecto`;
+INSERT INTO `unaj_proyecto`.`Calificaciones` (`CalificacionID`, `ViajeID`, `Quien`, `ParaQuien`, `Puntaje`, `Fecha`, `Comentario`) VALUES (1, 2, 5, 2, 10, '2016-08-31 23:00:00', 'El chofer me toco la jalea pero todo bien igual. Recomendado');
 
 COMMIT;
 
