@@ -3,13 +3,13 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id' => 'basic',
+    'id' => 'mvc',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'jasdjljsajldajslkd',
+            'cookieValidationKey' => 'CzczzQS_nLh8o_-rvH4v5vUbJFMudpXl',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
