@@ -2,8 +2,8 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '',
+    'dsn' => 'mysql:host=192.99.203.134;dbname=unaj_proyecto',
+    'username' => 'unaj_app ',
+    'password' => '79l2vak9wh5AZ3219',
     'charset' => 'utf8',
 ];
