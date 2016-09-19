@@ -31,7 +31,7 @@ CREATE TABLE `Agencias` (
   `Email` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `Estado` tinyint(4) NOT NULL,
   PRIMARY KEY (`AgenciaID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin DELAY_KEY_WRITE=1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `Agencias` (
 
 LOCK TABLES `Agencias` WRITE;
 /*!40000 ALTER TABLE `Agencias` DISABLE KEYS */;
-INSERT INTO `Agencias` VALUES (1,'Remiseria LA ESTRELLA','011 4237-1280','remiamigos@remis.com.ar',0),(2,'O\'Clock Remis','011 4287-7331','oclock@remisys.com.ar',0),(10,'PIMPON','1234','nuevaAgencia@prueba.com',0);
+INSERT INTO `Agencias` VALUES (1,'51834','553153','pipi@remis.com',0),(2,'O\'Clock Remis','011 4287-7331','oclock@remisys.com.ar',0),(10,'Prueba',NULL,'prueba@unaj.com',0),(11,'taREmis','45411266','TAREmis@gmail.com',0);
 /*!40000 ALTER TABLE `Agencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,11 +94,8 @@ CREATE TABLE `Direcciones` (
   `DireccionTipo` tinyint(4) NOT NULL COMMENT '0 - Direccion de Cliente.\n1 - Direccion de Agencia.',
   `AplicacionID` int(11) NOT NULL COMMENT 'Corresponde al ID del registro segun el DireccionTipo.\n\nEj: \nSi DireccionTipo= 0 entonces AplicacionID contiene el ID de una Persona.\nSi DireccionTipo = 1 entonces AplicacionID contiene el ID de una Agencia.',
   PRIMARY KEY (`DireccionID`),
-  KEY `fk_Direcciones_Personas1_idx` (`AplicacionID`),
-  KEY `fk_Direcciones_Agecias_idx` (`AplicacionID`),
-  CONSTRAINT `fk_Direcciones_Agencias` FOREIGN KEY (`AplicacionID`) REFERENCES `Agencias` (`AgenciaID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Direcciones_Personas` FOREIGN KEY (`AplicacionID`) REFERENCES `Personas` (`PersonaID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 KEY_BLOCK_SIZE=8;
+  KEY `fk_Direcciones_Agecias_idx` (`AplicacionID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 KEY_BLOCK_SIZE=8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +236,7 @@ CREATE TABLE `Vehiculos` (
   `Modelo` varchar(45) DEFAULT NULL,
   `Marca` varchar(45) DEFAULT NULL,
   `Estado` tinyint(4) NOT NULL,
-  `FechaAlta` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `FechaAlta` datetime NOT NULL,
   `FechaBaja` datetime DEFAULT NULL,
   PRIMARY KEY (`VehiculoID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -251,7 +248,7 @@ CREATE TABLE `Vehiculos` (
 
 LOCK TABLES `Vehiculos` WRITE;
 /*!40000 ALTER TABLE `Vehiculos` DISABLE KEYS */;
-INSERT INTO `Vehiculos` VALUES (1,'GIM268','2016','Renault',0,'2016-09-01 02:00:00',NULL),(2,'TOR345','2015','Fiat Punto',0,'2016-09-01 02:00:00',NULL);
+INSERT INTO `Vehiculos` VALUES (1,'GIM268','2016','Renault',0,'2016-08-31 23:00:00',NULL),(2,'TOR345','2015','Fiat Punto',0,'2016-08-31 23:00:00',NULL);
 /*!40000 ALTER TABLE `Vehiculos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,6 +323,9 @@ IN _AgenciaID INT,
 IN _Nombre VARCHAR(45), 
 IN _Direccion VARCHAR(200), 
 IN _DireccionCoordenada VARCHAR(200), 
+/*IN _DireccionDefault tinyint(4),
+IN _DireccionTipo tinyint(4),
+IN _AplicacionID INT (11),*/
 IN _Telefono VARCHAR(45), 
 IN _Email VARCHAR(45), 
 IN _Estado tinyint(4), 
@@ -345,9 +345,11 @@ BEGIN
     
 IF (@Operacion = @ALTA)
 THEN 
-	INSERT INTO Agencias(Nombre,Telefono,Email, Estado) VALUES (@Nombre, @Telefono, @Email, @Estado); 
+	INSERT INTO Agencias(Nombre,Telefono, Email, Estado) VALUES (@Nombre, @Telefono, @Email, @Estado); 
 	SET _Result = LAST_INSERT_ID();
     SELECT _Result;
+    
+    INSERT INTO Direcciones(Direccion, DireccionCoordenada,DireccionDefault, DireccionTipo,AplicacionID) VALUES (@Direccion, @DireccionCoordenada, 1,1, _Result);
     
 ELSEIF (@Operacion = @MODIFICACION)
 THEN 
@@ -357,6 +359,7 @@ THEN
     
 ELSEIF (@Operacion = @BAJA)
 THEN 
+	DELETE FROM Direcciones WHERE DireccionTipo = 1 AND AplicacionID=@AgenciaID;
 	DELETE FROM Agencias WHERE AgenciaID = @AgenciaID;
     SET _Result = @AgenciaID;
     SELECT _Result;
@@ -382,13 +385,11 @@ DELIMITER ;;
 CREATE DEFINER=`unaj_proyecto`@`%` PROCEDURE `Agencia_GetInfo`(IN _AgenciaID INT, IN _Nombre VARCHAR(45), IN _Direccion VARCHAR(200), IN _DireccionCoordenada VARCHAR(200), IN _Telefono VARCHAR(45), IN _Email VARCHAR(45), IN _Estado tinyint(4))
 BEGIN
 
-    SET @AgenciaID = _AgenciaID;
-    SET @Nombre = _Nombre; 
-	SET @Direccion = _Direccion;
-    SET @DireccionCoordenada = _DireccionCoordenada;
-    SET @Telefono = _Telefono;
-    SET @Email = _Email;
-    SET @Estado = _Estado;
+    SET @AgenciaID = NULLIF(_AgenciaID,-1);
+    SET @Nombre = NULLIF(_Nombre,''); /*NULLIF compara dos parámetros,Si el 1º no es NULL lo devuelve, en caso contrario, devuelve el 2º.*/
+    SET @Telefono = NULLIF(_Telefono,'');
+    SET @Email = NULLIF(_Email,'');
+    SET @Estado = NULLIF(_Estado,'');
     
 SELECT 
     AgenciaID,
@@ -404,6 +405,8 @@ WHERE
     AgenciaID = IFNULL(@AgenciaID,AgenciaID) AND 
     Nombre LIKE CONCAT('%',IFNULL(@Nombre,''),'%') AND
     Telefono = IFNULL(@Telefono, Telefono) AND
+    /*Direccion = IFNULL(@Direccion, Direccion) AND
+    DireccionCoordenada= IFNULL(@DireccionCoordenada, DireccionCoordenada) AND*/
     Email = IFNULL(@Email,Email) AND
     Estado = IFNULL(@Estado,Estado);
 END ;;
@@ -488,11 +491,11 @@ IN _ParaQuien INT,
 IN _Puntaje INT
 )
 BEGIN
-    SET @CalificacionID = CalificacionID;
-    SET @ViajeID = _ViajeID;
-    SET @Quien = _Quien;
-	SET @ParaQuien = _ParaQuien;
-    SET @Puntaje = _Puntaje;
+    SET @CalificacionID = NULLIF(CalificacionID,-1);
+    SET @ViajeID = NULLIF(_ViajeID,-1);
+    SET @Quien = NULLIF(_Quien,-1);
+	SET @ParaQuien = NULLIF(_ParaQuien,-1);
+    SET @Puntaje = NULLIF(_Puntaje,-1);
     
 SELECT
 	C.CalificacionID,
@@ -591,11 +594,11 @@ IN _Telefono VARCHAR(45),
 IN _Email VARCHAR(45))
 BEGIN
 
-    SET @PersonaID = _PersonaID;
-    SET @Nombre = _Nombre; 
-	SET @Usuario = _Usuario;
-    SET @Telefono = _Telefono;
-    SET @Email = _Email;
+    SET @PersonaID = NULLIF(_PersonaID,-1);
+    SET @Nombre = NULLIF(_Nombre,''); /*NULLIF compara dos parámetros,Si el 1º no es NULL lo devuelve, en caso contrario, devuelve el 2º.*/
+	SET @Usuario = NULLIF(_Usuario,'');
+    SET @Telefono = NULLIF(_Telefono,'');
+    SET @Email = NULLIF(_Email,'');
 
 SELECT 
 
@@ -702,13 +705,13 @@ IN _Direccion VArCHAR(500),
 IN _DireccionCoordenadas VARCHAR(500))
 BEGIN
 
-    SET @PersonaID = _PersonaID;
-    SET @Nombre = _Nombre; 
-	SET @Usuario = _Usuario;
-    SET @Telefono = _Telefono;
-    SET @Email = _Email;
-    SET @Direccion= _Direccion;
-    SET @DireccionCoordenadas= _DireccionCoordenadas;
+    SET @PersonaID = NULLIF(_PersonaID,-1);
+    SET @Nombre = NULLIF(_Nombre,''); 
+	SET @Usuario = NULLIF(_Usuario,'');
+    SET @Telefono = NULLIF(_Telefono,'');
+    SET @Email = NULLIF(_Email,'');
+    SET @Direccion= NULLIF(_Direccion,'');
+    SET @DireccionCoordenadas= NULLIF(_DireccionCoordenadas,'');
 
 SELECT 
 
@@ -813,12 +816,12 @@ IN _DireccionTipo TINYINT,
 IN _AplicacionID INT
 )
 BEGIN
-    SET @DireccionID = _DireccionID;
-    SET @Direccion = _Direccion;
-    SET @DireccionCoordenada = _DireccionCoordenada;
-    SET @DireccionDefault = _DireccionDefault;
-    SET @DireccionTipo = _DireccionTipo;
-	SET @AplicacionID = _AplicacionID;
+    SET @DireccionID = NULLIF(_DireccionID,-1);
+    SET @Direccion = NULLIF(_Direccion,'');
+    SET @DireccionCoordenada = NULLIF(_DireccionCoordenada,'');
+    SET @DireccionDefault = NULLIF(_DireccionDefault,-1);
+    SET @DireccionTipo = NULLIF(_DireccionTipo,-1);
+	SET @AplicacionID = NULLIF(_AplicacionID,-1);
     
 SELECT
 	D.DireccionID,
@@ -903,8 +906,8 @@ DELIMITER ;;
 CREATE DEFINER=`unaj_proyecto`@`%` PROCEDURE `Roles_GetInfo`(IN _RolID INT, IN _Descripcion VARCHAR(45))
 BEGIN
 
-    SET @RolID = _RolID;
-    SET @Descripcion = _Descripcion; 
+    SET @RolID = NULLIF(_RolID,-1);
+    SET @Descripcion = NULLIF(_Descripcion,''); 
 	
     
 SELECT 
@@ -1004,12 +1007,12 @@ IN _PrecioKM DOUBLE,
 IN _Estado TINYINT
 )
 BEGIN
-    SET @TarifaID = _TarifaID;
-    SET @AgenciaID = _AgenciaID;
-    SET @ViajeMinimo = _ViajeMinimo;
-    SET @KmMinimo = _KmMinimo;
-	SET @PrecioKM = _PrecioKM;
-    SET @Estado = _Estado;
+    SET @TarifaID = NULLIF(_TarifaID,-1);
+    SET @AgenciaID = NULLIF(_AgenciaID,-1);
+    SET @ViajeMinimo = NULLIF(_ViajeMinimo,-1);
+    SET @KmMinimo = NULLIF(_KmMinimo,-1);
+	SET @PrecioKM = NULLIF(_PrecioKM,-1);
+    SET @Estado = NULLIF(_Estado,-1);
     
 SELECT
 	T.TarifaID,
@@ -1113,13 +1116,13 @@ IN _FechaCierreDesde datetime,
 IN _FechaCierreHasta datetime, 
 IN _Estado tinyint)
 BEGIN
-    SET @TurnoID = _TurnoID;
-    SET @PersonaID = _PersonaID;
-    SET @FechaAperturaDesde = (SELECT IF(_FechaAperturaDesde is null,'2010-01-01 00:00:00',_FechaAperturaDesde));
-    SET @FechaAperturaHasta = (SELECT IF(_FechaAperturaHasta is null,'2050-01-01 00:00:00',_FechaAperturaHasta)); 
-	SET @FechaCierreDesde = (SELECT IF(_FechaCierreDesde is null,'2010-01-01 00:00:00',_FechaCierreDesde)); 
-    SET @FechaCierreHasta = (SELECT IF(_FechaCierreHasta is null,'2050-01-01 00:00:00',_FechaCierreHasta));
-    SET @Estado = _Estado;
+    SET @TurnoID = NULLIF(_TurnoID,-1);
+    SET @PersonaID = NULLIF(_PersonaID,-1);
+    SET @FechaAperturaDesde = (SELECT IF(_FechaAperturaDesde is null OR _FechaAperturaDesde='','2010-01-01 00:00:00',_FechaAperturaDesde));
+    SET @FechaAperturaHasta = (SELECT IF(_FechaAperturaHasta is null OR _FechaAperturaHasta='','2050-01-01 00:00:00',_FechaAperturaHasta)); 
+	SET @FechaCierreDesde = (SELECT IF(_FechaCierreDesde is null OR _FechaCierreDesde='','2010-01-01 00:00:00',_FechaCierreDesde)); 
+    SET @FechaCierreHasta = (SELECT IF(_FechaCierreHasta is null OR _FechaCierreHasta='','2050-01-01 00:00:00',_FechaCierreHasta));
+    SET @Estado = NULLIF(_Estado,-1);
 
 SELECT 
     T.TurnoID, 
@@ -1220,18 +1223,21 @@ IN _Matricula VARCHAR(45),
 IN _Modelo VARCHAR(45), 
 IN _Marca VARCHAR(45), 
 IN _Estado tinyint(4), 
-IN _FechaAlta timestamp, 
-IN _FechaBaja datetime)
+IN _FechaAltaDesde varchar(17), 
+IN _FechaAltaHasta varchar(17)/*,
+IN _FechaBajaDesde varchar(17), 
+IN _FechaBajaHasta varchar(17)*/
+)
 BEGIN
-		
-
-    SET @VehicluoID = _VehiculoID;
-    SET @Matricula = _Matricula; 
-	SET @Modelo = _Modelo;
-    SET @Marca = _Marca;
-    SET @Estado = _Estado;
-    SET @FechaAlta = _FechaAlta;
-    SET @FechaBaja = _FechaBaja;
+	SET @VehicluoID = NULLIF(_VehiculoID,-1);/*NULLIF compara dos parámetros,Si el 1º no es NULL lo devuelve, en caso contrario, devuelve el 2º.*/
+    SET @Matricula = NULLIF(_Matricula,''); 
+	SET @Modelo = NULLIF(_Modelo,'');
+    SET @Marca = NULLIF(_Marca,'');
+    SET @Estado = NULLIF(_Estado,-1);
+    SET @FechaAltaDesde = (SELECT IF(_FechaAltaDesde is null OR _FechaAltaDesde = '','2010-01-01 00:00:00',_FechaAltaDesde));
+    SET @FechaAltaHasta = (SELECT IF(_FechaAltaHasta is null OR _FechaAltaHasta = '' ,'2050-01-01 00:00:00',_FechaAltaHasta)); 
+	/*SET @FechaBajaDesde = (SELECT IF(_FechaBajaDesde is null OR _FechaBajaDesde='','2010-01-01 00:00:00',_FechaBajaDesde)); 
+    SET @FechaBajaHasta = (SELECT IF(_FechaBajaHasta is null OR _FechaBajaHasta='','2050-01-01 00:00:00',_FechaBajaHasta));*/
 
 SELECT 
 
@@ -1241,20 +1247,19 @@ SELECT
     V.Marca, 
     V.Estado,
     V.FechaAlta,
-    V.FechaAlta
+    V.FechaBaja
     
 FROM Vehiculos V 
 
 WHERE  /*aplica condiciones a las seleciones, a los siguientes campos: */
-
+	(V.FechaAlta	BETWEEN @FechaAltaDesde AND @FechaAltaHasta) AND
 	V.VehiculoID = IFNULL(@VehiculoID,V.VehiculoID) AND 
     V.Matricula  LIKE CONCAT('%',IFNULL(@Matricula,''),'%') AND
     V.Modelo  LIKE CONCAT('%',IFNULL(@Modelo,''),'%') AND
     V.Marca  LIKE CONCAT('%',IFNULL(@Marca,''),'%') AND
-    V.Estado = IFNULL(@Estado,V.Estado) AND
-    V.FechaAlta = IFNULL(@FechaAlta,V.FechaAlta) AND
-    V.FechaBaja = IFNULL(@FechaBaja,V.FechaBaja);
-   
+    V.Estado = IFNULL(@Estado,V.Estado)/* AND
+    V.FechaBaja between coalesce(@FechaBajaDesde,V.FechaBaja) and coalesce(@FechaBajaHasta,V.FechaBaja)*/
+    ;
    END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1359,10 +1364,10 @@ IN _TarifaID INT,
 IN _TurnoID INT, 
 IN _AgenciaID INT,
 IN _PersonaID INT,
-IN _FechaEmisionDesde DATETIME, 
-IN _FechaEmisionHasta DATETIME, 
-IN _FechaSalidaDesde DATETIME,
-IN _FechaSalidaHasta DATETIME,
+IN _FechaEmisionDesde VARCHAR(17), 
+IN _FechaEmisionHasta VARCHAR(17), 
+IN _FechaSalidaDesde VARCHAR(17),
+IN _FechaSalidaHasta VARCHAR(17),
 IN _ViajeTipo INT,
 IN _OrigenCoordenadas VARCHAR(500),
 IN _DestinoCoordenadas VARCHAR(500),
@@ -1373,26 +1378,26 @@ IN _ImporteTotal DOUBLE,
 IN _Distancia DOUBLE,
 IN _Estado TINYINT)
 BEGIN
-	SET @ViajeID = _ViajeID; 
-	SET @ChoferID = _ChoferID;
-	SET @VehiculoID = _VehiculoID;
-	SET @TarifaID = _TarifaID;
-	SET @TurnoID = _TurnoID; 
-	SET @AgenciaID = _AgenciaID;
-	SET @PersonaID = _PersonaID;
-	SET @FechaEmisionDesde = (SELECT IF(_FechaEmisionDesde is null,'2010-01-01 00:00:00',_FechaEmisionDesde));
-    SET @FechaEmisionHasta = (SELECT IF(_FechaEmisionHasta is null,'2050-01-01 00:00:00',_FechaEmisionHasta)); 
-	SET @FechaSalidaDesde = (SELECT IF(_FechaSalidaDesde is null,'2010-01-01 00:00:00',_FechaSalidaDesde)); 
-    SET @FechaSalidaHasta = (SELECT IF(_FechaSalidaHasta is null,'2050-01-01 00:00:00',_FechaSalidaHasta)); 
-	SET @ViajeTipo = _ViajeTipo;
-	SET @OrigenCoordenadas = _OrigenCoordenadas;
-	SET @DestinoCoordenadas = _DestinoCoordenadas;
-	SET @OrigenDireccion = _OrigenDireccion;
-	SET @DestinoDireccion = _DestinoDireccion;
-	SET @Comentario = _Comentario;
-	SET @ImporteTotal = _ImporteTotal;
-	SET @Distancia = _Distancia;
-	SET @Estado = _Estado;
+	SET @ViajeID = NULLIF(_ViajeID,-1); 
+	SET @ChoferID = NULLIF(_ChoferID,-1);
+	SET @VehiculoID = NULLIF(_VehiculoID,-1);
+	SET @TarifaID = NULLIF(_TarifaID,-1);
+	SET @TurnoID = NULLIF(_TurnoID,-1); 
+	SET @AgenciaID = NULLIF(_AgenciaID,-1);
+	SET @PersonaID = NULLIF(_PersonaID,-1);
+	SET @FechaEmisionDesde = (SELECT IF(_FechaEmisionDesde is null or _FechaEmisionDesde='','2010-01-01 00:00:00',_FechaEmisionDesde));
+    SET @FechaEmisionHasta = (SELECT IF(_FechaEmisionHasta is null or _FechaEmisionHasta='','2050-01-01 00:00:00',_FechaEmisionHasta)); 
+	SET @FechaSalidaDesde = (SELECT IF(_FechaSalidaDesde is null or _FechaSalidaDesde='','2010-01-01 00:00:00',_FechaSalidaDesde)); 
+    SET @FechaSalidaHasta = (SELECT IF(_FechaSalidaHasta is null or _FechaSalidaHasta='','2050-01-01 00:00:00',_FechaSalidaHasta)); 
+	SET @ViajeTipo = NULLIF(_ViajeTipo,-1);
+	SET @OrigenCoordenadas = NULLIF(_OrigenCoordenadas,'');
+	SET @DestinoCoordenadas = NULLIF(_DestinoCoordenadas,'');
+	SET @OrigenDireccion = NULLIF(_OrigenDireccion,'');
+	SET @DestinoDireccion = NULLIF(_DestinoDireccion,'');
+	SET @Comentario = NULLIF(_Comentario,'');
+	SET @ImporteTotal = NULLIF(_ImporteTotal,-1);
+	SET @Distancia = NULLIF(_Distancia,-1);
+	SET @Estado = NULLIF(_Estado,-1);
 		
     SELECT
 		V.ViajeID,
@@ -1463,4 +1468,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-11 17:38:09
+-- Dump completed on 2016-09-14 23:13:23
