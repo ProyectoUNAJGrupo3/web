@@ -1,6 +1,6 @@
 <?php
 namespace app\models;
-
+include('Operaciones.php');
 use Yii;
 use yii\base\Model;
 
@@ -12,13 +12,41 @@ use yii\base\Model;
  * @version 1.0
  * @author mende
  */
-class PersonasModelo/* extends Model*/
+class PersonasModelo /*extends Model*/
 {
-    const Operacion_Alta = 0, Operacion_Modificacion=1, Operacion_Baja=2, Operacion_GetInfo=3, spABM='Personas_ABM', spGetInfo='Personas_GetInfo';
-    private $Operacion=null;
-    private $OperacionState=null;
-    private $Personas=null;
-    private $Parametros=null;
+    const Operacion_Alta = 0, Operacion_Modificacion=1, Operacion_Baja=2, Operacion_GetInfo=3;  //CONSTANTES QUE SIRVEN PARA UTILIZARLAS COMO REFERENCIA A CADA OPERACION.
+    const spABM='Personas_ABM', spGetInfo='Personas_GetInfo';                                   //NOMBRES DE STORED PROCEDURES QUE SE UTILIZARAN EN EL MODELO.
+    private $Operacion=null;                                                                    //VARIABLE AUXILIAR PARA GUARDAR LA CONSTANTE DE OPERACION QUE SE UTILIZARA COMO REFERENCIA.
+    private $OperacionState=null;                                                               //VARIABLE QUE GUARDARA EL ESTADO DE LA OPERACION ACTUAL (ALTA, BAJA, MODIFICACION o GETINFO).
+    private $Personas=null;                                                                     //VARIABLE QUE SERVIRA PARA GUARDAR LAS PERSONAS QUE DEVUELVA EL METODO GETINFO.
+
+
+
+    public function RegistrarPersona($parametros)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, PersonaID y @result).
+    {
+        $this->setOperacion(self::Operacion_Alta);                                              //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Alta() DE LA CLASE OPERACIONES.
+        $this->Personas = $this->OperacionState->EjecutarOperacion($parametros,self::spABM);    //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Alta()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la persona insertada).
+        return $this->Personas;
+    }
+    public function EliminarPersona($parametros)                                                //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion y @result).
+    {
+        $this->setOperacion(self::Operacion_Baja);                                              //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Baja() DE LA CLASE OPERACIONES.
+        $this->Personas = $this->OperacionState->EjecutarOperacion($parametros,self::spABM);    //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Baja()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la persona eliminada).
+
+        return $this->Personas;
+    }
+    public function ModificarPersona($parametros)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion y @result).
+    {
+        $this->setOperacion(self::Operacion_Modificacion);                                      //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Modificacion() DE LA CLASE OPERACIONES.
+        $this->Personas = $this->OperacionState->EjecutarOperacion($parametros,self::spABM);    //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Modifcacion()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la persona modificada).
+        return $this->Personas;
+    }
+    public function GetInfoPersonas($parametros)                                                //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES.
+    {
+        $this->setOperacion(self::Operacion_GetInfo);                                           //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Getinfo() DE LA CLASE OPERACIONES.
+        $this->Personas = $this->OperacionState->EjecutarOperacion($parametros,self::spGetInfo);//EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto GetInfo()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE GETINFO. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON USUARIOS CUYOS VALORES SON LOS MISMOS QUE DEVUELVE EL STORED PROCEDURE.
+        return $this->Personas;                                                                 //SE RETORNA LA LISTA DE PERSONAS.
+    }
 
     public function setOperacion($Operacion) {
         $this->Operacion = $Operacion;
@@ -39,209 +67,13 @@ class PersonasModelo/* extends Model*/
         {
             $this->OperacionState =new GetInfo();
         }
-    }
-
-    public function RegistrarPersona($parametros)
-    {
-        $this->setOperacion(self::Operacion_Alta);
-        $this->Personas = $this->OperacionState->EjecutarOperacion($parametros,self::spABM);
-        if($this->Personas!=null && $this->Personas!="")
-        {return true;}
-        else {return false;}
-    }
-    public function EliminarPersona($parametros)
-    {
-        $this->setOperacion(self::Operacion_Baja);
-        $this->Personas = $this->OperacionState->EjecutarOperacion($parametros,self::spABM);
-        if($this->Personas!=null && $this->Personas!="")
-        {return true;}
-        else {return false;}
-    }
-    public function ModificarPersona($parametros)
-    {
-        $this->setOperacion(self::Operacion_Modificacion);
-        $this->Personas = $this->OperacionState->EjecutarOperacion($parametros,self::spABM);
-        if($this->Personas!=null && $this->Personas!="")
-        {return true;}
-        else {return false;}
-    }
-    public function GetInfoPersonas($parametros)
-    {
-        $this->setOperacion(self::Operacion_GetInfo);
-        $this->Personas = $this->OperacionState->EjecutarOperacion($parametros,self::spGetInfo);
-        return $this->Personas;
-    }
-}
-interface OperacionState
-{
-    public function EjecutarOperacion($parametros, $SP);
-}
-class Alta implements OperacionState
-{
-    private $parametros;
-    public $stringParametros='';
-    private $storeProcedureName;
-
-    private function setParametros($parametros)
-    {
-        $ultimaPosicion = count($parametros);
-        $posicionActual = 1;
-        $this->stringParametros.='0,NULL,';
-        foreach($parametros as $obj)
-        {
-            $this->stringParametros.= ($obj==="")?'""':$obj;
-            $this->stringParametros.=($posicionActual==$ultimaPosicion)?',@result':',';
-            $posicionActual++;
-        }
-    }
-
-    private function EjecutarQuery()
-    {
-
-        $connection = \Yii::$app->db;
-        $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
-        $info = $model->queryAll();
-
-
-        /*$connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
-        $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
-        $info =  mysqli_fetch_array($model);*/
-        return $info;
-    }
-
-    public function EjecutarOperacion($parametros, $SP)
-    {
-        $this->setParametros($parametros);
-        $this->storeProcedureName=$SP;
-        return $this->EjecutarQuery();
-    }
-}
-class Modificacion implements OperacionState
-{
-    private $parametros;
-    public $stringParametros='';
-    private $storeProcedureName;
-
-    private function setParametros($parametros)
-    {
-        $ultimaPosicion = count($parametros);
-        $posicionActual = 1;
-        $this->stringParametros.='1,';
-        foreach($parametros as $obj)
-        {
-            $this->stringParametros.= ($obj=="")?'""':$obj;
-            $this->stringParametros.=($posicionActual==$ultimaPosicion)?',@result':',';
-            $posicionActual++;
-        }
-    }
-
-    private function EjecutarQuery()
-    {
-        /*
-        $connection = \Yii::$app->db;
-        $model = $connection->createCommand('CALL unaj_proyecto.Cliente_GetInfo(4,"", "", "", "", "", "");');
-        $users = $model->queryAll();
-         */
-
-        $connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
-        $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
-        $info =  mysqli_fetch_array($model);
-        return $info;
-    }
-
-    public function EjecutarOperacion($parametros, $SP)
-    {
-        $this->setParametros($parametros);
-        $this->storeProcedureName=$SP;
-        return $this->EjecutarQuery();
-    }
-}
-class Baja implements OperacionState
-{
-    private $parametros;
-    public $stringParametros='';
-    private $storeProcedureName;
-
-    private function setParametros($parametros)
-    {
-        $ultimaPosicion = count($parametros);
-        $posicionActual = 1;
-        $this->stringParametros.='2,';
-        foreach($parametros as $obj)
-        {
-            $this->stringParametros.= ($obj=="")?'""':$obj;
-            $this->stringParametros.=($posicionActual==$ultimaPosicion)?',@result':',';
-            $posicionActual++;
-        }
-    }
-
-    private function EjecutarQuery()
-    {
-        /*
-        $connection = \Yii::$app->db;
-        $model = $connection->createCommand('CALL unaj_proyecto.Cliente_GetInfo(4,"", "", "", "", "", "");');
-        $users = $model->queryAll();
-         */
-
-        $connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
-        $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
-        $info =  mysqli_fetch_array($model);
-        return $info;
-    }
-
-    public function EjecutarOperacion($parametros, $SP)
-    {
-        $this->setParametros($parametros);
-        $this->storeProcedureName=$SP;
-        return $this->EjecutarQuery();
-    }
-}
-class GetInfo implements OperacionState
-{
-    private $parametros;
-    public $stringParametros='';
-    private $storeProcedureName;
-
-    private function setParametros($parametros)
-    {
-        $ultimaPosicion = count($parametros);
-        $posicionActual = 1;
-        foreach($parametros as $obj)
-        {
-
-            $this->stringParametros.= ($obj=="")?'""':$obj;
-            $this->stringParametros.=($posicionActual==$ultimaPosicion)?'':',';
-            $posicionActual++;
-        }
-    }
-
-    private function EjecutarQuery()
-    {
-
-        /*
-        $connection = \Yii::$app->db;
-        $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
-        $info = $model->queryAll();
-         */
-
-
-        $connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
-        $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
-        $info =  mysqli_fetch_array($model);
-
-        return $info;
-    }
-
-    public function EjecutarOperacion($parametros, $SP)
-    {
-        $this->setParametros($parametros);
-        $this->storeProcedureName=$SP;
-        return $this->EjecutarQuery();
-    }
+    }                                                   //ESTE METODO RECIBE LA CONSTANTE DE OPERACION Y SETEA LA VARIABLE OperacionState CON UN OBJETO, EL OBJETO SE CREA A PARTIR DE LA CLASE Operaciones.php y PUEDE SER ALTA, BAJA, MODIFICACION o GETINFO.
 }
 
-$test = new PersonasModelo();
-print_r($test->GetInfoPersonas([
+
+//CLASE TEST GET INFO
+/*$test = new PersonasModelo();                               //SE CREA UNA INSTANCIA DE LA CLASE PesonasModelo
+print_r($test->GetInfoPersonas([                            //SE LLAMA AL METODO GetInfoPersonas PASANDO COMO PARAMETRO LA LISTA DE PARAMETROS QUE RECIBIRA LA CLASE GetInfo en Operaciones.php, A PARTIR DE ESTA INFORMACION LA CLASE GetInfo REALIZARA LA LOGICA DE LA CONSULTA A LA BD Y DEVOLVERA LA LISTA DE PERSONAS.
                 'PersonaID' => -1,
                 'Nombre' => "",
                 'Usuario' => "",
@@ -251,11 +83,11 @@ print_r($test->GetInfoPersonas([
                 'DireccionCoordenadas' => "",
                 'Estado' =>'',
                 'RolID' =>''
-                ]));
+                ]));*/
 
-/*
+/* TEST ALTA
 $test = new PersonasModelo();
-$test->RegistrarPersona([
+if($test->RegistrarPersona([
 'Nombre' => '"Pepino Alejandro"',
 'Usuario' => '"pempin"',
 'Password' => '"pempin"',
@@ -264,40 +96,44 @@ $test->RegistrarPersona([
 'Direccion' => '"Calle falsa 123"',
 'DireccionCoordenadas' => '"{Latitud:1234512315, Longitud:3435315}"',
 'DireccionDefault' => 0,
+'DireccionTipo' => 1,
 'Estado' =>0,
 'RolID' =>4
-]);
-
+])!=null) echo 'Cliente registrado correctamente!';
 */
+
 /* TEST MODIFICACION
-$test = new UsuariosModelo(1,[
+$test = new PersonasModelo();
+if($test->ModificarPersona([
 'PersonaID' => 35,
 'Nombre' => '"Pepino Alejandro"',
-'Usuario' => '"smendez"',
-'Password' => '"smendez"',
+'Usuario' => '"pempin"',
+'Password' => '"pempin"',
 'Telefono' => '"5422464"',
 'Email' => '"santi@mendez.com.ar"',
 'Direccion' => '"Calle falsa 123"',
 'DireccionCoordenadas' => '"{Latitud:1234512315, Longitud:3435315}"',
 'DireccionDefault' => 0,
-'Estado' =>1,
+'DireccionTipo' => 1,
+'Estado' =>0,
 'RolID' =>4
-]);
-if($test->ModificarUsuario()) echo 'Cliente modificado correctamente!';
+])!=null) echo 'Cliente modificado correctamente!';
  */
 
-/*TEST BORRAR
-$test = new UsuariosModelo(2,[
-'PersonaID' => 35,
-'Nombre' => '"Pepino Alejandro"',
-'Usuario' => '"smendez"',
-'Password' => '"smendez"',
-'Telefono' => '"5422464"',
-'Email' => '"santi@mendez.com.ar"',
-'Direccion' => '"Calle falsa 123"',
-'DireccionCoordenadas' => '"{Latitud:1234512315, Longitud:3435315}"',
-'DireccionDefault' => 0,
-'Estado' =>1,
-'RolID' =>4
-]);
-if($test->EliminarUsuario()) echo 'Cliente eliminado correctamente!';*/
+/* TEST BAJA
+$test = new PersonasModelo();
+if($test->EliminarPersona([
+'PersonaID' => 69,
+'Nombre' => '""',
+'Usuario' => '""',
+'Password' => '""',
+'Telefono' => '""',
+'Email' => '""',
+'Direccion' => '""',
+'DireccionCoordenadas' => '""',
+'DireccionDefault' => "",
+'DireccionTipo' => 1,
+'Estado' =>"",
+'RolID' =>""
+])!=null) echo 'Cliente eliminado correctamente!';
+*/
