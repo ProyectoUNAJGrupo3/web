@@ -118,7 +118,7 @@ DROP TABLE IF EXISTS `Personas`;
 CREATE TABLE `Personas` (
   `PersonaID` int(11) NOT NULL,
   `Usuario` varchar(45) DEFAULT NULL,
-  `Contraseña` varchar(45) DEFAULT NULL,
+  `Password` varchar(45) DEFAULT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `Telefono` varchar(45) DEFAULT NULL,
   `Email` varchar(45) DEFAULT NULL,
@@ -386,7 +386,7 @@ CREATE DEFINER=`unaj_proyecto`@`%` PROCEDURE `Agencia_GetInfo`(IN _AgenciaID INT
 BEGIN
 
     SET @AgenciaID = NULLIF(_AgenciaID,-1);
-    SET @Nombre = NULLIF(_Nombre,''); /*NULLIF compara dos parámetros,Si el 1º no es NULL lo devuelve, en caso contrario, devuelve el 2º.*/
+    SET @Nombre = NULLIF(_Nombre,''); /* NULLIF() recibe dos parámetros, si el resultado del primer parámetro es igual al resultado del segundo, devuelve un valor NULO de lo contrario devuelve valor del primer parámetro*/
     SET @Telefono = NULLIF(_Telefono,'');
     SET @Email = NULLIF(_Email,'');
     SET @Estado = NULLIF(_Estado,'');
@@ -403,7 +403,7 @@ FROM
     Agencias
 WHERE
     AgenciaID = IFNULL(@AgenciaID,AgenciaID) AND 
-    Nombre LIKE CONCAT('%',IFNULL(@Nombre,''),'%') AND
+    Nombre LIKE CONCAT('%',IFNULL(@Nombre,''),'%') AND /*IFNULL()verifica si el primer parámetro devuelve como resultado de la consulta un valor nulo entonces dará como resultado el valor del segundo parámetro */
     Telefono = IFNULL(@Telefono, Telefono) AND
     /*Direccion = IFNULL(@Direccion, Direccion) AND
     DireccionCoordenada= IFNULL(@DireccionCoordenada, DireccionCoordenada) AND*/
@@ -594,9 +594,8 @@ IN _Telefono VARCHAR(45),
 IN _Email VARCHAR(45))
 BEGIN
 
-    SET @PersonaID = NULLIF(_PersonaID,-1);
-    SET @Nombre = NULLIF(_Nombre,''); /*NULLIF compara dos parámetros,Si el 1º no es NULL lo devuelve, en caso contrario, devuelve el 2º.*/
-	SET @Usuario = NULLIF(_Usuario,'');
+    SET @PersonaID = NULLIF(_PersonaID,-1); 
+    SET @Nombre = NULLIF(_Nombre,''); /* NULLIF() recibe dos parámetros, si el resultado del primer parámetro es igual al resultado del segundo, devuelve un valor NULO de lo contrario devuelve valor del primer parámetro*/ 
     SET @Telefono = NULLIF(_Telefono,'');
     SET @Email = NULLIF(_Email,'');
 
@@ -613,7 +612,7 @@ FROM Personas P
 WHERE  /*aplica condiciones a las seleciones, a los siguientes campos: */
 
     P.PersonaID = IFNULL(@ChoferID,P.PersonaID) AND 
-    P.Nombre LIKE CONCAT('%',IFNULL(@Nombre,''),'%') AND
+    P.Nombre LIKE CONCAT('%',IFNULL(@Nombre,''),'%') AND /*IFNULL()verifica si el primer parámetro devuelve como resultado de la consulta un valor nulo entonces dará como resultado el valor del segundo parámetro */
     P.Usuario = IFNULL(@Usuario, P.Usuario) AND
     P.Telefono = IFNULL(@Telefono, P.Telefono) AND
     P.Email = IFNULL(@Email,P.Email) AND
@@ -718,6 +717,7 @@ SELECT
 	P.PersonaID,
     P.Nombre,
     P.Usuario, 
+    P.Password,
     P.Telefono, 
     P.Email,
 	(SELECT Direccion FROM Direcciones D WHERE D.DireccionTipo=0 AND D.DireccionDefault=1 AND D.AplicacionID=P.PersonaID) as Direccion,
@@ -730,8 +730,8 @@ WHERE  /*aplica condiciones a las seleciones, a los siguientes campos: */
     P.PersonaID = IFNULL(@PersonaID,P.PersonaID) AND 
     P.Nombre LIKE CONCAT('%',IFNULL(@Nombre,''),'%') AND
     P.Usuario = IFNULL(@Usuario, P.Usuario) AND
-    P.Telefono = IFNULL(@Telefono, P.Telefono) AND
-    P.Email = IFNULL(@Email,P.Email) AND
+    (CASE WHEN @Telefono IS NULL THEN (P.Telefono IS NULL OR P.Telefono IS NOT NULL) ELSE P.Telefono=@Telefono END) AND
+    (CASE WHEN @Email IS NULL THEN (P.Email IS NULL OR P.Email IS NOT NULL) ELSE P.Email=@Email END) AND
     P.RolID= 4;
 
 END ;;
@@ -1229,9 +1229,9 @@ IN _FechaBajaDesde varchar(17),
 IN _FechaBajaHasta varchar(17)*/
 )
 BEGIN
-	SET @VehicluoID = NULLIF(_VehiculoID,-1);/*NULLIF compara dos parámetros,Si el 1º no es NULL lo devuelve, en caso contrario, devuelve el 2º.*/
+	SET @VehicluoID = NULLIF(_VehiculoID,-1);
     SET @Matricula = NULLIF(_Matricula,''); 
-	SET @Modelo = NULLIF(_Modelo,'');
+	SET @Modelo = NULLIF(_Modelo,'');/* NULLIF() recibe dos parámetros, si el resultado del primer parámetro es igual al resultado del segundo, devuelve un valor NULO de lo contrario devuelve valor del primer parámetro*/
     SET @Marca = NULLIF(_Marca,'');
     SET @Estado = NULLIF(_Estado,-1);
     SET @FechaAltaDesde = (SELECT IF(_FechaAltaDesde is null OR _FechaAltaDesde = '','2010-01-01 00:00:00',_FechaAltaDesde));
@@ -1254,7 +1254,7 @@ FROM Vehiculos V
 WHERE  /*aplica condiciones a las seleciones, a los siguientes campos: */
 	(V.FechaAlta	BETWEEN @FechaAltaDesde AND @FechaAltaHasta) AND
 	V.VehiculoID = IFNULL(@VehiculoID,V.VehiculoID) AND 
-    V.Matricula  LIKE CONCAT('%',IFNULL(@Matricula,''),'%') AND
+    V.Matricula  LIKE CONCAT('%',IFNULL(@Matricula,''),'%') AND /*IFNULL()verifica si el primer parámetro devuelve como resultado de la consulta un valor nulo entonces dará como resultado el valor del segundo parámetro */
     V.Modelo  LIKE CONCAT('%',IFNULL(@Modelo,''),'%') AND
     V.Marca  LIKE CONCAT('%',IFNULL(@Marca,''),'%') AND
     V.Estado = IFNULL(@Estado,V.Estado)/* AND
@@ -1468,4 +1468,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-14 23:13:23
+-- Dump completed on 2016-09-18 13:23:59
