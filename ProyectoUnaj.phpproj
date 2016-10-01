@@ -8,7 +8,7 @@
     </RootNamespace>
     <OutputType>Library</OutputType>
     <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
-    <SpecificPageValue>mvc/models/PersonasModelo.php</SpecificPageValue>
+    <SpecificPageValue>mvc/web/index.php</SpecificPageValue>
     <StartAction>SpecificPage</StartAction>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -33,7 +33,6 @@
     <Compile Include="mvc\models\OperacionState.php" />
     <Compile Include="mvc\models\User.php" />
     <Compile Include="mvc\models\PersonasModelo.php" />
-    <Compile Include="mvc\models\UsuariosModelo.php" />
     <Compile Include="mvc\requirements.php" />
     <Compile Include="mvc\runtime\.gitignore" />
     <Compile Include="mvc\tests\codeception\acceptance\AboutCept.php" />
