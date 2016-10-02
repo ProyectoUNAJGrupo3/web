@@ -27,11 +27,12 @@
     <Compile Include="mvc\config\web.php" />
     <Compile Include="mvc\controllers\SiteController.php" />
     <Compile Include="mvc\mail\layouts\html.php" />
-    <Compile Include="mvc\models\CallStore.php" />
     <Compile Include="mvc\models\ContactForm.php" />
     <Compile Include="mvc\models\LoginForm.php" />
+    <Compile Include="mvc\models\Operaciones.php" />
+    <Compile Include="mvc\models\OperacionState.php" />
     <Compile Include="mvc\models\User.php" />
-    <Compile Include="mvc\models\Usuario_Modelo.php" />
+    <Compile Include="mvc\models\PersonasModelo.php" />
     <Compile Include="mvc\requirements.php" />
     <Compile Include="mvc\runtime\.gitignore" />
     <Compile Include="mvc\tests\codeception\acceptance\AboutCept.php" />
