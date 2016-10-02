@@ -133,11 +133,11 @@ print_r($test->GetInfoPersonas(-1,"","","","","","","",""));
 /* TEST ALTA
 if($test->RegistrarPersona("'Pepino Alejandro'","'pempin'", "'pempin'","'2543654'", "'prueba@pepe.com'", "'Calle appsp'","'{fjdsi}'",0,1,0,4)!=null) echo 'Cliente registrado correctamente!';
 */
-
-/*TEST MODIFICACION
+/*
+TEST MODIFICACION
 if($test->ModificarPersona(72,"'Santino Alejandro'","'pempin'", "'pempin'","'2543654'", "'prueba@pepe.com'", "'Calle appsp'","'{fjdsi}'",0,1,0,4)!=null) echo 'Cliente modificado correctamente!';
 */
 
 /*TEST BAJA
-if($test->EliminarPersona(72,1)!=null) echo 'Cliente eliminado correctamente!';
+if($test->EliminarPersona(72,1)!=null) echo 'Cliente eliminado correctamente!';       //(72,1) EL PRIMER PARAMETRO CORRESPONDE AL ID DE PERSONA, MIENTRAS QUE EL 1 CORRESPONDE A LA DIRECCION TIPO
 */
