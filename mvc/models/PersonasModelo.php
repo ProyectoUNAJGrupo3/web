@@ -12,7 +12,7 @@ use yii\base\Model;
  * @version 1.0
  * @author mende
  */
-class PersonasModelo /*extends Model*/
+class PersonasModelo extends Model
 {
     const Operacion_Alta = 0, Operacion_Modificacion=1, Operacion_Baja=2, Operacion_GetInfo=3;  //CONSTANTES QUE SIRVEN PARA UTILIZARLAS COMO REFERENCIA A CADA OPERACION.
     const spABM='Personas_ABM', spGetInfo='Personas_GetInfo';                                   //NOMBRES DE STORED PROCEDURES QUE SE UTILIZARAN EN EL MODELO.
