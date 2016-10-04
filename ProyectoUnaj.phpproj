@@ -27,6 +27,7 @@
     <Compile Include="mvc\config\web.php" />
     <Compile Include="mvc\controllers\SiteController.php" />
     <Compile Include="mvc\mail\layouts\html.php" />
+    <Compile Include="mvc\models\AgenciaModelo.php" />
     <Compile Include="mvc\models\ContactForm.php" />
     <Compile Include="mvc\models\LoginForm.php" />
     <Compile Include="mvc\models\Operaciones.php" />
