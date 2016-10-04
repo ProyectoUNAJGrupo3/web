@@ -37,11 +37,11 @@ class Alta implements OperacionState
         $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
         $info = $model->queryAll();
 
-        /*
-        $connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
+        
+        /*$connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
         $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
-        $info =  mysqli_fetch_array($model);
-        */
+        $info =  mysqli_fetch_array($model);*/
+        
         return $info;
     }
 
@@ -78,11 +78,11 @@ class Modificacion implements OperacionState
         $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
         $info = $model->queryAll();
 
-        /*
-        $connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
+        
+        /*$connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
         $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
-        $info =  mysqli_fetch_array($model);
-        */
+        $info =  mysqli_fetch_array($model);*/
+        
         return $info;
     }
 
@@ -119,11 +119,11 @@ class Baja implements OperacionState
         $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
         $info = $model->queryAll();
 
-        /*
-        $connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
+        
+        /*$connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
         $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
-        $info =  mysqli_fetch_array($model);
-        */
+        $info =  mysqli_fetch_array($model);*/
+        
         return $info;
     }
 
@@ -159,11 +159,11 @@ class GetInfo implements OperacionState
         $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
         $info = $model->queryAll();
         
-        /*
-        $connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
+        
+        /*$connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
         $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
-        $info =  mysqli_fetch_array($model);
-        */
+        $info =  mysqli_fetch_array($model);*/
+        
         return $info;
     }
 
