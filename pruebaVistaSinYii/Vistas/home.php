@@ -16,7 +16,6 @@ include('header.php');
 		<div id="map"></div>
 	
 		<div id="dvMap" style="width: 700px; height: 700px; width: 100%; boder:3px solid black; padding: 30px 30px; box-shadow: 15px 15px 10px #888888; margin-left:-15px;"></div>
-		
 	</div><!--End Bar Buttons-->
 </div>
 

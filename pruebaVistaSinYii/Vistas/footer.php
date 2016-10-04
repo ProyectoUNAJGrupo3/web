@@ -46,20 +46,10 @@ $(document).ready(function(){
 		$("#myModal").modal();
 	});
 });
-
 </script>
-
-<script>
-function mostrarMapa(){
-	document.getElementById('dvMap').style.display = 'block';
-	document.getElementById('main').style.display = 'none';
-}
-</script>
-
 <script>
 function abrirFormulario() {
 	var formularioDescargado = false;
-	
 	$('#myModal').modal('hide');
 	if (!formularioDescargado){
 			$.ajax({
@@ -69,14 +59,11 @@ function abrirFormulario() {
 			  success: function(data) {
 				$('body').append(data);
 				formularioDescargado = true;
-				document.getElementById('dvMap').style.display = 'none';
 			  },
 			});
 		}
 }
 </script>
-
-
 
 <!--<script>
 function abrirFormulario() {
