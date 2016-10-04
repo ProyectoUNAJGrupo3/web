@@ -23,18 +23,18 @@ class PersonasModelo extends Model
 
 
 
-    public function RegistrarPersona($Nombre, $Usuario,$Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $DireccionTipo, $Estado, $RolID)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, PersonaID y @result).
+    public function RegistrarPersona($Nombre, $Apellido,$Usuario,$Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $Estado, $RolID)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, PersonaID y @result).
     {
         $this->Parametros = [
                 'Nombre' => $Nombre,
                 'Usuario' => $Usuario,
+                'Apellido' => $Apellido,
                 'Password' => $Password,
                 'Telefono' => $Telefono,
                 'Email' => $Email,
                 'Direccion' => $Direccion,
                 'DireccionCoordenadas' => $DireccionCoordenadas,
                 'DireccionDefault' => $DireccionDefault,
-                'DireccionTipo' => $DireccionTipo,
                 'Estado' =>$Estado,
                 'RolID' =>$RolID
                 ];
@@ -42,11 +42,12 @@ class PersonasModelo extends Model
         $this->Personas = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Alta()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la persona insertada).
         return $this->Personas;
     }
-    public function EliminarPersona($PersonaID, $DireccionTipo)
+    public function EliminarPersona($PersonaID)
     {
         $this->Parametros = [
                 'PersonaID' => $PersonaID,
                 'Nombre' => "",
+                'Apellido' => "",
                 'Usuario' => "",
                 'Password' => "",
                 'Telefono' => "",
@@ -54,7 +55,6 @@ class PersonasModelo extends Model
                 'Direccion' => "",
                 'DireccionCoordenadas' => "",
                 'DireccionDefault' => "",
-                'DireccionTipo' => $DireccionTipo,
                 'Estado' =>"",
                 'RolID' =>""
                 ];
@@ -63,11 +63,12 @@ class PersonasModelo extends Model
 
         return $this->Personas;
     }
-    public function ModificarPersona($PersonaID, $Nombre, $Usuario,$Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $DireccionTipo, $Estado, $RolID)
+    public function ModificarPersona($PersonaID, $Nombre, $Apellido, $Usuario,$Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $DireccionTipo, $Estado, $RolID)
     {
         $this->Parametros = [
                 'PersonaID' => $PersonaID,
                 'Nombre' => $Nombre,
+                'Apellido' => $Apellido,
                 'Usuario' => $Usuario,
                 'Password' => $Password,
                 'Telefono' => $Telefono,
@@ -75,7 +76,6 @@ class PersonasModelo extends Model
                 'Direccion' => $Direccion,
                 'DireccionCoordenadas' => $DireccionCoordenadas,
                 'DireccionDefault' => $DireccionDefault,
-                'DireccionTipo' => $DireccionTipo,
                 'Estado' =>$Estado,
                 'RolID' =>$RolID
                 ];
@@ -83,11 +83,12 @@ class PersonasModelo extends Model
         $this->Personas = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Modifcacion()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la persona modificada).
         return $this->Personas;
     }
-    public function GetInfoPersonas($PersonaID, $Nombre, $Usuario, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $Estado, $RolID)
+    public function GetInfoPersonas($PersonaID, $Nombre, $Apellido,$Usuario, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $Estado, $RolID)
     {
         $this->Parametros = [
                 'PersonaID' => $PersonaID,
                 'Nombre' => $Nombre,
+                'Apellido' => $Apellido,
                 'Usuario' => $Usuario,
                 'Telefono' => $Telefono,
                 'Email' => $Email,
@@ -126,18 +127,19 @@ class PersonasModelo extends Model
 
 $test = new PersonasModelo();
 /*TEST GET INFO
-print_r($test->GetInfoPersonas(-1,"","","","","","","",""));
-*/
+print_r($test->GetInfoPersonas(-1,"","","","","","","","",""));
+ */
 
 
-/* TEST ALTA
-if($test->RegistrarPersona("'Pepino Alejandro'","'pempin'", "'pempin'","'2543654'", "'prueba@pepe.com'", "'Calle appsp'","'{fjdsi}'",0,1,0,4)!=null) echo 'Cliente registrado correctamente!';
-*/
+
+/*TEST REGISTRAR
+if($test->RegistrarPersona("'Son'","'Goku'","'ssj3'", "'ssj3'","'42134213'", "'supersaiyan@tierra.com'", "'Monta?a paos'","'{fjdsi}'",0,0,4)!=null) echo 'Cliente registrado correctamente!';
+ */
 
 /*TEST MODIFICACION
-if($test->ModificarPersona(72,"'Santino Alejandro'","'pempin'", "'pempin'","'2543654'", "'prueba@pepe.com'", "'Calle appsp'","'{fjdsi}'",0,1,0,4)!=null) echo 'Cliente modificado correctamente!';
-*/
+if($test->ModificarPersona(72,"'Santino Alejandro'","'pempin'", "'pempin'","'2543654'", "'prueba@pepe.com'", "'Calle appsp'","'{fjdsi}'",0,0,4)!=null) echo 'Cliente modificado correctamente!';
+ */
 
-/*TEST BAJA
-if($test->EliminarPersona(72,1)!=null) echo 'Cliente eliminado correctamente!';
-*/
+/*TEST ELIMINAR
+if($test->EliminarPersona(72)!=null) echo 'Cliente eliminado correctamente!';
+ */
