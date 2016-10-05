@@ -8,9 +8,14 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\PersonasModelo;                      //agregado
+use app\models\TipoUsuario;                         //agregado
+use app\models\PSFormularioLoginModel;             //agregado
+use app\models\PSFormularioUsuarioModel;           //agregado
 
 class SiteController extends Controller
 {
+    public $rolID;
     /**
      * @inheritdoc
      */
@@ -19,15 +24,67 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
+                'only' => ['login','logout','administrador','recepcionista','chofer','cliente'],             //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'rules' => [                              //reglas
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['login'],                 //para la accion login
+                        'allow' => true,                        //Todos los permisos aceptados
+                        'roles' => ['?'],                       //Tienen acceso a esta accion todos los usuarios invitados
+
+                    ],
+                    //se coloca por el momento este permiso        **********************************************
+    /*/                [
+                        'actions' => ['login','logout'],
                         'allow' => true,
                         'roles' => ['@'],
+
+                ],
+   /*/                [
+                        //el administrador tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout','administrador'],
+                        'allow' => true,
+                        'roles' => ['@'],                       //El arroba es para el usuario autenticado
+                        'matchCallback' => function ($rule, $action) {                    //permite escribir la lógica de comprobación de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
+                            return TipoUsuario::usuarioAdministrador($this->rolID)===false;
+                                               //Llamada al método que comprueba si es un administrador
+                            //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
+                        },
+                    ],
+                    [
+                        //el recepcionista tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout','recepcionista'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return TipoUsuario::usuarioRecepcionista($this->rolID)===false;
+                            //Llamada al método que comprueba si es un recepcionista
+                       },
+                    ],
+                    [
+                        //el chofer tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout','chofer'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return TipoUsuario::usuarioChofer($this->rolID)===false;
+                            //Llamada al método que comprueba si es un chofer
+                       },
+                    ],
+                    [
+                        //el cliente tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout','cliente'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return TipoUsuario::usuarioCliente($this->rolID)===false;
+                            //Llamada al método que comprueba si es un cliente
+
+                        },
                     ],
                 ],
             ],
+            //Controla el modo en que se accede a las acciones, en este caso a la acción logout
+             //sólo se puede acceder a través del método post
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -40,6 +97,7 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
+
     public function actions()
     {
         return [
@@ -63,6 +121,26 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    // funciones para las vistas dependiendo el tipo de usuario
+    public function actionAdministrador()
+    {
+        return $this->render('index');
+    }
+
+    public function actionRecepcionista()
+    {
+        return $this->render('about');
+    }
+    public function actionChofer()
+    {
+        return $this->render('about');
+    }
+
+    public function actionCliente()
+    {
+        return $this->render("about");
+    }
+
     /**
      * Login action.
      *
@@ -70,15 +148,47 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        global $rolID;
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
+
         }
 
-        $model = new LoginForm();
+        $model = new PSFormularioLoginModel();
+        $model1 = new PersonasModelo();    //modelo agregado de prueba
+   //     $model = new LoginForm();
+        $variable = $model1->GetInfoPersonas(-1,"","","","","","","","","");
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            foreach ($variable as $persona){                           
+                if ($model->getUsuario() === $persona['Usuario']){        //si el usuario del modelo ("emendez") es igual al usuario obtenido de la lista de personas de la bd. El ('Usuario') hace referencia a la fila Usuario, atributo de persona
+                    $this->rolID = $persona['RolID'];                            //guardo el rol como global para que el control de acceso lo pueda usar
+                    if (TipoUsuario::usuarioAdministrador($this->rolID)){  //*************************************************
+                         return $this->redirect(['site/administrador']);
+                    }
+                    elseif(TipoUsuario::usuarioRecepcionista($this->rolID)){
+                         return $this->redirect(['site/recepcionista']);
+                    }
+                    elseif(TipoUsuario::usuarioChofer($this->rolID)){
+                         return $this->redirect(['site/chofer']);
+                    }
+                    elseif(TipoUsuario::usuarioCliente($this->rolID)){
+                         return $this->redirect(['site/cliente']);
+                    }
+                    else{
+                        return  $this->goBack();
+                    }
+   
+                }
+
+       //     break;
+
+            }     //foreach primero
+            //        return $this->goBack();
+
         }
-        return $this->render('login', [
+        return $this->render('PSFormularioLogin', [
             'model' => $model,
         ]);
     }
@@ -113,6 +223,12 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionRegistro()
+    {
+        $model = new PSFormularioUsuarioModel();
+        return $this->render("PSFormularioUsuario", ['model' => $model]);
+    }
+
     /**
      * Displays about page.
      *
@@ -122,4 +238,5 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
 }
