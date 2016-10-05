@@ -18,6 +18,7 @@ class LoginForm extends Model
     public $rememberMe = true;
 
     private $_user = false;
+    public $usuario;
 
 
     /**
@@ -73,9 +74,16 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = User::findByUserName($this->username);
         }
 
         return $this->_user;
     }
+    //metodo agregado
+    public function getUsuario(){
+        return $this->username;
+
+    }
+
+
 }
