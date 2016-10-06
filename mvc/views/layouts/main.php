@@ -22,7 +22,10 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php $this->beginBody() ;
+      /*include('testMaps.php');*/
+    
+?>
 
 <div class="wrap">
     <?php
