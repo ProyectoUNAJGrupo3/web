@@ -44,9 +44,9 @@ class SiteController extends Controller
                         'actions' => ['logout','administrador'],
                         'allow' => true,
                         'roles' => ['@'],                       //El arroba es para el usuario autenticado
-                        'matchCallback' => function ($rule, $action) {                    //permite escribir la lógica de comprobación de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
+                        'matchCallback' => function ($rule, $action) {                    //permite escribir la lï¿½gica de comprobaciï¿½n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
                             return TipoUsuario::usuarioAdministrador($this->rolID)===false;
-                                               //Llamada al método que comprueba si es un administrador
+                                               //Llamada al mï¿½todo que comprueba si es un administrador
                             //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
                         },
                     ],
@@ -57,7 +57,7 @@ class SiteController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return TipoUsuario::usuarioRecepcionista($this->rolID)===false;
-                            //Llamada al método que comprueba si es un recepcionista
+                            //Llamada al mï¿½todo que comprueba si es un recepcionista
                        },
                     ],
                     [
@@ -67,7 +67,7 @@ class SiteController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return TipoUsuario::usuarioChofer($this->rolID)===false;
-                            //Llamada al método que comprueba si es un chofer
+                            //Llamada al mï¿½todo que comprueba si es un chofer
                        },
                     ],
                     [
@@ -77,14 +77,14 @@ class SiteController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return TipoUsuario::usuarioCliente($this->rolID)===false;
-                            //Llamada al método que comprueba si es un cliente
+                            //Llamada al mï¿½todo que comprueba si es un cliente
 
                         },
                     ],
                 ],
             ],
-            //Controla el modo en que se accede a las acciones, en este caso a la acción logout
-             //sólo se puede acceder a través del método post
+            //Controla el modo en que se accede a las acciones, en este caso a la acciï¿½n logout
+             //sï¿½lo se puede acceder a travï¿½s del mï¿½todo post
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -161,7 +161,7 @@ class SiteController extends Controller
         $variable = $model1->GetInfoPersonas(-1,"","","","","","","","","");
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            foreach ($variable as $persona){                           
+            foreach ($variable as $persona){
                 if ($model->getUsuario() === $persona['Usuario']){        //si el usuario del modelo ("emendez") es igual al usuario obtenido de la lista de personas de la bd. El ('Usuario') hace referencia a la fila Usuario, atributo de persona
                     $this->rolID = $persona['RolID'];                            //guardo el rol como global para que el control de acceso lo pueda usar
                     if (TipoUsuario::usuarioAdministrador($this->rolID)){  //*************************************************
@@ -179,7 +179,7 @@ class SiteController extends Controller
                     else{
                         return  $this->goBack();
                     }
-   
+
                 }
 
        //     break;
@@ -226,6 +226,9 @@ class SiteController extends Controller
     public function actionRegistro()
     {
         $model = new PSFormularioUsuarioModel();
+        if ($model->load(Yii::$app->request->post()) && $model->AltaRegistro()) {
+            Yii::$app->session->setFlash('Usuario creado con exito');
+        }
         return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
 
