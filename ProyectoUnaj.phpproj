@@ -32,6 +32,7 @@
     <Compile Include="mvc\models\LoginForm.php" />
     <Compile Include="mvc\models\Operaciones.php" />
     <Compile Include="mvc\models\OperacionState.php" />
+    <Compile Include="mvc\models\RegistroUsuario.php" />
     <Compile Include="mvc\models\User.php" />
     <Compile Include="mvc\models\PersonasModelo.php" />
     <Compile Include="mvc\requirements.php" />

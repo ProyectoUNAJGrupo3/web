@@ -27,8 +27,8 @@ class PersonasModelo extends Model
     {
         $this->Parametros = [
                 'Nombre' => $Nombre,
-                'Usuario' => $Usuario,
                 'Apellido' => $Apellido,
+                'Usuario' => $Usuario,
                 'Password' => $Password,
                 'Telefono' => $Telefono,
                 'Email' => $Email,
