@@ -41,7 +41,7 @@
 						<div class="header-nav-inner">
 								
 								<ul style="width:100%">
-									<li class="nav-button nav-0"><a href="#">Home</a></li>
+									<li class="nav-button nav-0"><a href="#" onclick="mostrarMapa()">Home</a></li>
 									<li class="nav-button nav-1"><a href="#">Qui&eacute;nes somos</a></li>
 									<li class="nav-button nav-2"><a href="#">Nuestro Clientes</a></li>
 									<li class="nav-button nav-4"><a href="#">Nuestra Historia</a></li>

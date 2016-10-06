@@ -1,11 +1,29 @@
-		<footer>
+			
+<!--		<footer>
 			<div class="footer">
-				<hr style="border:1px solid gray;">
+				<hr id="gray" style="border:1px solid gray;">
 				<span id="footer-copy-right" style="text-align:center">Derechos Reservado &copy 2016</span>
 			</div>
-		</footer>
+		</footer> 
 
-</div> <!--End Container-->
+</div> --> 
+
+<!--End Container--> 
+
+<div class="contenedor">
+    <div class="principal">
+        <!--Contenido-->
+        <!--Contenido-->
+        <!--Contenido-->
+        <!--Contenido-->
+        <!--Contenido-->    
+    </div>
+    <footer>
+	<div class="footer">
+				<hr id="gray" style="border:1px solid gray;">
+				<span id="footer-copy-right" style="text-align:center">Derechos Reservados &copy 2016</span>
+			</div></footer>
+</div>
 
 <script>
 /**Corresponder al Login de Menu*/
@@ -46,7 +64,26 @@ $(document).ready(function(){
 		$("#myModal").modal();
 	});
 });
+
 </script>
+
+<script>
+function mostrarMapa(){
+	//$('body').css('display','block');
+	
+	document.getElementById('main').style.display = 'none';
+	document.getElementById('dvMap').style.display = 'block';
+	document.getElementById('bar-buttons').style.display = 'block';
+	document.getElementById('footer-copy-right').style.display = 'block';
+	document.getElementById('gray').style.display = 'block';
+	}
+	//if (formularioDescargado = true){
+	//	document.getElementById('main').style.display = 'none';
+
+	//}
+
+</script>
+
 <script>
 function abrirFormulario() {
 	var formularioDescargado = false;
@@ -56,14 +93,23 @@ function abrirFormulario() {
 			  url: 'formularioUsuario.html',
 			  dataType: 'text',
 			  async:false,
-			  success: function(data) {
+			  success: function(data) { 
 				$('body').append(data);
+				//$('body').append(footer);
 				formularioDescargado = true;
+				document.getElementById('dvMap').style.display = 'none';
+				document.getElementById('bar-buttons').style.display = 'none';
+				//document.getElementById('footer-copy-right').style.display = 'none';
+				//document.getElementById('gray').style.display = 'none';
 			  },
+			  
 			});
 		}
+	 	
 }
 </script>
+
+
 
 <!--<script>
 function abrirFormulario() {
