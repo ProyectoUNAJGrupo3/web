@@ -24,7 +24,7 @@ use yii\web\AssetBundle;
  *              'bundles' => [
  *                  'dosamigos\google\maps\MapAsset' => [
  *                      'options' => [
- *                          'key' => 'AIzaSyAEKWU3BPNhv5XSgVJ3XEEpPI-w5iJajXs',
+ *                          'key' => 'this_is_my_key',
  *                          'language' => 'id',
  *                          'version' => '3.1.18'
  *                      ]
@@ -54,7 +54,7 @@ class MapAsset extends AssetBundle
 	// BACKWARD COMPATIBILITY
 	// To configure please, add `googleMapsApiKey` parameter to your application configuration
 	// file with the value of your API key. To get yours, please visit https://code.google.com/apis/console/.
-        $key = 'AIzaSyAEKWU3BPNhv5XSgVJ3XEEpPI-w5iJajXs';
+        $key = 'AIzaSyBR6DOamOqz59j-iu3dK3Cgfi1w5VCvWWk';
 	// To configure please, add `googleMapsLibraries` parameter to your application configuration
 	$libraries = @Yii::$app->params['googleMapsLibraries'];
 	// To configure please, add `googleMapsLanguage` parameter to your application configuration

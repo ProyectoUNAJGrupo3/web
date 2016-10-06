@@ -387,8 +387,8 @@ class Map extends ObjectAbstract
     public function getJs()
     {
         $name = $this->getName();
-        $width = "90%";
-        $height = "90%";
+        $width = strpos($this->width, "%") ? $this->width : $this->width . 'px';
+        $height = strpos($this->height, "%") ? $this->height : $this->height . 'px';
         $containerId = ArrayHelper::getValue($this->containerOptions, 'id', $name . '-map-canvas');
         $overlaysJs = [];
         $js = [];
@@ -461,4 +461,4 @@ class Map extends ObjectAbstract
     {
         return $this->getPlugins()->remove($plugin);
     }
-}
+} 
