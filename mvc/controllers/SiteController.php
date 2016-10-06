@@ -161,7 +161,7 @@ class SiteController extends Controller
         $variable = $model1->GetInfoPersonas(-1,"","","","","","","","","");
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            foreach ($variable as $persona){                           
+            foreach ($variable as $persona){
                 if ($model->getUsuario() === $persona['Usuario']){        //si el usuario del modelo ("emendez") es igual al usuario obtenido de la lista de personas de la bd. El ('Usuario') hace referencia a la fila Usuario, atributo de persona
                     $this->rolID = $persona['RolID'];                            //guardo el rol como global para que el control de acceso lo pueda usar
                     if (TipoUsuario::usuarioAdministrador($this->rolID)){  //*************************************************
@@ -179,7 +179,7 @@ class SiteController extends Controller
                     else{
                         return  $this->goBack();
                     }
-   
+
                 }
 
        //     break;
@@ -226,6 +226,9 @@ class SiteController extends Controller
     public function actionRegistro()
     {
         $model = new PSFormularioUsuarioModel();
+        if ($model->load(Yii::$app->request->post()) && $model->AltaRegistro()) {
+            Yii::$app->session->setFlash('Usuario creado con exito');
+        }
         return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
 
