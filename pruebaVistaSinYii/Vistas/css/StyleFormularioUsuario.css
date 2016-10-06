@@ -1,0 +1,64 @@
+#page-single-main{
+	 width: 100%;
+	 background-color:#F5F5DA;
+	 margin:0px;
+	 margin-left:-15px;
+
+}
+
+
+#title-form{
+	color:black;
+	text-align: center;
+	font-size:40px;
+}
+
+
+.label-field-form{
+	font-size:16px;
+	width: 50%;
+	size:50px;
+	float:center;	
+}
+#nombre, #apellido, #correo-electronico, #telefono,#direccion, #nombreUsuario, #contrasenia, #confirmarContrasenia{
+	font-size:16px;
+	width: 60%;
+	size:50px;
+	float:center;	
+}
+#errorInfoNom, #errorInfoApel, #errorInfoEmail, #errorInfoTel, #errorInfUser, #errorInfContrasenia, #errorInfConfContrasenia{
+	font-size:14px;
+	color:gray;
+}
+#btn-registrarme{
+	font-size:16px;
+	size:50px;
+	margin-left:120px;
+}
+#contenedor-formulario{
+	margin: 30px 100px;
+	box-shadow: 21px 21px 51px #999;
+	border-radius: 70px;
+	padding:10px 50px;
+	float:center;
+    size:500px;
+	position: relative;
+	vertical-align: top;
+}
+#sub-contenedor-formulario{
+	border-radius: 70px;
+	box-shadow: 10px 10px 15px #999;
+	padding:10px 10px;
+	margin: 40px 10px;
+	position: relative;
+	float:center;
+}
+
+#sub-sub-contenedor-formulario{
+	position:absolute;
+	margin-left:20%;
+	position:center;
+	size:120px;
+	float:center;
+	position: relative;
+}
