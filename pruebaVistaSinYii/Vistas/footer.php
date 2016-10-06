@@ -6,6 +6,7 @@
 			</div>
 		</footer> 
 
+<<<<<<< HEAD
 </div> --> 
 
 <!--End Container--> 
@@ -24,6 +25,9 @@
 				<span id="footer-copy-right" style="text-align:center">Derechos Reservados &copy 2016</span>
 			</div></footer>
 </div>
+=======
+</div> 
+>>>>>>> repocentral/master
 
 <script>
 /**Corresponder al Login de Menu*/
@@ -46,7 +50,7 @@ $(document).ready(function(){
 });
 </script>
 <script>
-/**Corresponder al Login de Menu*/
+/**Corresponde al Home --> Boton SOLICITAR SERVICIO REMISERIA el cual abre el POPUP LOGIN*/
 var loginDescargado = false;
 $(document).ready(function(){
 	$("#btn-solcitar-remis").click(function(){
@@ -67,6 +71,7 @@ $(document).ready(function(){
 
 </script>
 
+<<<<<<< HEAD
 <script>
 function mostrarMapa(){
 	//$('body').css('display','block');
@@ -84,10 +89,13 @@ function mostrarMapa(){
 
 </script>
 
+=======
+>>>>>>> repocentral/master
 <script>
+/*CORRESPONDIENTE A LOGIN --> BOTON REGISTRARME QUE ABRE EL FORMULARIO Y LO COLOCA EN LA HOME*/
 function abrirFormulario() {
-	var formularioDescargado = false;
 	$('#myModal').modal('hide');
+<<<<<<< HEAD
 	if (!formularioDescargado){
 			$.ajax({
 			  url: 'formularioUsuario.html',
@@ -111,10 +119,25 @@ function abrirFormulario() {
 
 
 
+=======
+	$(function(){
+      $("#contenedor").load("formularioUsuario.html"); 
+    });
+
+}
+</script>
+
+<script>
+/**MOSTRAR MAPA CON BOTON LOGIN*/
+function mostrarMapa(){
+	document.getElementById('dvMap').style.display = 'block'
+}
+</script>
+>>>>>>> repocentral/master
 <!--<script>
-function abrirFormulario() {
-    var myWindow = window.open("", "_self");
-    myWindow.document.write("formularioUsario.html");
+/*MOSTRAR MAPA CON BOTON LOGIN*/
+function mostrarMapa(){
+	document.getElementById('dvMap').style.display = 'block'
 }
 </script>-->
 
@@ -227,7 +250,7 @@ function validarConfirmacionContrasenia(){
 }
 </script>
 
-<script><!---Validaciones Campos Login->
+<script><!--Validaciones Campos Login-->
 function validarLoginNombre(){
 	var x=document.formLogin.usarioForm.value;
 	 if (x==null || x=="")
@@ -256,6 +279,10 @@ function validarLoginContrasenia(){
 }
 </script>
 
+
+
+
+<!--ABRIENDO EL MAPA-->
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFe54SLlmRo-9fKIQXhAuXhDTLoGRHFBw&callback=initMap">
 </script>
@@ -289,5 +316,4 @@ if (navigator.geolocation) {
 </html>
 
 <!--fondo mapas: background
-mapa para ver posicion, buscar remiserias, saolicitar
--->
+mapa para ver posicion, buscar remiserias, saolicitar -->

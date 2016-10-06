@@ -16,15 +16,14 @@
 	</head>
 	<body>
 		<div class="container">
-
 			<header class="header-head" itf-shared-header="">
 				<div class="header ng-isolate.scope" off-set="250" sticky="" style="position:static;">
-					<!--logo-->
+					
 					<div class="header-top">
 						<div class="header-top-inner">
 							
 							<div class="header-top-inner-left">
-								<!--<a class="navbar-brand navar-brand-otra-clase"-->
+					
 								<a class="navbar-brand " href="#"><img src="logo.jpg" height="90px" width="90px" alt="Logo P&aacute;gina" align="left-top" title="Logo Service Remis"></a>
 							</div>
 							
@@ -32,16 +31,20 @@
 								<span class="name-company">Service Remis</span>
 							</div>
 							
-						</div><!--End header-top-inner-->
-					</div><!--End Header top-->
+						</div>
+					</div>
 					
-					<!--menu-->
+					
 					<div class="header-nav">
 						
 						<div class="header-nav-inner">
 								
 								<ul style="width:100%">
+<<<<<<< HEAD
 									<li class="nav-button nav-0"><a href="#" onclick="mostrarMapa()">Home</a></li>
+=======
+									<li class="nav-button nav-0"><a href="#" onclick="mostrarMapaDesdeHome()">Home</a></li>
+>>>>>>> repocentral/master
 									<li class="nav-button nav-1"><a href="#">Qui&eacute;nes somos</a></li>
 									<li class="nav-button nav-2"><a href="#">Nuestro Clientes</a></li>
 									<li class="nav-button nav-4"><a href="#">Nuestra Historia</a></li>
