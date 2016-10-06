@@ -1799,6 +1799,8 @@
     <Compile Include="mvc\views\site\error.php" />
     <Compile Include="mvc\views\site\index.php" />
     <Compile Include="mvc\views\site\login.php" />
+    <Compile Include="mvc\views\site\PSFormularioLogin.php" />
+    <Compile Include="mvc\views\site\PSFormularioUsuario.php" />
     <Compile Include="mvc\web\assets\.gitignore" />
     <Compile Include="mvc\web\css\site.css" />
     <Compile Include="mvc\web\favicon.ico" />
