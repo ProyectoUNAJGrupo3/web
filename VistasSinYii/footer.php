@@ -52,8 +52,8 @@ $(document).ready(function(){
 });
 </script>
 
-<script>
-/**Corresponde al Home --> Boton Menu QUIENES SOMOS */
+<!--<script>
+Corresponde al Home -- Boton Menu QUIENES SOMOS 
 var loginDescargado = false;
 $(document).ready(function(){
 	$("#quienes-somos").click(function(){
@@ -71,7 +71,7 @@ $(document).ready(function(){
 		/*$("#myModal").modal();*/
 	});
 });
-</script>
+</script>-->
 
 
 
@@ -97,7 +97,7 @@ function volverPantallaHome() {
 <script>
 function abrirQuienesSomos(){
 $(function(){
-      $("#contenedor-home").load("ventanaQuien.html"); 
+      $("#contenedor-home").load("ventanaQuienesSomos.html"); 
     });
 }
 </script>
