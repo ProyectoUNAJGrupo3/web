@@ -8,12 +8,14 @@ use yii\widgets\ActiveForm;
     <section id="main">
         <article>
             <div id="page-single-main">-->
-
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places">
+</script>
 <div class="site-contact">
     <h1>Formulario Usuario</h1>
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
+    <?php if (Yii::$app->session->hasFlash('Usuario creado con exito')): ?>
 
         <div class="alert alert-success">
             Thank you for contacting us. We will respond to you as soon as possible.
@@ -37,6 +39,10 @@ use yii\widgets\ActiveForm;
         </p>
 
         <div class="row">
+            <div id="map-container">
+            <div id="map"></div>
+        </div>
+        <input id="pac-input" class="controls" type="text" placeholder="Busca tu partido / barrio " />
             <div class="col-lg-5">
 
                 <?php $form = ActiveForm::begin(); ?>
@@ -48,8 +54,8 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'apellido')->input("text"); ?>
                 <?= $form->field($model, 'correo')->input("email"); ?>
                 <?= $form->field($model, 'telefono'); ?>
-                <?= $form->field($model, 'direccion'); ?>
-                <?= Html::button('Buscar Dirección', ['class' => 'btn btn-primary']); ?>
+                <?= $form->field($model, 'direccion')->textInput(['readonly' => true]); ?>
+                <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick'=>'initMap();']) ;?>
                 <!--                                    <label for="datos-personales" class="label-field-form">Nombre</label>
                                                     <input type="text" id="nombre" name="nombreForm" class="form-control" onblur="validarNombre()" placeholder="nombre" aria-required="true" required maxlength="60" /> <span id="errorInfoNom"></span>
                                                     <br>

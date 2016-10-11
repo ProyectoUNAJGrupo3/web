@@ -22,7 +22,10 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php $this->beginBody() ;
+      /*include('testMaps.php');*/
+    
+?>
 
 <div class="wrap">
     <?php
@@ -37,8 +40,9 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'About', 'url' => ['/site/about']], 
             ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Registro', 'url' => ['/site/registro']],           //boludez que agregue yo
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
