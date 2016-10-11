@@ -10,7 +10,7 @@ class PSFormularioLoginModel extends Model {
     public $usuario;
     public $contrasenia;
     public $recordarMe = true;
-    private $_user = false;
+    public $_user = false;
     public $rememberMe = true;
 
     public function rules() {
@@ -54,6 +54,7 @@ class PSFormularioLoginModel extends Model {
     public function getUser()
     {
         if ($this->_user === false) {
+            User::setUser();
             $this->_user = User::findByUserName($this->usuario);
         }
 
