@@ -227,7 +227,8 @@ class SiteController extends Controller
     {
         $model = new PSFormularioUsuarioModel();
         if ($model->load(Yii::$app->request->post()) && $model->AltaRegistro()) {
-            Yii::$app->session->setFlash('Usuario creado con exito');
+            return $this->redirect(['site/administrador']);
+            
         }
         return $this->render("PSFormularioUsuario", ['model' => $model]);
     }

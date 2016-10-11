@@ -23,15 +23,16 @@ $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
-    <!--<div class="jumbotron">
+    <div class="jumbotron">
         <h1>Congratulations!</h1>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
         <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>-->
+    </div>
 
     <div class="body-content">
+
         <?php
         $this->beginBody();
         /* include('testMaps.php'); */
@@ -42,7 +43,7 @@ $this->title = 'My Yii Application';
     'zoom' => 14,
     ]);
 
-    /*
+    
     // lets use the directions renderer
     $home = new LatLng(['lat' => -34.772015, 'lng' => -58.264468]);
     $school = new LatLng(['lat' => -34.773216, 'lng' => -58.270884]);
@@ -80,7 +81,7 @@ $this->title = 'My Yii Application';
 
     // Thats it, append the resulting script to the map
     $map->appendScript($directionsService->getJs());
-    */
+    
     // Lets add a marker now
     $marker = new Marker([
     'position' => $coord,
@@ -96,7 +97,7 @@ $this->title = 'My Yii Application';
 
     // Add marker to the map
     $map->addOverlay($marker);
-    /*
+    
     // Now lets write a polygon
     $coords = [
     new LatLng(['lat' => 25.774252, 'lng' => -80.190262]),
@@ -117,7 +118,7 @@ $this->title = 'My Yii Application';
     // Add it now to the map
     $map->addOverlay($polygon);
 
-    */
+    
     // Lets show the BicyclingLayer :)
     $bikeLayer = new BicyclingLayer(['map' => $map->getName()]);
 

@@ -31,7 +31,7 @@ class PSFormularioUsuarioModel extends Model {
 
 
             ['telefono', 'required'],
-            //['telefono', 'match','pattern'=>'/^[0-9]+$i/','message'=>'Ingrese solo números'],
+            ['telefono', 'match','pattern'=>'/^[0-9]+$i/','message'=>'Ingrese solo números'],
             //['telefono', 'match','pattern'=>'/^.{8,20}$i/','message'=>'Ingrese como mínimo 8 y como máximo 20 números'],
 
             ['direccion', 'required'],
