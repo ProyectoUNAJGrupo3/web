@@ -16,7 +16,7 @@ class PSFormularioLoginModel extends Model {
     public function rules() {
         return [
             // username and password are both required
-            [['usuario', 'contrasenia'], 'required'],
+            [['usuario', 'contrasenia'], 'required', 'message'=>'Campo vacío, inválido'],
             // rememberMe must be a boolean value
             ['recordarMe', 'boolean'],
             // password is validated by validatePassword()
