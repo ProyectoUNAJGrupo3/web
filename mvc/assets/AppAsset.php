@@ -22,7 +22,11 @@ class AppAsset extends AssetBundle {
         'css/site.css',
     ];
     public $js = [
+<<<<<<< HEAD
         'js/Maps.js'
+=======
+        'js/Mapas.js'
+>>>>>>> proyectoWeb/master
     ];
     public $depends = [
         'yii\web\YiiAsset',
