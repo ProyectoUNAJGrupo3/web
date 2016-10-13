@@ -49,19 +49,9 @@
 						<div class="header-nav-inner">
 								
 								<ul style="width:100%">
-<<<<<<< HEAD:pruebaVistaSinYii/Vistas/header.php
-<<<<<<< HEAD
-									<li class="nav-button nav-0"><a href="#" onclick="mostrarMapa()">Home</a></li>
-=======
-									<li class="nav-button nav-0"><a href="#" onclick="mostrarMapaDesdeHome()">Home</a></li>
->>>>>>> repocentral/master
-									<li class="nav-button nav-1"><a href="#">Qui&eacute;nes somos</a></li>
-									<li class="nav-button nav-2"><a href="#">Nuestro Clientes</a></li>
-=======
 									<li class="nav-button nav-0"><a href="#">Home</a></li><!--onclick="volverPantallaHome()"-->
 									<li class="nav-button nav-1"><a href="#" onclick="abrirQuienesSomos()">Qui&eacute;nes somos</a></li>
 									<li class="nav-button nav-2"><a href="#" onclick="abrirNuestrosClientes()">Nuestro Clientes</a></li>
->>>>>>> repocentral/master:VistasSinYii/header.php
 									<li class="nav-button nav-4"><a href="#">Nuestra Historia</a></li>
 									<li class="nav-button nav-5"><a href="#">Contacto</a></li>
 									<li class="nav-button nav-6"><button type="button" class="btn-login" id="btn-login" data-dismiss="modal" data-toggle="modal"><a href="#">Login</a></button></li>
