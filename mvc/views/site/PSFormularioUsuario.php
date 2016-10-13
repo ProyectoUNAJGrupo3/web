@@ -8,7 +8,9 @@ use yii\widgets\ActiveForm;
     <section id="main">
         <article>
             <div id="page-single-main">-->
-
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places">
+</script>
 <div class="site-contact">
     <h1>Formulario Usuario</h1>
     <h1><?= Html::encode($this->title) ?></h1>
@@ -33,75 +35,31 @@ use yii\widgets\ActiveForm;
     <?php else: ?>
 
         <p>
-            A continuación ingrese sus datos para poder crearse un usuario.
+            A continuación ingrese sus datos para poder crearse una cuenta.
         </p>
 
         <div class="row">
+            <div id="map-container">
+                <div id="map"></div>
+            </div>
+            <input id="pac-input" class="controls" type="text" placeholder="Busca tu partido / barrio " />
             <div class="col-lg-5">
 
                 <?php $form = ActiveForm::begin(); ?>
-                            <!--<h1 id="title-form"><strong>F&oacute;rmulario de Usuario</strong></h1>
-                            <div class="container-form" id="contenedor-formulario">
-                                <form id="contenido-form" onsubmit="return validateForm()" method="post" name="formUser">-->
                 <b><h3><u>Datos</u> <u>Personales</u></h3></b>
-                <?= $form->field($model, 'nombre')->input("text"); ?>
-                <?= $form->field($model, 'apellido')->input("text"); ?>
+                <?= $form->field($model, 'nombre')->input("text", ['maxlength' => '50']); ?>
+                <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50']); ?>
                 <?= $form->field($model, 'correo')->input("email"); ?>
-                <?= $form->field($model, 'telefono'); ?>
-                <?= $form->field($model, 'direccion'); ?>
-                <?= Html::button('Buscar Dirección', ['class' => 'btn btn-primary']); ?>
-                <!--                                    <label for="datos-personales" class="label-field-form">Nombre</label>
-                                                    <input type="text" id="nombre" name="nombreForm" class="form-control" onblur="validarNombre()" placeholder="nombre" aria-required="true" required maxlength="60" /> <span id="errorInfoNom"></span>
-                                                    <br>
-                                                    <label for="datos-personales"  class="label-field-form" id="apellido">Apellido</label>
-                                                    <br>
-                                                    <input type="text" class="form-control" name="apellidoForm" id="apellido" onblur="validarApellido()" placeholder="apellido"  aria-required="true" required maxlength="60"><span id="errorInfoApel"></span>
-                                                    <br>
-                                                    <label for="datos-personales" id="correo" class="label-field-form">Correo Electr&oacute;nico</label>
-                                                    <br>
-                                                    <input type="email" id="correo-electronico" name="correoElectronicoForm" class="form-control" placeholder="correo" size="50" aria-required="true" required maxlength="75" onblur="validarEmail()"><span id="errorInfoEmail"></span>
-                                                    <br>
-                                                    <label class="label-field-form" >Tel&eacute;fono</label>
-                                                    <br>
-                                                    <input for="number-datos-personales"  type="text" id="telefono" name="telefonoForm" class="form-control" placeholder="tel&eacute;fono" size="40" aria-required="true" maxlength="20" onblur="validarTelefono();"><span id="errorInfoTel"></span>
-                                                    <br>
-                                                    <label for="datos-personales" class="label-field-form">Direcci&oacute;n</label>
-                                                    <br>
-                                                    <input type="text" class="form-control" id="direccion" placeholder="direcci&oacute;n" size="40" aria-required="true" required readonly>
-                                                    <br>
-                                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-off"></span> Buscar direcci&oacute;n</button>
-                                                    <br><br>-->
+                <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20']); ?>
+                <?= $form->field($model, 'direccion')->textInput(['readonly' => true]); ?>
+                <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
 
                 <b><h3><u>Datos</u> <u>de</u> <u>Usuario</u></h3></b>
                 <br>
-                <!--label('Name')-->
                 <?= $form->field($model, 'usuario')->textInput(); ?>
                 <?= $form->field($model, 'contrasenia')->passwordInput(); ?>
                 <?= $form->field($model, 'confirmarContrasenia')->passwordInput(); ?>
-                <!--<label for="username" id="nombre-usuario" class="label-field-form" maxlength="100">Nombre de Usuario</label>
-                <br>
-                <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" placeholder="nombre de usuario" size="40" aria-required="true" maxlength="30" required onblur="validarNombreUsuario()"><span id="errorInfUser"></span>
-                <br> 
-                <label for="password" id="alter-property-input" class="label-field-form">Contrase&ntilde;a</label>
-                <br>
-                <input type="password" class="form-control" id="contrasenia" name="contraseniaForm" placeholder="contrase&ntilde;a" onblur="validarContrasenia()" size="40" aria-required="true" required maxlength="30"><span id="errorInfContrasenia"></span>
-                <br>  
-                <label for="valdidate-password" id="confirmar-contrasenia" class="label-field-form">Confirmar Contrase&ntilde;a</label>
-                <br>
-                <input type="password" class="form-control" id="confirmarContrasenia" name="confirmarContraseniaForm" placeholder="confirmar contrase&ntilde;a" maxlength="30" onblur="validarConfirmacionContrasenia()" size="40" aria-required="true" required><span id="errorInfConfContrasenia"></span>
-                </p>
-                <p><br>
-                <!--<input type="submit" class="form-control" id="confirmar-contrasenia" placeholder="confirmar contrase&ntilde;a" size="40" aria-required="true" required>-->
-                <!--<button type="submit" class="btn btn-primary" id="btn-registrarme"><span class="glyphicon glyphicon-off"></span> Registrarme</button>
-                </p>-->
                 <?= Html::submitButton('Registrarme', ['class' => 'btn btn-primary']); ?>
-
-                <!--</form>
-            </div>
-        </div>
-        </article>
-        </section>
-        </div>-->
                 <?php ActiveForm::end(); ?>
             </div>
         </div>
