@@ -16,8 +16,8 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $Estado;
     public $RolID;
 
-    public $authKey = 'test1key';
-    public $accessToken='1-token';
+    /*public $authKey = 'test1key';
+    public $accessToken='1-token';*/
 
     private static $users;
 
@@ -28,6 +28,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentity($PersonaID)
     {
+        self::$users = self::getListaPersonas();
         return isset(self::$users[$PersonaID]) ? new static(self::$users[$PersonaID]) : null;
     }
 
@@ -36,13 +37,14 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
+        throw new \yii\base\NotSupportedException();
+        /*foreach (self::$users as $user) {
             if ($user['accessToken'] === $token) {
                 return new static($user);
             }
         }
 
-        return null;
+        return null;*/
     }
 
     /**
@@ -61,10 +63,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 
         return null;
     }
-    public static function setUser()
+    public static function setUsers()
     {
-        $test = new PersonasModelo();
-        self::$users = $test->GetInfoPersonas(-1,"","","","","","","","","");
+        self::$users = self::getListaPersonas();
     }
 
     /**
@@ -80,7 +81,8 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        throw new \yii\base\NotSupportedException();
+        //return $this->authKey;
     }
 
     /**
@@ -88,7 +90,8 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        throw new \yii\base\NotSupportedException();
+        //return $this->authKey === $authKey;
     }
 
     /**
@@ -102,5 +105,15 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         return $this->Password === $Password;
     }
 
+    public function getListaPersonas()
+    {
+        $test = new PersonasModelo();
+        $PersonasBD = $test->GetInfoPersonas(-1,"","","","","","","","","");
+        $listaPersonas = [];
 
+        foreach ($PersonasBD as $persona) {
+            $listaPersonas[$persona['PersonaID']]=$persona;
+        }
+        return $listaPersonas;
+    }
 }
