@@ -8,10 +8,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\PersonasModelo;                      //agregado
-use app\models\TipoUsuario;                         //agregado
-use app\models\PSFormularioLoginModel;             //agregado
-use app\models\PSFormularioUsuarioModel;           //agregado
+use app\models\TipoUsuario;
+use app\models\PSFormularioLoginModel;
+use app\models\PSFormularioUsuarioModel;
 
 class SiteController extends Controller
 {
@@ -44,9 +43,9 @@ class SiteController extends Controller
                         'actions' => ['logout','administrador'],
                         'allow' => true,
                         'roles' => ['@'],                       //El arroba es para el usuario autenticado
-                        'matchCallback' => function ($rule, $action) {                    //permite escribir la lógica de comprobación de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
+                        'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
                             return TipoUsuario::usuarioAdministrador($this->rolID)===false;
-                                               //Llamada al método que comprueba si es un administrador
+                            //Llamada al m?todo que comprueba si es un administrador
                             //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
                         },
                     ],
@@ -57,8 +56,8 @@ class SiteController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return TipoUsuario::usuarioRecepcionista($this->rolID)===false;
-                            //Llamada al método que comprueba si es un recepcionista
-                       },
+                            //Llamada al m?todo que comprueba si es un recepcionista
+                        },
                     ],
                     [
                         //el chofer tiene permisos sobre las siguientes acciones
@@ -67,8 +66,8 @@ class SiteController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return TipoUsuario::usuarioChofer($this->rolID)===false;
-                            //Llamada al método que comprueba si es un chofer
-                       },
+                            //Llamada al m?todo que comprueba si es un chofer
+                        },
                     ],
                     [
                         //el cliente tiene permisos sobre las siguientes acciones
@@ -77,14 +76,14 @@ class SiteController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return TipoUsuario::usuarioCliente($this->rolID)===false;
-                            //Llamada al método que comprueba si es un cliente
+                            //Llamada al m?todo que comprueba si es un cliente
 
                         },
                     ],
                 ],
             ],
-            //Controla el modo en que se accede a las acciones, en este caso a la acción logout
-             //sólo se puede acceder a través del método post
+            //Controla el modo en que se accede a las acciones, en este caso a la acci?n logout
+             //s?lo se puede acceder a trav?s del m?todo post
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -97,7 +96,6 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-
     public function actions()
     {
         return [
@@ -120,7 +118,6 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-
     // funciones para las vistas dependiendo el tipo de usuario
     public function actionAdministrador()
     {
@@ -140,7 +137,6 @@ class SiteController extends Controller
     {
         return $this->render("about");
     }
-
     /**
      * Login action.
      *
@@ -148,47 +144,30 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        global $rolID;
-
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
-
         }
 
         $model = new PSFormularioLoginModel();
-        $model1 = new PersonasModelo();    //modelo agregado de prueba
-   //     $model = new LoginForm();
-        $variable = $model1->GetInfoPersonas(-1,"","","","","","","","","");
-
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            foreach ($variable as $persona){
-                if ($model->getUsuario() === $persona['Usuario']){        //si el usuario del modelo ("emendez") es igual al usuario obtenido de la lista de personas de la bd. El ('Usuario') hace referencia a la fila Usuario, atributo de persona
-                    $this->rolID = $persona['RolID'];                            //guardo el rol como global para que el control de acceso lo pueda usar
-                    if (TipoUsuario::usuarioAdministrador($this->rolID)){  //*************************************************
-                         return $this->redirect(['site/administrador']);
-                    }
-                    elseif(TipoUsuario::usuarioRecepcionista($this->rolID)){
-                         return $this->redirect(['site/recepcionista']);
-                    }
-                    elseif(TipoUsuario::usuarioChofer($this->rolID)){
-                         return $this->redirect(['site/chofer']);
-                    }
-                    elseif(TipoUsuario::usuarioCliente($this->rolID)){
-                         return $this->redirect(['site/cliente']);
-                    }
-                    else{
-                        return  $this->goBack();
-                    }
-
-                }
-
-       //     break;
-
-            }     //foreach primero
-            //        return $this->goBack();
-
+            $this->rolID = $model->_user->RolID;
+            if (TipoUsuario::usuarioAdministrador($this->rolID)){
+                return $this->redirect(['site/administrador']);
+            }
+            elseif(TipoUsuario::usuarioRecepcionista($this->rolID)){
+                return $this->redirect(['site/recepcionista']);
+            }
+            elseif(TipoUsuario::usuarioChofer($this->rolID)){
+                return $this->redirect(['site/chofer']);
+            }
+            elseif(TipoUsuario::usuarioCliente($this->rolID)){
+                return $this->redirect(['site/cliente']);
+            }
+            else{
+                return  $this->goBack();
+            }
         }
-        return $this->render('PSFormularioLogin', [
+        return $this->render('login', [
             'model' => $model,
         ]);
     }
@@ -223,15 +202,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionRegistro()
-    {
-        $model = new PSFormularioUsuarioModel();
-        if ($model->load(Yii::$app->request->post()) && $model->AltaRegistro()) {
-            Yii::$app->session->setFlash('Usuario creado con exito');
-        }
-        return $this->render("PSFormularioUsuario", ['model' => $model]);
-    }
-
     /**
      * Displays about page.
      *
@@ -241,5 +211,13 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    public function actionRegistro()
+    {
+        $model = new PSFormularioUsuarioModel();
 
+        if ($model->load(Yii::$app->request->post()) && $model->AltaRegistro()) {
+            Yii::$app->session->setFlash('Usuario creado con exito');
+        }
+        return $this->render("PSFormularioUsuario", ['model' => $model]);
+    }
 }
