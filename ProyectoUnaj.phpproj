@@ -2444,7 +2444,6 @@
     <Folder Include="mvc\web\css" />
     <Folder Include="mvc\web" />
     <Folder Include="mvc" />
-    <Folder Include="mvc\web\js\" />
     <Folder Include="sql" />
     <Folder Include="tests" />
   </ItemGroup>
@@ -3260,7 +3259,6 @@
     <Content Include="mvc\vendor\yiisoft\yii2\web\migrations\schema-sqlite.sql" />
     <Content Include="mvc\vendor\yiisoft\yii2\yii" />
     <Content Include="mvc\vendor\yiisoft\yii2\yii.bat" />
-    <Content Include="mvc\web\js\Mapas.js" />
     <Content Include="mvc\yii.bat" />
   </ItemGroup>
 </Project>
