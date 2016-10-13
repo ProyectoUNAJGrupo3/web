@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\TipoUsuario;
+use app\models\PSFormularioLoginModel;
+use app\models\PSFormularioUsuarioModel;
 
 class SiteController extends Controller
 {
@@ -146,7 +148,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = new PSFormularioLoginModel();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $this->rolID = $model->_user->RolID;
             if (TipoUsuario::usuarioAdministrador($this->rolID)){
@@ -208,5 +210,14 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    public function actionRegistro()
+    {
+        $model = new PSFormularioUsuarioModel();
+
+        if ($model->load(Yii::$app->request->post()) && $model->AltaRegistro()) {
+            Yii::$app->session->setFlash('Usuario creado con exito');
+        }
+        return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
 }
