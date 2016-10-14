@@ -44,7 +44,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],                       //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
-                            return TipoUsuario::usuarioAdministrador($this->rolID)===false;
+                            return TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID);
                             //Llamada al m?todo que comprueba si es un administrador
                             //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
                         },
@@ -55,7 +55,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return TipoUsuario::usuarioRecepcionista($this->rolID)===false;
+                            return TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID);
                             //Llamada al m?todo que comprueba si es un recepcionista
                         },
                     ],
@@ -65,7 +65,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return TipoUsuario::usuarioChofer($this->rolID)===false;
+                            return TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID);
                             //Llamada al m?todo que comprueba si es un chofer
                         },
                     ],
@@ -75,7 +75,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return TipoUsuario::usuarioCliente($this->rolID)===false;
+                            return TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID);
                             //Llamada al m?todo que comprueba si es un cliente
 
                         },
@@ -126,16 +126,16 @@ class SiteController extends Controller
 
     public function actionRecepcionista()
     {
-        return $this->render('about');
+        return $this->render('index');
     }
     public function actionChofer()
     {
-        return $this->render('about');
+        return $this->render('index');
     }
 
     public function actionCliente()
     {
-        return $this->render("about");
+        return $this->render("index");
     }
     /**
      * Login action.
@@ -150,17 +150,17 @@ class SiteController extends Controller
 
         $model = new PSFormularioLoginModel();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $this->rolID = $model->_user->RolID;
-            if (TipoUsuario::usuarioAdministrador($this->rolID)){
+
+            if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)){         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
                 return $this->redirect(['site/administrador']);
             }
-            elseif(TipoUsuario::usuarioRecepcionista($this->rolID)){
+            elseif(TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID)){
                 return $this->redirect(['site/recepcionista']);
             }
-            elseif(TipoUsuario::usuarioChofer($this->rolID)){
+            elseif(TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID)){
                 return $this->redirect(['site/chofer']);
             }
-            elseif(TipoUsuario::usuarioCliente($this->rolID)){
+            elseif(TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID)){
                 return $this->redirect(['site/cliente']);
             }
             else{
