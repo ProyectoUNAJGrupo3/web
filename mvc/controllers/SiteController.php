@@ -8,10 +8,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\PersonasModelo;                      //agregado
-use app\models\TipoUsuario;                         //agregado
-use app\models\PSFormularioLoginModel;             //agregado
-use app\models\PSFormularioUsuarioModel;           //agregado
+use app\models\TipoUsuario;
+use app\models\PSFormularioLoginModel;
+use app\models\PSFormularioUsuarioModel;
 
 class SiteController extends Controller
 {
@@ -45,7 +44,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],                       //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
-                            return TipoUsuario::usuarioAdministrador($this->rolID)===false;
+                            return TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID);
                             //Llamada al m?todo que comprueba si es un administrador
                             //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
                         },
@@ -56,7 +55,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return TipoUsuario::usuarioRecepcionista($this->rolID)===false;
+                            return TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID);
                             //Llamada al m?todo que comprueba si es un recepcionista
                         },
                     ],
@@ -66,7 +65,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return TipoUsuario::usuarioChofer($this->rolID)===false;
+                            return TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID);
                             //Llamada al m?todo que comprueba si es un chofer
                         },
                     ],
@@ -76,7 +75,7 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return TipoUsuario::usuarioCliente($this->rolID)===false;
+                            return TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID);
                             //Llamada al m?todo que comprueba si es un cliente
 
                         },
@@ -97,7 +96,6 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-
     public function actions()
     {
         return [
@@ -120,7 +118,6 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-
     // funciones para las vistas dependiendo el tipo de usuario
     public function actionAdministrador()
     {
@@ -129,18 +126,17 @@ class SiteController extends Controller
 
     public function actionRecepcionista()
     {
-        return $this->render('about');
+        return $this->render('index');
     }
     public function actionChofer()
     {
-        return $this->render('about');
+        return $this->render('index');
     }
 
     public function actionCliente()
     {
-        return $this->render("about");
+        return $this->render("index");
     }
-
     /**
      * Login action.
      *
@@ -148,54 +144,32 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        global $rolID;
-
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
-
         }
 
         $model = new PSFormularioLoginModel();
-        $model1 = new PersonasModelo();    //modelo agregado de prueba
-        //     $model = new LoginForm();
-        $variable = $model1->GetInfoPersonas(-1,"","","","","","","","","");
-
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
 
-            $rolID =$model->_user->RolID;
-            foreach ($variable as $persona){
-                if ($model->getUsuario() === $persona['Usuario']){        //si el usuario del modelo ("emendez") es igual al usuario obtenido de la lista de personas de la bd. El ('Usuario') hace referencia a la fila Usuario, atributo de persona
-                    $this->rolID = $persona['RolID'];                            //guardo el rol como global para que el control de acceso lo pueda usar
-                    if (TipoUsuario::usuarioAdministrador($this->rolID)){  //*************************************************
-                        return $this->redirect(['site/administrador']);
-                    }
-                    elseif(TipoUsuario::usuarioRecepcionista($this->rolID)){
-                        return $this->redirect(['site/recepcionista']);
-                    }
-                    elseif(TipoUsuario::usuarioChofer($this->rolID)){
-                        return $this->redirect(['site/chofer']);
-                    }
-                    elseif(TipoUsuario::usuarioCliente($this->rolID)){
-                        return $this->redirect(['site/cliente']);
-                    }
-                    else{
-                        return  $this->goBack();
-                    }
-
-                }
-
-                //     break;
-
-            }     //foreach primero
-            //        return $this->goBack();
-
+            if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)){         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
+                return $this->redirect(['site/administrador']);
+            }
+            elseif(TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID)){
+                return $this->redirect(['site/recepcionista']);
+            }
+            elseif(TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID)){
+                return $this->redirect(['site/chofer']);
+            }
+            elseif(TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID)){
+                return $this->redirect(['site/cliente']);
+            }
+            else{
+                return  $this->goBack();
+            }
         }
-        else{
-            return $this->render('PSFormularioLogin', [
-           'model' => $model,
-       ]);
-        }
-
+        return $this->render('login', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -228,15 +202,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionRegistro()
-    {
-        $model = new PSFormularioUsuarioModel();
-        if ($model->load(Yii::$app->request->post()) && $model->AltaRegistro()) {
-            Yii::$app->session->setFlash('Usuario creado con exito');
-        }
-        return $this->render("PSFormularioUsuario", ['model' => $model]);
-    }
-
     /**
      * Displays about page.
      *
@@ -246,5 +211,13 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    public function actionRegistro()
+    {
+        $model = new PSFormularioUsuarioModel();
 
+        if ($model->load(Yii::$app->request->post()) && ($model->AltaRegistro() === true)) {
+            return $this-> render ('about');
+        }
+        return $this->render("PSFormularioUsuario", ['model' => $model]);
+    }
 }
