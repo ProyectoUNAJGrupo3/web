@@ -54,7 +54,7 @@ class MapAsset extends AssetBundle
 	// BACKWARD COMPATIBILITY
 	// To configure please, add `googleMapsApiKey` parameter to your application configuration
 	// file with the value of your API key. To get yours, please visit https://code.google.com/apis/console/.
-	$key = @Yii::$app->params['googleMapsApiKey'];
+        $key = 'AIzaSyBR6DOamOqz59j-iu3dK3Cgfi1w5VCvWWk';
 	// To configure please, add `googleMapsLibraries` parameter to your application configuration
 	$libraries = @Yii::$app->params['googleMapsLibraries'];
 	// To configure please, add `googleMapsLanguage` parameter to your application configuration
@@ -69,4 +69,4 @@ class MapAsset extends AssetBundle
 
         $this->js[] = 'https://maps.googleapis.com/maps/api/js?'. http_build_query($this->options);
     }
-} 
+}

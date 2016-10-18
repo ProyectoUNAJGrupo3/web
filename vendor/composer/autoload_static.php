@@ -4,20 +4,25 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6e37c01b3107d2fee51518fbee07b981
+class ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749
 {
     public static $files = array (
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'y' => 
         array (
+            'yii\\swiftmailer\\' => 16,
+            'yii\\gii\\' => 8,
+            'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
+            'yii\\codeception\\' => 16,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
@@ -39,9 +44,25 @@ class ComposerStaticInit6e37c01b3107d2fee51518fbee07b981
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'F' => 
+        array (
+            'Faker\\' => 6,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'yii\\swiftmailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
+        ),
+        'yii\\gii\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-gii',
+        ),
+        'yii\\faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-faker',
+        ),
         'yii\\debug\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-debug',
@@ -49,6 +70,10 @@ class ComposerStaticInit6e37c01b3107d2fee51518fbee07b981
         'yii\\composer\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-composer',
+        ),
+        'yii\\codeception\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-codeception',
         ),
         'yii\\bootstrap\\' => 
         array (
@@ -82,6 +107,10 @@ class ComposerStaticInit6e37c01b3107d2fee51518fbee07b981
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -92,14 +121,21 @@ class ComposerStaticInit6e37c01b3107d2fee51518fbee07b981
                 0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
             ),
         ),
+        'D' => 
+        array (
+            'Diff' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpspec/php-diff/lib',
+            ),
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6e37c01b3107d2fee51518fbee07b981::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6e37c01b3107d2fee51518fbee07b981::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6e37c01b3107d2fee51518fbee07b981::$prefixesPsr0;
+            $loader->prefixLengthsPsr4 = ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
