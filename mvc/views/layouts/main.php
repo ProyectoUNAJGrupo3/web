@@ -48,6 +48,7 @@ PSCssAsset::register($this);
                 ['label' => 'Contact', 'url' => ['/site/contact']],
                 ['label' => 'Registrarme', 'url' => ['/site/registro']], //boludez que agregue yo
                 Yii::$app->user->isGuest ? (
+                        //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                         ['label' => 'Login', 'url' => ['/site/login']]
                         ) : (
                         '<li>'
