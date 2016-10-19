@@ -1,8 +1,12 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
 <div class="site-login">
+
+
+
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -14,27 +18,25 @@ use yii\widgets\ActiveForm;
                 <h4><strong><p style="text-align: center">Ingrese su usario y contrase&ntilde;a</p></strong></h4>
                 <br><br>
                 <?php
-    $form = ActiveForm::begin(['id' => 'login-form',
-                'options' => ['class' => 'form-horizontal'],
-                'fieldConfig' => [
-                    'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-                    'labelOptions' => ['class' => 'col-lg-1 control-label'],
-    ]]);
+                $form = ActiveForm::begin(['id' => 'login-form',
+                            'options' => ['class' => 'form-horizontal'],
+                            'fieldConfig' => [
+                                'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
+                                'labelOptions' => ['class' => 'col-lg-1 control-label'],
+                ]]);
                 ?>
+                <?= $form->field($model, 'usuario')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'contrasenia')->passwordInput() ?>
                 <?=
- $form->field($model, 'usuario')->textInput(['autofocus' => true]) ?>
-                <?=
- $form->field($model, 'contrasenia')->passwordInput() ?>
-                <?=
-    $form->field($model, 'rememberMe')->checkbox([
-        'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-    ])
+                $form->field($model, 'rememberMe')->checkbox([
+                    'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+                ])
                 ?>
                 <div class="form-group">
                     <div class="col-lg-offset-1 col-lg-11">
-                        
 
-                       <?= Html::submitButton('Registrarme', ['class' => 'btn btn-primary']); ?>
+
+                        <?= Html::submitButton('Registrarme', ['class' => 'btn btn-primary']); ?>
                     </div>
                 </div>
                 <div id="imgEmail"  align="center">
@@ -58,7 +60,7 @@ use yii\widgets\ActiveForm;
                     </a>
                 </div>
 
-             <?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
             </div>
         </div>
 
