@@ -29,10 +29,13 @@ class PSCssAsset extends AssetBundle {
         'css/styleNuestrosClientes.css',
         'css/stylePagesHtml.css',
         'css/styleQuienesSomos.css',
+        'css/styleFormulariosVehiculo.css',
+        'css/styleFormularioEmpleado.css',
     ];
     public $js = [
         'js/Maps.js',
-        'js/Mapas.js'
+        'js/Mapas.js',
+        'js/AperturaPopupLogin.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
