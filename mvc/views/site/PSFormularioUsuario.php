@@ -60,11 +60,12 @@ PSCssAsset::register($this);
                                     <u>Personales</u>
                                 </h3>
                             </b>
-                            <?= $form->field($model, 'nombre')->input("text", ['maxlength' => '50']); ?>
-                            <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50']); ?>
-                            <?= $form->field($model, 'correo')->input("email"); ?>
-                            <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20']); ?>
-                            <?= $form->field($model, 'direccion')->textInput(['readonly' => true]); ?>
+                            <?= $form->field($model, 'nombre')->input("text", ['maxlength' => '50'])->label("Nombre");; ?>
+                            <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50'])->label("Apellido"); ?>
+                            <?= $form->field($model, 'correo')->input("email")->label("Correo"); ?>
+                            <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20'])->label("Tele&eacute;fono"); ?>
+                            <?= $form->field($model, 'direccion')->textInput(['readonly' => true])->label("Direcci&oacute;n"); ?>
+                            <?= $form->field($model, 'coordenadas')->textInput(['id'=>'coordenadas'])->label(""); ?>
                             <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
                             <b>
                                 <h3>
@@ -74,9 +75,9 @@ PSCssAsset::register($this);
                                 </h3>
                             </b>
                             <br />
-                            <?= $form->field($model, 'usuario')->textInput(); ?>
-                            <?= $form->field($model, 'contrasenia')->passwordInput(); ?>
-                            <?= $form->field($model, 'confirmarContrasenia')->passwordInput(); ?>
+                            <?= $form->field($model, 'usuario')->textInput()->label("Usuario"); ?>
+                            <?= $form->field($model, 'contrasenia')->passwordInput()->label("Contrase&ntilde;a"); ?>
+                            <?= $form->field($model, 'confirmarContrasenia')->passwordInput()->label("Confirmar Contrase&ntilde;a"); ?>
                             <?= Html::submitButton('Registrarme', ['class' => 'btn btn-primary', 'id'=>'btn-registrarme']);  ?>
                             <?php ActiveForm::end(); ?>
                         </div>
