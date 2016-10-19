@@ -11,6 +11,7 @@ class PSFormularioUsuarioModel extends Model {
     public $correo;
     public $telefono;
     public $direccion;
+    public $coordenadas;
     public $usuario;
     public $contrasenia;
     public $confirmarContrasenia;
