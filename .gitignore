@@ -9,6 +9,7 @@
 *.sln
 *.phpproj
 *.phpproj.user
+.nbproject/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
