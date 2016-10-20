@@ -24,7 +24,7 @@ class PSFormularioUsuarioModel extends Model {
             ['nombre', 'match','pattern'=>'/^[a-zA-Z ]*$/','message'=>'Ingrese solo letras'],
             ['nombre', 'match','pattern'=>'/^.{3,50}$/','message'=>'Ingrese como mínimo 3 y como máximo 50 letras'],
             
-            ['coordenadas', 'required','message'=>'Campo obligatorio'],
+            ['coordenadas', 'required'],
 
             ['apellido', 'required','message'=>'Campo obligatorio'],
             ['apellido', 'match','pattern'=>'/^[a-zA-Z ]*$/','message'=>'Ingrese solo letras'],
