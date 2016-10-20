@@ -14,13 +14,13 @@
 
 #nombre,#apellido,#dni,#telefono,#direccion{
     font-size:16px;
-    width: 60%;
+    width: 50%;
     size:70px;
     float:center;	
 }
 #listaTipoEmpleado,#listaEstadoAuto{
     font-size:16px;
-    width: 60%;
+    width: 50%;
     height: 20%;
     size:70px;
     float:center;	
@@ -32,6 +32,13 @@
 #btn-cancelar{
     font-size:20px;
     size:70px;
+}
+
+#emplado_tiene_auto{
+    display: none;
+}
+#dato_vehiculo_empleado{
+    display: none;
 }
 
 #botones-group{
