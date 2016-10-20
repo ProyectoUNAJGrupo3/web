@@ -13,6 +13,7 @@ composer.json
 composer.lock
 composer.phar
 /vendor/
+nbproject/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
