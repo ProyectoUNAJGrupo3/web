@@ -12,7 +12,7 @@
 composer.json
 composer.lock
 composer.phar
-
+/vendor/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
