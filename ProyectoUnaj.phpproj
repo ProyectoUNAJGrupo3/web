@@ -18,6 +18,7 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="composer-setup.php" />
     <Compile Include="documentacion\doc.txt" />
     <Compile Include="mvc\assets\AppAsset.php" />
     <Compile Include="mvc\assets\PSCssAsset.php" />
@@ -33,7 +34,12 @@
     <Compile Include="mvc\models\LoginForm.php" />
     <Compile Include="mvc\models\Operaciones.php" />
     <Compile Include="mvc\models\OperacionState.php" />
+    <Compile Include="mvc\models\PSActualizacionDatosChoferModel.php" />
+    <Compile Include="mvc\models\PSActualizacionDatosRecepcionistaModel.php" />
+    <Compile Include="mvc\models\PSFormularioActualizacionVehiculoModel.php" />
+    <Compile Include="mvc\models\PSFormularioAltaVehiculoModel.php" />
     <Compile Include="mvc\models\PSFormularioLoginModel.php" />
+    <Compile Include="mvc\models\PSFormularioNuevoEmpleadoModel.php" />
     <Compile Include="mvc\models\PSFormularioUsuarioModel.php" />
     <Compile Include="mvc\models\RegistroUsuario.php" />
     <Compile Include="mvc\models\TipoUsuario.php" />
@@ -1910,11 +1916,16 @@
     <Compile Include="mvc\views\site\index.php" />
     <Compile Include="mvc\views\site\login.php" />
     <Compile Include="mvc\views\site\PSActualizacionDatosChofer.php" />
+    <Compile Include="mvc\views\site\PSActualizacionDatosRecepcionista.php" />
+    <Compile Include="mvc\views\site\PSFormularioActualizacionVehiculo.php" />
+    <Compile Include="mvc\views\site\PSFormularioAltaVehiculo.php" />
     <Compile Include="mvc\views\site\PSFormularioLogin.php" />
+    <Compile Include="mvc\views\site\PSFormularioNuevoEmpleado.php" />
     <Compile Include="mvc\views\site\PSFormularioUsuario.php" />
     <Compile Include="mvc\web\assets\.gitignore" />
     <Compile Include="mvc\web\css\site.css" />
     <Compile Include="mvc\web\favicon.ico" />
+    <Compile Include="mvc\web\index-test.php" />
     <Compile Include="mvc\web\index.php" />
     <Compile Include="mvc\web\robots.txt" />
     <Compile Include="mvc\.bowerrc" />
@@ -2523,10 +2534,19 @@
     <Folder Include="VistasSinYii\imagenes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include=".vs\config\applicationhost.config" />
+    <Content Include="cd" />
+    <Content Include="composer" />
     <Content Include="composer.json" />
+    <Content Include="composer.lock" />
+    <Content Include="composer.phar" />
+    <Content Include="exit" />
     <Content Include="mvc\composer.json" />
     <Content Include="mvc\composer.lock" />
+    <Content Include="mvc\composer.phar" />
+    <Content Include="mvc\LICENSE.md" />
+    <Content Include="mvc\README.md" />
     <Content Include="mvc\vendor\2amigos\yii2-google-maps-library\.gitignore" />
     <Content Include="mvc\vendor\2amigos\yii2-google-maps-library\composer.json" />
     <Content Include="mvc\vendor\2amigos\yii2-google-maps-library\LICENSE.txt" />
@@ -3337,6 +3357,8 @@
     <Content Include="mvc\vendor\yiisoft\yii2\yii.bat" />
     <Content Include="mvc\web\css\styleContentMap.css" />
     <Content Include="mvc\web\css\styleFooter.css" />
+    <Content Include="mvc\web\css\styleFormularioEmpleado.css" />
+    <Content Include="mvc\web\css\styleFormulariosVehiculo.css" />
     <Content Include="mvc\web\css\StyleFormularioUsuario.css" />
     <Content Include="mvc\web\css\styleHeader.css" />
     <Content Include="mvc\web\css\styleHome.css" />
@@ -3353,6 +3375,9 @@
     <Content Include="mvc\yii.bat" />
     <Content Include="nbproject\project.properties" />
     <Content Include="nbproject\project.xml" />
+    <Content Include="php" />
+    <Content Include="sada.xlsx" />
+    <Content Include="test.txt" />
     <Content Include="VistasSinYii\avatarUser.png" />
     <Content Include="VistasSinYii\bootstrap-3.3.7\.editorconfig" />
     <Content Include="VistasSinYii\bootstrap-3.3.7\.gitattributes" />
