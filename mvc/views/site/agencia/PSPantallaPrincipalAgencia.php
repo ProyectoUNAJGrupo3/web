@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\bootstrap\Dropdown;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -41,7 +42,7 @@ $this->title = 'Agencia';
         /* include('testMaps.php'); */
         ?>
 
-        <div class="wrap">
+        <div class="dropdown dropdown-toggle glyphicon-chevron-down">
             <?php
             NavBar::begin([
                 'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Agencia</b>',
@@ -52,16 +53,40 @@ $this->title = 'Agencia';
                 ],
             ]);
             ;
-            echo Nav::widget([
+            echo Nav::widget([//'zii.widgets.CMenu', [
+                'class' => 'dropdown',
                 'options' => ['class' => 'navbar-nav navbar-right'],
+                //'activeCssClass' => 'active',
+                //'activateParents' => true,
                 'items' => [
-                    ['label' => 'Home'], // 'url' => ['/site/index']],
-//                    ['label' => 'Listar Empleados'], // 'url' => ['/site/about']],
-//                    ['label' => 'Listar Viajes'], // 'url' => ['/site/contact']],
-//                    ['label' => 'Listar Vehiculo'], // 'url' => ['/site/registro']], //boludez que agregue yo
+                    ['label' => 'Home', 'url' => ['#']],
+                    ['label' => 'Choferes', 'id' => 'lblChoferCH', 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle', 'items' => [
+                            ['label' => 'Nuevo', 'id' => 'lblNuevoCH', 'url' => ['#']],
+                            ['label' => 'Actualizar', 'id' => 'lblActCH', 'url' => ['recepcionista/actualizarRecepcionista']],
+                            ['label' => 'Eliminar', 'id' => 'lblEliCH', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Listar Todos', 'id' => 'lblListAllCH', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],],
+                    ['label' => 'Recepcionista', 'items' => [
+                            ['label' => 'Nuevo', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Actualizar', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Eliminar', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Listar Todos', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],],
+                    ['label' => 'Vehiculos', 'items' => [
+                            ['label' => 'Nuevo', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Actualizar', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Eliminar', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Listar Todos', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],],
+                    ['label' => 'Viajes', 'items' => [
+                            ['label' => 'Listar Turno Mañana', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Listar Turno Tarde', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Listar Turno Noche', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Listar Todos', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
-                            ['label' => 'Login']// 'url' => ['/site/login']]
+                            ['label' => 'Login',]// 'url' => ['/site/login']]
                             ) : (
                             '<li>'
                             . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -75,6 +100,7 @@ $this->title = 'Agencia';
             ]);
             NavBar::end();
             ?>
+
 
             <div class="container">
                 <?=
@@ -103,7 +129,7 @@ $this->title = 'Agencia';
             </article>
         </section>
 
-        <aside id="columna">
+        <!--<aside id="columna">
 
             <div class="menu">
                 <a href="#" class="btn-menu">Menu <span class="icono glyphicon glyphicon-list"></span></a>
@@ -117,58 +143,58 @@ $this->title = 'Agencia';
                             <li>
                                 <a href="#"><span class="icono izquierda glyphicons glyphicons-car"></span>
                                         <!--<span class="glyphicon icon-car"></span>-->
-                                    Chofer
-                                    <span class="icono derecha glyphicon glyphicon-chevron-down"></span></a>
-                                <ul>
-                                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Nuevo Chofer</a></li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-trash"></span>Eliminar Chofer</a></li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-repeat"></span>Actualizar Datos Chofer</a></li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-list"></span>Listar Choferes</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="menu-recepcionista">
-                            <li><a href="#"><span class="icono izquierda glyphicon glyphicon-earphone"></span>
-                                    Telefonista
-                                    <span class="icono derecha glyphicon glyphicon-chevron-down"></span></a>
-                                <ul>
-                                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Nueva Telefonista</a></li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-trash"></span>Eliminar Telefonista</a></li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-repeat"></span>Actualizar  Datos Telefonista</a></li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-list"></span>Listar Telefonistas</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+        <!--                        Chofer
+                                <span class="icono derecha glyphicon glyphicon-chevron-down"></span></a>
+                            <ul>
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span>Nuevo Chofer</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-trash"></span>Eliminar Chofer</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-repeat"></span>Actualizar Datos Chofer</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-list"></span>Listar Choferes</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="menu-recepcionista">
+                        <li><a href="#"><span class="icono izquierda glyphicon glyphicon-earphone"></span>
+                                Telefonista
+                                <span class="icono derecha glyphicon glyphicon-chevron-down"></span></a>
+                            <ul>
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span>Nueva Telefonista</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-trash"></span>Eliminar Telefonista</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-repeat"></span>Actualizar  Datos Telefonista</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-list"></span>Listar Telefonistas</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
 
-                <ul class="menu-vehiculos">
-                    <li><a href="#"><!--<span class="icono izquierda glyphicon glyphicon-car"></span>-->
-                            Veh&iacute;culos <span class="icono derecha glyphicon glyphicon-chevron-down"></span></a>
-                        <ul>
-                            <li>Nuevo Veh&iacute;culo</li>
-                            <li><a href="#"><span class="glyphicon glyphicon-trash"></span>Eliminar Veh&iacute;culo</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-repeat"></span>Actualizar Datos Veh&iacute;culo</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-list"></span>Listar Veh&iacute;culo</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="menu-viajes">
-                    <li><a href="#"> <span class="icono izquierda glyphicon glyphicon-road"></span>
-                            Viajes <span class="icono derecha glyphicon glyphicon-chevron-down"></span></a>
-                        <ul>
-                            <li>Nuevo Viaje</li>
-                            <li><a href="#"><span class="glyphicon glyphicon-trash"></span>Eliminar Viaje</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-repeat"></span>Actualizar Datos Viaje</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-list"></span>Listar Viaje</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+            <ul class="menu-vehiculos">
+                <li><a href="#"><!--<span class="icono izquierda glyphicon glyphicon-car"></span>-->
+           <!--             Veh&iacute;culos <span class="icono derecha glyphicon glyphicon-chevron-down"></span></a>
+                    <ul>
+                        <li>Nuevo Veh&iacute;culo</li>
+                        <li><a href="#"><span class="glyphicon glyphicon-trash"></span>Eliminar Veh&iacute;culo</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-repeat"></span>Actualizar Datos Veh&iacute;culo</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-list"></span>Listar Veh&iacute;culo</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="menu-viajes">
+                <li><a href="#"> <span class="icono izquierda glyphicon glyphicon-road"></span>
+                        Viajes <span class="icono derecha glyphicon glyphicon-chevron-down"></span></a>
+                    <ul>
+                        <li>Nuevo Viaje</li>
+                        <li><a href="#"><span class="glyphicon glyphicon-trash"></span>Eliminar Viaje</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-repeat"></span>Actualizar Datos Viaje</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-list"></span>Listar Viaje</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </aside>-->
         <?php $this->endBody() ?>
-        <!--<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script src="web/js/jQuery.js"></script>-->
+    <!--<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="web/js/jQuery.js"></script>-->
 
     </body>
 </html>
