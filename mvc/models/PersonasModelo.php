@@ -23,7 +23,7 @@ class PersonasModelo extends Model
 
 
 
-    public function RegistrarPersona($Nombre, $Apellido,$Usuario,$Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $Estado, $RolID)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, PersonaID y @result).
+    public function RegistrarPersona($Nombre, $Apellido,$Usuario,$Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $Estado, $RolID, $Documento, $AgenciaID)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, PersonaID y @result).
     {
         $this->Parametros = [
                 'Nombre' => $Nombre,
@@ -36,7 +36,9 @@ class PersonasModelo extends Model
                 'DireccionCoordenadas' => $DireccionCoordenadas,
                 'DireccionDefault' => $DireccionDefault,
                 'Estado' =>$Estado,
-                'RolID' =>$RolID
+                'RolID' =>$RolID,
+                'Documento' =>$Documento,
+                'AgenciaID' =>$AgenciaID,
                 ];
         $this->setOperacion(self::Operacion_Alta);                                                      //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Alta() DE LA CLASE OPERACIONES.
         $this->Personas = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Alta()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la persona insertada).
@@ -56,14 +58,16 @@ class PersonasModelo extends Model
                 'DireccionCoordenadas' => "",
                 'DireccionDefault' => "",
                 'Estado' =>"",
-                'RolID' =>""
+                'RolID' =>"",
+                'Documento' =>"",
+                'AgenciaID' =>"",
                 ];
         $this->setOperacion(self::Operacion_Baja);                                                    //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Baja() DE LA CLASE OPERACIONES.
         $this->Personas = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);    //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Baja()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la persona eliminada).
 
         return $this->Personas;
     }
-    public function ModificarPersona($PersonaID, $Nombre, $Apellido, $Usuario,$Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $DireccionTipo, $Estado, $RolID)
+    public function ModificarPersona($PersonaID, $Nombre, $Apellido, $Usuario,$Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $DireccionTipo, $Estado, $RolID, $Documento, $AgenciaID)
     {
         $this->Parametros = [
                 'PersonaID' => $PersonaID,
@@ -77,13 +81,15 @@ class PersonasModelo extends Model
                 'DireccionCoordenadas' => $DireccionCoordenadas,
                 'DireccionDefault' => $DireccionDefault,
                 'Estado' =>$Estado,
-                'RolID' =>$RolID
+                'RolID' =>$RolID,
+                'Documento' =>$Documento,
+                'AgenciaID' =>$AgenciaID,
                 ];
         $this->setOperacion(self::Operacion_Modificacion);                                              //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Modificacion() DE LA CLASE OPERACIONES.
         $this->Personas = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Modifcacion()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la persona modificada).
         return $this->Personas;
     }
-    public function GetInfoPersonas($PersonaID, $Nombre, $Apellido,$Usuario, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $Estado, $RolID)
+    public function GetInfoPersonas($PersonaID, $Nombre, $Apellido,$Usuario, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $Estado, $RolID, $Documento, $AgenciaID)
     {
         $this->Parametros = [
                 'PersonaID' => $PersonaID,
@@ -95,7 +101,9 @@ class PersonasModelo extends Model
                 'Direccion' => $Direccion,
                 'DireccionCoordenadas' => $DireccionCoordenadas,
                 'Estado' =>$Estado,
-                'RolID' =>$RolID
+                'RolID' =>$RolID,
+                'Documento' =>$Documento,
+                'AgenciaID' =>$AgenciaID,
                 ];
         $this->setOperacion(self::Operacion_GetInfo);                                                   //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Getinfo() DE LA CLASE OPERACIONES.
         $this->Personas = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spGetInfo);  //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto GetInfo()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE GETINFO. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON USUARIOS CUYOS VALORES SON LOS MISMOS QUE DEVUELVE EL STORED PROCEDURE.
