@@ -14,6 +14,20 @@ use app\models\PSFormularioUsuarioModel;
 use app\models\PSFormularioAltaVehiculoModel;
 use app\models\PSFormularioActualizacionVehiculoModel;
 use app\models\PSFormularioNuevoEmpleadoModel;
+use app\models\PSFormularioSolicitudRegistrarAgencia;
+use app\models\ErrorAccesoDenegadoModel;
+use app\models\PSPantallaPrincipalAgenciaModel;
+
+
+
+
+use app\models\PSActualizacionDatosChoferModel;
+use app\models\PSActualizacionDatosRecepcionistaModel;
+
+
+
+
+
 
 class SiteController extends Controller {
 
@@ -208,22 +222,50 @@ class SiteController extends Controller {
         if ($model->load(Yii::$app->request->post()) && ($model->AltaRegistro() === true)) {
             return $this->render('about');
         }
-        return $this->render("PSFormularioUsuario", ['model' => $model]);
+        return $this->render("usuario/PSFormularioUsuario", ['model' => $model]);
     }
 
     public function actionAlta_vehiculo_agencia() {
         $model = new PSFormularioAltaVehiculoModel();
-        return $this->render("PSFormularioAltaVehiculo", ['model' => $model]);
+        return $this->render("vehiculo/PSFormularioAltaVehiculo", ['model' => $model]);
     }
 
     public function actionActualizar_vehiculo_agencia() {
         $model = new PSFormularioActualizacionVehiculoModel();
-        return $this->render("PSFormularioActualizacionVehiculo", ['model' => $model]);
+        return $this->render("vehiculo/PSFormularioActualizacionVehiculo", ['model' => $model]);
     }
 
     public function actionAlta_empleado_agencia() {
         $model = new PSFormularioNuevoEmpleadoModel();
-        return $this->render("PSFormularioNuevoEmpleado", ['model' => $model]);
+        return $this->render("empleado/PSFormularioNuevoEmpleado", ['model' => $model]);
+    }
+
+    public function actionAbrir_solicitud_agencia_nueva() {
+        $model = new PSFormularioSolicitudRegistrarAgencia();
+        return $this->render("PSFormularioSolicitudRegistrarAgencia", ['model' => $model]);
+    }
+
+    public function actionAbrir_home_agencia() {
+        $model = new PSPantallaPrincipalAgenciaModel();
+        return $this->render("agencia/PSPantallaPrincipalAgencia", ['model' => $model]);
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    public function actionAlta_datos_chofer() {
+        $model = new PSActualizacionDatosChoferModel();
+        return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
+    }
+
+    public function actionAlta_datos_recepcionista() {
+        $model = new PSActualizacionDatosRecepcionistaModel();
+        return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
     }
 
 }

@@ -72,45 +72,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <?php $select = Html::beginForm() ?>
                             <?php echo Html::label("Tipo Empleado<b id='asterisco'>*</b>") ?>
                             <br>
-                            <?php echo Html::dropDownList('listaTipoEmpleado', $select, ['empty' => 'Seleccion...', '1' => 'Receptionista', '2' => 'Chofer'], ['id' => 'listaTipoEmpleado']); ?>
-
-                            <!--EVALUO SI TIPO EMPLEADO ES Chofer, ->true
-                                MOSTRAR OPCION TIENE AUTO O NO
-                            -->
-                            <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
-
-                                <div id="emplado_tiene_auto">
-                                    <br><br>
-                                    <h4><b>Auto propio</b></h4>
-                                    <br>
-                                    <?php echo Html::radioList($select, false, ['0' => 'Si', '1' => 'No']); ?>
-                                </div>
-
-                                <!-- SI EMPLEADO NUEVO, CHOFER, TIENE AUTO -> CARGO LO DATOS DEL MISMO
-                                -->
-                                <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
-                                    <div id="dato_vehiculo_empleado">
-                                        <h3>
-                                            <u>Datos</u>
-                                            <u>Vehículo</u>
-                                        </h3>
-                                        </b>
-                                        <?= $form->field($model, 'modelo')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Modelo <b id='asterisco'>*</b>"); ?>
-                                        <?= $form->field($model, 'patente')->input("text", ['maxlength' => '50', 'id' => 'patente'])->label("Patente <b id='asterisco'>*</b>"); ?>
-                                        <?= $form->field($model, 'numeroSeguro')->input('text', ['maxlength' => '8', 'id' => 'numeroSeguro'])->label("N&uacute;mero de Seguro <b id='asterisco'>*</b>"); ?>
-                                        <?= $form->field($model, 'anio')->input('text', ['maxlength' => '4', 'id' => 'numeroSeguro'])->label("A&ntilde;o <b id='asterisco'>*</b>"); ?>
-                                        <?php echo Html::label("Estado <b id='asterisco'>*</b>") ?>
-                                        <br>
-                                        <?php echo Html::dropDownList('listaEstadoAuto', $select, ['0' => 'Seleccion...', '1' => '0 Km', '2' => 'Chocado'], ['id' => 'listaEstadoAuto']); ?>
-                                        <?php $select = Html::endForm() ?>                            
-                                    </div>
-                                <?php else: ?>
-                                <?php endif; ?>
-                            <?php else: ?>
-
-
-
-                            <?php endif; ?>
+                            <?php echo Html::dropDownList('listaTipoEmpleado', $select, ['empty' => 'Seleccion...', '1' => 'Recepcionista', '2' => 'Chofer'], ['id' => 'listaTipoEmpleado']); ?>
 
                             <?php ActiveForm::end(); ?>
                             <br>
@@ -129,4 +91,3 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
             </article>
         </section>
     </div>
-

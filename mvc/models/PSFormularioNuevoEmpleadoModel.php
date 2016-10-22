@@ -13,15 +13,6 @@ class PSFormularioNuevoEmpleadoModel extends Model {
     public $direccion;
     //dropDownList tipo empleado
     public $listaTipoEmpleado;
-    //checkbox para auto
-    public $si;
-    public $no;
-    //datos auto
-    public $modelo;
-    public $patente;
-    public $numeroSeguro;
-    public $anio;
-    public $listaEstadoAuto;
 
     public function rules() {
         return[
@@ -34,12 +25,13 @@ class PSFormularioNuevoEmpleadoModel extends Model {
             ['apellido', 'match', 'pattern' => '/^[a-zA-Z_ ]*$/', 'message' => 'Ingrese solo letras'],
             ['apellido', 'match', 'pattern' => '/^.{3,50}$/', 'message' => 'Ingrese como mínimo 3 y como máximo 50 letras'],
             ['dni', 'required', 'message' => 'Campo obligatorio'],
-            ['dni', 'match', 'pattern' => '/^[1-9]\d*$/', 'message' => 'Ingrese solo números'],
+            ['dni', 'match', 'pattern' => '/^[0-9]\d*$/', 'message' => 'Ingrese solo números'],
             ['dni', 'match', 'pattern' => '/^.{8,8}$/', 'message' => 'DNI inválido'],
             ['telefono', 'required', 'message' => 'Campo obligatorio'],
             ['telefono', 'match', 'pattern' => '/^[0-9]\d*$/', 'message' => 'Ingrese solo números'],
-            ['telefono', 'match', 'pattern' => '/^\d{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
+            ['telefono', 'match', 'pattern' => '/^.{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
             ['direccion', 'required', 'message' => 'Campo obligatorio'],
+            ['listaTipoEmpleado', 'required', 'message' => 'Campo obligatorio'],
         ];
     }
 
