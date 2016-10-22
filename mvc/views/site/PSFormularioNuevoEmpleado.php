@@ -1,10 +1,8 @@
 <?php
-
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\assets\PSCssAsset;
-
 PSCssAsset::register($this);
 ?>
 <!--<div class="container">
@@ -128,5 +126,4 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                 </div>
             </article>
         </section>
-    </div>
-
+</div>

@@ -14,6 +14,9 @@ use app\models\PSFormularioUsuarioModel;
 use app\models\PSFormularioAltaVehiculoModel;
 use app\models\PSFormularioActualizacionVehiculoModel;
 use app\models\PSFormularioNuevoEmpleadoModel;
+use app\models\PSFormularioSolicitudRegistrarAgencia;
+use app\models\ErrorAccesoDenegadoModel;
+use app\models\PSPantallaPrincipalAgenciaModel;
 
 class SiteController extends Controller {
 
@@ -208,7 +211,7 @@ class SiteController extends Controller {
         if ($model->load(Yii::$app->request->post()) && ($model->AltaRegistro() === true)) {
             return $this->render('about');
         }
-        return $this->render("PSFormularioUsuario", ['model' => $model]);
+        return $this->render("altaUsuario", ['model' => $model]);
     }
 
     public function actionAlta_vehiculo_agencia() {
@@ -224,6 +227,16 @@ class SiteController extends Controller {
     public function actionAlta_empleado_agencia() {
         $model = new PSFormularioNuevoEmpleadoModel();
         return $this->render("PSFormularioNuevoEmpleado", ['model' => $model]);
+    }
+
+    public function actionAbrir_solicitud_agencia_nueva() {
+        $model = new PSFormularioSolicitudRegistrarAgencia();
+        return $this->render("PSFormularioSolicitudRegistrarAgencia", ['model' => $model]);
+    }
+
+    public function actionAbrir_home_agencia() {
+        $model = new PSPantallaPrincipalAgenciaModel();
+        return $this->render("PSPantallaPrincipalAgencia", ['model' => $model]);
     }
 
 }

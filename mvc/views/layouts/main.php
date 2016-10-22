@@ -35,6 +35,7 @@ PSCssAsset::register($this);
         NavBar::begin([
             'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">RemisYA</b>',
             'brandUrl' => Yii::$app->homeUrl,
+            'id'=>'barra-menu-main',
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
@@ -44,7 +45,7 @@ PSCssAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Quienes Somos', 'url' => ['/site/about']],
+                ['label' => 'Quiénes Somos', 'url' => ['/site/about']],
                 ['label' => 'Contact', 'url' => ['/site/contact']],
                 ['label' => 'Registrarme', 'url' => ['/site/registro']], //boludez que agregue yo
                 Yii::$app->user->isGuest ? (
@@ -59,7 +60,7 @@ PSCssAsset::register($this);
                         . Html::endForm()
                         . '</li>'
                         )
-            ],
+            ]
         ]);
         NavBar::end();
         ?>

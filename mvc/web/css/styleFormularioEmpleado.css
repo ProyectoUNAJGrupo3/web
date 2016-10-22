@@ -12,7 +12,7 @@
     font-size:40px;
 }
 
-#nombre,#apellido,#dni,#telefono,#direccion{
+#nombre,#apellido,#dni,#telefono,#direccion,#modelo,#patente,#numeroSeguro,#anio,#marca{
     font-size:16px;
     width: 50%;
     size:70px;
@@ -34,7 +34,7 @@
     size:70px;
 }
 
-#emplado_tiene_auto{
+#empleado_tiene_auto{
     display: none;
 }
 #dato_vehiculo_empleado{
