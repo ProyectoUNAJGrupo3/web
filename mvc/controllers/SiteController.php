@@ -14,6 +14,8 @@ use app\models\PSFormularioUsuarioModel;
 use app\models\PSFormularioAltaVehiculoModel;
 use app\models\PSFormularioActualizacionVehiculoModel;
 use app\models\PSFormularioNuevoEmpleadoModel;
+use app\models\PSActualizacionDatosChoferModel;
+use app\models\PSActualizacionDatosRecepcionistaModel;
 
 class SiteController extends Controller {
 
@@ -226,4 +228,13 @@ class SiteController extends Controller {
         return $this->render("PSFormularioNuevoEmpleado", ['model' => $model]);
     }
 
+    public function actionAlta_datos_chofer() {
+        $model = new PSActualizacionDatosChoferModel();
+        return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
+    }
+
+    public function actionAlta_datos_recepcionista() {
+        $model = new PSActualizacionDatosRecepcionistaModel();
+        return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
+    }
 }
