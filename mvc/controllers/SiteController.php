@@ -1,7 +1,5 @@
 <?php
-
 namespace app\controllers;
-
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -14,14 +12,10 @@ use app\models\PSFormularioUsuarioModel;
 use app\models\PSFormularioAltaVehiculoModel;
 use app\models\PSFormularioActualizacionVehiculoModel;
 use app\models\PSFormularioNuevoEmpleadoModel;
-use app\models\PSFormularioSolicitudRegistrarAgencia;
-use app\models\ErrorAccesoDenegadoModel;
-use app\models\PSPantallaPrincipalAgenciaModel;
-
+use app\models\PSActualizacionDatosChoferModel;
+use app\models\PSActualizacionDatosRecepcionistaModel;
 class SiteController extends Controller {
-
     public $rolID;
-
     /**
      * @inheritdoc
      */
@@ -41,7 +35,6 @@ class SiteController extends Controller {
                       'actions' => ['login','logout'],
                       'allow' => true,
                       'roles' => ['@'],
-
                       ],
                       / */ [
                         //el administrador tiene permisos sobre las siguientes acciones
@@ -96,7 +89,6 @@ class SiteController extends Controller {
             ],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -111,7 +103,6 @@ class SiteController extends Controller {
             ],
         ];
     }
-
     /**
      * Displays homepage.
      *
@@ -120,24 +111,19 @@ class SiteController extends Controller {
     public function actionIndex() {
         return $this->render('index');
     }
-
     // funciones para las vistas dependiendo el tipo de usuario
     public function actionAdministrador() {
         return $this->render('index');
     }
-
     public function actionRecepcionista() {
         return $this->render('index');
     }
-
     public function actionChofer() {
         return $this->render('index');
     }
-
     public function actionCliente() {
         return $this->render("index");
     }
-
     /**
      * Login action.
      *
@@ -147,10 +133,8 @@ class SiteController extends Controller {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $model = new PSFormularioLoginModel();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
             if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)) {         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
                 return $this->redirect(['site/administrador']);
             } elseif (TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID)) {
@@ -167,7 +151,6 @@ class SiteController extends Controller {
                     'model' => $model,
         ]);
     }
-
     /**
      * Logout action.
      *
@@ -175,10 +158,8 @@ class SiteController extends Controller {
      */
     public function actionLogout() {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
-
     /**
      * Displays contact page.
      *
@@ -188,14 +169,12 @@ class SiteController extends Controller {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
-
             return $this->refresh();
         }
         return $this->render('contact', [
                     'model' => $model,
         ]);
     }
-
     /**
      * Displays about page.
      *
@@ -204,39 +183,31 @@ class SiteController extends Controller {
     public function actionAbout() {
         return $this->render('about');
     }
-
     public function actionRegistro() {
         $model = new PSFormularioUsuarioModel();
-
         if ($model->load(Yii::$app->request->post()) && ($model->AltaRegistro() === true)) {
             return $this->render('about');
         }
-        return $this->render("altaUsuario", ['model' => $model]);
+        return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
-
     public function actionAlta_vehiculo_agencia() {
         $model = new PSFormularioAltaVehiculoModel();
         return $this->render("PSFormularioAltaVehiculo", ['model' => $model]);
     }
-
     public function actionActualizar_vehiculo_agencia() {
         $model = new PSFormularioActualizacionVehiculoModel();
         return $this->render("PSFormularioActualizacionVehiculo", ['model' => $model]);
     }
-
     public function actionAlta_empleado_agencia() {
         $model = new PSFormularioNuevoEmpleadoModel();
         return $this->render("PSFormularioNuevoEmpleado", ['model' => $model]);
     }
-
-    public function actionAbrir_solicitud_agencia_nueva() {
-        $model = new PSFormularioSolicitudRegistrarAgencia();
-        return $this->render("PSFormularioSolicitudRegistrarAgencia", ['model' => $model]);
+    public function actionAlta_datos_chofer() {
+        $model = new PSActualizacionDatosChoferModel();
+        return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
     }
-
-    public function actionAbrir_home_agencia() {
-        $model = new PSPantallaPrincipalAgenciaModel();
-        return $this->render("PSPantallaPrincipalAgencia", ['model' => $model]);
+    public function actionAlta_datos_recepcionista() {
+        $model = new PSActualizacionDatosRecepcionistaModel();
+        return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
     }
-
 }
