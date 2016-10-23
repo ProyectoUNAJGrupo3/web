@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\ModelosEmpleados;
 
 use yii\base\Model;
 
