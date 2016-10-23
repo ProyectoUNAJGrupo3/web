@@ -23,13 +23,13 @@ class PSFormularioUsuarioModel extends Model {
             ['nombre', 'required','message'=>'Campo obligatorio'],
             ['nombre', 'match','pattern'=>'/^[a-zA-Z ]*$/','message'=>'Ingrese solo letras'],
             ['nombre', 'match','pattern'=>'/^.{3,50}$/','message'=>'Ingrese como mínimo 3 y como máximo 50 letras'],
-            
+
             ['coordenadas', 'required'],
 
             ['apellido', 'required','message'=>'Campo obligatorio'],
             ['apellido', 'match','pattern'=>'/^[a-zA-Z ]*$/','message'=>'Ingrese solo letras'],
             ['apellido', 'match','pattern'=>'/^.{3,50}$/','message'=>'Ingrese como mínimo 3 y como máximo 50 letras'],
-            
+
 
             ['correo', 'required','message'=>'Campo obligatorio'],
             //['correo', 'match','pattern'=>'/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$./','message'=>'Correo No Válido'],
@@ -40,8 +40,8 @@ class PSFormularioUsuarioModel extends Model {
             ['telefono', 'match','pattern'=>'/^[1-9]\d*$/','message'=>'Ingrese solo números'],
             ['telefono', 'match','pattern'=>'/^\d{8,20}/','message'=>'Ingrese como mínimo 8 y como máximo 20 números'],
 
-            ['direccion', 'required','message'=>'Campo obligatorio'],            
-            
+            ['direccion', 'required','message'=>'Campo obligatorio'],
+
             ['usuario', 'required','message'=>'Campo obligatorio'],
 
             ['contrasenia', 'required','message'=>'Campo obligatorio'],
@@ -54,7 +54,7 @@ class PSFormularioUsuarioModel extends Model {
     public function AltaRegistro()
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
-        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'0'","'4'"); //genera el alta del usuario y lo guarda
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'0'","'4'","''","''"); //genera el alta del usuario y lo guarda
         return true;
     }
 }
