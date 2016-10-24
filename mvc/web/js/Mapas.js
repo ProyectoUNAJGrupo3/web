@@ -151,6 +151,7 @@ function initMap() {
     });
     function geocodeLatLng(geocoder, map, latLng) {// <--infowindow-->) {
         var latlng = latLng;
+        $('#coordenadas').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
         geocoder.geocode({ 'location': latlng }, function (results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
                 if (results[0]) {

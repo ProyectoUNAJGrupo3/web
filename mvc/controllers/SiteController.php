@@ -6,14 +6,19 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+
 use app\models\TipoUsuario;
 use app\models\PSFormularioLoginModel;
 use app\models\PSFormularioUsuarioModel;
-use app\models\PSFormularioAltaVehiculoModel;
-use app\models\PSFormularioActualizacionVehiculoModel;
-use app\models\PSFormularioNuevoEmpleadoModel;
+
+use app\models\ModelosHome\ContactForm;
+
+use app\models\ModelosVehiculos\PSFormularioAltaVehiculoModel;
+use app\models\ModelosVehiculos\PSFormularioActualizacionVehiculoModel;
+
+use app\models\ModelosEmpleados\PSFormularioNuevoEmpleadoModel;
+use app\models\ModelosEmpleados\PSActualizacionDatosChoferModel;
+use app\models\ModelosEmpleados\PSActualizacionDatosRecepcionistaModel;
 
 class SiteController extends Controller {
 
@@ -226,4 +231,13 @@ class SiteController extends Controller {
         return $this->render("PSFormularioNuevoEmpleado", ['model' => $model]);
     }
 
+    public function actionAlta_datos_chofer() {
+        $model = new PSActualizacionDatosChoferModel();
+        return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
+    }
+
+    public function actionAlta_datos_recepcionista() {
+        $model = new PSActualizacionDatosRecepcionistaModel();
+        return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
+    }
 }

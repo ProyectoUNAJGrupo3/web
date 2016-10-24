@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+include('CapaServicio/PersonasModelo.php');
 
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
@@ -15,6 +16,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $DireccionCoordenada;
     public $Estado;
     public $RolID;
+    public $AgenciaID;
+    public $AgenciaNombre;
+    public $Documento;
 
     /*public $authKey = 'test1key';
     public $accessToken='1-token';*/
@@ -108,7 +112,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public function getListaPersonas()
     {
         $test = new PersonasModelo();
-        $PersonasBD = $test->GetInfoPersonas(-1,"","","","","","","","","");
+        $PersonasBD = $test->GetInfoPersonas(-1,"","","","","","","","","","","");
         $listaPersonas = [];
 
         foreach ($PersonasBD as $persona) {
@@ -118,5 +122,5 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     }
 
 
-    
+
 }
