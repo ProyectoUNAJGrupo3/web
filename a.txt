@@ -1,0 +1,271 @@
+[33mcommit 2f7aef31d330e090c26774898386682d5e846df1[m
+Author: MarceloMansilla <mansillamarcelo90@gmail.com>
+Date:   Sun Oct 23 22:41:00 2016 -0300
+
+    probando
+
+[33mcommit 6f8168cb378c83f72eabed52651bf395e5f16dc8[m
+Author: MarceloMansilla <mansillamarcelo90@gmail.com>
+Date:   Sun Oct 23 22:24:06 2016 -0300
+
+    subiendo archivo de prueba
+
+[33mcommit 0229ebfddad41c38525d169408ac27a48d5a7425[m
+Author: MarceloMansilla <mansillamarcelo90@gmail.com>
+Date:   Sun Oct 23 21:40:28 2016 -0300
+
+    Borrando archivos
+
+[33mcommit a470a47efb8ee8ba2f641ffc5132b4bb33554d42[m
+Author: MarceloMansilla <mansillamarcelo90@gmail.com>
+Date:   Sun Oct 23 18:49:52 2016 -0300
+
+    Segunda prueba
+
+[33mcommit d71bf9ac7f1dffd79705f116072924d74c5efe21[m
+Author: MarceloMansilla <mansillamarcelo90@gmail.com>
+Date:   Sun Oct 23 18:46:13 2016 -0300
+
+    Probando
+
+[33mcommit 58b3223ba1659aa2be29bfaa8bbf971918008940[m
+Author: MarceloMansilla <mansillamarcelo90@gmail.com>
+Date:   Sat Oct 22 20:01:13 2016 -0300
+
+    Subiendo vista
+
+[33mcommit 84fbc3fea4080930c0a3509a8f1100c9353d37c1[m
+Author: MarceloMansilla <mansillamarcelo90@gmail.com>
+Date:   Tue Oct 18 22:31:02 2016 -0300
+
+    Subiendo modificaciones a vistas
+
+[33mcommit d8b48c258ac92cfcc3be010f29eeee65e60d8e0d[m
+Author: MarceloMansilla <mansillamarcelo90@gmail.com>
+Date:   Mon Oct 17 22:58:09 2016 -0300
+
+    Agregando vistas correspondientes al modulo agencia
+
+[33mcommit 660d9835eebd0c45435460345ab9f30754d454bb[m
+Author: MarceloMansilla <mansillamarcelo90@gmail.com>
+Date:   Mon Oct 17 18:40:00 2016 -0300
+
+    configuracion git marcelo clase 17 oct 2016
+
+[33mcommit a544093f910bf331a511a06a05fba3537f9be7c6[m
+Merge: 29202c6 7a95511
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 21:17:01 2016 -0300
+
+    Merge pull request #60 from mendezalejandro/master
+    
+    Actualizacion de Repositorio Central a Repositorio Local
+
+[33mcommit 7a95511ec61f67fcd1b21df8edae5dc2b9045da9[m
+Author: Alejandro Ezequiel Mendez <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 21:16:33 2016 -0300
+
+    Correccion
+
+[33mcommit 983482f9ef159593a64e22fe70ccf0b76fd6cf9d[m
+Author: Alejandro Ezequiel Mendez <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 21:14:02 2016 -0300
+
+    Correccion
+
+[33mcommit 05ffed73a71e0d4d12f1325f21a65377a5980a47[m
+Author: Alejandro Ezequiel Mendez <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 21:11:04 2016 -0300
+
+    Correccion
+
+[33mcommit 29202c60a1fd14bedf6e6b07d5368e2f6f513eb6[m
+Merge: 5b6b5fd d1a6145
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 20:04:34 2016 -0300
+
+    Merge pull request #59 from mendezalejandro/master
+    
+    Merge pull request #10 from ProyectoUNAJGrupo3/master
+
+[33mcommit e9c966834687494250235b092eaed4e6ffe922d0[m
+Author: Alejandro Ezequiel Mendez <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 20:02:11 2016 -0300
+
+    dsa
+
+[33mcommit d1a61450721ff195323e3103422ed3f1d1d37cbe[m
+Merge: f62307c 5b6b5fd
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 19:55:30 2016 -0300
+
+    Merge pull request #10 from ProyectoUNAJGrupo3/master
+    
+    Actualizacion de Repositorio Central a Repositorio Local
+
+[33mcommit 5b6b5fdc7ea68868648c7f12150ae5f5857c5d9e[m
+Merge: 2dea4b8 f62307c
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 19:55:02 2016 -0300
+
+    Merge pull request #58 from mendezalejandro/master
+    
+    Merge pull request #9 from ProyectoUNAJGrupo3/master
+
+[33mcommit 2dea4b8eab508246148f97fd68994b0aa6524978[m
+Merge: 9575f48 d8dc5ae
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 19:53:25 2016 -0300
+
+    Merge pull request #57 from LilianLSilva/master
+    
+    Actualizacion y cambios de Vistas: Login , Formulario y Home.
+
+[33mcommit d8dc5ae097feb39f1466ff155abce71f530a66d0[m
+Author: Lilian <Lilian@LILIAN-PC>
+Date:   Sat Oct 15 19:51:01 2016 -0300
+
+    Actualizacion y cambios de Vistas: Login , Formulario y Home.
+
+[33mcommit 9575f480504523306696440a073668a32594e369[m
+Merge: 1c0d1cd 02f6338
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Sat Oct 15 19:47:23 2016 -0300
+
+    Merge pull request #56 from LilianLSilva/master
+    
+    Actualizacion y Cambios en las vistas: formulario, login y home
+
+[33mcommit 02f633861961bc99414495711ba47cc60b5c4449[m
+Author: Lilian <Lilian@LILIAN-PC>
+Date:   Sat Oct 15 19:34:17 2016 -0300
+
+    Actualizando vistas: formulario, home y login con css.
+
+[33mcommit 9756f695ef8b44a344bdb133a533cfcae3647764[m
+Merge: 38273dc 1c0d1cd
+Author: LilianLSilva <silvalilian84@hotmail.com>
+Date:   Sat Oct 15 15:11:49 2016 -0300
+
+    Merge pull request #7 from ProyectoUNAJGrupo3/master
+    
+    Actualización de mi repositorio
+
+[33mcommit 1c0d1cd39de80539631d59cc0842b218e24ec59c[m
+Merge: d994617 db051e8
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Fri Oct 14 13:50:55 2016 -0300
+
+    Merge pull request #55 from bnv86/master
+    
+    probando request 2
+
+[33mcommit db051e837e553ea6187189c54679b9fc43f385c5[m
+Merge: fd4bd7f d994617
+Author: bnv86 <vituccibruno@gmail.com>
+Date:   Fri Oct 14 13:41:43 2016 -0300
+
+    kjfohdfjsdhfjh
+
+[33mcommit fd4bd7fb99760c7584568059bb105edf64c53cb2[m
+Author: bnv86 <vituccibruno@gmail.com>
+Date:   Fri Oct 14 13:36:11 2016 -0300
+
+    borre los archivos conflictivos
+
+[33mcommit f62307c11a93a5abe37387499308b53595eea723[m
+Merge: f137a2e d994617
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Fri Oct 14 10:31:13 2016 -0300
+
+    Merge pull request #9 from ProyectoUNAJGrupo3/master
+    
+    Actualizacion
+
+[33mcommit d994617cbdbfe2f0b06aa80ef4aac56f9ef85a32[m
+Merge: 94ce410 f137a2e
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Fri Oct 14 10:30:40 2016 -0300
+
+    Merge pull request #54 from mendezalejandro/master
+    
+    Merge pull request #8 from ProyectoUNAJGrupo3/master
+
+[33mcommit 94ce4107da2f673af11267b18c2546df52afb6cf[m
+Merge: 42d6471 afb37d8
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Thu Oct 13 13:40:17 2016 -0300
+
+    Merge pull request #53 from encina94/master
+    
+    Actualizando cambios de control de acceso
+
+[33mcommit afb37d8f63041e5902cea2d57b299b199d2f280c[m
+Author: encina94 <encina.sebastian94@gmail.com>
+Date:   Thu Oct 13 13:30:05 2016 -0300
+
+    Modificacion para control de acceso funcional
+
+[33mcommit f137a2ee7f42818b996ed38e6f8094f89e536dbc[m
+Merge: 7497017 42d6471
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Thu Oct 13 10:48:45 2016 -0300
+
+    Merge pull request #8 from ProyectoUNAJGrupo3/master
+    
+    Actualizacion
+
+[33mcommit 42d6471b85e8209b2d2c7957c6d79eef6347b680[m
+Merge: 7497017 7a4e641
+Author: mendezalejandro <mendezalejandro.e@gmail.com>
+Date:   Thu Oct 13 09:13:35 2016 -0300
+
+    Merge pull request #52 from federicolozada/master
+    
+    Redireccion registro
+
+[33mcommit 38273dc70eea485f2078723db1f22f730cdb8537[m
+Merge: 04f31a1 7497017
+Author: LilianLSilva <silvalilian84@hotmail.com>
+Date:   Thu Oct 13 08:01:12 2016 -0300
+
+    Merge pull request #6 from ProyectoUNAJGrupo3/master
+    
+    Actualizacion
+
+[33mcommit 7a4e641f0ceb01af0ac49a1a93473d3ef4c92fec[m
+Author: federicolozada <fede_017_027@hotmail.com>
+Date:   Wed Oct 12 23:45:15 2016 -0300
+
+    Redireccion del registro (a la pagina about)
+
+[33mcommit 0f56a1339053f80ade03df8285e7d6731101db0d[m
+Merge: 3b6646d 7497017
+Author: federicolozada <fede_017_027@hotmail.com>
+Date:   Wed Oct 12 23:37:37 2016 -0300
+
+    merge del upstream
+
+[33mcommit 3b6646d6ed786d13bec2989d540b454b9dd685bf[m
+Author: federicolozada <fede_017_027@hotmail.com>
+Date:   Wed Oct 12 23:34:56 2016 -0300
+
+    ver
+
+[33mcommit 45bb2b3c7f1b921eb4998f1d549d9ef4f4480870[m
+Author: bnv86 <vituccibruno@gmail.com>
+Date:   Wed Oct 12 23:15:33 2016 -0300
+
+    merge te odio
+
+[33mcommit 0468f7af9f010557686da1f508083af5eb33fd7b[m
+Merge: 28d298a 7497017
+Author: encina94 <encina.sebastian94@gmail.com>
+Date:   Wed Oct 12 23:05:40 2016 -0300
+
+    Merge pull request #6 from ProyectoUNAJGrupo3/master
+    
+    Actualizando repositorio propio con repositorio local
+
+[33mcommit a21f6d8724a4a71e6cf91ab6cf6bf66a4d5c6e3d[m
+Author: bnv86 <vituccibruno@gmail.com>
