@@ -1,0 +1,19 @@
+{
+    "name": "plasmaconduit/option",
+    "version": "0.2.1",
+    "require": {
+        "plasmaconduit/either": "0.2.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec2": "*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}

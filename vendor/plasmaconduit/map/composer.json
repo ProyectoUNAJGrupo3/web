@@ -1,0 +1,19 @@
+{
+    "name": "plasmaconduit/map",
+    "version": "0.1.10",
+    "require": {
+        "plasmaconduit/option": "0.2.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec2": "*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
