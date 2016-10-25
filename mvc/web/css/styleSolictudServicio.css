@@ -1,0 +1,67 @@
+#page-single-main-solicitud-servicio{
+    width: 100%;
+    background-color:#F5F5DA;
+    margin-top:0px;
+    padding:20px;
+    border-radius:60px;
+}
+
+#title-form-solicitud-servicio{
+    color:black;
+    text-align: center;
+    font-size:40px;
+}
+
+#nombreAgecia,#nombrePasajero,#apellidoPasajero,#origen,#destino{
+    font-size:16px;
+    width: 40%;
+    size:60px;
+    float:center;	
+}
+#btn-solicitar-servicio{
+    font-size:20px;
+    size:70px;
+}
+#btn-cancelar{
+    font-size:20px;
+    size:70px;
+}
+
+#botones-group-solicitud-servicio{
+    margin-top: 20px;
+    margin-left: 200px;
+    display:inline-block;
+    float: center;
+    position: relative;
+}
+#asterisco-solicitud-servicio{
+    color:red;
+}
+
+#contenedor-formulario-solicitud-servicio{
+    margin: 30px 100px;
+    box-shadow: 21px 21px 51px #999;
+    border-radius: 70px;
+    padding:10px 50px;
+    float:center;
+    size:500px;
+    position: relative;
+    vertical-align: top;
+}
+#sub-contenedor-formulario-solicitud-servicio{
+    border-radius: 70px;
+    box-shadow: 10px 10px 15px #999;
+    padding:10px 10px;
+    margin: 90px 10px;
+    position: relative;
+    float:center;
+}
+
+#sub-sub-contenedor-formulario-solicitud-servicio{
+    position:absolute;
+    margin-left:20%;
+    position:center;
+    size:120px;
+    float:center;
+    position: relative;
+}
