@@ -112,7 +112,7 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionIndex() {
+        public function actionIndex() {
         return $this->render('index');
     }
 
@@ -122,16 +122,17 @@ class SiteController extends Controller {
     }
 
     public function actionRecepcionista() {
-        return $this->render('index');
+        return $this->redirect(['recepcionista/index']);
     }
 
     public function actionChofer() {
-        return $this->render('index');
+        return $this->redirect(['chofer/index']);
     }
 
     public function actionCliente() {
-        return $this->render("index");
+        return $this->redirect(['cliente/index']);
     }
+
 
     /**
      * Login action.
