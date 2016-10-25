@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+include('CapaServicio/PersonasModelo.php');
 
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
@@ -121,5 +122,5 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     }
 
 
-    
+
 }
