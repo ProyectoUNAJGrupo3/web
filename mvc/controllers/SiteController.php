@@ -1,21 +1,17 @@
 <?php
 
 namespace app\controllers;
-
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+
+use app\models\ModelosHome\ContactForm;
+
 use app\models\TipoUsuario;
 use app\models\PSFormularioLoginModel;
 use app\models\PSFormularioUsuarioModel;
-use app\models\PSFormularioAltaVehiculoModel;
-use app\models\PSFormularioActualizacionVehiculoModel;
-use app\models\PSFormularioNuevoEmpleadoModel;
-use app\models\PSActualizacionDatosChoferModel;
-use app\models\PSActualizacionDatosRecepcionistaModel;
+use app\models\PSFormularioSolictudServicioUsuarioModel;
 
 class SiteController extends Controller {
 
@@ -122,7 +118,7 @@ class SiteController extends Controller {
 
     // funciones para las vistas dependiendo el tipo de usuario
     public function actionAdministrador() {
-        return $this->render('index');
+        return $this->redirect(['agencia/index']);
     }
 
     public function actionRecepcionista() {
@@ -213,28 +209,9 @@ class SiteController extends Controller {
         return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
 
-    public function actionAlta_vehiculo_agencia() {
-        $model = new PSFormularioAltaVehiculoModel();
-        return $this->render("PSFormularioAltaVehiculo", ['model' => $model]);
+    public function actionAbrir_solictud_servicio() {
+        $model = new PSFormularioSolictudServicioUsuarioModel();
+        return $this->render("solicitarServicioFormulario", ['model' => $model]);
     }
 
-    public function actionActualizar_vehiculo_agencia() {
-        $model = new PSFormularioActualizacionVehiculoModel();
-        return $this->render("PSFormularioActualizacionVehiculo", ['model' => $model]);
-    }
-
-    public function actionAlta_empleado_agencia() {
-        $model = new PSFormularioNuevoEmpleadoModel();
-        return $this->render("PSFormularioNuevoEmpleado", ['model' => $model]);
-    }
-
-    public function actionAlta_datos_chofer() {
-        $model = new PSActualizacionDatosChoferModel();
-        return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
-    }
-
-    public function actionAlta_datos_recepcionista() {
-        $model = new PSActualizacionDatosRecepcionistaModel();
-        return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
-    }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\ContactForm */
@@ -7,62 +6,83 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
+use app\assets\PSCssAsset;
 
-$this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
+PSCssAsset::register($this);
+
+
+$this->title = 'Contacto';
 ?>
 <div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
+    <section id="main">
+        <article>
+            <div id="page-single-main">
+                <br />
+                <h1 id="title-form">
+                    <strong>F&oacute;rmulario de Contacto</strong>
+                </h1>
+                <div class="container-form" id="contenedor-formulario">
+                    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
-        <div class="alert alert-success">
-            Thank you for contacting us. We will respond to you as soon as possible.
-        </div>
+                        <div class="alert alert-success">
+                            Gracias por contactarse
+                        </div>
 
-        <p>
-            Note that if you turn on the Yii debugger, you should be able
-            to view the mail message on the mail panel of the debugger.
-            <?php if (Yii::$app->mailer->useFileTransport): ?>
-                Because the application is in development mode, the email is not sent but saved as
-                a file under <code><?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?></code>.
-                Please configure the <code>useFileTransport</code> property of the <code>mail</code>
-                application component to be false to enable email sending.
-            <?php endif; ?>
-        </p>
+                        <p>
 
-    <?php else: ?>
+                            <?php if (Yii::$app->mailer->useFileTransport): ?>
+                            <p>En lo inmediato, nos contactaremos con usted a fin de dar
+                                respuesta a sus inquietudes.
+                            </p>
+                            <p>
+                                Siga disfrutando de nuestro servicios.
+                            </p>    
+                        <?php endif; ?>
+                        </p>
 
-        <p>
-            If you have business inquiries or other questions, please fill out the following form to contact us.
-            Thank you.
-        </p>
+                    <?php else: ?>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
-        <div class="row">
-            <div class="col-lg-5">
+                                <b>
+                                    <h3>
+                                        <u>Datos</u>
+                                        <u>De</u>
+                                        <u>Contacto</u>
+                                    </h3>
+                                </b>
 
-                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+                                <?= $form->field($model, 'name')->textInput(['autofocus' => true])->label('Nombre'); ?>
 
-                    <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+                                <?= $form->field($model, 'email')->label('Email'); ?>
 
-                    <?= $form->field($model, 'email') ?>
+                                <?= $form->field($model, 'subject')->label('Asunto'); ?>
 
-                    <?= $form->field($model, 'subject') ?>
+                                <?= $form->field($model, 'body')->textArea(['rows' => 6])->label('Mensaje'); ?>
 
-                    <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
+                                <?=
+                                $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                                                            'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6" style="margin-left:60px;">{input}</div></div>',
+                                ])->label('C&oacute;digo de Verificaci&oacute;n');
+                                ?>
 
-                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                    ]) ?>
+                                <div class="form-group" style="display: inline-block; margin-left: 200px;">
+                                    <?= Html::submitButton('Enviar', ['class' => 'btn btn-primary', 'name' => 'contact-button','style'=>'margin-left:0px;font-size:20px;']); ?>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'name' => 'contact-button','style'=>'margin-left: 100px; margin-top:-65px;font-size:20px;']); ?>
+                                </div>
 
-                    <div class="form-group">
-                        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-                    </div>
+                                <?php ActiveForm::end(); ?>
 
-                <?php ActiveForm::end(); ?>
+                            </div>
+                        </div>
 
+
+                    <?php endif; ?>
+                </div>
             </div>
-        </div>
-
-    <?php endif; ?>
+        </article>
+    </section>
 </div>
