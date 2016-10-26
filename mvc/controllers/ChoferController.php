@@ -14,8 +14,26 @@ class ChoferController extends Controller{
 
 
     public function actions() {
-        Yii::$app->errorHandler->errorAction = 'chofer/error';             //seteo la ruta de vista de error para que al llamar al ErrorAction no vaya a la del site sino a la de agencia,
-                                                                          //la ruta ya esta harcodeada en config/web en la parte errorHandler
+        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+
+            if (Yii::$app->user->identity->RolID==1) {                                                                //si el usuario es administrador
+                Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
+
+            } elseif (Yii::$app->user->identity->RolID==2) {
+                Yii::$app->errorHandler->errorAction = 'recepcionista/error';
+
+            } elseif (Yii::$app->user->identity->RolID==3) {
+                Yii::$app->errorHandler->errorAction = 'chofer/error';
+
+            } elseif (Yii::$app->user->identity->RolID==4) {
+                Yii::$app->errorHandler->errorAction = 'cliente/error';
+
+            } else {
+                Yii::$app->errorHandler->errorAction = 'site/error';
+            }
+        }else{                                                                                                      //sino (si el usuario es invitado) se muestra la pagina de error del site
+            Yii::$app->errorHandler->errorAction = 'site/error';
+        }
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
