@@ -11,11 +11,6 @@ class PSFormularioNuevoEmpleadoModel extends Model {
     public $dni;
     public $telefono;
     public $direccion;
-    //dropDownList tipo empleado
-    public $listaTipoEmpleado;
-    //checkbox para auto
-    public $si;
-    public $no;
     //datos auto
     public $modelo;
     public $patente;
