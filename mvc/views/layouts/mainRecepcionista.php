@@ -48,8 +48,8 @@ $this->title = 'Recepcionista';
                 'items' => [
                     ['label' => 'Home', 'url' => ['recepcionista/index']],
                     ['label' => 'Viajes', 'items' => [
-                            ['label' => 'Carga Nuevo viaje', 'url' => ['#'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                            ['label' => 'Ver Solicitudes', 'url' => ['#'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Carga Nuevo viaje', 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Ver Solicitudes', 'url' => ['/recepcionista/listar_solcitudes_servicio'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         ],],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']

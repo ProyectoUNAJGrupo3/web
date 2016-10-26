@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this yii\web\View */
 /* @var $name string */
 /* @var $message string */
@@ -9,7 +8,7 @@ use yii\helpers\Html;
 
 $this->title = $name;
 ?>
-<div class="recepcionista-error">
+<div class="site-error">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -18,10 +17,16 @@ $this->title = $name;
     </div>
 
     <p>
-        blablalbalba  
-    </p>
-    <p>
-        recepcionista
-    </p>
+    <div class="body">
+        <div id="contenedor">
+            <div id="cartel"><p>
+                <h1 id="warning">Warning</h1>
+                <img src="img/warning.jpg">
+                <h1 id="acceso-denegado">Acceso Denegado</h1>
+                </p>
+            </div>
+        </div>
+    </div>
+</p>
 
 </div>

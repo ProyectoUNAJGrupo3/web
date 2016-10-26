@@ -4,7 +4,7 @@ namespace app\models;
 
 use yii\base\Model;
 
-class PSFormularioSolicitudRegistrarAgencia extends Model {
+class PSFormularioSolicitudRegistrarAgenciaModel extends Model {
 
     public $nombreAgencia;
     public $telefonoAgencia;
@@ -26,7 +26,7 @@ class PSFormularioSolicitudRegistrarAgencia extends Model {
             ['telefonoAgencia', 'required', 'message' => 'Campo obligatorio'],
             ['numeroClienteServcio', 'required', 'message' => 'Campo obligatorio'],
             ['direccionAgencia', 'required', 'message' => 'Campo obligatorio'],
-            ['noombreDuenio', 'required', 'message' => 'Campo obligatorio'],
+            ['nombreDuenio', 'required', 'message' => 'Campo obligatorio'],
             ['apellidoDuenio', 'required', 'message' => 'Campo obligatorio'],
             ['dniDuenio', 'required', 'message' => 'Campo obligatorio'],
             ['email', 'required', 'message' => 'Campo obligatorio'],

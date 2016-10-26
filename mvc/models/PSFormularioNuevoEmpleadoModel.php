@@ -11,12 +11,6 @@ class PSFormularioNuevoEmpleadoModel extends Model {
     public $dni;
     public $telefono;
     public $direccion;
-    //datos auto
-    public $modelo;
-    public $patente;
-    public $numeroSeguro;
-    public $anio;
-    public $listaEstadoAuto;
 
     public function rules() {
         return[

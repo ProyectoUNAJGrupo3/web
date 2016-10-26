@@ -4,7 +4,7 @@ namespace app\models;
 
 use yii\base\Model;
 
-class ActualizacionDatosRecepcionistaModel extends Model {
+class ActualizarChoferModel extends Model {
 
     public $nombre;
     public $apellido;
@@ -13,7 +13,13 @@ class ActualizacionDatosRecepcionistaModel extends Model {
     public $telefono;
     public $fechaDeIngreso;
     public $turno;
+    public $tipoDeEmpleado;
     public $fechaDeEgreso;
+    public $matricula;
+    public $modelo;
+    public $marca;
+    public $estado;
+    public $fechaDeAlta;
 
     public function rules() {
         return[
@@ -26,7 +32,12 @@ class ActualizacionDatosRecepcionistaModel extends Model {
             ['telefono', 'required', 'message' => 'Campo obligatorio'],
             ['fechaDeIngreso', 'required', 'message' => 'Campo obligatorio'],
             ['turno', 'required', 'message' => 'Campo obligatorio'],
+            ['tipoDeEmpleado', 'required', 'message' => 'Campo obligatorio'],
             ['fechaDeEgreso', 'required', 'message' => 'Campo obligatorio'],
+            ['matricula', 'required', 'message' => 'Campo obligatorio'],
+            ['modelo', 'required', 'message' => 'Campo obligatorio'],
+            ['marca', 'required', 'message' => 'Campo obligatorio'],
+            ['estado', 'required', 'message' => 'Campo obligatorio'],
             ['fechaDeAlta', 'required', 'message' => 'Campo obligatorio'],
         ];
     }

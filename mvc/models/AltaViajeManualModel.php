@@ -4,13 +4,14 @@ namespace app\models;
 
 use yii\base\Model;
 
-class NuevoViajeManualModel extends Model {
+class AltaViajeManualModel extends Model {
 
     public $nombre;
     public $apellido;
     public $origen;
     public $destino;
     public $listadoChoferes;
+    public $listadoCoches;
 
     public function rules() {
         return[
@@ -27,6 +28,7 @@ class NuevoViajeManualModel extends Model {
             ['destino', 'match', 'pattern' => '/^[0-9]\d*$/', 'message' => 'Ingrese solo números'],
             ['destino', 'match', 'pattern' => '/^.{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
             ['listadoChoferes', 'required', 'message' => 'Campo obligatorio'],
+            ['listadoCoches', 'required', 'message' => 'Campo obligatorio'],
         ];
     }
 

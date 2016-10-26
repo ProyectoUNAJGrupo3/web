@@ -46,8 +46,8 @@ USADO POR LA RECEPCIONISTA
                                     </h3>
                                 </b>
 
-                                <?= $form->field($model, 'nombre')->input("text", ['maxlength' => '50', 'id'=>'nombrePasajero'])->label("Nombre"); ?>
-                                <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50','id'=>'apellidoPasajero'])->label("Apellido"); ?>
+                                <?= $form->field($model, 'nombre')->input("text", ['maxlength' => '50', 'id' => 'nombrePasajero'])->label("Nombre"); ?>
+                                <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50', 'id' => 'apellidoPasajero'])->label("Apellido"); ?>
                                 <br>
                                 <b>
                                     <h3>
@@ -57,8 +57,8 @@ USADO POR LA RECEPCIONISTA
                                     </h3>
                                 </b>
                                 <br>
-                                <?= $form->field($model, 'origen')->input('text', ['readonly' => true,'id'=>'origen'])->label("Origen <b id='asterisco'>*</b>"); ?>
-                                <?= $form->field($model, 'destino')->textInput([''=>'','id'=>'destino','readonly' => true])->label("Destino <b id='asterisco'>*</b>"); ?>
+                                <?= $form->field($model, 'origen')->input('text', ['readonly' => true, 'id' => 'origen'])->label("Origen <b id='asterisco'>*</b>"); ?>
+                                <?= $form->field($model, 'destino')->textInput(['' => '', 'id' => 'destino', 'readonly' => true])->label("Destino <b id='asterisco'>*</b>"); ?>
                                 <br>
                                 <b>
                                     <h3>
@@ -72,6 +72,9 @@ USADO POR LA RECEPCIONISTA
                                 <?php echo Html::label("Choferes <b id='asterisco'>*</b>") ?>
                                 <br>
                                 <?php echo Html::dropDownList('listadoChoferes', $select, ['empty' => 'Seleccion...', '1' => 'Pablo', '2' => 'Martin'], ['id' => 'listadoChoferes']); ?>
+                                <?php echo Html::label("Veh&iacute;culos <b id='asterisco'>*</b>") ?>
+                                <br>
+                                <?php echo Html::dropDownList('listadoChoferes', $select, ['empty' => 'Seleccion...', '1' => 'Renault', '2' => 'Fiat'], ['id' => 'listadoCoches']); ?>
 
                                 <?php ActiveForm::end(); ?>
 

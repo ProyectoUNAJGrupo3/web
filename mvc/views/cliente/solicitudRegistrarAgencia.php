@@ -61,8 +61,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                 </h3>
                             </b>
                             <?= $form->field($model, 'nombreAgencia')->input("text", ['autofocus' => true, 'maxlength' => '50', 'id' => 'marca'])->label("Nombre<b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'numeroClienteServcio')->input("text", ['maxlength' => '50', 'id' => 'patente'])->label("Número Cliente (Agua, gas, luz, cable, teléfono) <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'telefonoAgencia')->input('text', ['maxlength' => '4', 'id' => 'anio'])->label("Tele&eacute;fono <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'telefonoAgencia')->input("text", ['maxlength' => '50', 'id' => 'patente'])->label("Número Cliente (Agua, gas, luz, cable, teléfono) <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'numeroClienteServcio')->input('text', ['maxlength' => '4', 'id' => 'anio'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
                             <?= $form->field($model, 'direccionAgencia')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'nombre'])->label("Dirección <b id='asterisco'>*</b>"); ?>
                             <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
                             <br><br>
@@ -74,7 +74,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             </b>
                             <?= $form->field($model, 'nombreDuenio')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Nombre <b id='asterisco'>*</b>"); ?>
                             <?= $form->field($model, 'apellidoDuenio')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Apellido <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'dniDuenio')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("DNI <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'dniDuenio')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Documento <b id='asterisco'>*</b>"); ?>
                             <?= $form->field($model, 'email')->input('text', ['maxlength' => '8', 'id' => 'numeroSeguro'])->label("Email <b id='asterisco'>*</b>"); ?>
 
                             <?php ActiveForm::end(); ?>

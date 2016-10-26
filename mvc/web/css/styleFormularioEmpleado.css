@@ -27,13 +27,6 @@
     size:70px;
 }
 
-#empleado_tiene_auto{
-    display: none;
-}
-#dato_vehiculo_empleado{
-    display: none;
-}
-
 #botones-group{
     margin-top: 20px;
     margin-left: 200px;
