@@ -110,7 +110,7 @@ class SiteController extends Controller {
             } elseif (Yii::$app->user->identity->RolID==4) {
                 Yii::$app->errorHandler->errorAction = 'cliente/error';
 
-            } else {                                              
+            } else {
                 Yii::$app->errorHandler->errorAction = 'site/error';
             }
         }else{                                                                                                      //sino (si el usuario es invitado) se muestra la pagina de error del site
@@ -134,7 +134,26 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionIndex() {
-        return $this->render('index');
+        //En caso de que cierre el usuario cierre la pagina y haya cerrado sesion, al abrir la aplicacion la pagina que se le presente va a ser la de su home (la que depende de su rol
+
+        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+
+            if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)) {         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
+                return $this->redirect(['agencia/index']);
+            } elseif (TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID)) {
+                return $this->redirect(['recepcionista/index']);
+            } elseif (TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID)) {
+                return $this->redirect(['chofer/index']);
+            } elseif (TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID)) {
+                return $this->redirect(['cliente/index']);
+            } else {
+                return $this->render('index');
+            }
+        }
+        else{
+            return $this->render('index');
+        }
+
     }
 
     // funciones para las vistas dependiendo el tipo de usuario
