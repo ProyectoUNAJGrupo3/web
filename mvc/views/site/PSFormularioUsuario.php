@@ -62,6 +62,7 @@ PSCssAsset::register($this);
                             </b>
                             <?= $form->field($model, 'nombre')->input("text", ['maxlength' => '50'])->label("Nombre");; ?>
                             <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50'])->label("Apellido"); ?>
+                            <?= $form->field($model, 'documento')->input("text", ['maxlength' => '15'])->label("Documento"); ?>
                             <?= $form->field($model, 'correo')->input("email")->label("Correo"); ?>
                             <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20'])->label("Tele&eacute;fono"); ?>
                             <?= $form->field($model, 'direccion')->textInput(['readonly' => true])->label("Direcci&oacute;n"); ?>
