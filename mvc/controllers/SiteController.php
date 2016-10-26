@@ -1,13 +1,13 @@
 <?php
 
 namespace app\controllers;
-
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+
+use app\models\ModelosHome\ContactForm;
+
 use app\models\TipoUsuario;
 use app\models\PSFormularioLoginModel;
 use app\models\PSFormularioUsuarioModel;
@@ -112,7 +112,7 @@ class SiteController extends Controller {
      *
      * @return string
      */
-        public function actionIndex() {
+    public function actionIndex() {
         return $this->render('index');
     }
 
@@ -122,17 +122,16 @@ class SiteController extends Controller {
     }
 
     public function actionRecepcionista() {
-        return $this->redirect(['recepcionista/index']);
+        return $this->render('index');
     }
 
     public function actionChofer() {
-        return $this->redirect(['chofer/index']);
+        return $this->render('index');
     }
 
     public function actionCliente() {
-        return $this->redirect(['cliente/index']);
+        return $this->render("index");
     }
-
 
     /**
      * Login action.
