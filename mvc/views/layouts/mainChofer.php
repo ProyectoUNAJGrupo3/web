@@ -8,10 +8,11 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\PSCssAsset;
-use app\models\TipoUsuario;
 
 AppAsset::register($this);
 PSCssAsset::register($this);
+
+$this->title = 'Chofer';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -34,21 +35,22 @@ PSCssAsset::register($this);
         <div class="wrap">
             <?php
             NavBar::begin([
-                'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Usuario</b>',
+                'id' => 'barra-agencia',
+                'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Chofer</b>',
                 'brandUrl' => Yii::$app->homeUrl,
-                'id' => 'barra-menu-main',
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
             ;
-
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['#']],
-                    ['label' => 'Historial Viajes', 'url' => ['#']],
-                    ['label' => 'Historial Calificaciones', 'url' => ['#']],
+                    ['label' => 'Home', 'url' => ['chofer/index']],
+                    ['label' => 'Viajes', 'items' => [
+                            ['label' => 'Viajes Hechos', 'url' => ['#'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Listar Todos', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]
@@ -65,6 +67,7 @@ PSCssAsset::register($this);
             ]);
             NavBar::end();
             ?>
+
 
             <div class="container">
                 <?=

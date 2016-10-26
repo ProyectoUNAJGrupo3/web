@@ -16,6 +16,8 @@ class AgenciaController extends Controller {
     public $layout = 'mainAgencia';                           //se asocia al layout predeterminado
 
     public function actions() {                                 //Errores todavia no solucionado
+        Yii::$app->errorHandler->errorAction = 'agencia/error';             //seteo la ruta de vista de error para que al llamar al ErrorAction no vaya a la del site sino a la de agencia,
+        //la ruta ya esta harcodeada en config/web en la parte errorHandler 
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
