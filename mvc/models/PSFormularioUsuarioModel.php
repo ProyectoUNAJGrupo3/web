@@ -3,7 +3,6 @@
 namespace app\models;
 include('CapaServicio/PersonasModelo.php');
 use yii\base\Model;
-include('CapaServicio/PersonasModelo.php');
 
 class PSFormularioUsuarioModel extends Model {
 
