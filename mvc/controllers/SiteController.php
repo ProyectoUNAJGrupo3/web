@@ -123,7 +123,7 @@ class SiteController extends Controller {
     public function actionRecepcionista() {
         return $this->redirect(['recepcionista/index']);
     }
-    //este era el inconveniente, todos redireccionaban a index de default
+    
     
 
     public function actionChofer() {
