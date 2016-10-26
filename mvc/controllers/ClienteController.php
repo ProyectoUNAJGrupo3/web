@@ -6,10 +6,32 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use app\models\TipoUsuario;
 
 class ClienteController extends Controller {
 
     public $layout = 'mainCliente';                                             //se asocia al layout predeterminado
+
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'rules' => [                              //reglas
+                        //el administrador tiene permisos sobre las siguientes acciones
+                        ['actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'], //El arroba es para el usuario autenticado
+                        'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
+                            return TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID);
+                            //Llamada al m?todo que comprueba si es un administrador
+                            //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
+                        }
+                                               ]
+                    ]
+                ]
+             ];
+    }
 
     public function actions() {
         if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado

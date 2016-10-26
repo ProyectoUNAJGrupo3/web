@@ -6,6 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use app\models\TipoUsuario;
 use app\models\PSFormularioAltaVehiculoModel;
 use app\models\PSFormularioActualizacionVehiculoModel;
 use app\models\PSFormularioNuevoEmpleadoModel;
@@ -15,8 +16,29 @@ class AgenciaController extends Controller {
 
     public $layout = 'mainAgencia';                           //se asocia al layout predeterminado
 
-    public function actions() {                                 
-        
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'rules' => [                              //reglas
+                        //el administrador tiene permisos sobre las siguientes acciones
+                        ['actions' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia'],
+                        'allow' => true,
+                        'roles' => ['@'], //El arroba es para el usuario autenticado
+                        'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
+                            return TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID);
+                            //Llamada al m?todo que comprueba si es un administrador
+                            //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
+                        }
+                                               ]
+                    ]
+                ]
+             ];
+    }
+
+    public function actions() {
+
         if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
 
             if (Yii::$app->user->identity->RolID==1) {                                                                //si el usuario es administrador
