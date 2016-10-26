@@ -1,38 +1,43 @@
+#barra-menu-main{
+    background-color: #2e6da4;
+    border: #2e6da4;
+}
+
 #contenedor-home{
-	background-color:#f5f5dc;
-	margin-top:-20px;
-	border-radius:5%;
-	margin-top:-35px;
+    background-color:#f5f5dc;
+    margin-top:-20px;
+    border-radius:5%;
+    margin-top:-35px;
 }
 #titulo{
-	font-size:46px;
-	color:black;
-	text-align: center;
-	float:center;
-	box-shadow:5px 5px 10px #888888;
+    font-size:46px;
+    color:black;
+    text-align: center;
+    float:center;
+    box-shadow:5px 5px 10px #888888;
 }
 #titulo-contenido{
-	font-size:46px;
-	color:gray;
-	text-align: center;
-	float:center;
-	background-color:#f5f5dc;
-	
+    font-size:46px;
+    color:gray;
+    text-align: center;
+    float:center;
+    background-color:#f5f5dc;
+
 }
 
 
 #descripcion{
-	margin-top:20px;
-	padding: 0px 20px;
-	text-align:justify;
-	float:center;
-	width:90%;
-	font-size:26px;
-	background-color:#f5f5dc;
+    margin-top:20px;
+    padding: 0px 20px;
+    text-align:justify;
+    float:center;
+    width:90%;
+    font-size:26px;
+    background-color:#f5f5dc;
     font: 30 34px/40px Roboto,sans-serif;
     letter-spacing: -0.01em;
     margin-top: 40px;
-	margin-left: 60px;
-	border-radius: 20px;
-	box-shadow:1px 1px 5px #888888;
+    margin-left: 60px;
+    border-radius: 20px;
+    box-shadow:1px 1px 5px #888888;
 }
