@@ -13,7 +13,7 @@ PSCssAsset::register($this);
             <div id="page-single-main">
                 <br />
                 <h1 id="title-form">
-                    <strong>F&oacute;rmulario Ingreso Nuevo Veh&iacute;culo </strong>
+                    <strong>F&oacute;rmulario Actualizar Datos Veh&iacute;culo </strong>
                 </h1>
                 <div class="container-form" id="contenedor-formulario">
                     <h1>
@@ -54,15 +54,14 @@ PSCssAsset::register($this);
                             </h3>
                         </b>
                         <?= $form->field($model, 'marca')->input("text", ['maxlength' => '50', 'id' => 'marca', 'autofocus' => true])->label("Marca <b id='asterisco'>*</b>"); ?>
-                        <?= $form->field($model, 'modelo')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Modelo <b id='asterisco'>*</b>"); ?>
+                        <?= $form->field($model, 'modelo')->input("text", ['maxlength' => '50', 'id' => 'modelo', 'autofocus' => true])->label("Modelo <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'patente')->input("text", ['maxlength' => '50', 'id' => 'patente'])->label("Patente <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'anio')->input("text", ['maxlength' => '4', 'id' => 'anio'])->label("A&ntilde;o <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'numeroSeguro')->input('text', ['maxlength' => '10', 'id' => 'numeroSeguro'])->label("N&uacute;mero de Seguro <b id='asterisco'>*</b>"); ?>
-
                         <?php $select = Html::beginForm() ?>
                         <?php echo Html::label("Estado <b id='asterisco'>*</b>") ?>
                         <br>
-                        <?php echo Html::dropDownList('listaEstado', $select, ['Item A' => 'Seleccion...', 'Item B' => '0 km', 'Item C' => 'Usado', 'Item D' => 'En reparación', 'Item E' => 'Fuera de Servicio'], ['id' => 'listaEstados']); ?>
+                        <?php echo Html::dropDownList('listaEstado', $select, ['Item A' => 'Seleccion...', 'Item B' => 'En reparación', 'Item C' => 'Fuera de Servicio'], ['id' => 'listaEstados']); ?>
                         <br><br>
                         <?php echo Html::label("Conductor <b id='asterisco'>*</b>") ?>
                         <br>
@@ -72,7 +71,7 @@ PSCssAsset::register($this);
                         <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>
                         <br><br>
                         <div id='botones-group'>
-                            <?= Html::submitButton('Guardar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                         </div>
