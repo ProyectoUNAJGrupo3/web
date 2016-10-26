@@ -6,16 +6,11 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use app\models\ModelosHome\ContactForm;
 use app\models\TipoUsuario;
 use app\models\PSFormularioLoginModel;
 use app\models\PSFormularioUsuarioModel;
-use app\models\PSFormularioAltaVehiculoModel;
-use app\models\PSFormularioActualizacionVehiculoModel;
-use app\models\PSFormularioNuevoEmpleadoModel;
-use app\models\PSActualizacionDatosChoferModel;
-use app\models\PSActualizacionDatosRecepcionistaModel;
+use app\models\PSFormularioSolictudServicioUsuarioModel;
 
 class SiteController extends Controller {
 
@@ -100,6 +95,28 @@ class SiteController extends Controller {
      * @inheritdoc
      */
     public function actions() {
+        //Control de errores en caso de que se quiera acceder a las acciones de este controlador
+        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+
+            if (Yii::$app->user->identity->RolID==1) {                                                                //si el usuario es administrador
+                Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
+
+            } elseif (Yii::$app->user->identity->RolID==2) {
+                Yii::$app->errorHandler->errorAction = 'recepcionista/error';
+
+            } elseif (Yii::$app->user->identity->RolID==3) {
+                Yii::$app->errorHandler->errorAction = 'chofer/error';
+
+            } elseif (Yii::$app->user->identity->RolID==4) {
+                Yii::$app->errorHandler->errorAction = 'cliente/error';
+
+            } else {                                              
+                Yii::$app->errorHandler->errorAction = 'site/error';
+            }
+        }else{                                                                                                      //sino (si el usuario es invitado) se muestra la pagina de error del site
+            Yii::$app->errorHandler->errorAction = 'site/error';
+        }
+
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -122,19 +139,21 @@ class SiteController extends Controller {
 
     // funciones para las vistas dependiendo el tipo de usuario
     public function actionAdministrador() {
-        return $this->render('index');
+        return $this->redirect(['agencia/index']);
     }
 
     public function actionRecepcionista() {
-        return $this->render('index');
+        return $this->redirect(['recepcionista/index']);
     }
 
+
+
     public function actionChofer() {
-        return $this->render('index');
+        return $this->redirect(['chofer/index']);
     }
 
     public function actionCliente() {
-        return $this->render("index");
+        return $this->redirect(['cliente/index']);
     }
 
     /**
@@ -213,28 +232,9 @@ class SiteController extends Controller {
         return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
 
-    public function actionAlta_vehiculo_agencia() {
-        $model = new PSFormularioAltaVehiculoModel();
-        return $this->render("PSFormularioAltaVehiculo", ['model' => $model]);
+    public function actionAbrir_solictud_servicio() {
+        $model = new PSFormularioSolictudServicioUsuarioModel();
+        return $this->render("solicitarServicioFormulario", ['model' => $model]);
     }
 
-    public function actionActualizar_vehiculo_agencia() {
-        $model = new PSFormularioActualizacionVehiculoModel();
-        return $this->render("PSFormularioActualizacionVehiculo", ['model' => $model]);
-    }
-
-    public function actionAlta_empleado_agencia() {
-        $model = new PSFormularioNuevoEmpleadoModel();
-        return $this->render("PSFormularioNuevoEmpleado", ['model' => $model]);
-    }
-
-    public function actionAlta_datos_chofer() {
-        $model = new PSActualizacionDatosChoferModel();
-        return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
-    }
-
-    public function actionAlta_datos_recepcionista() {
-        $model = new PSActualizacionDatosRecepcionistaModel();
-        return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
-    }
 }
