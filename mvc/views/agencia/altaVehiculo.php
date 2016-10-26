@@ -13,7 +13,7 @@ PSCssAsset::register($this);
             <div id="page-single-main">
                 <br />
                 <h1 id="title-form">
-                    <strong>F&oacute;rmulario Ingreso Nuevo Veh&iacute;culo </strong>
+                    <strong>F&oacute;rmulario Nuevo Veh&iacute;culo </strong>
                 </h1>
                 <div class="container-form" id="contenedor-formulario">
                     <h1>
@@ -62,11 +62,7 @@ PSCssAsset::register($this);
                         <?php $select = Html::beginForm() ?>
                         <?php echo Html::label("Estado <b id='asterisco'>*</b>") ?>
                         <br>
-                        <?php echo Html::dropDownList('listaEstado', $select, ['Item A' => 'Seleccion...', 'Item B' => '0 km', 'Item C' => 'Usado', 'Item D' => 'En reparación', 'Item E' => 'Fuera de Servicio'], ['id' => 'listaEstados']); ?>
-                        <br><br>
-                        <?php echo Html::label("Conductor <b id='asterisco'>*</b>") ?>
-                        <br>
-                        <?php echo Html::dropDownList('listaConductor', $select, ['Item A' => 'Seleccion...', 'Item B' => 'A', 'Item C' => 'B', 'Item D' => 'C', 'Item E' => 'D'], ['id' => 'listaConductores']); ?>
+                        <?php echo Html::dropDownList('listaEstado', $select, ['Item A' => 'Seleccion...', 'Item B' => '0 km', 'Item C' => 'Usado'], ['id' => 'listaEstados']); ?>
                         <?php Html::endForm() ?>
                         <br><br>
                         <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>

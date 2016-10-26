@@ -1,23 +1,24 @@
 #contenedor-quienes-somos{
-	width: 100%;
-	background-color:#F5F5DA;
-	margin-left:-15px;
-	padding:20px;
+    margin-top: -100px;
+    width: 100%;
+    background-color:#F5F5DA;
+    margin-left:-15px;
+    padding:20px;
 }
 #sub-contenedor{
-	margin: 30px 100px;
-	box-shadow: 21px 21px 51px #999;
-	border-radius: 70px;
-	padding:10px 50px;
-	float:center;
-	size:500px;
-	position: relative;
-	vertical-align: top;	
+    margin: 30px 100px;
+    box-shadow: 21px 21px 51px #999;
+    border-radius: 70px;
+    padding:10px 50px;
+    float:center;
+    size:500px;
+    position: relative;
+    vertical-align: top;	
 }
 #imagen-header{
-	color:black;
-	text-align: center;
-	font-size:40px;
+    color:black;
+    text-align: center;
+    font-size:40px;
 }
 #contenido{
 }
