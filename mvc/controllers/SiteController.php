@@ -134,7 +134,7 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionIndex() {
-        //En caso de que cierre el usuario cierre la pagina y haya cerrado sesion, al abrir la aplicacion la pagina que se le presente va a ser la de su home (la que depende de su rol
+        //En caso de que cierre el usuario cierre la pagina y haya cerrado sesion, al abrir la aplicacion la pagina que se le presente va a ser la de su home (la que depende de su rol)
 
         if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
 
