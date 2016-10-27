@@ -33,23 +33,23 @@ PSCssAsset::register($this);
                     <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20']); ?>
 
 
-                    <?= $form->field($model,'fechaDeIngreso')->widget(DatePicker::className(),['clientOptions' => ['defaultDate' => '2014-01-01']]) ?>
+                    <?= $form->field($model, 'fechaDeIngreso')->widget(DatePicker::className(), ['clientOptions' => ['defaultDate' => '2014-01-01']]) ?>
 
                     <?php $select = Html::beginForm() ?>
                     <?php echo Html::label("turno <b id='asterisco'>*</b>") ?>
                     <br />
                     <?php echo Html::dropDownList('listaTurno', $select, ['Item A' => 'Seleccione...', 'Item B' => 'Ma�ana', 'Item C' => 'Tarde', 'Item D' => 'Noche'], ['id' => 'listaTurno']); ?>
-                
+
                     <?php Html::endForm() ?>
                     <br />
                     <br />
                     <br />
-                    <?= $form->field($model,'fechaDeEgreso')->widget(DatePicker::className(),['clientOptions' => ['defaultDate' => '2014-01-01']]) ?>
-              
+                    <?= $form->field($model, 'fechaDeEgreso')->widget(DatePicker::className(), ['clientOptions' => ['defaultDate' => '2014-01-01']]) ?>
+
                     <br />
                     <br />
                     <br />
-                  
+
 
 
                     <div class="modal-footer">

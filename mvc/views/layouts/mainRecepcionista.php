@@ -12,7 +12,7 @@ use app\assets\PSCssAsset;
 AppAsset::register($this);
 PSCssAsset::register($this);
 
-$this->title = 'Agencia';
+$this->title = 'Recepcionista';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $this->title = 'Agencia';
             <?php
             NavBar::begin([
                 'id' => 'barra-agencia',
-                'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Agencia</b>',
+                'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Recepcionista</b>',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -46,29 +46,10 @@ $this->title = 'Agencia';
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['/agencia/index']],
-                    ['label' => 'Choferes', 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle', 'items' => [
-                            ['label' => 'Nuevo', 'url' => ['/agencia/alta_chofer_agencia']],
-                            //DatePicker
-                            //['label' => 'Actualizar', 'url' => ['/agencia/actualizar_chofer_agencia']],
-                            ['label' => 'Listar Todos', 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],],
-                    ['label' => 'Telefonistas', 'items' => [
-                            ['label' => 'Nuevo', 'url' => ['/agencia/alta_telefonista_agencia'], 'class' => 'dropdown-toggle'],
-                            //DatePicker                            
-                            //['label' => 'Actualizar', 'url' => ['/agencia/actualizar_recepcionista_agencia']],
-                            ['label' => 'Listar Todos', 'url' => ['/agencia/listar_recepcionistas_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],],
-                    ['label' => 'Vehículos', 'items' => [
-                            ['label' => 'Nuevo', 'url' => ['/agencia/alta_vehiculo_agencia'], 'class' => 'dropdown-toggle'],
-                            ['label' => 'Actualizar', 'url' => ['/agencia/actualizar_vehiculo_agencia'], 'class' => 'dropdown-toggle'],
-                            ['label' => 'Listar Todos', 'url' => ['/agencia/listar_vehiculo_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],],
+                    ['label' => 'Home', 'url' => ['recepcionista/index']],
                     ['label' => 'Viajes', 'items' => [
-                            ['label' => 'Listar Turno Mañana', 'url' => ['/agencia/listar_viajes_turno_maniana_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                            ['label' => 'Listar Turno Tarde', 'url' => ['/agencia/listar_viajes_turno_tarde_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                            ['label' => 'Listar Turno Noche', 'url' => ['/agencia/listar_viajes_turno_noche_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                            ['label' => 'Listar Todos', 'url' => ['/agencia/listar_viajes_totales_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Carga Nuevo viaje', 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            ['label' => 'Ver Solicitudes', 'url' => ['/recepcionista/listar_solcitudes_servicio'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         ],],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']

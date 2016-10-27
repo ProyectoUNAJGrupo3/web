@@ -1,13 +1,12 @@
 <?php
 
 namespace app\controllers;
+
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-
 use app\models\ModelosHome\ContactForm;
-
 use app\models\TipoUsuario;
 use app\models\PSFormularioLoginModel;
 use app\models\PSFormularioUsuarioModel;
@@ -122,15 +121,17 @@ class SiteController extends Controller {
     }
 
     public function actionRecepcionista() {
-        return $this->render('index');
+        return $this->redirect(['recepcionista/index']);
     }
+    
+    
 
     public function actionChofer() {
-        return $this->render('index');
+        return $this->redirect(['chofer/index']);
     }
 
     public function actionCliente() {
-        return $this->render("index");
+        return $this->redirect(['cliente/index']);
     }
 
     /**
@@ -209,9 +210,6 @@ class SiteController extends Controller {
         return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
 
-    public function actionAbrir_solictud_servicio() {
-        $model = new PSFormularioSolictudServicioUsuarioModel();
-        return $this->render("solicitarServicioFormulario", ['model' => $model]);
-    }
+    
 
 }

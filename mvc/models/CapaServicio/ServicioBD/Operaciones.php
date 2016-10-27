@@ -24,7 +24,7 @@ class Alta implements OperacionState
         $this->stringParametros.='0,NULL,';
         foreach($parametros as $obj)
         {
-            $this->stringParametros.= ($obj==="")?'""':$obj;
+            $this->stringParametros.= ($obj==="\"\"" or $obj==="" or is_null($obj))?'NULL':$obj;
             $this->stringParametros.=($posicionActual==$ultimaPosicion)?',@result':',';
             $posicionActual++;
         }
@@ -37,11 +37,11 @@ class Alta implements OperacionState
         $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
         $info = $model->queryAll();
 
-        
+
         /*$connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
         $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
         $info =  mysqli_fetch_array($model);*/
-        
+
         return $info;
     }
 
@@ -65,7 +65,7 @@ class Modificacion implements OperacionState
         $this->stringParametros.='1,';
         foreach($parametros as $obj)
         {
-            $this->stringParametros.= ($obj=="")?'""':$obj;
+            $this->stringParametros.= ($obj==="\"\"" or $obj==="" or is_null($obj))?'NULL':$obj;
             $this->stringParametros.=($posicionActual==$ultimaPosicion)?',@result':',';
             $posicionActual++;
         }
@@ -78,11 +78,11 @@ class Modificacion implements OperacionState
         $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
         $info = $model->queryAll();
 
-        
+
         /*$connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
         $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
         $info =  mysqli_fetch_array($model);*/
-        
+
         return $info;
     }
 
@@ -106,7 +106,7 @@ class Baja implements OperacionState
         $this->stringParametros.='2,';
         foreach($parametros as $obj)
         {
-            $this->stringParametros.= ($obj=="")?'""':$obj;
+            $this->stringParametros.= ($obj==="\"\"" or $obj==="" or is_null($obj))?'NULL':$obj;
             $this->stringParametros.=($posicionActual==$ultimaPosicion)?',@result':',';
             $posicionActual++;
         }
@@ -119,11 +119,11 @@ class Baja implements OperacionState
         $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
         $info = $model->queryAll();
 
-        
+
         /*$connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
         $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
         $info =  mysqli_fetch_array($model);*/
-        
+
         return $info;
     }
 
@@ -147,7 +147,7 @@ class GetInfo implements OperacionState
         foreach($parametros as $obj)
         {
 
-            $this->stringParametros.= ($obj=="")?'""':$obj;
+            $this->stringParametros.= ($obj==="\"\"" or $obj==="" or is_null($obj))?'NULL':$obj;
             $this->stringParametros.=($posicionActual==$ultimaPosicion)?'':',';
             $posicionActual++;
         }
@@ -158,12 +158,12 @@ class GetInfo implements OperacionState
         $connection = \Yii::$app->db;
         $model = $connection->createCommand('CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');');
         $info = $model->queryAll();
-        
-        
+
+
         /*$connection = mysqli_connect("192.99.203.134", "unaj_app", "u79l2vak9wh5AZ3219", "unaj_proyecto");
         $model = mysqli_query($connection,'CALL unaj_proyecto.'.$this->storeProcedureName.'('.$this->stringParametros.');') ;
         $info =  mysqli_fetch_array($model);*/
-        
+
         return $info;
     }
 
