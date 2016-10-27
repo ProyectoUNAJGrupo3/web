@@ -57,7 +57,12 @@ $this->title = 'Service Remis';
             <strong>
                 <p>
                     Por medio de la aplicaci&oacute;n usted podr&aacute; solicitar el servicio de remis prestado por las agencias.
-                    Para ello, usted contar&aacute; con la posiblidad de listar las agenias m&aacute;s cercanas y podr&aacute; pedir una prestaci&oacute;n
+                    Para ello, udfdsfdsfdsfdsfdsfdsfdsfdfd
+                    
+                    f
+                    fds
+                    dsf
+                    dssted contar&aacute; con la posiblidad de listar las agenias m&aacute;s cercanas y podr&aacute; pedir una prestaci&oacute;n
                     mediante la opci&oacute;n "Solicitar Servicio Remiseria".
                 </p>
             </strong>
