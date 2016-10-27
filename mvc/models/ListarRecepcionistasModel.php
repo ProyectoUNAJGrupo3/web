@@ -1,11 +1,7 @@
 <?php
-
 namespace app\models;
-
 use yii\base\Model;
-
-class PSActualizacionDatosChoferModel extends Model {
-
+class ListarRecepcionistasModel extends Model {
     public $nombre;
     public $apellido;
     public $dni;
@@ -20,7 +16,6 @@ class PSActualizacionDatosChoferModel extends Model {
     public $marca;
     public $estado;
     public $fechaDeAlta;
-
     public function rules() {
         return[
             //([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
@@ -41,5 +36,4 @@ class PSActualizacionDatosChoferModel extends Model {
             ['fechaDeAlta', 'required', 'message' => 'Campo obligatorio'],
         ];
     }
-
 }
