@@ -210,9 +210,6 @@ class SiteController extends Controller {
         return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
 
-    public function actionAbrir_solictud_servicio() {
-        $model = new PSFormularioSolictudServicioUsuarioModel();
-        return $this->render("solicitarServicioFormulario", ['model' => $model]);
-    }
+    
 
 }

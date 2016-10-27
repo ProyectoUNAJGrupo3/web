@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this yii\web\View */
 /* @var $name string */
 /* @var $message string */
@@ -18,10 +17,17 @@ $this->title = $name;
     </div>
 
     <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
+    <div class="body">
+        <div id="contenedor">
+            <div id="cartel"><p>
+                <h1 id="warning">Warning</h1>
+                <img src="img/warning.jpg">
+                <h1 id="acceso-denegado">Acceso Denegado</h1>
+                </p>
+                <h2><b>A Desarrollar</b></h2>
+            </div>
+        </div>
+    </div>
+</p>
 
 </div>
