@@ -18,13 +18,6 @@
     size:70px;
     float:center;	
 }
-#listaTipoEmpleado,#listaEstadoAuto{
-    font-size:16px;
-    width: 50%;
-    height: 20%;
-    size:70px;
-    float:center;	
-}
 #btn-guardar{
     font-size:20px;
     size:70px;
@@ -34,7 +27,7 @@
     size:70px;
 }
 
-#emplado_tiene_auto{
+#empleado_tiene_auto{
     display: none;
 }
 #dato_vehiculo_empleado{
