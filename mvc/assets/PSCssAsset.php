@@ -36,6 +36,8 @@ class PSCssAsset extends AssetBundle {
         'css/styleHomeAgencia.css',
         'css/styleCargarNuevoViaje.css',
         'css/styleSolictudServicio.css',
+        'css/styleAltaChofer.css',
+        
         
     ];
     public $js = [
