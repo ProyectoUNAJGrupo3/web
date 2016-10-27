@@ -1,0 +1,74 @@
+#page-single-main{
+    width: 100%;
+    background-color:#F5F5DA;
+    margin-top:-20px;
+    padding:20px;
+    border-radius:60px;
+}
+
+#title-form{
+    color:black;
+    text-align: center;
+    font-size:40px;
+}
+
+#nombrePasajero,#apellidoPasajero{
+    font-size:16px;
+    width: 100%;
+    size:70px;
+    float:center;	
+}
+#listadoChoferes{
+    font-size:16px;
+    width: 100%;
+    height: 20%;
+    size:70px;
+    float:center;	
+}
+#btn-cargar-viaje{
+    font-size:20px;
+    size:70px;
+}
+#btn-cancelar{
+    font-size:20px;
+    size:70px;
+}
+#botones-group-viaje{
+    border: 1px solid black;
+    margin-left: 200px;
+    margin-top: 20px;
+    display:inline-block;
+    float: center;
+    position: relative;
+}
+#asterisco{
+    color:red;
+}
+
+#contenedor-formulario{
+    margin: 30px 100px;
+    box-shadow: 21px 21px 51px #999;
+    border-radius: 70px;
+    padding:10px 50px;
+    float:center;
+    size:500px;
+    position: relative;
+    vertical-align: top;
+}
+#sub-contenedor-formulario{
+    border-radius: 70px;
+    box-shadow: 10px 10px 15px #999;
+    padding:10px 10px;
+    margin: 90px 10px;
+    position: relative;
+    float:center;
+}
+
+#sub-sub-contenedor-formulario{
+    position:absolute;
+    margin-left:20%;
+    position:center;
+    size:120px;
+    float:center;
+    position: relative;
+}

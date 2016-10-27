@@ -1,6 +1,6 @@
 #btn-ver-remiserias, #btn-solcitar-remis, #btn-obtener-ubicacion-en-el-mapa{
-	font-family:arial;
-	-moz-user-select: none;
+    font-family:arial;
+    -moz-user-select: none;
     background-image: none;
     border: 1px solid transparent;
     border-radius: 20px;
@@ -14,40 +14,40 @@
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
-	background-color: #337ab7;
+    background-color: #337ab7;
     border-color: #2e6da4;
     color: #fff;
-	font-size: 17px;
-	margin-left:15px;
-	display:inline-block;
-	border-radius: 20px;
+    font-size: 17px;
+    margin-left:15px;
+    display:inline-block;
+    border-radius: 20px;
 }
 
 #dvMapHome{
-	width: 600px;
-	height: 600px;
-	width: 100%;
-	padding: 20px 0px;
-	box-shadow: 15px 15px 15px #888888;
-	margin-left:0px;
-	display:block;
-	
+    width: 600px;
+    height: 600px;
+    width: 100%;
+    padding: 20px 0px;
+    box-shadow: 15px 15px 15px #888888;
+    margin-left:0px;
+    display:block;
+
 }
 
 #btn-ver-remiserias:hover, #btn-solcitar-remis:hover{
-	color:#ffffff;
-	background-color:#286090;
-	border-color:#2e6da4;
-	text-decoration:none;
-	cursor:pointer;
-	filter:alpha(opacity=50);
-	size:5px 75px;	
+    color:#ffffff;
+    background-color:#286090;
+    border-color:#2e6da4;
+    text-decoration:none;
+    cursor:pointer;
+    filter:alpha(opacity=50);
+    size:5px 75px;	
 }
 
 #bar-buttons{
-	color:#ffffff;
-	padding: 20px 20px;
-	width:100%;
-	background-color:#F5F5DA;
-	border-radius:40px;
+    color:#ffffff;
+    padding: 20px 20px;
+    width:100%;
+    background-color:#F5F5DA;
+    border-radius:40px;
 }
