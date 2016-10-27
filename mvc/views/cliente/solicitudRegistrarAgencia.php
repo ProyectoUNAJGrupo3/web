@@ -3,9 +3,9 @@
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\assets\PSCssAsset;
+use app\assets\AppAsset;
 
-PSCssAsset::register($this);
+AppAsset::register($this);
 ?>
 <!--<div class="container">
     <section id="main">
@@ -20,7 +20,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                 <div id="page-single-main">
                     <br />
                     <h1 id="title-form">
-                        <strong>F&oacute;rmulario Nuevo Telefonista</strong>
+                        <strong>Solicitud Registrar Agencia</strong>
                     </h1>
                     <div class="container-form" id="contenedor-formulario">
                         <div id="map-container">
@@ -57,25 +57,32 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <b>
                                 <h3>
                                     <u>Datos</u>
-                                    <u>Personales</u>
+                                    <u>Agencia</u>
                                 </h3>
                             </b>
-                            <?= $form->field($model, 'nombre')->input("text", ['autofocus' => true, 'maxlength' => '50', 'id' => 'nombre'])->label("Nombre <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50', 'id' => 'apellido'])->label("Apellido <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'dni')->input('text', ['maxlength' => '8', 'id' => 'dni'])->label("Documento <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20', 'id' => 'telefono'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'direccion')->textInput(['readonly' => true, 'id' => 'direccion'])->label("Direcci&oacute;n"); ?>
+                            <?= $form->field($model, 'nombreAgencia')->input("text", ['autofocus' => true, 'maxlength' => '50', 'id' => 'marca'])->label("Nombre<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'telefonoAgencia')->input("text", ['maxlength' => '50', 'id' => 'patente'])->label("Número Cliente (Agua, gas, luz, cable, teléfono) <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'numeroClienteServcio')->input('text', ['maxlength' => '4', 'id' => 'anio'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'direccionAgencia')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'nombre'])->label("Dirección <b id='asterisco'>*</b>"); ?>
                             <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
-
                             <br><br>
 
+                            <h3>
+                                <u>Datos</u>
+                                <u>Due&ntilde;o</u>
+                            </h3>
+                            </b>
+                            <?= $form->field($model, 'nombreDuenio')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Nombre <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'apellidoDuenio')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Apellido <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'dniDuenio')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Documento <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'email')->input('text', ['maxlength' => '8', 'id' => 'numeroSeguro'])->label("Email <b id='asterisco'>*</b>"); ?>
 
                             <?php ActiveForm::end(); ?>
                             <br>
                             <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>
                             <br>
                             <div id='botones-group'>
-                                <?= Html::submitButton('Guardar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                <?= Html::submitButton('Enviar solicitud', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>
@@ -83,8 +90,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                         <?php endif; ?>
                     </div>
                 </div>
-                </div>
+
             </article>
         </section>
     </div>
-
+</div>

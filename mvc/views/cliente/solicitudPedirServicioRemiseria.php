@@ -3,9 +3,9 @@
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\assets\PSCssAsset;
+use app\assets\AppAsset;
 
-PSCssAsset::register($this);
+AppAsset::register($this);
 ?>
 <!--<div class="container">
     <section id="main">
@@ -20,7 +20,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                 <div id="page-single-main">
                     <br />
                     <h1 id="title-form">
-                        <strong>F&oacute;rmulario Nuevo Telefonista</strong>
+                        <strong>Solicitud Servicio Remis</strong>
                     </h1>
                     <div class="container-form" id="contenedor-formulario">
                         <div id="map-container">
@@ -57,25 +57,22 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <b>
                                 <h3>
                                     <u>Datos</u>
-                                    <u>Personales</u>
+                                    <u>Solicitud</u>
                                 </h3>
                             </b>
-                            <?= $form->field($model, 'nombre')->input("text", ['autofocus' => true, 'maxlength' => '50', 'id' => 'nombre'])->label("Nombre <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50', 'id' => 'apellido'])->label("Apellido <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'dni')->input('text', ['maxlength' => '8', 'id' => 'dni'])->label("Documento <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20', 'id' => 'telefono'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'direccion')->textInput(['readonly' => true, 'id' => 'direccion'])->label("Direcci&oacute;n"); ?>
+
+                            <?= $form->field($model, 'nombreAgencia')->input("text", ['readonly' => true,'autofocus' => true, 'maxlength' => '50', 'id' => 'marca'])->label("Nombre Agencia<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'nombreUsuario')->input("text", ['readonly' => true,'maxlength' => '50', 'id' => 'patente'])->label("Nombre Usuario<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'apellidoUsuario')->input("text", ['readonly' => true,'maxlength' => '50', 'id' => 'patente'])->label("Apellido Usuario<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'origenUsuario')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'nombre'])->label("Origen <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'destinoUsuario')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'nombre'])->label("Destino <b id='asterisco'>*</b>"); ?>
                             <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
-
-                            <br><br>
-
-
                             <?php ActiveForm::end(); ?>
                             <br>
                             <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>
                             <br>
                             <div id='botones-group'>
-                                <?= Html::submitButton('Guardar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                <?= Html::submitButton('Enviar Solicitud', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>
@@ -83,8 +80,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                         <?php endif; ?>
                     </div>
                 </div>
-                </div>
+
             </article>
         </section>
     </div>
-
+</div>

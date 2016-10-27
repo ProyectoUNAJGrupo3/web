@@ -6,6 +6,10 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use app\models\Usuario\PSFormularioSolicitudRegistrarAgenciaModel;
+use app\models\Usuario\PSFormularioSolicitarServcioRemiseriaModel;
+use app\models\Usuario\ListaHistorialViajesUsuarioModel;
+use app\models\Usuario\ListaHistorialCalificacionesUsuarioModel;
 
 class ClienteController extends Controller {
 
@@ -23,6 +27,26 @@ class ClienteController extends Controller {
 
     public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
         return $this->render('index');
+    }
+
+    public function actionSolicitud_registrar_agencia() {
+        $model = new PSFormularioSolicitudRegistrarAgenciaModel();
+        return $this->render("solicitudRegistrarAgencia", ['model' => $model]);
+    }
+
+    public function actionSolicitar_servicio_remis() {
+        $model = new PSFormularioSolicitarServcioRemiseriaModel();
+        return $this->render("solicitudPedirServicioRemiseria", ['model' => $model]);
+    }
+
+    public function actionListar_hisrotial_viajes() {
+        $model = new ListaHistorialViajesUsuarioModel();
+        return $this->render("listaHistorialViajes", ['model' => $model]);
+    }
+
+    public function actionListar_historial_calificaciones() {
+        $model = new ListaHistorialCalificacionesUsuarioModel();
+        return $this->render("listaHistorialCalificaciones", ['model' => $model]);
     }
 
 }

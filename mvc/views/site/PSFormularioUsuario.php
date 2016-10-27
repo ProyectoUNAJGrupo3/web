@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
