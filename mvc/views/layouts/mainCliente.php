@@ -49,8 +49,17 @@ $this->title = 'Usuario';
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/cliente/index']],
-                    ['label' => 'Historial Viajes', 'url' => ['#']],
-                    ['label' => 'Historial Calificaciones', 'url' => ['#']],
+                    ['label' => 'Viajes', 'url' => ['#'], 'items' => [
+                            ['label' => 'Ver Historial', 'url' => ['/cliente/listar_hisrotial_viajes'],],
+                            ['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
+                            ['label' => 'Calificar Servicio', 'url' => ['#'],],
+                        ],
+                    ],
+                    ['label' => 'Calificaciones', 'url' => ['#'], 'items' => [
+                            ['label' => 'Ver Historial', 'url' => ['/cliente/listar_historial_calificaciones'],],
+                        ],
+                    ],
+                    ['label' => 'Registrar Agencia', 'url' => ['/cliente/solicitud_registrar_agencia']],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]
