@@ -11,17 +11,19 @@ $this->title = $name;
 ?>
 <div class="recepcionista-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
 
     <div class="alert alert-danger">
         <?= nl2br(Html::encode($message)) ?>
     </div>
 
     <p>
-        blablalbalba  
+        The above error occurred while the Web server was processing your request.
     </p>
     <p>
-        recepcionista
+        Please contact us if you think this is a server error. Thank you.  "Recepcionista"
     </p>
 
 </div>

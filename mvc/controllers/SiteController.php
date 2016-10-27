@@ -95,6 +95,28 @@ class SiteController extends Controller {
      * @inheritdoc
      */
     public function actions() {
+        //Control de errores en caso de que se quiera acceder a las acciones de este controlador
+        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+
+            if (Yii::$app->user->identity->RolID==1) {                                                                //si el usuario es administrador
+                Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
+
+            } elseif (Yii::$app->user->identity->RolID==2) {
+                Yii::$app->errorHandler->errorAction = 'recepcionista/error';
+
+            } elseif (Yii::$app->user->identity->RolID==3) {
+                Yii::$app->errorHandler->errorAction = 'chofer/error';
+
+            } elseif (Yii::$app->user->identity->RolID==4) {
+                Yii::$app->errorHandler->errorAction = 'cliente/error';
+
+            } else {
+                Yii::$app->errorHandler->errorAction = 'site/error';
+            }
+        }else{                                                                                                      //sino (si el usuario es invitado) se muestra la pagina de error del site
+            Yii::$app->errorHandler->errorAction = 'site/error';
+        }
+
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -112,7 +134,26 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionIndex() {
-        return $this->render('index');
+        //En caso de que cierre el usuario cierre la pagina y haya cerrado sesion, al abrir la aplicacion la pagina que se le presente va a ser la de su home (la que depende de su rol)
+
+        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+
+            if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)) {         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
+                return $this->redirect(['agencia/index']);
+            } elseif (TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID)) {
+                return $this->redirect(['recepcionista/index']);
+            } elseif (TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID)) {
+                return $this->redirect(['chofer/index']);
+            } elseif (TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID)) {
+                return $this->redirect(['cliente/index']);
+            } else {
+                return $this->render('index');
+            }
+        }
+        else{
+            return $this->render('index');
+        }
+
     }
 
     // funciones para las vistas dependiendo el tipo de usuario
@@ -123,8 +164,8 @@ class SiteController extends Controller {
     public function actionRecepcionista() {
         return $this->redirect(['recepcionista/index']);
     }
-    
-    
+
+
 
     public function actionChofer() {
         return $this->redirect(['chofer/index']);
