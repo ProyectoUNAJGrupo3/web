@@ -6,8 +6,8 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\AltaViajeManualModel;
-use app\models\ListaSolicitudesServicioModel;
+use app\models\Recepcionista\AltaViajeManualModel;
+use app\models\Recepcionista\ListaSolicitudesServicioModel;
 
 class RecepcionistaController extends Controller {
 

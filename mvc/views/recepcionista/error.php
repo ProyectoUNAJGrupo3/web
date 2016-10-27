@@ -24,6 +24,7 @@ $this->title = $name;
                 <img src="img/warning.jpg">
                 <h1 id="acceso-denegado">Acceso Denegado</h1>
                 </p>
+                <h2><b>A Desarrollar</b></h2>
             </div>
         </div>
     </div>

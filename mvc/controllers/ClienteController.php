@@ -6,10 +6,10 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\PSFormularioSolicitudRegistrarAgenciaModel;
-use app\models\PSFormularioSolicitarServcioRemiseriaModel;
-use app\models\ListaHistorialViajesUsuarioModel;
-use app\models\ListaHistorialCalificacionesUsuarioModel;
+use app\models\Usuario\PSFormularioSolicitudRegistrarAgenciaModel;
+use app\models\Usuario\PSFormularioSolicitarServcioRemiseriaModel;
+use app\models\Usuario\ListaHistorialViajesUsuarioModel;
+use app\models\Usuario\ListaHistorialCalificacionesUsuarioModel;
 
 class ClienteController extends Controller {
 

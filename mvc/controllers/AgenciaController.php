@@ -7,21 +7,21 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 //************actualizar***************
-use app\models\ActualizarChoferModel;
-use app\models\PSActualizacionDatosRecepcionistaModel;
-use app\models\ActualizarVehiculoAgenciaModel;
+use app\models\Agencia\ActualizarChoferModel;
+use app\models\Agencia\PSActualizacionDatosRecepcionistaModel;
+use app\models\Agencia\ActualizarVehiculoAgenciaModel;
 //************alta***************
-use app\models\AltaVehiculoAgenciaModel;
-use app\models\AltaRecepcionistaAgenciaModel;
-use app\models\AltaChoferAgenciaModel;
+use app\models\Agencia\AltaVehiculoAgenciaModel;
+use app\models\Agencia\AltaRecepcionistaAgenciaModel;
+use app\models\Agencia\AltaChoferAgenciaModel;
 //************listar***************
-use app\models\ListaChoferesModel;
-use app\models\ListaRecepcionistasModel;
-use app\models\ListaVehiculoModel;
-use app\models\ListaViajesTurnoManianaModel;
-use app\models\ListaViajesTurnoTardeModel;
-use app\models\ListaViajesTurnoNocheModel;
-use app\models\ListaViajesTotalesModel;
+use app\models\Agencia\ListaChoferesModel;
+use app\models\Agencia\ListaRecepcionistasModel;
+use app\models\Agencia\ListaVehiculoModel;
+use app\models\Agencia\ListaViajesTurnoManianaModel;
+use app\models\Agencia\ListaViajesTurnoTardeModel;
+use app\models\Agencia\ListaViajesTurnoNocheModel;
+use app\models\Agencia\ListaViajesTotalesModel;
 
 class AgenciaController extends Controller {
 
@@ -45,7 +45,7 @@ class AgenciaController extends Controller {
     //******************************Alta**************************************//
 
     public function actionAlta_vehiculo_agencia() {
-        $model = new \app\models\AltaVehiculoAgenciaModel();
+        $model = new AltaVehiculoAgenciaModel();
         return $this->render("altaVehiculo", ['model' => $model]);
     }
 
