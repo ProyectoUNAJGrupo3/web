@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\Agencia;
+namespace app\models;
 
 use yii\base\Model;
 
@@ -10,7 +10,10 @@ class AltaChoferAgenciaModel extends Model {
     public $apellido;
     public $dni;
     public $telefono;
-    public $direccion;
+    public $agenciaID;
+    public $usuario;
+    public $contrasenia;
+    public $confirmarContrasenia;
 
     public function rules() {
         return[
@@ -28,8 +31,23 @@ class AltaChoferAgenciaModel extends Model {
             ['telefono', 'required', 'message' => 'Campo obligatorio'],
             ['telefono', 'match', 'pattern' => '/^[0-9]\d*$/', 'message' => 'Ingrese solo números'],
             ['telefono', 'match', 'pattern' => '/^\d{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
-            ['direccion', 'required', 'message' => 'Campo obligatorio'],
+            ['coordenadas', 'required'],
+            ['usuario', 'required','message'=>'Campo obligatorio'],
+
+            ['contrasenia', 'required','message'=>'Campo obligatorio'],
+            ['contrasenia', 'match','pattern'=>'/^.{6,50}$/','message'=>'Ingrese como mínimo 6 caracteres'],
+
+            ['confirmarContrasenia', 'required','message'=>'Campo obligatorio'],
+            ['confirmarContrasenia', 'match','pattern'=>'/^.{6,50}$/','message'=>'Ingrese como mínimo 6 caracteres'],
+
+            ['confirmarContrasenia', 'compare', 'compareAttribute'=>'contrasenia' , 'message'=>'Las constraseñas deben Coincidir'],
         ];
+    }
+    public function registrarchofer()
+    {
+        $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","''","''","''","'0'","'0'","'3'","'$this->documento'","'$this->agenciaID'"); //genera el alta del usuario y lo guarda
+        return true;
     }
 
 }

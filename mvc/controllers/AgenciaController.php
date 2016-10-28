@@ -23,7 +23,7 @@ use app\models\Agencia\ListaViajesTurnoManianaModel;
 use app\models\Agencia\ListaViajesTurnoTardeModel;
 use app\models\Agencia\ListaViajesTurnoNocheModel;
 use app\models\Agencia\ListaViajesTotalesModel;
-   
+
 class AgenciaController extends Controller {
 
     public $layout = 'mainAgencia';                           //se asocia al layout predeterminado
@@ -88,6 +88,9 @@ class AgenciaController extends Controller {
 
     public function actionAlta_vehiculo_agencia() {
         $model = new AltaVehiculoAgenciaModel();
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarchofer() === true)) {
+            Yii::$app->session->setFlash('Empleado creado con exito');
+        }
         return $this->render("altaVehiculo", ['model' => $model]);
     }
 
