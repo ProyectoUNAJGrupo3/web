@@ -5,16 +5,16 @@
 
 #contenedor-home{
     background-color:#f5f5dc;
-    margin-top:-20px;
-    border-radius:5%;
-    margin-top:-35px;
+    margin-top:-45px;
+    width: 100%;
+    max-width: 1500px;
 }
 #titulo{
     font-size:46px;
     color:black;
     text-align: center;
     float:center;
-    box-shadow:5px 5px 10px #888888;
+
 }
 #titulo-contenido{
     font-size:46px;
