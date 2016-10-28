@@ -8,11 +8,6 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\TipoUsuario;
 
-
-
-
-
-
 class RecepcionistaController extends Controller{
 
     public $layout = 'mainRecepcionista';                           //se asocia al layout predeterminado
