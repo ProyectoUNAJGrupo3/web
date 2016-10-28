@@ -1,7 +1,9 @@
 <?php
 
-namespace app\models;
+namespace app\models\CapaServicio\ServicioBD;
 include('OperacionState.php');
+
+use yii\base\Model;
 /**
  * Operaciones short summary.
  *
