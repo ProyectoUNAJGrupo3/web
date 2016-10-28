@@ -82,7 +82,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                 </div>
-
+                <?php ActiveForm::end(); ?>
                 <?php endif; ?>
 </div>
                 </div>

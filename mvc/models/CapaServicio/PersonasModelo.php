@@ -1,8 +1,11 @@
 <?php
 namespace app\models\CapaServicio;
-include('ServicioBD/Operaciones.php');
+include ('ServicioBD\Operaciones.php');
 use Yii;
 use yii\base\Model;
+use app\models\CapaServicio\ServicioBD\Alta;
+use app\models\CapaServicio\ServicioBD\Baja;
+use app\models\CapaServicio\ServicioBD\Modificacion;
 /**
  * PersonasModelo short summary.
  *
@@ -126,7 +129,7 @@ class PersonasModelo extends Model
         }
         else if($this->Operacion==self::Operacion_GetInfo)
         {
-            $this->OperacionState =new GetInfo();
+            $this->OperacionState =new ServicioBD\GetInfo();
         }
     }                                                  //ESTE METODO RECIBE LA CONSTANTE DE OPERACION Y SETEA LA VARIABLE OperacionState CON UN OBJETO, EL OBJETO SE CREA A PARTIR DE LA CLASE Operaciones.php y PUEDE SER ALTA, BAJA, MODIFICACION o GETINFO.
 }

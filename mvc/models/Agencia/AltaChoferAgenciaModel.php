@@ -2,15 +2,15 @@
 
 namespace app\models\Agencia;
 
+use yii;
 use yii\base\Model;
-use app\models\
+use app\models\CapaServicio\PersonasModelo;
 class AltaChoferAgenciaModel extends Model {
 
     public $nombre;
     public $apellido;
     public $dni;
     public $telefono;
-    public $agenciaID;
     public $usuario;
     public $contrasenia;
     public $confirmarContrasenia;
@@ -46,7 +46,8 @@ class AltaChoferAgenciaModel extends Model {
     public function registrarchofer()
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
-        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","''","''","''","'0'","'0'","'3'","'$this->documento'","'Yii::$app->user->identity->AgenciaID'"); //genera el alta del chofer y lo guarda
+        $app = Yii::$app->user->identity->AgenciaID;
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","''","''","''","'0'","'0'","'3'","'$this->dni'","'$app'"); //genera el alta del chofer y lo guarda
         return true;
     }
 
