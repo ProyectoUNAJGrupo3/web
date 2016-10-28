@@ -7,7 +7,6 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 
 
-
 class ChoferController extends Controller{
 
     public $layout = 'mainChofer';                           //se asocia al layout predeterminado
