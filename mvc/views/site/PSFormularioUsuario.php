@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
@@ -62,9 +62,8 @@ PSCssAsset::register($this);
                             </b>
                             <?= $form->field($model, 'nombre')->input("text", ['maxlength' => '50'])->label("Nombre");; ?>
                             <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50'])->label("Apellido"); ?>
-                            <?= $form->field($model, 'documento')->input("text", ['maxlength' => '15'])->label("Documento"); ?>
                             <?= $form->field($model, 'correo')->input("email")->label("Correo"); ?>
-                            <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20'])->label("Tele&eacute;fono"); ?>
+                            <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20'])->label("Tel&eacute;fono"); ?>
                             <?= $form->field($model, 'direccion')->textInput(['readonly' => true])->label("Direcci&oacute;n"); ?>
                             <?= $form->field($model, 'coordenadas')->textInput(['id'=>'coordenadas'])->label(""); ?>
                             <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>

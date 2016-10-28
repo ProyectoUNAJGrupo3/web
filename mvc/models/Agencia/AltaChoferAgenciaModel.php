@@ -1,27 +1,16 @@
 <?php
 
-namespace app\models\ModelosEmpleados;
+namespace app\models\Agencia;
 
 use yii\base\Model;
 
-class PSFormularioNuevoEmpleadoModel extends Model {
+class AltaChoferAgenciaModel extends Model {
 
     public $nombre;
     public $apellido;
     public $dni;
     public $telefono;
     public $direccion;
-    //dropDownList tipo empleado
-    public $listaTipoEmpleado;
-    //checkbox para auto
-    public $si;
-    public $no;
-    //datos auto
-    public $modelo;
-    public $patente;
-    public $numeroSeguro;
-    public $anio;
-    public $listaEstadoAuto;
 
     public function rules() {
         return[
