@@ -9,6 +9,7 @@ class PSFormularioUsuarioModel extends Model {
     public $nombre;
     public $apellido;
     public $correo;
+    public $documento;
     public $telefono;
     public $direccion;
     public $coordenadas;
@@ -56,7 +57,7 @@ class PSFormularioUsuarioModel extends Model {
     public function AltaRegistro()
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
-        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'0'","'4'","''","''"); //genera el alta del usuario y lo guarda
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'0'","'4'","'$this->documento'","''"); //genera el alta del usuario y lo guarda
         return true;
     }
 }
