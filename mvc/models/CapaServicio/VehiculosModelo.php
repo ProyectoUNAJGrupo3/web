@@ -1,8 +1,12 @@
 <?php
-namespace app\models;
+namespace app\models\CapaServicio;
 include('ServicioBD/Operaciones.php');
 use Yii;
 use yii\base\Model;
+use app\models\CapaServicio\ServicioBD\Alta;
+use app\models\CapaServicio\ServicioBD\Baja;
+use app\models\CapaServicio\ServicioBD\Modificacion;
+use app\models\CapaServicio\ServicioBD\GetInfo;
 
 /**
  * VehiculosModelo short summary.
@@ -71,7 +75,7 @@ class VehiculosModelo extends Model
         $this->Vehiculos = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Modifcacion()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Vehiculos QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Vehiculo modificada).
         return $this->Vehiculos;
     }
-    public function GetInfoVehiculos($VehiculoID, $Matricula, $Modelo,$Marca, $Estado, $FechaAltaDesde, $FechaAltaHasta, $AgenciaID)
+    public function GetInfoVehiculos($VehiculoID, $Matricula, $Modelo,$Marca, $Estado, $FechaAltaDesde, $FechaAltaHasta, $AgenciaID, $SoloDisponibles)
     {
         $this->Parametros = [
             'Matricula'=> $Matricula,
@@ -81,6 +85,7 @@ class VehiculosModelo extends Model
             'FechaAltaDesde'=> $FechaAltaDesde,
             'FechaAltaHasta'=> $FechaAltaHasta,
             'AgenciaID'=> $AgenciaID,
+            'SoloDisponibles'=> $SoloDisponibles,
               ];
 
         $this->setOperacion(self::Operacion_GetInfo);                                                   //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Getinfo() DE LA CLASE OPERACIONES.
@@ -113,7 +118,7 @@ class VehiculosModelo extends Model
 /*
 $test = new VehiculosModelo();
 TEST GET INFO
-print_r($test->GetInfoVehiculos("","","","","","","",""));
+print_r($test->GetInfoVehiculos("","","","","","","","",""));
  */
 
 
