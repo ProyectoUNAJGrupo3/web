@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-include('CapaServicio/PersonasModelo.php');
+use app\models\CapaServicio\PersonasModelo;
 use yii\base\Model;
 
 class PSFormularioUsuarioModel extends Model {
