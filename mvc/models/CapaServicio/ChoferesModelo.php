@@ -23,7 +23,7 @@ class ChoferesModelo extends Model
 
 
 
-    public function RegistrarChofer($Nombre,$Apellido,$Documento,$Usuario,$Password, $Telefono,$Email,$Estado, $AgenciaID, $VehiculoID)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, ChofereID y @result).
+    public function RegistrarChofer($Nombre,$Apellido,$Documento,$Usuario,$Password, $Telefono,$Email,$Estado, $AgenciaID/*, $VehiculoID*/)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, ChofereID y @result).
     {
         $this->Parametros = [
                 'Nombre'=>$Nombre         ,
@@ -35,7 +35,7 @@ class ChoferesModelo extends Model
                 'Email'=>$Email          ,
                 'Estado'=>$Estado         ,
                 'AgenciaID'=>$AgenciaID      ,
-                'VehiculoID'=>$VehiculoID     ,
+                /*'VehiculoID'=>$VehiculoID     ,*/
                 ];
         $this->setOperacion(self::Operacion_Alta);                                                      //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Alta() DE LA CLASE OPERACIONES.
         $this->Choferes = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Alta()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Choferes QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Chofere insertada).
@@ -54,14 +54,14 @@ class ChoferesModelo extends Model
                 'Email'=>NULL ,
                 'Estado'=>NULL ,
                 'AgenciaID'=>NULL,
-                'VehiculoID'=>NULL,
+                /*'VehiculoID'=>NULL,*/
                 ];
         $this->setOperacion(self::Operacion_Baja);                                                    //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Baja() DE LA CLASE OPERACIONES.
         $this->Choferes = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);    //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Baja()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Choferes QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Chofere eliminada).
 
         return $this->Choferes;
     }
-    public function ModificarChofer($PersonaID, $Nombre,$Apellido,$Documento,$Usuario,$Password, $Telefono,$Email,$Estado, $AgenciaID, $VehiculoID)
+    public function ModificarChofer($PersonaID, $Nombre,$Apellido,$Documento,$Usuario,$Password, $Telefono,$Email,$Estado, $AgenciaID/*, $VehiculoID*/)
     {
         $this->Parametros = [
                 'PersonaID'=>$PersonaID      ,
@@ -74,13 +74,13 @@ class ChoferesModelo extends Model
                 'Email'=>$Email          ,
                 'Estado'=>$Estado         ,
                 'AgenciaID'=>$AgenciaID      ,
-                'VehiculoID'=>$VehiculoID     ,
+                /*'VehiculoID'=>$VehiculoID     ,*/
                 ];
         $this->setOperacion(self::Operacion_Modificacion);                                              //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Modificacion() DE LA CLASE OPERACIONES.
         $this->Choferes = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Modifcacion()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Choferes QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Chofere modificada).
         return $this->Choferes;
     }
-    public function GetInfoChoferes($PersonaID,$Nombre,$Apellido,$Documento,$Usuario,$Telefono,$Email,$Estado, $AgenciaID, $VehiculoID, $SoloDisponibles)
+    public function GetInfoChoferes($PersonaID,$Nombre,$Apellido,$Documento,$Usuario,$Telefono,$Email,$Estado, $AgenciaID/*, $VehiculoID*/, $SoloDisponibles)
     {
         $this->Parametros = [
                 'PersonaID'=>$PersonaID      ,
@@ -92,7 +92,7 @@ class ChoferesModelo extends Model
                 'Email'=>$Email          ,
                 'Estado'=>$Estado         ,
                 'AgenciaID'=>$AgenciaID      ,
-                'VehiculoID'=>$VehiculoID     ,
+                /*'VehiculoID'=>$VehiculoID     ,*/
                 'SoloDisponibles'=>$SoloDisponibles
                 ];
 
@@ -126,13 +126,13 @@ class ChoferesModelo extends Model
 /*
 $test = new ChoferesModelo();
 TEST GET INFO
-print_r($test->GetInfoChoferes(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL));
+print_r($test->GetInfoChoferes(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL));
  */
 
 
 
 /*TEST REGISTRAR
-if($test->RegistrarChofer(0,NULL, 'J Fangio', 'Fangio', 'fanngio', 'fanngio', '4422331122', 'jgjgfancio@hotmail.com', 0, '413215434532', 1, 2)!=null) echo 'Cliente registrado correctamente!';
+if($test->RegistrarChofer(0,NULL, 'J Fangio', 'Fangio', 'fanngio', 'fanngio', '4422331122', 'jgjgfancio@hotmail.com', 0, '413215434532', 2)!=null) echo 'Cliente registrado correctamente!';
  */
 
 /*TEST MODIFICACION
