@@ -1,9 +1,8 @@
 <?php
-namespace app\models;
+namespace app\models\CapaServicio;
 include('ServicioBD/Operaciones.php');
 use Yii;
 use yii\base\Model;
-
 /**
  * PersonasModelo short summary.
  *

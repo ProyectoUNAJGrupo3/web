@@ -1,9 +1,9 @@
 <?php
 
-namespace app\models;
+namespace app\models\Agencia;
 
 use yii\base\Model;
-
+use app\models\
 class AltaChoferAgenciaModel extends Model {
 
     public $nombre;
@@ -31,7 +31,7 @@ class AltaChoferAgenciaModel extends Model {
             ['telefono', 'required', 'message' => 'Campo obligatorio'],
             ['telefono', 'match', 'pattern' => '/^[0-9]\d*$/', 'message' => 'Ingrese solo números'],
             ['telefono', 'match', 'pattern' => '/^\d{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
-            ['coordenadas', 'required'],
+            ['agenciaID', 'required'],
             ['usuario', 'required','message'=>'Campo obligatorio'],
 
             ['contrasenia', 'required','message'=>'Campo obligatorio'],
@@ -46,7 +46,7 @@ class AltaChoferAgenciaModel extends Model {
     public function registrarchofer()
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
-        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","''","''","''","'0'","'0'","'3'","'$this->documento'","'$this->agenciaID'"); //genera el alta del usuario y lo guarda
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","''","''","''","'0'","'0'","'3'","'$this->documento'","'Yii::$app->user->identity->AgenciaID'"); //genera el alta del chofer y lo guarda
         return true;
     }
 

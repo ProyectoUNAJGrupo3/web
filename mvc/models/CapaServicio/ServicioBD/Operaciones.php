@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\CapaServicio\ServicioBD;
 include('OperacionState.php');
 /**
  * Operaciones short summary.

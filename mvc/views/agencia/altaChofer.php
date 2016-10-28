@@ -64,7 +64,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                         <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50', 'id' => 'apellido'])->label("Apellido <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'dni')->input('text', ['maxlength' => '8', 'id' => 'dni'])->label("Documento <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20', 'id' => 'telefono'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
-                        <?= $form->field($model, 'agenciaID')->textInput([Yii::$app->user->identity->AgenciaID=>'agenciaID'])->label(""); ?>
                         <b>
                             <h3>
                                 <u>Datos</u>
@@ -83,7 +82,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                 </div>
-                        <?php ActiveForm::end(); ?>
+
                 <?php endif; ?>
 </div>
                 </div>
