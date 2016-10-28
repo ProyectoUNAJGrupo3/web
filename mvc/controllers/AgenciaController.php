@@ -6,7 +6,6 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-<<<<<<< HEAD
 //************actualizar***************
 use app\models\Agencia\ActualizarChoferModel;
 use app\models\Agencia\PSActualizacionDatosRecepcionistaModel;
@@ -31,7 +30,6 @@ use app\models\PSFormularioActualizacionVehiculoModel;
 use app\models\PSFormularioNuevoEmpleadoModel;
 use app\models\PSFormularioNuevoTelefonistaModel;
    
->>>>>>> b663780501449eea62e880146fe5d6763706bb79
 class AgenciaController extends Controller {
 
     public $layout = 'mainAgencia';                           //se asocia al layout predeterminado
