@@ -6,23 +6,6 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-//************actualizar***************
-use app\models\Agencia\ActualizarChoferModel;
-use app\models\Agencia\PSActualizacionDatosRecepcionistaModel;
-use app\models\Agencia\ActualizarVehiculoAgenciaModel;
-//************alta***************
-use app\models\Agencia\AltaVehiculoAgenciaModel;
-use app\models\Agencia\AltaRecepcionistaAgenciaModel;
-use app\models\Agencia\AltaChoferAgenciaModel;
-//************listar***************
-use app\models\Agencia\ListaChoferesModel;
-use app\models\Agencia\ListaRecepcionistasModel;
-use app\models\Agencia\ListaVehiculoModel;
-use app\models\Agencia\ListaViajesTurnoManianaModel;
-use app\models\Agencia\ListaViajesTurnoTardeModel;
-use app\models\Agencia\ListaViajesTurnoNocheModel;
-use app\models\Agencia\ListaViajesTotalesModel;      
-
 use app\models\TipoUsuario;
 //************actualizar***************
 use app\models\Agencia\ActualizarChoferModel;
