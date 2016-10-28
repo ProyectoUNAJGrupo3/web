@@ -1,8 +1,12 @@
 <?php
-namespace app\models;
+namespace app\models\CapaServicio;
 include('ServicioBD/Operaciones.php');
 use Yii;
 use yii\base\Model;
+use app\models\CapaServicio\ServicioBD\Alta;
+use app\models\CapaServicio\ServicioBD\Baja;
+use app\models\CapaServicio\ServicioBD\Modificacion;
+use app\models\CapaServicio\ServicioBD\GetInfo;
 
 /**
  * TarifasModelo short summary.
@@ -23,17 +27,16 @@ class TarifasModelo extends Model
 
 
 
-    public function RegistrarTarifa($Matricula, $Modelo,$Marca, $Estado, $FechaAlta, $FechaBaja, $AgenciaID)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, TarifaID y @result).
+    public function RegistrarTarifa($Comision, $AgenciaID,$ViajeMinimo, $KmMinimo, $PrecioKM, $Estado)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, TarifaID y @result).
     {
         $this->Parametros = [
-            'Matricula'=> $Matricula,
-            'Modelo'=> $Modelo,
-            'Marca'=> $Marca,
-            'Estado'=> $Estado,
-            'FechaAlta'=> $FechaAlta,
-            'FechaBaja'=> $FechaBaja,
+            'Comision'=> $Comision,
             'AgenciaID'=> $AgenciaID,
-              ];
+            'ViajeMinimo'=> $ViajeMinimo,
+            'KmMinimo'=> $KmMinimo,
+            'PrecioKM'=> $PrecioKM,
+            'Estado'=> $Estado,
+      ];
         $this->setOperacion(self::Operacion_Alta);                                                      //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Alta() DE LA CLASE OPERACIONES.
         $this->Tarifas = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Alta()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Tarifas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Tarifa insertada).
         return $this->Tarifas;
@@ -42,45 +45,43 @@ class TarifasModelo extends Model
     {
         $this->Parametros = [
             'TarifaID'=> $TarifaID,
-            'Matricula'=> "",
-            'Modelo'=> "",
-            'Marca'=> "",
-            'Estado'=> "",
-            'FechaAlta'=> "",
-            'FechaBaja'=> "",
-            'AgenciaID'=> "",
+            'Comision'=> NULL,
+            'AgenciaID'=> NULL,
+            'ViajeMinimo'=> NULL,
+            'KmMinimo'=> NULL,
+            'PrecioKM'=> NULL,
+            'Estado'=> NULL,
               ];
         $this->setOperacion(self::Operacion_Baja);                                                    //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Baja() DE LA CLASE OPERACIONES.
         $this->Tarifas = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);    //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Baja()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Tarifas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Tarifa eliminada).
 
         return $this->Tarifas;
     }
-    public function ModificarTarifa($TarifaID, $Matricula, $Modelo,$Marca, $Estado, $FechaAlta, $FechaBaja, $AgenciaID)
+    public function ModificarTarifa($TarifaID, $Comision, $AgenciaID,$ViajeMinimo, $KmMinimo, $PrecioKM, $Estado)
     {
         $this->Parametros = [
             'TarifaID'=> $TarifaID,
-            'Matricula'=> $Matricula,
-            'Modelo'=> $Modelo,
-            'Marca'=> $Marca,
-            'Estado'=> $Estado,
-            'FechaAlta'=> $FechaAlta,
-            'FechaBaja'=> $FechaBaja,
+            'Comision'=> $Comision,
             'AgenciaID'=> $AgenciaID,
+            'ViajeMinimo'=> $ViajeMinimo,
+            'KmMinimo'=> $KmMinimo,
+            'PrecioKM'=> $PrecioKM,
+            'Estado'=> $Estado,
               ];
         $this->setOperacion(self::Operacion_Modificacion);                                              //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Modificacion() DE LA CLASE OPERACIONES.
         $this->Tarifas = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Modifcacion()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Tarifas QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Tarifa modificada).
         return $this->Tarifas;
     }
-    public function GetInfoTarifas($TarifaID, $Matricula, $Modelo,$Marca, $Estado, $FechaAltaDesde, $FechaAltaHasta, $AgenciaID)
+    public function GetInfoTarifas($TarifaID, $Comision, $AgenciaID,$ViajeMinimo, $KmMinimo, $PrecioKM, $Estado)
     {
         $this->Parametros = [
-            'Matricula'=> $Matricula,
-            'Modelo'=> $Modelo,
-            'Marca'=> $Marca,
-            'Estado'=> $Estado,
-            'FechaAltaDesde'=> $FechaAltaDesde,
-            'FechaAltaHasta'=> $FechaAltaHasta,
+            'TarifaID'=> $TarifaID,
+            'Comision'=> $Comision,
             'AgenciaID'=> $AgenciaID,
+            'ViajeMinimo'=> $ViajeMinimo,
+            'KmMinimo'=> $KmMinimo,
+            'PrecioKM'=> $PrecioKM,
+            'Estado'=> $Estado,
               ];
 
         $this->setOperacion(self::Operacion_GetInfo);                                                   //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Getinfo() DE LA CLASE OPERACIONES.
@@ -113,19 +114,19 @@ class TarifasModelo extends Model
 /*
 $test = new TarifasModelo();
 TEST GET INFO
-print_r($test->GetInfoTarifas("","","","","","","",""));
+print_r($test->GetInfoTarifas(NULL,NULL,NULL,NULL,NULL,NULL,0));
  */
 
 
 
 /*TEST REGISTRAR
-if($test->RegistrarTarifa(1,1,1,1,1,1,"'2010-01-01'","'2020-01-01'",0,"'{}'","'{}'","''","''","'nada'",100,20,0,1)!=null) echo 'Cliente registrado correctamente!';
+if($test->RegistrarTarifa(10,1,10,10,0)!=null) echo 'Tarifa registrado correctamente!';
  */
 
 /*TEST MODIFICACION
-if($test->RegistrarTarifa(4,2,2,1,1,1,1,"'2010-01-01'","'2020-01-01'",0,"'{}'","'{}'","''","''","'nada'",100,20,0,1)!=null) echo 'Cliente modificado correctamente!';
+if($test->RegistrarTarifa(1,10,1,10,10,0)!=null) echo 'Tarifa modificado correctamente!';
  */
 
 /*TEST ELIMINAR
-if($test->EliminarTarifa(4)!=null) echo 'Cliente eliminado correctamente!';
+if($test->EliminarTarifa(4)!=null) echo 'Tarifa eliminado correctamente!';
  */
