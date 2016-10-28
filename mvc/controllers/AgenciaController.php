@@ -11,7 +11,7 @@ use app\models\PSFormularioAltaVehiculoModel;
 use app\models\PSFormularioActualizacionVehiculoModel;
 use app\models\PSFormularioNuevoEmpleadoModel;
 use app\models\PSFormularioNuevoTelefonistaModel;
-  
+   
 class AgenciaController extends Controller {
 
     public $layout = 'mainAgencia';                           //se asocia al layout predeterminado

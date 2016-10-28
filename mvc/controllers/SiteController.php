@@ -67,7 +67,7 @@ class SiteController extends Controller {
                     return TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID);
                     //Llamada al m?todo que comprueba si es un chofer
                 },
-                    ],
+                    ], 
                     [
                         //el cliente tiene permisos sobre las siguientes acciones
                         'actions' => ['logout', 'cliente'],

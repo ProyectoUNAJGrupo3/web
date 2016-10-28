@@ -9,7 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\TipoUsuario;
 
 class ClienteController extends Controller {
-
+     
     public $layout = 'mainCliente';                                             //se asocia al layout predeterminado
 
     public function behaviors() {

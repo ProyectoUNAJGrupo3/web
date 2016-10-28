@@ -8,7 +8,6 @@ use yii\filters\VerbFilter;
 use app\models\TipoUsuario;
 
 
-
 class ChoferController extends Controller{
 
     public $layout = 'mainChofer';                           //se asocia al layout predeterminado
