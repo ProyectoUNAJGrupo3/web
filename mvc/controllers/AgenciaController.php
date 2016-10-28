@@ -21,7 +21,7 @@ use app\models\Agencia\ListaVehiculoModel;
 use app\models\Agencia\ListaViajesTurnoManianaModel;
 use app\models\Agencia\ListaViajesTurnoTardeModel;
 use app\models\Agencia\ListaViajesTurnoNocheModel;
-use app\models\Agencia\ListaViajesTotalesModel;
+use app\models\Agencia\ListaViajesTotalesModel;      
 
 class AgenciaController extends Controller {
 
