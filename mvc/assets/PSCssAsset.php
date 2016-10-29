@@ -34,10 +34,12 @@ class PSCssAsset extends AssetBundle {
         'css/styleAccesoDenegado.css',
         'css/styleHome.css',
         'css/styleHomeAgencia.css',
-        'css/styleCargarNuevoViaje.css',
-        'css/styleSolictudServicio.css',
+        'css/styleCargarNuevoViajeManual',
+        'css/styleSolictudRemisManual.css',
         'css/styleAltaChofer.css',
-        
+        'css/styleSolictudServicioRemis.css',
+        'css/styleSolicitudServcioRemisCliente.css',
+        'css/styleSolicitudRegistrarAgencia.css',
         
     ];
     public $js = [
