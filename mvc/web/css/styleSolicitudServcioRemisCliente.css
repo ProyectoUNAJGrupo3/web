@@ -1,51 +1,54 @@
-#page-single-main{
+#page-single-main-solicitud-servicio{
     width: 100%;
     background-color:#F5F5DA;
-    margin-top:-20px;
+    margin-top:0px;
     padding:20px;
     border-radius:60px;
 }
 
-#title-form{
+#title-form-solicitud-servicio{
     color:black;
     text-align: center;
     font-size:40px;
 }
 
-#nombrePasajero,#apellidoPasajero{
+#nombreAgenciaSolicitudRemisUsuario,#nombreSolicitudRemisUsuario,#apellidoSolicitudRemisUsuario,#origenSolicitudRemisUsuario,#destinoSolicitudRemisUsuario{
     font-size:16px;
-    width: 100%;
-    size:70px;
+    width: 50%;
+    size:60px;
     float:center;	
 }
-#listadoChoferes{
+
+#listadoChoferes,#listadoCoches{
     font-size:16px;
-    width: 100%;
+    width: 50%;
     height: 20%;
     size:70px;
     float:center;	
 }
 #btn-cargar-viaje{
+    margin-left: 0px;
     font-size:20px;
     size:70px;
 }
-#btn-cancelar{
+#btn-cancelar-viaje{
     font-size:20px;
     size:70px;
+    margin-left: 00px;
 }
+
 #botones-group-viaje{
-    border: 1px solid black;
-    margin-left: 200px;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-left: 250px;
     display:inline-block;
     float: center;
     position: relative;
 }
-#asterisco{
+#asterisco-solicitud-servicio{
     color:red;
 }
 
-#contenedor-formulario{
+#contenedor-formulario-solicitud-servicio{
     margin: 30px 100px;
     box-shadow: 21px 21px 51px #999;
     border-radius: 70px;
@@ -55,7 +58,7 @@
     position: relative;
     vertical-align: top;
 }
-#sub-contenedor-formulario{
+#sub-contenedor-formulario-solicitud-servicio{
     border-radius: 70px;
     box-shadow: 10px 10px 15px #999;
     padding:10px 10px;
@@ -64,7 +67,7 @@
     float:center;
 }
 
-#sub-sub-contenedor-formulario{
+#sub-sub-contenedor-formulario-solicitud-servicio{
     position:absolute;
     margin-left:20%;
     position:center;
