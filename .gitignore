@@ -6,6 +6,14 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.sln
+*.phpproj
+*.phpproj.user
+composer.json
+composer.lock
+composer.phar
+/vendor/
+nbproject/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -24,6 +32,7 @@ bld/
 
 # Visual Studio 2015 cache/options directory
 .vs/
+.nbproject/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -42,7 +51,9 @@ dlldata.c
 
 # DNX
 project.lock.json
+project.fragment.lock.json
 artifacts/
+Properties/launchSettings.json
 
 *_i.c
 *_p.c
@@ -108,6 +119,10 @@ _TeamCity*
 
 # DotCover is a Code Coverage Tool
 *.dotCover
+
+# Visual Studio code coverage results
+*.coverage
+*.coveragexml
 
 # NCrunch
 _NCrunch_*
@@ -188,6 +203,7 @@ ClientBin/
 *~
 *.dbmdl
 *.dbproj.schemaview
+*.jfm
 *.pfx
 *.publishsettings
 node_modules/
@@ -232,6 +248,9 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 
+# Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
+*.vbw
+
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
 **/*.DesktopClient/GeneratedArtifacts
@@ -250,3 +269,14 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# CodeRush
+.cr/
+
+# Python Tools for Visual Studio (PTVS)
+__pycache__/
+*.pyc
+
+# Cake - Uncomment if you are using it
+# tools/
+/mvc/vendor

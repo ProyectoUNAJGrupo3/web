@@ -1,9 +1,0 @@
-{
-    "require": {
-        "yiisoft/yii2": "^2.0",
-        "yiisoft/yii2-composer": "^2.0",
-        "yiisoft/yii2-debug": "^2.0",
-        "2amigos/yii2-google-maps-library": "^1.0",
-        "yiisoft/yii2-jui": "^2.0"
-    }
-}
