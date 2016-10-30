@@ -17,9 +17,10 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\assets\PSCssAsset;
+use app\assets\AppAssetAgencia;
 
-PSCssAsset::register($this);
+AppAssetAgencia::register($this);
+AppAsset::register($this);
 /* @var $this yii\web\View */             //modifique el div class ="site-index" por el "agencia-index"
 $this->title = 'Service Remis';
 ?>
@@ -34,7 +35,7 @@ $this->title = 'Service Remis';
     </div>-->
 
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
 
     <!--<div class="jumbotron">
         <h1>Congratulations!</h1>
@@ -56,7 +57,7 @@ $this->title = 'Service Remis';
         <div id="descripcion">
             <strong>
                 <p>
-                   blalblalblalblabla.
+                    blalblalblalblabla.
                 </p>
             </strong>
         </div>

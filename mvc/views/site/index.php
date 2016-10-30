@@ -16,10 +16,10 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use app\assets\AppAssetWebSite;
 use app\assets\AppAsset;
-use app\assets\PSCssAsset;
-
-PSCssAsset::register($this);
+AppAsset::register($this);
+AppAssetWebSite::register($this);
 /* @var $this yii\web\View */
 $this->title = 'Service Remis';
 ?>

@@ -20,6 +20,11 @@ class AppAsset extends AssetBundle {
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/styleHome.css',
+        'css/styleFooter.css',
+        'css/styleHeader.css',
+        'css/styleHomeAgencia.css',
+        'css/styleAccesoDenegado.css',
     ];
     public $js = [
         'js/Mapas.js',

@@ -7,10 +7,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\assets\PSCssAsset;
-
 AppAsset::register($this);
-PSCssAsset::register($this);
 
 $this->title = 'Recepcionista';
 ?>
@@ -44,13 +41,18 @@ $this->title = 'Recepcionista';
             ]);
             ;
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
+                'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['recepcionista/index']],
-                    ['label' => 'Viajes', 'items' => [
+                    [
+                        'label' => 'Viajes',
+                        'items' => [
                             ['label' => 'Carga Nuevo viaje', 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            '<li class="divider"></li>',
                             ['label' => 'Ver Solicitudes', 'url' => ['/recepcionista/listar_solcitudes_servicio'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                        ],],
+                        ],
+                    ],
+                    ['label' => 'Ver Solicitud', 'url' => ['recepcionista/ver_datos_solcitud_de_servicio']],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]

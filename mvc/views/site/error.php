@@ -1,8 +1,9 @@
 <?php
 
-use app\assets\PSCssAsset;
-
-PSCssAsset::register($this);
+use app\assets\AppAssetWebSite;
+use app\assets\AppAsset;
+AppAsset::register($this);
+AppAssetWebSite::register($this);
 ?>
 <div class="body">
     <div id="contenedor">

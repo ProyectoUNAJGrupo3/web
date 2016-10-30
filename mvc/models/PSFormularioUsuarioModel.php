@@ -1,15 +1,15 @@
 <?php
 
 namespace app\models;
-include('CapaServicio/PersonasModelo.php');
+use app\models\CapaServicio\PersonasModelo;
 use yii\base\Model;
 
 class PSFormularioUsuarioModel extends Model {
 
     public $nombre;
     public $apellido;
-    public $documento;
     public $correo;
+    public $documento;
     public $telefono;
     public $direccion;
     public $coordenadas;
@@ -52,6 +52,8 @@ class PSFormularioUsuarioModel extends Model {
 
             ['confirmarContrasenia', 'required','message'=>'Campo obligatorio'],
             ['confirmarContrasenia', 'match','pattern'=>'/^.{6,50}$/','message'=>'Ingrese como mínimo 6 caracteres'],
+
+            ['confirmarContrasenia', 'compare', 'compareAttribute'=>'contrasenia' , 'message'=>'Las constraseñas deben Coincidir'],
         ];
     }
     public function AltaRegistro()

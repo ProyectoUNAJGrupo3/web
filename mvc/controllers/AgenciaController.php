@@ -6,6 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use app\models\TipoUsuario;
 //************actualizar***************
 use app\models\Agencia\ActualizarChoferModel;
 use app\models\Agencia\PSActualizacionDatosRecepcionistaModel;
@@ -21,15 +22,56 @@ use app\models\Agencia\ListaVehiculoModel;
 use app\models\Agencia\ListaViajesTurnoManianaModel;
 use app\models\Agencia\ListaViajesTurnoTardeModel;
 use app\models\Agencia\ListaViajesTurnoNocheModel;
-use app\models\Agencia\ListaViajesTotalesModel;
+use app\models\Agencia\ViajesGridModel;
 
 class AgenciaController extends Controller {
 
     public $layout = 'mainAgencia';                           //se asocia al layout predeterminado
 
-    public function actions() {                                 //Errores todavia no solucionado
-        Yii::$app->errorHandler->errorAction = 'agencia/error';             //seteo la ruta de vista de error para que al llamar al ErrorAction no vaya a la del site sino a la de agencia,
-        //la ruta ya esta harcodeada en config/web en la parte errorHandler 
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'rules' => [                              //reglas
+                        //el administrador tiene permisos sobre las siguientes acciones
+                        ['actions' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia'],
+                        'allow' => true,
+                        'roles' => ['@'], //El arroba es para el usuario autenticado
+                        'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
+                            return TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID);
+                            //Llamada al m?todo que comprueba si es un administrador
+                            //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
+                        }
+                                               ]
+                    ]
+                ]
+             ];
+    }
+
+    public function actions() {
+
+        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+
+            if (Yii::$app->user->identity->RolID==1) {                                                                //si el usuario es administrador
+                Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
+
+            } elseif (Yii::$app->user->identity->RolID==2) {
+                Yii::$app->errorHandler->errorAction = 'recepcionista/error';
+
+            } elseif (Yii::$app->user->identity->RolID==3) {
+                Yii::$app->errorHandler->errorAction = 'chofer/error';
+
+            } elseif (Yii::$app->user->identity->RolID==4) {
+                Yii::$app->errorHandler->errorAction = 'cliente/error';
+
+            } else {
+                Yii::$app->errorHandler->errorAction = 'site/error';
+            }
+        }else{                                                                                                      //sino (si el usuario es invitado) se muestra la pagina de error del site
+            Yii::$app->errorHandler->errorAction = 'site/error';
+        }
+        //la ruta ya esta harcodeada en config/web en la parte errorHandler
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -41,16 +83,21 @@ class AgenciaController extends Controller {
         return $this->render('index');
     }
 
-    //*************************************************************************//
+//*************************************************************************//
     //******************************Alta**************************************//
 
     public function actionAlta_vehiculo_agencia() {
         $model = new AltaVehiculoAgenciaModel();
+
         return $this->render("altaVehiculo", ['model' => $model]);
     }
 
     public function actionAlta_chofer_agencia() {
         $model = new AltaChoferAgenciaModel();
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarchofer() === true)) {
+            Yii::$app->session->setFlash('Empleado creado con exito');
+
+        }
         return $this->render("altaChofer", ['model' => $model]);
     }
 
@@ -113,8 +160,9 @@ class AgenciaController extends Controller {
     }
 
     public function actionListar_viajes_totales_agencia() {
-        $model = new ListaViajesTotalesModel();
+
+        $model = new ViajesGridModel();
+        $model->setDataProvider();
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
-
 }
