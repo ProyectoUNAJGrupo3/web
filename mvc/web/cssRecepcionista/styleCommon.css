@@ -1,0 +1,45 @@
+#page-single-main-recepcionista{
+    width: 100%;
+    background-color:#F5F5DA;
+    margin-top:-20px;
+    padding:15px;
+    border-radius:60px;
+}
+
+
+#title-form-recepcionista{
+    color:black;
+    text-align: center;
+    font-size:40px;
+}
+#asterisco-solicitud-servicio-recepcionista{
+    color:red;
+}
+
+#contenedor-formulario-recepcionista{
+    margin: 30px 100px;
+    box-shadow: 21px 21px 51px #999;
+    border-radius: 70px;
+    padding:10px 50px;
+    float:center;
+    size:500px;
+    position: relative;
+    vertical-align: top;
+}
+#sub-contenedor-formulario-recepcionista{
+    border-radius: 70px;
+    box-shadow: 10px 10px 15px #999;
+    padding:10px 10px;
+    margin: 90px 10px;
+    position: relative;
+    float:center;
+}
+
+#sub-sub-contenedor-formulario-recepcionista{
+    position:absolute;
+    margin-left:20%;
+    position:center;
+    size:120px;
+    float:center;
+    position: relative;
+}

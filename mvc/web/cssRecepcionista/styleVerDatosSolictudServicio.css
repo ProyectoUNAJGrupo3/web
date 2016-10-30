@@ -1,0 +1,15 @@
+#numeroSolicitud, #nombreUsuario, #origen,#destino{
+    font-size:16px;
+    width: 80%;
+    size:40px;
+    float:center;	
+}
+#botones-grupo-ver-datos-solicitud{
+
+    margin-top: 10px;
+    margin-left: 300px;
+    display:inline-block;
+    float: center;
+    position: relative;
+
+}

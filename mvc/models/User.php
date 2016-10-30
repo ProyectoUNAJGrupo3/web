@@ -1,7 +1,8 @@
 <?php
 
 namespace app\models;
-
+use yii\base\Model;
+use app\models\CapaServicio\PersonasModelo;
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
     public $PersonaID;
@@ -121,5 +122,5 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     }
 
 
-    
+
 }

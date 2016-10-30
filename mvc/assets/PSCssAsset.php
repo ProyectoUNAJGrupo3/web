@@ -31,6 +31,16 @@ class PSCssAsset extends AssetBundle {
         'css/styleQuienesSomos.css',
         'css/styleFormulariosVehiculo.css',
         'css/styleFormularioEmpleado.css',
+        'css/styleAccesoDenegado.css',
+        'css/styleHome.css',
+        'css/styleHomeAgencia.css',
+        'css/styleCargarNuevoViajeManual',
+        'css/styleSolictudRemisManual.css',
+        'css/styleAltaChofer.css',
+        'css/styleSolictudServicioRemis.css',
+        'css/styleSolicitudServcioRemisCliente.css',
+        'css/styleSolicitudRegistrarAgencia.css',
+        
     ];
     public $js = [
         'js/Maps.js',

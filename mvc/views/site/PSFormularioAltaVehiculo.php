@@ -53,7 +53,7 @@ PSCssAsset::register($this);
                                 <u>Veh&iacute;culo</u>
                             </h3>
                         </b>
-                        <?= $form->field($model, 'marca')->input("text", ['maxlength' => '50', 'id' => 'marca','autofocus'=>true])->label("Marca <b id='asterisco'>*</b>"); ?>
+                        <?= $form->field($model, 'marca')->input("text", ['maxlength' => '50', 'id' => 'marca', 'autofocus' => true])->label("Marca <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'modelo')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Modelo <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'patente')->input("text", ['maxlength' => '50', 'id' => 'patente'])->label("Patente <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'anio')->input("text", ['maxlength' => '4', 'id' => 'anio'])->label("A&ntilde;o <b id='asterisco'>*</b>"); ?>

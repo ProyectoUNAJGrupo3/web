@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\assets\AppAsset;
+AppAsset::register($this);
 ?>
 <div class="site-login">
 
