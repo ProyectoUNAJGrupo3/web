@@ -1,52 +1,94 @@
 #barra-menu-main{
-    background-color: #2e6da4;
+    background-color: #153654;
     border: #2e6da4;
 }
 
 #contenedor-home{
-    background-color:#f5f5dc;
-    margin-top:-45px;
-    width: 100%;
-    max-width: 1500px;
+
+    background-image:url(REMISEJECUTIVO2.jpg);
+    background-repeat:no-repeat;
+    background-position: 0px 0px;
+    margin-top:-50px;
+    border-radius:0%;
+    margin-left:-110px;
+
+
 }
-#titulo{
-    font-size:46px;
-    color:black;
-    text-align: center;
-    float:center;
+
+#boton{
+   height: 35px; 
+   width: 200px;
+   text-align: center;    
+   font-size:15px;
+   font-style:unset;
+   font-variant-caps:inherit;
+   font-style:oblique;
+   background-color:darkseagreen;
+   margin-bottom:380px;
+   margin-left:1000px;
+   box-shadow:5px 5px 10px #33C4C4;
+}
+   
+#boton2{
+   height: 35px; 
+   width: 200px;
+   text-align: center;    
+   font-size:0px;
+   font-style:unset;
+   font-variant-caps:inherit;
+   font-style:oblique;
+   background-color:darkseagreen;
+   margin-bottom:10px;
+   margin-left:100px;
+   box-shadow:0px 0px 0px #33C4C4;
+}
+
+
+p {
+  font: 150% sans-serif;
+}
+
+
+
+
+#mensaje{
+    font-size:20px;
+    color:chartreuse;
+   
+    margin-left:20px;
+    float:right;
+    box-shadow:5px 5px 10px #888888;
+    font-family:Verdana;
+    font-style:italic;
+    vertical-align:initial;
+    line-height:-2;
+   
 
 }
 #titulo-contenido{
-    font-size:46px;
-    color:gray;
-    text-align: center;
-    float:center;
-    background-color:#f5f5dc;
-
+    font-size:35px;
+    font-family:Verdana;
+    font-style:italic;
+    color: white;        
+    margin-left:370px;
+    letter-spacing: -0.02em;
+    vertical-align: central;
+    line-height:-2;
+  
 }
 
 
-#descripcion{
-    margin-top:20px;
-    padding: 0px 20px;
-    text-align:justify;
-    float:center;
-    width:90%;
-    font-size:26px;
-    background-color:#f5f5dc;
-    font: 30 34px/40px Roboto,sans-serif;
-    letter-spacing: -0.01em;
-    margin-top: 40px;
-    margin-left: 60px;
-    border-radius: 20px;
-    box-shadow:1px 1px 5px #888888;
+#table{
+    width:auto;
+    height:auto;
 }
 
-#distancia{
-    color:black;
-    padding: 0px 20px;
-    text-align:justify;
-    font-size:20px;
-    font: 30 34px/40px Roboto,sans-serif;
-    display:none;
+
+#jumbotron{
+    background-color: black;        
+    margin-left:-200px;
+    margin-right:-200px;
+    border-radius:0%;
+    margin-top:-30px;
+
 }
