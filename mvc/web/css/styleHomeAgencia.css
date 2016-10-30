@@ -1,0 +1,132 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.menu{
+    background-color: #e9e9e9;
+    font-family: arial;
+    line-height: 18px;
+    width: 100%;
+    min-width: 300px;
+    margin: 50px;
+    display: inline-block;
+    line-height: 18px;
+}
+.menu .menu-empleados,.menu  .menu-vehiculos, .menu  .menu-viajes{
+    width: 100%;
+}
+.menu .menu-empleados li a, .menu-recepcionista li a, .menu-vehiculos li a, .menu-viajes li a, .menu-chofer li a{
+    color: #494949;
+    display: block;
+    padding: 15px 20px;
+    background-color: #e9e9e9;
+}
+
+.menu .menu-empleados li a:hover, .menu-recepcionista li a:hover, .menu-vehiculos li a:hover, .menu-viajes li a:hover, .menu-chofer li a:hover{
+    color: #494949;
+    background-color: #1a95d5;
+    text-decoration: none;
+}
+.menu .menu-empleados .icono, .menu-vehiculos .icono, .menu-viajes .icono{
+    font-size: 20px;
+    line-height: 18px;
+}
+
+.menu .menu-empleados .icono.derecha, .menu-recepcionista .icono.derecha, .menu-vehiculos .icono.derecha, .menu-viajes .icono.derecha, .menu-chofer .icono.derechas{
+    float: right;
+    margin-right: 10px;
+}
+.menu .menu-empleados .icono.izquierda, .menu-recepcionista .icono.izquierda, .menu-vehiculos .icono.izquierda, .menu-viajes .icono.izquierda, .menu-chofer icono.izquierda{
+    float: left;
+    margin-left: 10px;
+}
+
+.menu .menu-empleados ul, .menu-recepcionista ul, .menu-vehiculos ul, .menu-viajes ul, .menu-chofer ul{
+    color: #494949;
+    background-color: #e9e9e9;
+    text-decoration: none;
+}
+
+.menu .menu-empleados ul li, .menu-empleados .menu-recepcionista ul li, .menu-empleados .menu-chofer ul li, .menu-vehiculos li ul li, .menu-viajes li ul li{
+    color: #494949;
+    background-color: #e9e9e9;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.menu-vehiculos li ul li, .menu-viajes li ul li{
+    color: #494949;
+    background-color: #e9e9e9;
+    text-decoration: none;
+    margin: 0px 15px;
+}
+
+/*Cambiando fondo a links*/
+.menu .menu-empleados li .menu-chofer li ul li a, .menu-empleados li .menu-recepcionista li ul li a, .menu .menu-vehiculos li ul li a, .menu .menu-viajes li ul li a{
+    background-color: #424242;
+    color: #E9E9E9;
+}
+
+
+.menu .menu-empleado .activado > a,.menu .menu-vehiculos .activado > a,.menu .menu-viajes .activado > a{
+    background-color: #1a95d5;
+    color: #fff;
+}
+
+
+.menu ul{
+    list-style: none;
+}
+
+/*.menu .menu-empleados ul, .menu .menu-vehiculos ul, .menu .menu-viajes ul{
+    display: none;
+}*/
+.btn-menu{
+    display: none;
+}
+.btn-menu .icono{
+    float: right;
+}
+a{
+    text-decoration: none;
+    color:#ffffff;
+}
+
+#barra-agencia{
+    background-color: #2e6da4;
+    border: #2e6da4;
+}
+
+#seccion{
+    width: 100%;
+    float:left;
+    width: 800px;		/*asigno tamanio horizontal a la primera caja*/
+    margin-top: -110px;
+    /*margin: 20px;*/
+}
+
+/*el tamanio de un elemento y sus margenes son agregados para obtener el valor real ocupado en pantalla*/ 
+#columna{
+    float: left;
+    width: 1000%;
+    width: 320px;		/*tamanio de la segunda caja*/
+    margin-top: -110px;
+    /*margin: 20px 0px;	/*margen interno*/
+    padding: 0px;
+    background: #ffffff;	/*color gris*/
+}
+
+/*-------------Footer-----------------
+        esta propiedad devuelve al documento su flujo normal y nos permite posicionae <footer> debajo del ultimo
+        elemento en lugar de a su lado
+*/
+
+article {
+    background: #ffffff;
+    padding: 0px;
+    margin-bottom: 5px;
+    width: 100%;
+}
