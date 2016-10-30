@@ -77,6 +77,7 @@ class VehiculosModelo extends Model
     public function GetInfoVehiculos($VehiculoID, $Matricula, $Modelo,$Marca, $Estado, $FechaAltaDesde, $FechaAltaHasta, $AgenciaID, $SoloDisponibles)
     {
         $this->Parametros = [
+            'VehiculoID'=> $VehiculoID,
             'Matricula'=> $Matricula,
             'Modelo'=> $Modelo,
             'Marca'=> $Marca,
