@@ -3,9 +3,11 @@
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\assets\PSCssAsset;
+use app\assets\AppAsset;
+use app\assets\AppAssetAgencia;
 
-PSCssAsset::register($this);
+AppAssetAgencia::register($this);
+AppAsset::register($this);
 ?>
 <div class="site-contact">
     <section id="main">
@@ -53,8 +55,8 @@ PSCssAsset::register($this);
                                 <u>Veh&iacute;culo</u>
                             </h3>
                         </b>
-                        <?= $form->field($model, 'marca')->input("text", ['maxlength' => '50', 'id' => 'marca','autofocus'=>true])->label("Marca <b id='asterisco'>*</b>"); ?>
-                        <?= $form->field($model, 'modelo')->input("text", ['maxlength' => '50', 'id' => 'modelo','autofocus'=>true])->label("Modelo <b id='asterisco'>*</b>"); ?>
+                        <?= $form->field($model, 'marca')->input("text", ['maxlength' => '50', 'id' => 'marca', 'autofocus' => true])->label("Marca <b id='asterisco'>*</b>"); ?>
+                        <?= $form->field($model, 'modelo')->input("text", ['maxlength' => '50', 'id' => 'modelo', 'autofocus' => true])->label("Modelo <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'patente')->input("text", ['maxlength' => '50', 'id' => 'patente'])->label("Patente <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'anio')->input("text", ['maxlength' => '4', 'id' => 'anio'])->label("A&ntilde;o <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'numeroSeguro')->input('text', ['maxlength' => '10', 'id' => 'numeroSeguro'])->label("N&uacute;mero de Seguro <b id='asterisco'>*</b>"); ?>

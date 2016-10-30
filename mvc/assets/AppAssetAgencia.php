@@ -14,21 +14,19 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle {
+class AppAssetAgencia extends AssetBundle {
 
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/styleHome.css',
-        'css/styleFooter.css',
-        'css/styleHeader.css',
-        'css/styleHomeAgencia.css',
-        'css/styleAccesoDenegado.css',
+        'cssAgencia/styleAltaChofer.css',
+        'cssAgencia/styleVehiculo.css',
+        'css/styleListarSolicitudesDesdeRecepcionista.css',
     ];
     public $js = [
         'js/Maps.js',
-        'js/Mapas.js'
+        'js/Mapas.js',
+        'js/AperturaPopupLogin.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

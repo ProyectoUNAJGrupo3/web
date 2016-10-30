@@ -3,9 +3,11 @@
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\assets\AppAssetCliente;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+AppAssetCliente::register($this);
 ?>
 <!--<div class="container">
     <section id="main">
@@ -60,10 +62,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                     <u>Agencia</u>
                                 </h3>
                             </b>
-                            <?= $form->field($model, 'nombreAgencia')->input("text", ['autofocus' => true, 'maxlength' => '50', 'id' => 'nombreRegistrarAgenciaDesdeCliente'])->label("Nombre<b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'telefonoAgencia')->input("text", ['maxlength' => '50', 'id' => 'apellidoRegistrarAgenciaDesdeCliente'])->label("Número Cliente (Agua, gas, luz, cable, teléfono) <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'numeroClienteServcio')->input('text', ['maxlength' => '4', 'id' => 'servicioRegistrarAgenciaDesdeCliente'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'direccionAgencia')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'direccionRegistrarAgenciaDesdeCliente'])->label("Dirección <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'nombreAgencia')->input("text", ['autofocus' => true, 'maxlength' => '50', 'id' => 'nombreAgencia'])->label("Nombre<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'telefonoAgencia')->input("text", ['maxlength' => '50', 'id' => 'telefonoAgencia'])->label("Número Cliente (Agua, gas, luz, cable, teléfono) <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'numeroClienteServcio')->input('text', ['maxlength' => '4', 'id' => 'numeroClienteServcio'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'direccionAgencia')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'direccionAgencia'])->label("Dirección <b id='asterisco'>*</b>"); ?>
                             <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
                             <br><br>
 
@@ -72,17 +74,17 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                 <u>Due&ntilde;o</u>
                             </h3>
                             </b>
-                            <?= $form->field($model, 'nombreDuenio')->input("text", ['maxlength' => '50', 'id' => 'nombreDuenioRegistrarAgenciaDesdeCliente'])->label("Nombre <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'apellidoDuenio')->input("text", ['maxlength' => '50', 'id' => 'apellidoRegistrarAgenciaDesdeCliente'])->label("Apellido <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'dniDuenio')->input("text", ['maxlength' => '50', 'id' => 'dniRegistrarAgenciaDesdeCliente'])->label("Documento <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'email')->input('text', ['maxlength' => '8', 'id' => 'emailRegistrarAgenciaDesdeCliente'])->label("Email <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'nombreDuenio')->input("text", ['maxlength' => '50', 'id' => 'nombreDuenio'])->label("Nombre <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'apellidoDuenio')->input("text", ['maxlength' => '50', 'id' => 'apellidoDuenio'])->label("Apellido <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'dniDuenio')->input("text", ['maxlength' => '50', 'id' => 'dniDuenio'])->label("Documento <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'email')->input('text', ['maxlength' => '8', 'id' => 'email'])->label("Email <b id='asterisco'>*</b>"); ?>
 
                             <?php ActiveForm::end(); ?>
                             <br>
                             <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>
                             <br>
                             <div id='botones-group'>
-                                <?= Html::submitButton('Enviar solicitud', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                <?= Html::submitButton('Enviar solicitud', ['class' => 'btn btn-primary', 'id' => 'btn-enviar-solicitud']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>

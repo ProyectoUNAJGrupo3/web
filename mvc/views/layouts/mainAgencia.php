@@ -7,10 +7,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\assets\PSCssAsset;
 
 AppAsset::register($this);
-PSCssAsset::register($this);
+
 
 $this->title = 'Agencia';
 ?>
@@ -44,32 +43,56 @@ $this->title = 'Agencia';
             ]);
             ;
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
+                //'options' => ['class' => 'navbar-nav navbar-right'],
+                'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/agencia/index']],
-                    ['label' => 'Choferes', 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle', 'items' => [
+                    [
+                        'label' => 'Choferes',
+                        'items' => [
                             ['label' => 'Nuevo', 'url' => ['/agencia/alta_chofer_agencia']],
-                            //DatePicker
-                            //['label' => 'Actualizar', 'url' => ['/agencia/actualizar_chofer_agencia']],
+                            '<li class="divider"></li>',
                             ['label' => 'Listar Todos', 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],],
-                    ['label' => 'Telefonistas', 'items' => [
+                        ],
+                    ],
+                    //['label' => 'Choferes', 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle', 'items' => [
+                    //DatePicker
+                    //['label' => 'Actualizar', 'url' => ['/agencia/actualizar_chofer_agencia']],
+                    //],],
+                    //['label' => 'Telefonistas', 'items' => [
+                    [
+                        'label' => 'Telefonistas',
+                        'items' => [
                             ['label' => 'Nuevo', 'url' => ['/agencia/alta_telefonista_agencia'], 'class' => 'dropdown-toggle'],
-                            //DatePicker                            
-                            //['label' => 'Actualizar', 'url' => ['/agencia/actualizar_recepcionista_agencia']],
+                            '<li class="divider"></li>',
                             ['label' => 'Listar Todos', 'url' => ['/agencia/listar_recepcionistas_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],],
-                    ['label' => 'Vehículos', 'items' => [
+                        ],
+                    ],
+                    //DatePicker                            
+                    //['label' => 'Actualizar', 'url' => ['/agencia/actualizar_recepcionista_agencia']],
+                    //],],
+                    [
+                        'label' => 'Vehiculos',
+                        'items' => [
                             ['label' => 'Nuevo', 'url' => ['/agencia/alta_vehiculo_agencia'], 'class' => 'dropdown-toggle'],
+                            '<li class="divider"></li>',
                             ['label' => 'Actualizar', 'url' => ['/agencia/actualizar_vehiculo_agencia'], 'class' => 'dropdown-toggle'],
+                            '<li class="divider"></li>',
                             ['label' => 'Listar Todos', 'url' => ['/agencia/listar_vehiculo_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],],
-                    ['label' => 'Viajes', 'items' => [
+                        ],
+                    ],
+                    [
+                        'label' => 'Viajes',
+                        'items' => [
                             ['label' => 'Listar Turno Mañana', 'url' => ['/agencia/listar_viajes_turno_maniana_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            '<li class="divider"></li>',
                             ['label' => 'Listar Turno Tarde', 'url' => ['/agencia/listar_viajes_turno_tarde_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            '<li class="divider"></li>',
                             ['label' => 'Listar Turno Noche', 'url' => ['/agencia/listar_viajes_turno_noche_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            '<li class="divider"></li>',
                             ['label' => 'Listar Todos', 'url' => ['/agencia/listar_viajes_totales_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],],
+                        ],
+                    ],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]
