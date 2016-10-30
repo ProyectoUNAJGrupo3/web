@@ -7,10 +7,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\assets\PSCssAsset;
 
 AppAsset::register($this);
-PSCssAsset::register($this);
 
 $this->title = 'Chofer';
 ?>
@@ -20,11 +18,11 @@ $this->title = 'Chofer';
     <head>
         <meta charset="<?= Yii::$app->charset ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <?= Html::csrfMetaTags() ?>
+            <?= Html::csrfMetaTags() ?>
         <title>
-            <?= Html::encode($this->title) ?>
+        <?= Html::encode($this->title) ?>
         </title>
-        <?php $this->head() ?>
+<?php $this->head() ?>
     </head>
     <body>
         <?php
@@ -44,13 +42,17 @@ $this->title = 'Chofer';
             ]);
             ;
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
+                'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['chofer/index']],
-                    ['label' => 'Viajes', 'items' => [
+                    [
+                        'label' => 'Viajes',
+                        'items' => [
                             ['label' => 'Viajes Hechos', 'url' => ['#'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            '<li class="divider"></li>',
                             ['label' => 'Listar Todos', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],],
+                        ],
+                    ],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]
@@ -75,7 +77,7 @@ $this->title = 'Chofer';
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
-                <?= $content ?>
+<?= $content ?>
             </div>
         </div>
 
@@ -86,7 +88,7 @@ $this->title = 'Chofer';
             </div>
         </footer>
 
-        <?php $this->endBody() ?>
+<?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

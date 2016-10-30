@@ -1,8 +1,11 @@
 <?php
-namespace app\models;
-include('Operaciones.php');
+namespace app\models\CapaServicio;
 use Yii;
 use yii\base\Model;
+use app\models\CapaServicio\ServicioBD\GetInfo;
+use app\models\CapaServicio\ServicioBD\Alta;
+use app\models\CapaServicio\ServicioBD\Baja;
+use app\models\CapaServicio\ServicioBD\Modificacion;
 
 /**
  * AgenciaModelo short summary.
