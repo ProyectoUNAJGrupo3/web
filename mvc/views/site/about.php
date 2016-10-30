@@ -7,7 +7,7 @@ AppAsset::register($this);
 $this->title = 'Quiénes Somos';
 ?>
 <div class="site-about">
-    <div id="contenedor-nuestro-clientes">
+    <div id="contenedor-quienes-somos">
         <div id="sub-contenedor">
             <div id="imagen-header" src="#" alt="Imagen">
             </div>
