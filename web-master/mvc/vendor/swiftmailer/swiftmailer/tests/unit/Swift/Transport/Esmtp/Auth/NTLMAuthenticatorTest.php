@@ -94,12 +94,12 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticatorTest extends \SwiftMailerTestC
         );
     }
 
-    public function testGetDomainAndusername()
+    public function testGetDomainAndUsername()
     {
         $username = "DOMAIN\user";
 
         $login = $this->_getAuthenticator();
-        list($domain, $user) = $this->_invokePrivateMethod('getDomainAndusername', $login, array($username));
+        list($domain, $user) = $this->_invokePrivateMethod('getDomainAndUsername', $login, array($username));
 
         $this->assertEquals('DOMAIN', $domain,
             '%s: the fetched domain did not match'
@@ -109,12 +109,12 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticatorTest extends \SwiftMailerTestC
         );
     }
 
-    public function testGetDomainAndusernameWithExtension()
+    public function testGetDomainAndUsernameWithExtension()
     {
         $username = "domain.com\user";
 
         $login = $this->_getAuthenticator();
-        list($domain, $user) = $this->_invokePrivateMethod('getDomainAndusername', $login, array($username));
+        list($domain, $user) = $this->_invokePrivateMethod('getDomainAndUsername', $login, array($username));
 
         $this->assertEquals('domain.com', $domain,
             '%s: the fetched domain did not match'
@@ -124,12 +124,12 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticatorTest extends \SwiftMailerTestC
         );
     }
 
-    public function testGetDomainAndusernameWithAtSymbol()
+    public function testGetDomainAndUsernameWithAtSymbol()
     {
         $username = 'user@DOMAIN';
 
         $login = $this->_getAuthenticator();
-        list($domain, $user) = $this->_invokePrivateMethod('getDomainAndusername', $login, array($username));
+        list($domain, $user) = $this->_invokePrivateMethod('getDomainAndUsername', $login, array($username));
 
         $this->assertEquals('DOMAIN', $domain,
             '%s: the fetched domain did not match'
@@ -139,12 +139,12 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticatorTest extends \SwiftMailerTestC
         );
     }
 
-    public function testGetDomainAndusernameWithAtSymbolAndExtension()
+    public function testGetDomainAndUsernameWithAtSymbolAndExtension()
     {
         $username = 'user@domain.com';
 
         $login = $this->_getAuthenticator();
-        list($domain, $user) = $this->_invokePrivateMethod('getDomainAndusername', $login, array($username));
+        list($domain, $user) = $this->_invokePrivateMethod('getDomainAndUsername', $login, array($username));
 
         $this->assertEquals('domain.com', $domain,
             '%s: the fetched domain did not match'

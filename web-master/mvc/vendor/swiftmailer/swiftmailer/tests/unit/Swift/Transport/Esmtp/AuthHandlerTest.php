@@ -15,7 +15,7 @@ class Swift_Transport_Esmtp_AuthHandlerTest extends \SwiftMailerTestCase
         $this->assertEquals('AUTH', $auth->getHandledKeyword());
     }
 
-    public function testusernameCanBeSetAndFetched()
+    public function testUsernameCanBeSetAndFetched()
     {
         $auth = $this->_createHandler(array());
         $auth->setUsername('jack');
@@ -81,7 +81,7 @@ class Swift_Transport_Esmtp_AuthHandlerTest extends \SwiftMailerTestCase
         $auth->afterEhlo($this->_agent);
     }
 
-    public function testAuthenticatorsAreNotUsedIfNousernameSet()
+    public function testAuthenticatorsAreNotUsedIfNoUsernameSet()
     {
         $a1 = $this->_createMockAuthenticator('PLAIN');
         $a2 = $this->_createMockAuthenticator('LOGIN');

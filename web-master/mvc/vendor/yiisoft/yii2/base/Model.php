@@ -544,8 +544,8 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      * ```php
      * [
      *     'username' => [
-     *         'username is required.',
-     *         'username must contain only word characters.',
+     *         'Username is required.',
+     *         'Username must contain only word characters.',
      *     ],
      *     'email' => [
      *         'Email address is invalid.',

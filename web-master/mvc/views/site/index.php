@@ -16,10 +16,10 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use app\assets\AppAssetWebSite;
 use app\assets\AppAsset;
-use app\assets\PSCssAsset;
-
-PSCssAsset::register($this);
+AppAsset::register($this);
+AppAssetWebSite::register($this);
 /* @var $this yii\web\View */
 $this->title = 'Service Remis';
 ?>
@@ -32,10 +32,6 @@ $this->title = 'Service Remis';
 
         <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>-->
-
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
-
     <!--<div class="jumbotron">
         <h1>Congratulations!</h1>
 
@@ -57,7 +53,12 @@ $this->title = 'Service Remis';
             <strong>
                 <p>
                     Por medio de la aplicaci&oacute;n usted podr&aacute; solicitar el servicio de remis prestado por las agencias.
-                    Para ello, usted contar&aacute; con la posiblidad de listar las agenias m&aacute;s cercanas y podr&aacute; pedir una prestaci&oacute;n
+                    Para ello, udfdsfdsfdsfdsfdsfdsfdsfdfd
+                    
+                    f
+                    fds
+                    dsf
+                    dssted contar&aacute; con la posiblidad de listar las agenias m&aacute;s cercanas y podr&aacute; pedir una prestaci&oacute;n
                     mediante la opci&oacute;n "Solicitar Servicio Remiseria".
                 </p>
             </strong>
@@ -65,15 +66,35 @@ $this->title = 'Service Remis';
 
         <div id="bar-buttons">
             <div id="btn-bar">
-                <?= Html::button('Solicitar Servicio Remiseria', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-solcitar-remis']) ?>
-                <?= Html::button('Listar Remiserias', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-ver-remiserias']) ?>
-                <?= Html::button('Obtener ubicaci&oacute;n en el Mapa', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-obtener-ubicacion-en-el-mapa']) ?>
+                <?= Html::button('Solicitar Servicio Remiseria', ['class' => 'btn btn-primary','disabled' => true, 'name' => 'contact-button', 'id' => 'btn-solcitar-remis']) ?>
+                <?= Html::button('Listar Remiserias', ['class' => 'btn btn-primary disable','disabled' => true, 'name' => 'contact-button', 'id' => 'btn-ver-remiserias']) ?>
+                <?= 
+$this->registerJs('$(document).ready(function () {
+            initMap(true);
+            $("#btn-ver-remiserias").on("click", function() {getRemiserias(true)});
+
+            
+            });', \yii\web\View::POS_READY);
+                ?>
+                <label id ="distancia" class="display:none"> <strong>
+                <p>
+                    Distancia : 
+                </p>
+
+            </strong>
+                    </label>
             </div>
+             
+            
 
-
-            <div id="mapHome"></div>
-            <div id="dvMapHome">
-                <?php
+            <div id="mapHome">
+                <div id="map-Index">
+                    <div id="map"></div>
+                </div>
+                <input id="pac-input" class="controls" type="text" placeholder="Busca tu partido / barrio " />
+            </div>
+            <!--            <div id="dvMapHome">
+                
                 $coord = new LatLng(['lat' => 39.720089311812094, 'lng' => 2.91165944519042]);
                 $map = new Map([
                     'center' => $coord,
@@ -164,7 +185,7 @@ $this->title = 'Service Remis';
 // Display the map -finally :)
                 echo $map->display()
                 ?>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

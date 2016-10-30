@@ -4,7 +4,7 @@ namespace Faker\Provider\lt_LT;
 
 class Internet extends \Faker\Provider\Internet
 {
-    protected static $usernameFormats = array(
+    protected static $userNameFormats = array(
         '{{lastNameMale}}.{{firstNameMale}}',
         '{{lastNameFemale}}.{{firstNameFemale}}',
         '{{firstNameMale}}##',
