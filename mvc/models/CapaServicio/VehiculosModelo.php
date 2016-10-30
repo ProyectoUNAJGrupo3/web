@@ -1,12 +1,11 @@
 <?php
 namespace app\models\CapaServicio;
-include('ServicioBD/Operaciones.php');
 use Yii;
 use yii\base\Model;
+use app\models\CapaServicio\ServicioBD\GetInfo;
 use app\models\CapaServicio\ServicioBD\Alta;
 use app\models\CapaServicio\ServicioBD\Baja;
 use app\models\CapaServicio\ServicioBD\Modificacion;
-use app\models\CapaServicio\ServicioBD\GetInfo;
 
 /**
  * VehiculosModelo short summary.
@@ -78,6 +77,7 @@ class VehiculosModelo extends Model
     public function GetInfoVehiculos($VehiculoID, $Matricula, $Modelo,$Marca, $Estado, $FechaAltaDesde, $FechaAltaHasta, $AgenciaID, $SoloDisponibles)
     {
         $this->Parametros = [
+            'VehiculoID'=> $VehiculoID,
             'Matricula'=> $Matricula,
             'Modelo'=> $Modelo,
             'Marca'=> $Marca,

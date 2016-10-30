@@ -14,7 +14,6 @@ class PSFormularioSolicitudRegistrarAgencia extends Model {
     public $apellidoDuenio;
     public $dniDuenio;
     public $email;
-    
 
     public function rules() {
         return[
@@ -25,12 +24,21 @@ class PSFormularioSolicitudRegistrarAgencia extends Model {
             ['nombreAgencia', 'required', 'message' => 'Campo obligatorio'],
             ['telefonoAgencia', 'required', 'message' => 'Campo obligatorio'],
             ['numeroClienteServcio', 'required', 'message' => 'Campo obligatorio'],
-            ['direccionAgencia', 'required', 'message' => 'Campo obligatorio'],
-            ['noombreDuenio', 'required', 'message' => 'Campo obligatorio'],
+            ['nombreDuenio', 'required', 'message' => 'Campo obligatorio'],
             ['apellidoDuenio', 'required', 'message' => 'Campo obligatorio'],
             ['dniDuenio', 'required', 'message' => 'Campo obligatorio'],
-            ['email', 'required', 'message' => 'Campo obligatorio'],
-            
+            ['nombreAgencia', 'match', 'pattern' => '/^[a-zA-Z0-9_ ]*$/', 'message' => 'Ingrese solo letras'],
+            ['nombreAgencia', 'match', 'pattern' => '/^.{3,50}$/', 'message' => 'Ingrese como mínimo 3 y como máximo 50 letras'],
+            ['telefonoAgencia', 'match', 'pattern' => '/^[1-9]\d*$/', 'message' => 'Ingrese solo números'],
+            ['telefonoAgencia', 'match', 'pattern' => '/^\d{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
+            ['direccionAgencia', 'required', 'message' => 'Campo obligatorio'],
+            ['nombreDuenio', 'match', 'pattern' => '/^[a-zA-Z]*$/', 'message' => 'Ingrese solo letras'],
+            ['nombreDuenio', 'match', 'pattern' => '/^.{3,50}$/', 'message' => 'Ingrese como mínimo 3 y como máximo 50 letras'],
+            ['apellidoDuenio', 'match', 'pattern' => '/^[a-zA-Z]*$/', 'message' => 'Ingrese solo letras'],
+            ['apellidoDuenio', 'match', 'pattern' => '/^.{3,50}$/', 'message' => 'Ingrese como mínimo 3 y como máximo 50 letras'],
+            ['dniDuenio', 'match', 'pattern' => '/^[1-9]\d*$/', 'message' => 'Ingrese solo números'],
+            ['dniDuenio', 'match', 'pattern' => '/^\d{8,12}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
+            ['email', 'email', 'message' => 'Email no válido'],
         ];
     }
 

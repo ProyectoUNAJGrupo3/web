@@ -3,9 +3,10 @@
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\assets\PSCssAsset;
-
-PSCssAsset::register($this);
+use app\assets\AppAssetCliente;
+use app\assets\AppAsset;
+AppAsset::register($this);
+AppAssetCliente::register($this);
 ?>
 <!--<div class="container">
     <section id="main">

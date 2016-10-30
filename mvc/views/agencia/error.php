@@ -5,7 +5,11 @@
 /* @var $exception Exception */
 
 use yii\helpers\Html;
+use app\assets\AppAsset;
+use app\assets\AppAssetAgencia;
 
+AppAssetAgencia::register($this);
+AppAsset::register($this);
 $this->title = $name;
 ?>
 <div class="site-error">

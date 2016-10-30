@@ -23,10 +23,9 @@ class AltaViajeManualModel extends Model {
             ['apellido', 'match', 'pattern' => '/^.{3,50}$/', 'message' => 'Ingrese como mínimo 3 y como máximo 50 letras'],
             ['origen', 'required', 'message' => 'Campo obligatorio'],
             ['origen', 'match', 'pattern' => '/^[0-9]\d*$/', 'message' => 'Ingrese solo números'],
-            ['origen', 'match', 'pattern' => '/^.{8,8}$/', 'message' => 'DNI inválido'],
             ['destino', 'required', 'message' => 'Campo obligatorio'],
-            ['destino', 'match', 'pattern' => '/^[0-9]\d*$/', 'message' => 'Ingrese solo números'],
-            ['destino', 'match', 'pattern' => '/^.{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
+            //['destino', 'match', 'pattern' => '/^[0-9]\d*$/', 'message' => 'Ingrese solo números'],
+            //['destino', 'match', 'pattern' => '/^.{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
             ['listadoChoferes', 'required', 'message' => 'Campo obligatorio'],
             ['listadoCoches', 'required', 'message' => 'Campo obligatorio'],
         ];

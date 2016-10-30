@@ -2,7 +2,8 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
-
+use app\assets\AppAsset;
+AppAsset::register($this);
 $this->title = 'Quiénes Somos';
 ?>
 <div class="site-about">

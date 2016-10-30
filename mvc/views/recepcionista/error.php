@@ -3,7 +3,8 @@
 /* @var $name string */
 /* @var $message string */
 /* @var $exception Exception */
-
+use app\assets\AppAsset;
+AppAsset::register($this);
 use yii\helpers\Html;
 
 $this->title = $name;
