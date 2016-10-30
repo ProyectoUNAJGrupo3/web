@@ -130,7 +130,9 @@ a.desc:after {
   font-size: 13px;
   font-weight: 300;
 }
-
+#map-Index{
+	width: 100%;
+}
 #map {	
 	height:400px 
 }
