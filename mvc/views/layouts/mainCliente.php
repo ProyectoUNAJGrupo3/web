@@ -6,12 +6,13 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
-use app\assets\PSCssAsset;
-use app\models\TipoUsuario;
 
-AppAsset::register($this);
-PSCssAsset::register($this);
+use app\models\TipoUsuario;
+use app\assets\AppAssetCliente;
+use app\assets\AppAssetWebSite;
+
+AppAssetWebSite::register($this);
+AppAssetCliente::register($this);
 
 $this->title = 'Usuario';
 ?>
@@ -46,12 +47,16 @@ $this->title = 'Usuario';
             ;
 
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
+                'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/cliente/index']],
-                    ['label' => 'Viajes', 'url' => ['#'], 'items' => [
+                    [
+                        'label' => 'Viajes',
+                        'items' => [
                             ['label' => 'Ver Historial', 'url' => ['/cliente/listar_hisrotial_viajes'],],
+                            '<li class="divider"></li>',
                             ['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
+                            '<li class="divider"></li>',
                             ['label' => 'Calificar Servicio', 'url' => ['#'],],
                         ],
                     ],

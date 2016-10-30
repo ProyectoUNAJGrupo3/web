@@ -3,10 +3,12 @@
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\assets\PSCssAsset;
 use yii\jui\DatePicker;
+use app\assets\AppAsset;
+use app\assets\AppAssetAgencia;
 
-PSCssAsset::register($this);
+AppAssetAgencia::register($this);
+AppAsset::register($this);
 ?>
 <div class="container">
     <section id="main">
