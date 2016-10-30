@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\assets\AppAsset;
 use app\assets\AppAssetAgencia;
-use yii\grid\GridView;
 AppAssetAgencia::register($this);
 AppAsset::register($this);
 ?>
@@ -117,20 +116,3 @@ AppAsset::register($this);
         </article>
     </section>
 </div>
-<?=
- GridView::widget([
-'dataProvider' => $model->dataProvider,
-'columns' => [
-        'ClienteNombre',
-        'OrigenDireccion',
-        'DestinoDireccion',
-        'ChoferNombre',
-        'VehiculoMarca',
-        'VehiculoModelo',
-        'FechaSalida',
-        'ImporteTotal',
-        'Distancia',
-        'ViajeTipo',
-        'Estado',
-    ],]);
-?>
