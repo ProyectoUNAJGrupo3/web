@@ -7,15 +7,14 @@ use yii\base\Model;
 use app\models\CapaServicio\ViajesModelo;
 use yii\data\ArrayDataProvider;
 
-class ListaViajesTotalesModel extends Model {
-
+class ViajesGridModel extends Model {
     public $dataProvider;
 
-    public function getDataProvider() {
-                $obj = new ViajesModelo();
+    public function setDataProvider() {
+        $obj = new ViajesModelo();
         $this->dataProvider = new ArrayDataProvider([
-    'allModels' => $obj->GetInfoViajes(-1,-1,-1,-1,-1,-1,-1,"","","","",-1,"","","","","",-1,-1,-1)
-]);
+        'allModels' => $obj->GetInfoViajes(-1,-1,-1,-1,-1,-1,-1,"","","","",-1,"","","","","",-1,-1,-1)
+        ]);
         return true;
     }
 
