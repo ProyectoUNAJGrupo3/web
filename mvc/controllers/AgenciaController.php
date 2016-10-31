@@ -22,7 +22,7 @@ use app\models\Agencia\ListaVehiculoModel;
 use app\models\Agencia\ListaViajesTurnoManianaModel;
 use app\models\Agencia\ListaViajesTurnoTardeModel;
 use app\models\Agencia\ListaViajesTurnoNocheModel;
-use app\models\Agencia\ListaViajesTotalesModel;
+use app\models\Agencia\ViajesGridModel;
 
 class AgenciaController extends Controller {
 
@@ -160,7 +160,15 @@ class AgenciaController extends Controller {
     }
 
     public function actionListar_viajes_totales_agencia() {
-        $model = new ListaViajesTotalesModel();
+
+        $model = new ViajesGridModel();
+        $model->setDataProvider();
+        return $this->render("listaViajesTotales", ['model' => $model]);
+    }
+    public function actionGetTarifa() {
+
+        $model = new ViajesGridModel();
+        $model->setTarifa();
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
 }

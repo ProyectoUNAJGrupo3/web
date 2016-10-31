@@ -5,7 +5,9 @@
 /* @var $exception Exception */
 
 use yii\helpers\Html;
+use app\assets\AppAsset;
 
+AppAsset::register($this);
 $this->title = $name;
 ?>
 <div class="site-error">
@@ -13,13 +15,13 @@ $this->title = $name;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+<?= nl2br(Html::encode($message)) ?>
     </div>
 
     <p>
     <div class="body">
-        <div id="contenedor">
-            <div id="cartel"><p>
+        <div id="contenedor-cliente">
+            <div id="cartel-cliente"><p>
                 <h1 id="warning">Warning</h1>
                 <img src="img/warning.jpg">
                 <h1 id="acceso-denegado">Acceso Denegado</h1>
