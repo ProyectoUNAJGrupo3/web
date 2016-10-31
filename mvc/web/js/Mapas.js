@@ -36,25 +36,51 @@ function geocodeResult(results, status) {
         alert("Geocoding no tuvo éxito debido a: " + status);
     }
 };
+var remoMarks = [];
+function clearRemo() {
+    for (var i = 0; i < remoMarks.length; i++) {
+        remoMarks[i].setMap(null);
+    }
+    remoMarks = [];
+
+}
 
 function getRemiserias(Ubicacion) {
+    clearRemo()
+    
     var selected = marcadores[0];
     remos = [{ lat: -34.772015, lng: -58.264468 }, { lat: -34.773216, lng: -58.270884 }, { lat: -34.776670, lng: -58.274574 }];
     for (var i = 0; i < remos.length; i++) {
-        var remiseria = remos[i];
+
         var remo = new google.maps.Marker({
-            position: remiseria,
-            map: map,
-            title: 'otro string!' //otra info
-          });
-        infoWindow = new google.maps.InfoWindow({
-            content: "<h3>Ubicacion Centrar</h3><p>Debería ir alguna data.</p>" // Deberiamos llenar esto con data que viene de la base sobre la remiseria
-        });
-        remo.addListener('click', function (event) { // hace cualquier cosa 
-              //infoWindow.setPosition(event.latLng)
-            infoWindow.open(map, this)//ow
-        });
-        remo.setMap(map);
+                position: remos[i],
+                map: map,
+                title: 'otro string!',//otra info
+                animation: google.maps.Animation.DROP
+            });
+            infoWindow = new google.maps.InfoWindow({
+                content: "<h3>Ubicacion Centrar</h3><p>Debería ir alguna data.</p>" // Deberiamos llenar esto con data que viene de la base sobre la remiseria
+            });
+            var prevMarker = undefined;
+            remo.addListener('click', function (event) { // hace cualquier cosa 
+                //infoWindow.setPosition(event.latLng)
+                if (prevMarker != undefined && prevMarker != this) {
+                    prevMarker.setAnimation(null);
+                    prevMarker.setIcon('http://maps.google.com/mapfiles/marker.png');
+                } else if (prevMarker == this) {
+                    prevMarker = undefined;
+                    this.setAnimation(null);
+                    this.setIcon('http://maps.google.com/mapfiles/marker.png');
+                    return;
+                }
+                this.setAnimation(google.maps.Animation.BOUNCE);
+                this.setIcon('http://maps.google.com/mapfiles/marker_orange.png');
+                infoWindow.open(map, this)//ow
+                prevMarker = this;
+            });
+            remo.setIcon('http://maps.google.com/mapfiles/marker.png');
+            //remo.setMap(map);
+            remoMarks.push(remo);
 
        }
 }
