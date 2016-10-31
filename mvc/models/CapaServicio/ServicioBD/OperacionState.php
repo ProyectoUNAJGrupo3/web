@@ -1,5 +1,5 @@
 <?php
-namespace app\models;
+namespace app\models\CapaServicio\ServicioBD;
 /**
  * OperacionState short summary.
  *

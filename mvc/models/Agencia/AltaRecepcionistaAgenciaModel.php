@@ -2,8 +2,9 @@
 
 namespace app\models\Agencia;
 
+use yii;
 use yii\base\Model;
-
+use app\models\CapaServicio\PersonasModelo;
 class AltaRecepcionistaAgenciaModel extends Model {
 
     public $nombre;
@@ -11,6 +12,9 @@ class AltaRecepcionistaAgenciaModel extends Model {
     public $dni;
     public $telefono;
     public $direccion;
+    public $usuario;
+    public $contrasenia;
+    public $confirmarContrasenia;
 
     public function rules() {
         return[
@@ -24,12 +28,24 @@ class AltaRecepcionistaAgenciaModel extends Model {
             ['apellido', 'match', 'pattern' => '/^.{3,50}$/', 'message' => 'Ingrese como mínimo 3 y como máximo 50 letras'],
             ['dni', 'required', 'message' => 'Campo obligatorio'],
             ['dni', 'match', 'pattern' => '/^[1-9]\d*$/', 'message' => 'Ingrese solo números'],
-            ['dni', 'match', 'pattern' => '/^.{8,8}$/', 'message' => 'DNI inválido'],
+            ['dni', 'match', 'pattern' => '/^.{8,8}$/', 'message' => 'Documento inválido'],
             ['telefono', 'required', 'message' => 'Campo obligatorio'],
             ['telefono', 'match', 'pattern' => '/^[0-9]\d*$/', 'message' => 'Ingrese solo números'],
             ['telefono', 'match', 'pattern' => '/^\d{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
             ['direccion', 'required', 'message' => 'Campo obligatorio'],
+            ['usuario', 'required', 'message' => 'Campo obligatorio'],
+            ['contrasenia', 'required', 'message' => 'Campo obligatorio'],
+            ['contrasenia', 'match', 'pattern' => '/^.{6,50}$/', 'message' => 'Ingrese como mínimo 6 caracteres y como máximo 50 caracteres'],
+            ['confirmarContrasenia', 'required', 'message' => 'Campo obligatorio'],
+            ['confirmarContrasenia', 'match', 'pattern' => '/^.{6,50}$/', 'message' => 'Ingrese como mínimo 6 y como máximo 50 caracteres'],
+            ['contrasenia', 'compare', 'compareAttribute'=>'confirmarContrasenia', 'on'=>'register','message'=>'Las constraseñas deben Coincidir'],
         ];
     }
-
+    public function registrarrecepcionista()
+    {
+        $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
+        $app = Yii::$app->user->identity->AgenciaID;
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'",null,"''","''","'0'","'0'","'2'","'$this->dni'","'$app'"); //genera el alta del recepcionista y lo guarda
+        return true;
+    }
 }

@@ -36,18 +36,64 @@ function geocodeResult(results, status) {
         alert("Geocoding no tuvo éxito debido a: " + status);
     }
 };
+var remoMarks = [];
+function clearRemo() {
+    for (var i = 0; i < remoMarks.length; i++) {
+        remoMarks[i].setMap(null);
+    }
+    remoMarks = [];
 
-function initMap() {
+}
+
+function getRemiserias(Ubicacion) {
+    clearRemo()
+    
+    var selected = marcadores[0];
+    remos = [{ lat: -34.772015, lng: -58.264468 }, { lat: -34.773216, lng: -58.270884 }, { lat: -34.776670, lng: -58.274574 }];
+    for (var i = 0; i < remos.length; i++) {
+
+        var remo = new google.maps.Marker({
+                position: remos[i],
+                map: map,
+                title: 'otro string!',//otra info
+                animation: google.maps.Animation.DROP
+            });
+            infoWindow = new google.maps.InfoWindow({
+                content: "<h3>Ubicacion Centrar</h3><p>Debería ir alguna data.</p>" // Deberiamos llenar esto con data que viene de la base sobre la remiseria
+            });
+            var prevMarker = undefined;
+            remo.addListener('click', function (event) { // hace cualquier cosa 
+                //infoWindow.setPosition(event.latLng)
+                if (prevMarker != undefined && prevMarker != this) {
+                    prevMarker.setAnimation(null);
+                    prevMarker.setIcon('http://maps.google.com/mapfiles/marker.png');
+                } else if (prevMarker == this) {
+                    prevMarker = undefined;
+                    this.setAnimation(null);
+                    this.setIcon('http://maps.google.com/mapfiles/marker.png');
+                    return;
+                }
+                this.setAnimation(google.maps.Animation.BOUNCE);
+                this.setIcon('http://maps.google.com/mapfiles/marker_orange.png');
+                infoWindow.open(map, this)//ow
+                prevMarker = this;
+            });
+            remo.setIcon('http://maps.google.com/mapfiles/marker.png');
+            //remo.setMap(map);
+            remoMarks.push(remo);
+
+       }
+}
+
+function initMap(isindex) {
 
     var jsonDeLaBase = {
         ubicacionDefault: { lat: -34.7741908, lng: -58.2670426 },
         Remiserias: [{ lat: -34.772015, lng: -58.264468 }, { lat: -34.773216, lng: -58.270884 }, { lat: -34.776670, lng: -58.274574 }]
 
     }
-    if (map.mapTypeId != undefined) return;
-
+    if (map.mapTypeId != undefined && !isindex) return;
     map = new google.maps.Map(document.getElementById('map'), {
-        center: jsonDeLaBase.ubicacionDefault,
         zoom: 14,
         streetViewControl: false, // Todo en false para que no pueda
         overviewMapControl: false, // user el street view y esas cosas
@@ -55,7 +101,15 @@ function initMap() {
         mapTypeControl: false,
         panControl: false,
     });
-    // Create the search box and link it to the UI element.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            var marker = new google.maps.Marker(geolocate);
+            marker.setMap(map);
+            map.setCenter(geolocate);
+
+        })
+    }
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -83,7 +137,7 @@ function initMap() {
     // }
 
 
-    // if (navigator.geolocation) {
+    // if (navigator.geolocation) { navigator para obenter la geolocalizacion por html5 y no por la api
     //      var currentLocation=navigator.geolocation.getCurrentPosition(function (position){
 
     //      });
@@ -91,7 +145,7 @@ function initMap() {
     //     alert("La geoUbicacion no esta habilitada en este navegador.");
     //   }
 
-    var markers = [];
+    markers = [];
     searchBox.addListener('places_changed', function () {
         var places = searchBox.getPlaces();
 
@@ -128,27 +182,98 @@ function initMap() {
         });
         map.fitBounds(bounds);
     });
-    var marcadores = [];
-    google.maps.event.addListener(map, "rightclick", function (e) {
+    marcadores = [];
+    
+    if (isindex) {
+         directionsService = new google.maps.DirectionsService();
+         directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true })
+         service = new google.maps.DistanceMatrixService();
 
-        //latitud y longitud estan disponibles en el evento
-        var latLng = e.latLng;
-        marcadores.forEach(function (marker) {
-            marker.setMap(null);
+         directionsDisplay.addListener('directions_changed', function () {
+             distanceElement = $('#distancia');
+             distanceElement[0].innerText = 'Distancia : '+directionsDisplay.getDirections().routes[0].legs[0].distance.text;
+             distanceElement.show();
+             remoButton = $('#btn-ver-remiserias')[0];
+             remoButton.disabled= false;
+
         });
-        var searchBox = $('#pac-input');
-        var markerOptions = { position: latLng }
-        var marker = new google.maps.Marker(markerOptions);
-        marker.setMap(map);
-        marcadores.push(marker);
 
-        map.setCenter(latLng);
-        var geocoder = new google.maps.Geocoder();
-        geocodeLatLng(geocoder, map, latLng);
-        //$('#address').val();
+        directionsDisplay.setMap(map);
+        google.maps.event.addListener(map, "rightclick", function (e) {
+
+            //latitud y longitud estan disponibles en el evento
+            var latLng = e.latLng;
+            
+            var markerOptions = { position: latLng }
+            var marker = new google.maps.Marker(markerOptions);
+
+            marcadores.push(marker); // coloco la ubicacion del click en el array, despues decido que hacer si
+            var distance;
+            if (marcadores.length >= 2) {
+                if (marcadores.length > 2) 
+                    marcadores = marcadores.splice(1, 2);
+                
+                marcadores[0].setMap(null); // borra el marcador, poniendo visible=false tambien funciona, // TODO: encontrar manera de borrarlo de memoria
+                //la siguiente linea es inutil, encontre otras maneras mas piolas de caalcular distancia por otros servicios
+               // distance = google.maps.geometry.spherical.computeDistanceBetween(marcadores[0].position, marcadores[1].position).toFixed(2);
+                var request = { 
+                    origin: marcadores[0].position,
+                    destination: marcadores[1].position,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+                directionsService.route(request, function (response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response); // por defecto setea A y B
+                        //document.getElementById('distance').innerHTML = response.rows[0].elements[0].distance.text + ' km';
+                    } else {
+                        alert("Algo anda mal y no andubo ):");
+                    }
+                });
+
+                //dejo el codigo por las dudas 
+                //service.getDistanceMatrix({ // quiza no sea necesario esto !
+                //    origins: [marcadores[0].position],
+                //    destinations: [marcadores[1].position],
+                //    travelMode: google.maps.TravelMode.DRIVING,
+                //    unitSystem: google.maps.UnitSystem.METRIC,
+                //    avoidHighways: false,
+                //    avoidTolls: false
+                //}, function (response, status) {
+                //    if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                //        var distance = response.rows[0].elements[0].distance.text;
+                //        var duration = response.rows[0].elements[0].duration.text;
+ 
+                //    } else {
+                //        alert("Algo anda mal y no andubo ):");
+                //    }
+                //});
+            } else {
+                marker.setMap(map);
+            }
+        });
+    } else {
+        google.maps.event.addListener(map, "rightclick", function (e) {
+
+            //latitud y longitud estan disponibles en el evento
+            var latLng = e.latLng;
+            marcadores.forEach(function (marker) {
+                marker.setMap(null);
+            });
+            var searchBox = $('#pac-input');
+            var markerOptions = { position: latLng }
+            var marker = new google.maps.Marker(markerOptions);
+            marker.setMap(map);
+            marcadores.push(marker);
+
+            map.setCenter(latLng);
+            var geocoder = new google.maps.Geocoder();
+            geocodeLatLng(geocoder, map, latLng);
+            //$('#address').val();
 
 
-    });
+        });
+    }
+    
     function geocodeLatLng(geocoder, map, latLng) {// <--infowindow-->) {
         var latlng = latLng;
         $('#coordenadas').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
@@ -175,3 +300,21 @@ function initMap() {
     }
 
 };
+
+function calculateDistanceAndStuff(latLng) {
+    service.getDistanceMatrix({
+        origins: [marcadores[0].position],
+        destinations: [marcadores[1].position],
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.METRIC,
+        avoidHighways: false,
+        avoidTolls: false
+    }, function (response, status) {
+        if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+            distance = response.rows[0].elements[0].distance.text;
+
+        } else {
+            alert("Algo anda mal y no andubo ):");
+        }
+    });
+}

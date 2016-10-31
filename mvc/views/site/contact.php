@@ -6,9 +6,10 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
-use app\assets\PSCssAsset;
-
-PSCssAsset::register($this);
+use app\assets\AppAssetWebSite;
+use app\assets\AppAsset;
+AppAsset::register($this);
+AppAssetWebSite::register($this);
 
 
 $this->title = 'Contacto';

@@ -3,9 +3,11 @@
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\assets\PSCssAsset;
+use app\assets\AppAsset;
+use app\assets\AppAssetAgencia;
 
-PSCssAsset::register($this);
+AppAssetAgencia::register($this);
+AppAsset::register($this);
 ?>
 <!--<div class="container">
     <section id="main">
@@ -34,7 +36,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
 
                         <?php if (Yii::$app->session->hasFlash('Empleado creado con exito')): ?>
                             <div class="alert alert-success">
-                                Thank you for contacting us. We will respond to you as soon as possible.
+                                El empleado ha sido creado con exito
                             </div>
                             <p>
                                 Note that if you turn on the Yii debugger, you should be able
@@ -64,13 +66,19 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50', 'id' => 'apellido'])->label("Apellido <b id='asterisco'>*</b>"); ?>
                             <?= $form->field($model, 'dni')->input('text', ['maxlength' => '8', 'id' => 'dni'])->label("Documento <b id='asterisco'>*</b>"); ?>
                             <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20', 'id' => 'telefono'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'direccion')->textInput(['readonly' => true, 'id' => 'direccion'])->label("Direcci&oacute;n"); ?>
-                            <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
 
-                            <br><br>
+                            <b>
+                                <h3>
+                                    <u>Datos</u>
+                                    <u>Personales</u>
+                                </h3>
+                            </b>
+                            <?= $form->field($model, 'usuario')->textInput(['maxlength' => '50', 'id' => 'usuario'])->label("Usuario <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'contrasenia')->passwordInput(['maxlength' => '50', 'id' => 'contrasenia'])->label("Contrase&ntilde;a <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'confirmarContrasenia')->passwordInput(['maxlength' => '50', 'id' => 'confirmarContrasenia'])->label("Confirmar Contrase&ntilde;a <b id='asterisco'>*</b>"); ?>
 
 
-                            <?php ActiveForm::end(); ?>
+
                             <br>
                             <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>
                             <br>
@@ -79,7 +87,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>
-
+                        <?php ActiveForm::end(); ?>
                         <?php endif; ?>
                     </div>
                 </div>
