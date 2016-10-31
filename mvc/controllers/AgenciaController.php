@@ -83,7 +83,7 @@ class AgenciaController extends Controller {
         return $this->render('index');
     }
 
-//*************************************************************************//
+    //*************************************************************************//
     //******************************Alta**************************************//
 
     public function actionAlta_vehiculo_agencia() {
@@ -116,15 +116,15 @@ class AgenciaController extends Controller {
 
     /* Date Picker
      * public function actionActualizar_chofer_agencia() {
-      $model = new ActualizarChoferModel();
-      return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
-      } */
+    $model = new ActualizarChoferModel();
+    return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
+    } */
 
     /* DatePicker
      * public function actionActualizar_recepcionista_agencia() {
-      $model = new PSActualizacionDatosRecepcionistaModel();
-      return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
-      } */
+    $model = new PSActualizacionDatosRecepcionistaModel();
+    return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
+    } */
 
     //**************************************************************************//
     //******************************Listar**************************************//
@@ -163,12 +163,6 @@ class AgenciaController extends Controller {
 
         $model = new ViajesGridModel();
         $model->setDataProvider();
-        return $this->render("listaViajesTotales", ['model' => $model]);
-    }
-    public function actionGetTarifa() {
-
-        $model = new ViajesGridModel();
-        $model->setTarifa();
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
 }
