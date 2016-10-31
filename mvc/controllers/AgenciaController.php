@@ -165,4 +165,10 @@ class AgenciaController extends Controller {
         $model->setDataProvider();
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
+    public function actionGetTarifa() {
+
+        $model = new ViajesGridModel();
+        $model->setTarifa();
+        return $this->render("listaViajesTotales", ['model' => $model]);
+    }
 }
