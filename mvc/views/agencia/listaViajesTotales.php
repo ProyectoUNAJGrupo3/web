@@ -1,122 +1,75 @@
 <?php
-use yii\helpers\BaseHtml;
+
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use app\assets\AppAsset;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
+
 use app\assets\AppAssetAgencia;
 use yii\grid\GridView;
+use yii\helpers\BaseHtml;
+use yii\widgets\ActiveForm;
+use yii\bootstrap\Dropdown;
+use yii\helpers\ArrayHelper;
+
 AppAssetAgencia::register($this);
-AppAsset::register($this);
+/* @var $this yii\web\View */
+$this->title = 'RemisYa';
 ?>
-<!--<div class="container">
-    <section id="main">
-        <article>
-            <div id="page-single-main">-->
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
-<div class="site-contact">
-    <section id="main">
-        <article>
-            <div id="page-single-main">
-                <br />
-                <h1 id="title-form">
-                    <strong>Listado de Viajes Turno Totales</strong>
-                </h1>
-                <div class="container-form" id="contenedor-formulario">
-                    <h1>
-                        <?= Html::encode($this->title) ?>
-                    </h1>
-
-                    <?php if (Yii::$app->session->hasFlash('Usuario creado con exito')): ?>
-                    <div class="alert alert-success">
-                        Thank you for contacting us. We will respond to you as soon as possible.
-                    </div>
+<div class="row">
+    <div class="col-md-8">
+        <div id="btn-bar">
+            <?=
+        $this->registerJs('$(document).ready(function () {
+            initMap(true);
+            $("#btn-ver-remiserias").on("click", function() {getRemiserias(true)});
+            });', \yii\web\View::POS_READY);
+            ?>
+            <label id="distancia" class="display:none">
+                <strong>
                     <p>
-                        Note that if you turn on the Yii debugger, you should be able
-                        to view the mail message on the mail panel of the debugger.
-                        <?php if (Yii::$app->mailer->useFileTransport): ?>
-                        Because the application is in development mode, the email is not sent but saved as
-                        a file under
-                        <code>
-                            <?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?>
-                        </code>.
-                        Please configure the
-                        <code>useFileTransport</code>property of the
-                        <code>mail</code>
-                        application component to be false to enable email sending.
-                        <?php endif; ?>
+                        Distancia :
                     </p>
-                    <?php else: ?>
-                    <div>
-                        <h1>Ac&aacute; colocamos la grilla para listar veh&iacute;culos</h1>
 
-                        <table class="table table-striped table-hover ">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Column heading</th>
-                                    <th>Column heading</th>
-                                    <th>Column heading</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                </tr>
-                                <tr class="info">
-                                    <td>3</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                </tr>
-                                <tr class="success">
-                                    <td>4</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>5</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>6</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                </tr>
-                                <tr class="active">
-                                    <td>7</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                    <td>Column content</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id='botones-group'>
-                        <?= Html::submitButton('Ver', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
-                    </div>
-                    <?php endif; ?>
-                </div>
-        </article>
-    </section>
+                </strong>
+            </label>
+        </div>
+        <div id="mapHome" style="width:100%">
+            <div id="map-Index">
+                <div id="map"></div>
+            </div>
+            <input id="pac-input" class="controls" type="text" placeholder="Busca tu partido / barrio " />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <?php $form = ActiveForm::begin(); ?>
+        <b>
+            <h3>
+                Datos del viaje:
+            </h3>
+        </b>
+        <?= $form->field($model, 'Origen')->input("text", ['maxlength' => '50'])->label("Origen"); ?>
+        <?= $form->field($model, 'OrigenCoordenada')->hiddenInput(['id' => 'origencoordenada'])->label(false); ?>
+        <?= $form->field($model, 'Destino')->input("text", ['maxlength' => '50'])->label("Destino"); ?>
+        <?=
+        $form->field($model, 'DestinoCoordenada')->hiddenInput(['id' => 'destinocoordenada'])->label(false);
+        ?>
+        <div class="row">
+            <div class="col-md-8">
+                <?= $form->field($model, 'Distancia')->input("text", ['maxlength' => '50'])->label("Distancia"); ?>
+            </div>
+            <div class="col-md-4">
+                <?= Html::a('Calcular Tarifa', $model->setTarifa(), ['class'=>'btn btn-primary']) ?>
+            </div>
+        </div>
+        <?= $form->field($model, 'ImporteTotal')->input("text", ['maxlength' => '50'])->label("Importe total"); ?>
+        <?= $form->field($model, 'Chofer')->dropDownList($model->Chofer,['prompt'=>'Seleccione chofer'])?>
+        <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculo,['prompt'=>'Seleccione vehiculo'])?>
+    </div>
+    <?php ActiveForm::end(); ?>
 </div>
+
+    
 <?=
 GridView::widget([
 'dataProvider' => $model->dataProvider,

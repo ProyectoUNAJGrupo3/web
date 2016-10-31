@@ -8,6 +8,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\models\TipoUsuario;
 use app\assets\AppAssetWebSite;
+
 AppAssetWebSite::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -16,11 +17,11 @@ AppAssetWebSite::register($this);
     <head>
         <meta charset="<?= Yii::$app->charset ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <?= Html::csrfMetaTags() ?>
+            <?= Html::csrfMetaTags() ?>
         <title>
-            <?= Html::encode($this->title) ?>
+        <?= Html::encode($this->title) ?>
         </title>
-        <?php $this->head() ?>
+<?php $this->head() ?>
     </head>
     <body>
         <?php
@@ -47,7 +48,12 @@ AppAssetWebSite::register($this);
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'Quiénes Somos', 'url' => ['/site/about']],
                     ['label' => 'Contactarnos', 'url' => ['/site/contact']],
-                    ['label' => 'Registrarme', 'url' => ['/site/registro']], //boludez que agregue yo
+                    ['label' => 'Registrar',
+                        'items' => [
+                            ['label' => 'Usuario', 'url' => ['/site/registro'],],
+                            '<li class="divider"></li>',
+                            ['label' => 'Agencia', 'url' => ['/site/solicitud_registrar_agencia'],],
+                        ],],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]
@@ -71,7 +77,7 @@ AppAssetWebSite::register($this);
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
-                <?= $content ?>
+<?= $content ?>
             </div>
         </div>
 
@@ -82,7 +88,7 @@ AppAssetWebSite::register($this);
             </div>
         </footer>
 
-        <?php $this->endBody() ?>
+<?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>
