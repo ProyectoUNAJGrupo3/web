@@ -47,7 +47,7 @@ class AltaChoferAgenciaModel extends Model {
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
         $app = Yii::$app->user->identity->AgenciaID;
-        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","''","''","''","'0'","'0'","'3'","'$this->dni'","'$app'"); //genera el alta del chofer y lo guarda
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'",null,"''","''","'0'","'0'","'3'","'$this->dni'","'$app'"); //genera el alta del chofer y lo guarda
         return true;
     }
 
