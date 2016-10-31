@@ -40,7 +40,7 @@ class AltaChoferAgenciaModel extends Model {
             ['confirmarContrasenia', 'required','message'=>'Campo obligatorio'],
             ['confirmarContrasenia', 'match','pattern'=>'/^.{6,50}$/','message'=>'Ingrese como mínimo 6 caracteres'],
 
-            ['confirmarContrasenia', 'compare', 'compareAttribute'=>'contrasenia' , 'message'=>'Las constraseñas deben Coincidir'],
+            ['confirmarContrasenia', 'compare', 'compareAttribute'=>'contrasenia' ,'on'=>'register', 'message'=>'Las constraseñas deben Coincidir'],
         ];
     }
     public function registrarchofer()
