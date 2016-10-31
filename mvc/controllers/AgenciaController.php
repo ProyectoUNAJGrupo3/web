@@ -103,6 +103,9 @@ class AgenciaController extends Controller {
 
     public function actionAlta_telefonista_agencia() {
         $model = new AltaRecepcionistaAgenciaModel();
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarrecepcionista() === true)) {
+            Yii::$app->session->setFlash('Empleado creado con exito');
+        }
         return $this->render("altaTelefonista", ['model' => $model]);
     }
 
@@ -163,6 +166,12 @@ class AgenciaController extends Controller {
 
         $model = new ViajesGridModel();
         $model->setDataProvider();
+        return $this->render("listaViajesTotales", ['model' => $model]);
+    }
+    public function actionGetTarifa() {
+
+        $model = new ViajesGridModel();
+        $model->setTarifa();
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
 }
