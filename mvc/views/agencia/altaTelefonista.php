@@ -36,7 +36,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
 
                         <?php if (Yii::$app->session->hasFlash('Empleado creado con exito')): ?>
                             <div class="alert alert-success">
-                                Thank you for contacting us. We will respond to you as soon as possible.
+                                El empleado ha sido creado con exito
                             </div>
                             <p>
                                 Note that if you turn on the Yii debugger, you should be able
@@ -78,7 +78,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <?= $form->field($model, 'confirmarContrasenia')->passwordInput(['maxlength' => '50', 'id' => 'confirmarContrasenia'])->label("Confirmar Contrase&ntilde;a <b id='asterisco'>*</b>"); ?>
 
 
-                            <?php ActiveForm::end(); ?>
+
                             <br>
                             <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>
                             <br>
@@ -87,7 +87,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>
-
+                        <?php ActiveForm::end(); ?>
                         <?php endif; ?>
                     </div>
                 </div>
