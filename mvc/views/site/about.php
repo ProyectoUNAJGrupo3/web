@@ -19,7 +19,7 @@ $this->title = 'Quiénes Somos';
                 <h3>Nuestra Misi&oacute;n</h3>
                 <ul id="lista-mision">                    
                     <li>
-                        Desarrollar Software de Gesti&oacute;n Para Remiserias basado en las necesidades crecientes de los usuarios de remises como de empresarios del Rubro, utilizando para ello las mejores tecnolog&iacute;as disponibles.”
+                        Desarrollar Software de Gesti&oacute;n Para Remiserias basado en las necesidades crecientes de los usuarios de remises como de empresarios del Rubro, utilizando para ello las mejores tecnolog&iacute;as disponibles.
 
 En Remis Ya! consideramos que el Software de Gesti&oacute;n para remiserias se ha vuelto fundamental para la gesti&oacute;n y el control de operaciones de negocio del remis de todo tipo; desde los emprendimientos pequeños a mediana escala y para clientes finales que desean encontrar un servicio eficiente y seguro.
 
