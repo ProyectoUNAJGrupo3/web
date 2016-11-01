@@ -54,7 +54,7 @@ class AgenciaModelo //extends Model
 
         return $this->Agencia;
     }
-    public function ModificarAgencia($AgenciaID, $Nombre,$Direccion, $DireccionCoordenadas,$Telefono, $Email,  $Estado )
+    public function ModificarAgencia($AgenciaID, $Nombre,$Direccion, $DireccionCoordenadas,$Telefono, $Email,  $Estado)
     {
         $this->Parametros = [
                 'AgenciaID' => $AgenciaID,

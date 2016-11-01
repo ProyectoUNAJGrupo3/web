@@ -19,50 +19,59 @@ class TestEstrategia1 extends UnitTestCase
 {
 	public function testPersonas() //si el arg es "null" se puede poner el dato, si es "NULL" no poner (debido al constructor)
 	{		
-		/*
-		//PersonaABM($personaID, $nombre, $apellido, $usuario, $password, $telefono, $email, $direccion, $direccionCoordenadas, $direccionDefault, $direccionTipo, $estado, $rolID)
 		//constructor($personaID, $nombre, $apellido, $usuario, $password, $telefono, $email, $direccion, $direccionCoordenadas, $direccionDefault, $direccionTipo, $estado, $rolID, $documento, $agenciaID)
+		//constructor($personaID, $nombre, $apellido, $usuario, $password, $telefono, $email, $direccion, $direccionCoordenadas, $direccionDefault, $direccionTipo, $estado, $rolID, $documento, $agenciaID)
+		//RegistrarPersona($Nombre, $Apellido, $Usuario, $Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $Estado, $RolID, $Documento, $AgenciaID)
+		//ModificarPersona($PersonaID, $Nombre, $Apellido, $Usuario, $Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $DireccionTipo, $Estado, $RolID, $Documento, $AgenciaID)
+		//EliminarPersona($PersonaID)
+		//GetInfoPersonas($PersonaID, $Nombre, $Apellido, $Usuario, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $Estado, $RolID, $Documento, $AgenciaID)
 		
+		/*
 		$persona1 = new EstrategiaABM();
 		$persona1->setRegistrable(new PersonaABM(NULL, "'Fray'", "'El Colorado'", "'colo'", "'colo'", "'42105128'", "'elcolo@gmail.com'", "'casa'", "'88888578'", "'miauuu'", null, 0, 4, "'255555555'", ""));
 		$persona1->ejecutarRegistro();
 		$this->assertNotNull($persona1, "Registrar OK");	
-		
+		*/
 		//$persona2 = new EstrategiaABM();
 		//$persona2->setRegistrable(new PersonaABM(NULL, "'Guillermo'", "'guille'", "'Francella'", "'guille'", "'78787'", "'lanenaaaaaa@gmail.com'", "'Racing'", "'87915'", "'Capital Federal'", null, 0, 4));
 		//$persona2->ejecutar();
 		//$this->assertNotNull($persona2, 'registrar ok');			
 		
-		
+		/*
 		$persona1 = new EstrategiaABM();
-		$persona1->setModificable(new PersonaABM(269, "'Fray'", "'El Colorado'", "'elcolo'", "'elcolo'", "'42105128'", "'elcolo@gmail.com'", "'casa'", "'88888578'", "'miauuuuuuuuuuuuuuuu'", null, 0, 4, "'255555555'", ""));
+		$persona1->setModificable(new PersonaABM(0, "'Fray'", "'El Colorado'", "'elcolo'", "'elcolo'", "'42105128'", "'elcolo@gmail.com'", "'casa'", "'88888578'", "'miauuuuuuuuuuuuuuuu'", null, 0, 4, "'255555555'", ""));
 		$persona1->ejecutarModificacion();
 		$this->assertNotNull($persona1, "Modificar OK");
-		
+		*/
+		/*
 		$persona1 = new EstrategiaABM();
 		$persona1->setEliminable(new PersonaABM(254, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
 		$persona1->ejecutarEliminacion();
 		$this->assertNotNull($persona1, "Eliminar OK");	
+		*/
 		
+		/*
 		// GetInfoPersonas($PersonaID, $Nombre, $Apellido, $Usuario, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $Estado, $RolID, $Documento, $AgenciaID)
 		$persona1 = new EstrategiaABM();
-		$persona1->setInformable(new PersonaABM(268, "", "", "", NULL, "", "", "", "", NULL, NULL, "", "", "", NULL)); //NULL1=password, NULL2=direccionDefault, NULL3=direccionTipo, NULL4=agenciaID
+		$persona1->setInformable(new PersonaABM(269, "", "", "", NULL, "", "", "", "", NULL, NULL, "", "", "", NULL)); //NULL1=password, NULL2=direccionDefault, NULL3=direccionTipo, NULL4=agenciaID
 		$persona1->ejecutarInformacion();
 		$this->assertNotNull($persona1, "Informar OK");		
-		/*
+		*/
 	}
 		
 		public function testAgencias()
 		{
 			/*
-			//AgenciaABM($agenciaID, $nombre, $direccion, $direccionCoordenadas, $telefono, $email, $estado)
+			//function __construct($agenciaID, $nombre, $direccion, $direccionCoordenadas, $telefono, $email, $estado)
+			//RegistrarAgencia($Nombre, $Direccion, $DireccionCoordenadas , $Telefono, $Email, $Estado)   
+			//ModificarAgencia($AgenciaID, $Nombre,$Direccion, $DireccionCoordenadas,$Telefono, $Email,  $Estado )
+			//EliminarAgencia($AgenciaID)
+			//GetInfoAgencia($AgenciaID, $Nombre, $Direccion, $DireccionCoordenadas, $Telefono, $Email, $Estado)
 			
 			$agencia1 = new EstrategiaABM();
 			$agencia1->setRegistrable(new AgenciaABM(NULL, "'Agencia 11'", "'Barracas'", "'23111115111'", "'0980007700000'", "'11@gmail.com'", 0));
 			$agencia1->ejecutarRegistro();
-			$this->assertNotNull($agencia1, "Registrar ok");		
-			
-			
+			$this->assertNotNull($agencia1, "Registrar ok");					
 			
 			$agencia2 = new EstrategiaABM();
 			$agencia2->setModificable(new AgenciaABM(45, "'Remis Quilmes'", "'Yrigoyen 455'", "'244445555'", "'42545443'", "'remisquilmes@gmail.com'", 0));
@@ -200,7 +209,6 @@ class TestEstrategia1 extends UnitTestCase
 		public function testTarifas()
 		{
 			//function __construct($tarifaID, $comision, $agenciaID, $viajeMinimo, $kmMinimo, $precioKM, $estado)
-
 			//RegistrarTarifa($Comision, $AgenciaID, $ViajeMinimo, $KmMinimo, $PrecioKM, $Estado)  
 
 			/*
@@ -227,13 +235,13 @@ class TestEstrategia1 extends UnitTestCase
 			$this->assertNotNull($tarifas1 , "Eliminar ok");	
 			*/
 			
-			
+			/*
 			//GetInfoTarifas($TarifaID, $Comision, $AgenciaID,$ViajeMinimo, $KmMinimo, $PrecioKM, $Estado)
 			$tarifas1  = new EstrategiaABM();
 			$tarifas1 ->setInformable(new TarifasABM(9, null, null, null, null, null, null));
 			$tarifas1 ->ejecutarInformacion();
 			$this->assertNotNull($tarifas1 , "Informar ok");				
-			
+			*/
 		}			
 		
 }

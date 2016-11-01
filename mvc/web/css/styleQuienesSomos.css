@@ -14,6 +14,7 @@
     size:500px;
     position: relative;
     vertical-align: top;	
+
 }
 #imagen-header{
     color:black;
@@ -21,10 +22,29 @@
     font-size:40px;
 }
 #contenido{
+    color:black;
+
 }
 #lista-empresa{
+    color:cornflowerblue;
+    text-align: center;
+    font-size:17px;
 }
 #lista-mision{
+    color:cornflowerblue;
+    text-align: center;
+    font-size:17px;
+
 }
 #lista-plantel{	
+    color:cornflowerblue;
+    text-align: center;
+    font-size:17px;
+}
+#Servicios{
+    color:cornflowerblue;
+    text-align: initial;
+    font-size:17px;
+    font-family: sans-serif;
+
 }

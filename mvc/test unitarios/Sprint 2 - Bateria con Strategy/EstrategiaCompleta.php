@@ -71,16 +71,25 @@ class PersonaABM implements Registrable, Modificable, Eliminable, Informable
 	
 	public function registrar()
 	{	
-		$personasModelo = new PersonasModelo();	
-		$personasModelo->RegistrarPersona($this->nombre, $this->apellido, $this->usuario, $this->password, $this->telefono, $this->email, $this->direccion, $this->direccionCoordenadas, $this->direccionDefault, $this->estado, $this->rolID, $this->documento, $this->agenciaID);
-		echo $this->nombre . " es la nueva persona registrada. ";
-		//echo $this->documento . " es el DNI de la persona registrada. ";
-		//echo $this->agenciaID . " es agenciaID de la persona registrada. ";
+		//RegistrarPersona($Nombre, $Apellido, $Usuario, $Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $Estado, $RolID, $Documento, $AgenciaID)
+		
+		/*try {
+			throw new Exception('Unexpected PHP Error');
+		} 
+		catch (Exception $e) {
+			echo 'PERSONA YA REGISTRADA. ';
+		}*/
+		$personasModelo = new PersonasModelo();		
+		$personasModelo->RegistrarPersona($this->nombre, $this->apellido, $this->usuario, $this->password, $this->telefono, $this->email, $this->direccion, $this->direccionCoordenadas, $this->direccionDefault, $this->estado, $this->rolID, $this->documento, $this->agenciaID);		
+					
+		
+		echo " ", $this->nombre . " es la persona registrada. ";
+		echo $this->documento . " es el DNI de la persona. ";			
 	}	
 	
 	public function modificar()
 	{
-		
+		//ModificarPersona($PersonaID, $Nombre, $Apellido, $Usuario, $Password, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $DireccionDefault, $DireccionTipo, $Estado, $RolID, $Documento, $AgenciaID)
 		$personasModelo = new PersonasModelo();	
 		$personasModelo->ModificarPersona($this->personaID, $this->nombre, $this->apellido, $this->usuario,$this->password, $this->telefono, $this->email, $this->direccion, $this->direccionCoordenadas, $this->direccionDefault, $this->direccionTipo, $this->estado, $this->rolID, $this->documento, $this->agenciaID);
 		echo " La persona con ID: ", $this->personaID . " es la persona actualizada";		
@@ -88,14 +97,16 @@ class PersonaABM implements Registrable, Modificable, Eliminable, Informable
 
 	public function eliminar()
 	{
+		//EliminarPersona($PersonaID)
 		$personasModelo = new PersonasModelo();	
 		$personasModelo->EliminarPersona($this->personaID);
-		echo "La persona con ID: ", $this->personaID . " ha sido eliminada.";
+		echo " La persona con ID: ", $this->personaID . " ha sido eliminada.";
 		//echo " Informacion eliminada: ";
 		//print_r($personasModelo->GetInfoPersonas($this->personaID, $this->nombre, $this->apellido, $this->usuario, $this->telefono, $this->email, $this->direccion, $this->direccionCoordenadas, $this->estado, $this->rolID));		
 	}	
 	public function informar()
 	{
+		//GetInfoPersonas($PersonaID, $Nombre, $Apellido, $Usuario, $Telefono, $Email, $Direccion, $DireccionCoordenadas, $Estado, $RolID, $Documento, $AgenciaID)
 		$personasModelo = new PersonasModelo();	
 		echo " Informacion de persona solicitada: ";
 		print_r($personasModelo->GetInfoPersonas($this->personaID, $this->nombre, $this->apellido, $this->usuario, $this->telefono, $this->email, $this->direccion, $this->direccionCoordenadas, $this->estado, $this->rolID, $this->documento, $this->agenciaID));
@@ -126,12 +137,21 @@ class AgenciaABM implements Registrable, Modificable, Eliminable, Informable
 	
 	public function registrar()
 	{
+		//RegistrarAgencia($Nombre, $Direccion, $DireccionCoordenadas , $Telefono, $Email, $Estado)  
+		/*try {
+			throw new Exception('Unexpected PHP Error');
+					
+		} 
+		catch (Exception $e) {
+			echo 'AGENCIA YA REGISTRADA. ';
+		}	*/	
 		$agenciaModelo = new AgenciaModelo();		
-		$agenciaModelo->RegistrarAgencia($this->nombre, $this->direccion, $this->direccionCoordenadas, $this->telefono, $this->email, $this->estado);		 
-		echo $this->nombre . " es la nueva agencia registrada. "; 
+		$agenciaModelo->RegistrarAgencia($this->nombre, $this->direccion, $this->direccionCoordenadas, $this->telefono, $this->email, $this->estado);			
+		echo " ", $this->nombre . " es la agencia registrada. "; 
 	}
 	public function modificar()
 	{
+		//ModificarAgencia($AgenciaID, $Nombre,$Direccion, $DireccionCoordenadas,$Telefono, $Email,  $Estado )
 		$agenciaModelo = new AgenciaModelo();
 		$agenciaModelo->ModificarAgencia($this->agenciaID, $this->nombre, $this->direccion, $this->direccionCoordenadas, $this->telefono, $this->email, $this->estado);
 		echo " La agencia con ID: ", $this->agenciaID . " ha sido actualizada. ";
@@ -139,6 +159,7 @@ class AgenciaABM implements Registrable, Modificable, Eliminable, Informable
 
 	public function eliminar()
 	{
+		//EliminarAgencia($AgenciaID)
 		$agenciaModelo = new AgenciaModelo();	
 		$agenciaModelo->EliminarAgencia($this->agenciaID);
 		echo " La agencia con ID: ", $this->agenciaID . " ha sido eliminada. ";	
@@ -146,6 +167,7 @@ class AgenciaABM implements Registrable, Modificable, Eliminable, Informable
 	}		
 	public function informar()
 	{
+		//GetInfoAgencia($AgenciaID, $Nombre, $Direccion, $DireccionCoordenadas, $Telefono, $Email, $Estado)
 		$agenciaModelo = new AgenciaModelo();	
 		$agenciaModelo->GetInfoAgencia($this->agenciaID, $this->nombre, $this->direccion, $this->direccionCoordenadas, $this->telefono, $this->email, $this->estado);	
 		echo " Informacion de agencia solicitada: ";
@@ -155,8 +177,6 @@ class AgenciaABM implements Registrable, Modificable, Eliminable, Informable
 
 class ViajesABM implements Registrable, Modificable, Eliminable, Informable
 {
-	//public function RegistrarViaje($ChoferID, $VehiculoID, $TarifaID, $TurnoID, $AgenciaID, $PersonaID, $FechaEmision, $FechaSalida, $ViajeTipo, $OrigenCoordenadas, 
-	//$DestinoCoordenadas, $OrigenDireccion, $DestinoDireccion, $Comentario, $ImporteTotal, $Distancia, $Estado)
 	private $viajeID;
 	private $choferID;
 	private $vehiculoID;
@@ -208,8 +228,14 @@ class ViajesABM implements Registrable, Modificable, Eliminable, Informable
 	
 	public function registrar()
 	{
-		//RegistrarViaje($ChoferID, $VehiculoID, $TarifaID, $TurnoID, $AgenciaID, $PersonaID, $FechaEmision, $FechaSalida, $ViajeTipo, $OrigenCoordenadas, $DestinoCoordenadas, $OrigenDireccion, $DestinoDireccion, $Comentario, $ImporteTotal, $Distancia, $Estado)  
-		$viajeModelo = new ViajesModelo();		
+		//RegistrarViaje($ChoferID, $VehiculoID, $TarifaID, $TurnoID, $AgenciaID, $PersonaID, $FechaEmision, $FechaSalida, $ViajeTipo, $OrigenCoordenadas, $DestinoCoordenadas, $OrigenDireccion, $DestinoDireccion, $Comentario, $ImporteTotal, $Distancia, $Estado)  	
+		/*try {
+			throw new Exception('Unexpected PHP Error');
+		} 
+		catch (Exception $e) {
+			echo 'VIAJE YA REGISTRADO. ';
+		}	*/
+		$viajeModelo = new ViajesModelo();	
 		$viajeModelo->RegistrarViaje($this->choferID, $this->vehiculoID, $this->tarifaID, $this->turnoID, $this->agenciaID, $this->personaID , $this->fechaEmision , $this->fechaSalida , $this->viajeTipo , $this->origenCoordenadas , $this->destinoCoordenadas , $this->origenDireccion , $this->destinoDireccion, $this->comentario, $this->importeTotal, $this->distancia, $this->estado);		 
 		echo " Se registro el viaje desde " . $this->origenDireccion . " hasta " . $this->destinoDireccion . ". ";
 	}
@@ -337,10 +363,16 @@ class VehiculosABM implements Registrable, Modificable, Eliminable, Informable
 	
 	public function registrar()
 	{
-		//RegistrarVehiculo($Matricula, $Modelo, $Marca, $Estado, $FechaAlta, $FechaBaja, $AgenciaID)
-		$vehiculoModelo = new VehiculosModelo();		
-		$vehiculoModelo->RegistrarVehiculo($this->matricula, $this->modelo, $this->marca, $this->estado, $this->fechaAlta, $this->fechaBaja , $this->agenciaID);		 
-		echo " Se registro el vehiculo " . $this->matricula . " marca " . $this->marca . ". ";
+		//RegistrarVehiculo($Matricula, $Modelo, $Marca, $Estado, $FechaAlta, $FechaBaja, $AgenciaID)		
+		/*try {
+			throw new Exception('Unexpected PHP Error');				
+		} 
+		catch (Exception $e) {
+			echo 'VEHICULO YA REGISTRADO. ';
+		}		*/	
+		$vehiculoModelo = new VehiculosModelo();
+		$vehiculoModelo->RegistrarVehiculo($this->matricula, $this->modelo, $this->marca, $this->estado, $this->fechaAlta, $this->fechaBaja , $this->agenciaID);		
+		echo " Vehiculo registrado con matricula " . $this->matricula . " y marca " . $this->marca . ". ";
 	}
 	public function modificar()
 	{
@@ -393,9 +425,15 @@ class TarifasABM implements Registrable, Modificable, Eliminable, Informable
 	public function registrar()
 	{
 		//RegistrarTarifa($Comision, $AgenciaID, $ViajeMinimo, $KmMinimo, $PrecioKM, $Estado)  
-		$tarifaModelo = new TarifasModelo();		
-		$tarifaModelo->RegistrarTarifa($this->comision, $this->agenciaID, $this->viajeMinimo, $this->kmMinimo, $this->precioKM, $this->estado);		 
-		echo " Se registro la tarifa de la agencia con ID " . $this->agenciaID . " de viaje minimo " . $this->viajeMinimo . ". ";
+		/*try {
+			throw new Exception('Unexpected PHP Error');				
+		} 
+		catch (Exception $e) {
+			echo 'TARIFA YA REGISTRADA. ';
+		}		*/		
+		$tarifaModelo = new TarifasModelo();
+		$tarifaModelo->RegistrarTarifa($this->comision, $this->agenciaID, $this->viajeMinimo, $this->kmMinimo, $this->precioKM, $this->estado);		
+		echo " Tarifa registrada de agencia con ID " . $this->agenciaID . " de viaje minimo " . $this->viajeMinimo . ". ";
 	}
 	public function modificar()
 	{
