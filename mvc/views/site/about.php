@@ -7,83 +7,62 @@ AppAsset::register($this);
 $this->title = 'Quiénes Somos';
 ?>
 <div class="site-about">
-    <div id="contenedor-nuestro-clientes">
+    <div id="contenedor-quienes-somos">
         <div id="sub-contenedor">
             <div id="imagen-header" src="#" alt="Imagen">
             </div>
             <div id="contenido">
-                <h2>Nuestra Empresa</h2>
-                <ul id="lista-empresa">
-                    <h2>Empresa</h2>
-                    <li>
-                        <p>Lalal</p>
-                    </li>
-                    <li>
-                        <p>Lanannana</p>
-                    </li>
-                    <li>
-                        <p>Ninananono</p>
-                    </li>
-                    <li>
-                        <p>Dedidodo</p>
-                    </li>
-                    <li>
-                        <p>Sasesusesu</p>
-                    </li>
+                <h3>Nuestra Empresa</h3>
+                <ul id="lista-empresa">                   
+                    <li> En Remis Ya! nos dedicamos plenamente a mejorar nuestro desempeño para poder ofrecer un producto de competencia, no s&oacute;lo en el aspecto tecnol&oacute;gico, sino tambi&eacute;n en lo profesional, y as&iacute;, destacarnos como una empresa desarrolldora de Software de Gestin l&iacute;der en Argentina.  </li>
                 </ul>
+                <h3>Nuestra Misi&oacute;n</h3>
+                <ul id="lista-mision">                    
+                    <li>
+                        Desarrollar Software de Gesti&oacute;n Para Remiserias basado en las necesidades crecientes de los usuarios de remises como de empresarios del Rubro, utilizando para ello las mejores tecnolog&iacute;as disponibles.”
 
-                <ul id="lista-mision">
-                    <h2>Nuestra Misi&oacute;n</h2>
-                    <li>
-                        <p>Conectar a las usuarios con la agencias de remiser&iacute;a con el objetivo facilitar la prestaci&oacute;n del servicio sin necesidad de un c&oacute;digo para cada agencia</p>
-                    </li>
-                    <li>
-                        <p>Hacer que el servicio solicitado sea el mejor posible por medio de la calificaci&oacute;n dell mismo por parte de los usuario.</p>
-                    </li>
-                    <li>
-                        <p>Brindarle a las agencias que prestan el servicio la posiblidad de aceptar o rechazar de la solicitud </p>
-                    </li>
-                    <li>
-                        <p>Permitirle a los usuario, basando en la calificaciones de la agencias, contra el servicio que mejor </p>
-                    </li>
-                </ul>
+En Remis Ya! consideramos que el Software de Gesti&oacute;n para remiserias se ha vuelto fundamental para la gesti&oacute;n y el control de operaciones de negocio del remis de todo tipo; desde los emprendimientos pequeños a mediana escala y para clientes finales que desean encontrar un servicio eficiente y seguro.
 
-                <ul id="lista-plantel">
-                    <h2>Nuestra Plantel</h2>
+En este contexto la adaptabilidad, la escalabilidad, la eficiencia y la usabilidad de nuestro producto implica que las empresas usuarias sean m&aacute;s competitivas.
+
+Utilizamos lo mejor de la tecnolog&iacute;a disponible, tanto en el mundo comercial como en el &aacute;mbito acad&eacute;mico para hacer productos de software est&aacute;ndar que se adapten al servicio del rem&iacute;s. El mismo va a ser ergon&oacute;micos, aut&oacute;nomos como sea posible. A su vez es muy importante que el manejo del producto sea simple de aprender tanto por el usuario, como por el administrador y los mismos empleados de la agencia.
+                    </li>
+                    </ul>
+                   <h3>Otros Servicios</h3>
+                    <ul id="Servicios">
+                     <li>
+                            Conectar a las usuarios con la agencias de remiser&iacute;a con el objetivo facilitar la prestaci&oacute;n del servicio sin necesidad de un c&oacute;digo para cada agencia.</p>
+                    </li>
+                        
                     <li>
-                        <h3>Galdeman Nelson</h3>
-                        <p></p>
+                      
+                        Hacer que el servicio solicitado sea el mejor posible por medio de la calificaci&oacute;n dell mismo por parte de los usuario.
+                    </li>
+
+                    <li>
+                        Brindarle a las agencias que prestan el servicio la posiblidad de aceptar o rechazar de la solicitud.
                     </li>
                     <li>
-                        <h3>Marcelo Mansilla</h3>
-                        <p></p>
+                        Permitirle a los usuario, basando en la calificaciones de la agencias, contra el servicio que mejor.
                     </li>
-                    <li>
-                        <h3>Mendez Alejandro</h3>
-                        <p></p>
-                    </li>
-                    <li>
-                        <h3>Morales Ignacio</h3>
-                        <p></p>
-                    </li>
-                    <li>
-                        <h3>Rodriguez Aldo</h3>
-                        <p></p>
-                    </li>
-                    <li>
-                        <h3>Sebastian Encina</h3>
-                        <p></p>
-                    </li>
-                    <li>
-                        <h3>Silva Lilian</h3>
-                        <p></p>
-                    </li>
-                    <li>
-                        <h3>Vitucci Bruno</h3>
-                        <p></p>
-                    </li>
-                </ul>
-            </div>
+                     </ul>
+              
+                    
+                   <h3>El Equipo:</h3>
+                    <ul id="lista-plantel">
+                        <h4>Nelson Galdeman </h4>
+                        <h4>Marcelo Mansilla </h4>
+                        <h4>Ignacio Morales</h4>
+                        <h4>Alejandro Ezequiel Mendez </h4>
+                        <h4>Aldo Rodriguez </h4>
+                        <h4>Sebastian Encina </h4>
+                        <h4>Lilian Silva</h4>
+                        <h4>Bruno Vitucci </h4>
+               
+
+                 
+                    </ul>
+                </div>
         </div>
     </div>
 

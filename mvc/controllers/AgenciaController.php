@@ -103,6 +103,9 @@ class AgenciaController extends Controller {
 
     public function actionAlta_telefonista_agencia() {
         $model = new AltaRecepcionistaAgenciaModel();
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarrecepcionista() === true)) {
+            Yii::$app->session->setFlash('Empleado creado con exito');
+        }
         return $this->render("altaTelefonista", ['model' => $model]);
     }
 

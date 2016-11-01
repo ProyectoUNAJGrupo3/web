@@ -2,8 +2,9 @@
 
 namespace app\models\Agencia;
 
+use yii;
 use yii\base\Model;
-
+use app\models\CapaServicio\PersonasModelo;
 class AltaRecepcionistaAgenciaModel extends Model {
 
     public $nombre;
@@ -37,8 +38,14 @@ class AltaRecepcionistaAgenciaModel extends Model {
             ['contrasenia', 'match', 'pattern' => '/^.{6,50}$/', 'message' => 'Ingrese como mínimo 6 caracteres y como máximo 50 caracteres'],
             ['confirmarContrasenia', 'required', 'message' => 'Campo obligatorio'],
             ['confirmarContrasenia', 'match', 'pattern' => '/^.{6,50}$/', 'message' => 'Ingrese como mínimo 6 y como máximo 50 caracteres'],
-            ['contrasenia', 'compare', 'compareAttribute'=>'confirmarContrasenia', 'on'=>'register'],
+            ['contrasenia', 'compare', 'compareAttribute'=>'confirmarContrasenia', 'on'=>'register','message'=>'Las constraseñas deben Coincidir'],
         ];
     }
-
+    public function registrarrecepcionista()
+    {
+        $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
+        $app = Yii::$app->user->identity->AgenciaID;
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'",null,"''","''","'0'","'0'","'2'","'$this->dni'","'$app'"); //genera el alta del recepcionista y lo guarda
+        return true;
+    }
 }

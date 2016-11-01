@@ -65,7 +65,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                 ; ?>
                                 <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50'])->label("Apellido"); ?>
                                 <?= $form->field($model, 'correo')->input("email")->label("Correo"); ?>
-                                <?= $form->field($model, 'documento')->input('text', ['maxlength' => '20'])->label("Documento"); ?>
                                 <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20'])->label("Tel&eacute;fono"); ?>
                                 <?= $form->field($model, 'direccion')->textInput(['readonly' => true])->label("Direcci&oacute;n"); ?>
                                 <?= $form->field($model, 'coordenadas')->textInput(['id' => 'coordenadas'])->label(""); ?>
