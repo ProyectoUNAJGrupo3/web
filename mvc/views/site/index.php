@@ -22,34 +22,32 @@ PSCssAsset::register($this);
 ?>
 <div class="site-index">
     <div id="contenedor-home">
-        <table width="1500" height="552" border="0" background="img/REMISEJECUTIVO2.jpg">
+        <table width="1500" height="552" border="0"   background= "img/REMISEJECUTIVO5.jpg" 
             <tr>
                 <td>
                     <div style="background-image:url(REMISEJECUTIVO5.jpg);
                              background-repeat:no-repeat; background-position:-50px 50px">
                         <h1>
                             <br />
-                            <br>
+                           
                             <b>
-                                <font id="titulo-contenido" size=+2>BIENVENIDOS A REMIS YA! </font>
+                                
+                                <font id="titulo-contenido" size=+1> &nbsp;Bienvenidos a Remis ya!
+                                </br> &nbsp; &nbsp; &nbsp; &nbsp; Mejore la manera y el desempe&ntilde;o  de Gestionar su Agencia</font>
                                 <b>
                                     <br />
                                     <br />
                         </h1>
                         <p>
-                            <a id="boton" class="btn btn-primary" href="http://www.yiiframework.com">SOLICITE SU REMIS</a>
+                           
+                         <a id="boton" class="btn btn-primary" href="http://www.yiiframework.com">   SOLICITE SU REMIS</a>
                         </p>;
-
-
                     </div>
                 </td>
             </tr>
         </table>
     </div>
 </div>
-
-
-
 
 <div id="jumbotron">
     <div class="jumbotron">
@@ -60,14 +58,9 @@ PSCssAsset::register($this);
                         <img src="img/telefono.jpg" id="telefono.jpg" />   Pedir remises Online
                     </h2>
 
-                    <p>  
-                      
-                        Usted puede Eliegir la mejor opcion de remiseria, pudiendo seleccionar la mas cercana, o la que ofresca el mejor precio y servicio adaptandose a sus necesidades.
-                        
+                    <p>                        
+                        Usted puede Elegir la mejor opcion de remiseria, seleccionando la m&aacute;s cercana, o la que ofresca el mejor precio y servicio adaptandose a sus necesidades.                       
                      </p>
-
-
-
 
                 </div>
                 <div class="col-lg-4">
@@ -75,65 +68,50 @@ PSCssAsset::register($this);
                        <img src="img/negocio.jpg" id="negocio.jpg" />  Administre su propia Agencia Online
                     </h2>
                     <p>
-                        Ofrecemos un Sistema donde Usted pueda mejorar la gestion de su propia Agencia Online de remises, pudiendo obtener un seguimiento de las distintas actividades de su empresa de una manera simple y eficiente.
+                        Ofrecemos un Sistema donde Usted pueda mejorar la gestion de su propia Agencia de remises, pudiendo obtener un seguimiento de las distintas actividades de su empresa de una manera simple y eficiente.
                     </p>
 
                 </div>
                 <div class="col-lg-4">
                     <h2>
-                     <img src="img/pesos.jpg" id="pesos.jpg" />  Optimice los costos de Su Agencia
+                     <img src="img/pesos.jpg" id="pesos.jpg" /> Optimice los costos de Su Agencia
                     </h2>
                     <p>
-                        El Sistema le brinda el servicio donde usted realice sus actividades pudiendo obtener gestion eficiente de costos y ganancias obtenidas.
+                        El servicio del sistema le permite realizar sus actividades, pudiendo obtener gestion eficiente de costos y ganancias obtenidas.
                     </p>
-
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>
 <div id="jumbotron">
     <div class="jumbotron">
         <div class="row">
             <div id="col-lg-4">
-
                 <div class="col-lg-4">
                     <h2>
-                        <img src="img/persona.jpg" id="persona.jpg" />Atenci&oacute;n al cliente
+                        <img src="img/persona.jpg" id="persona.jpg" />  Atenci&oacute;n al cliente
                     </h2>
-
                     <p>
-                        Atenci&oacute;n personalizada de operadores telef&oacute;nicos las 24 HS orientados al cliente. Choferes capacitados. Pr&oacute;ximamente, reservas on-line desde nuestra pagina
+                       Atenci&oacute;n personalizada de operadores telef&oacute;nicos orientados al cliente, Choferes capacitados, reservas on-line, son algunos de los beneficios de utilizar esta Aplicaci&oacute;n.
                     </p>
-
-                </div>
-                <br />
-                <br />
-                <br />
-
-
-
+                </div>                                 
                 <div class="col-lg-4">
                     <h2>
                         <img src="img/seguridad-logo.png" id="seguridad-logo.png" />Seguridad
                     </h2>
                     <p>
-                        Las Agencias pueden hacer un seguimiento de la flota v&iacute;a web. Los clientes pueden obtener datos Chofer y del m&oacute;vil asignado.
+                        Las Agencias pueden hacer un seguimiento de la flota v&iacute;a web. Los clientes pueden obtener datos Chofer y del m&oacute;vil asignado Adem&aacute;s de poder calificar su atenci&oacute;n.
                     </p>
-
                 </div>
                 <div class="col-lg-4">
                     <h2>
-                        <img src="img/24horas2.jpg" id="24horas2.jpg" />24 Horas
+                        <img src="img/24horas2.jpg" id="24horas2.jpg" />  24 Horas
                     </h2>
                     <p>
                         Las Remiserias con las que se puede conectar cuentan con central de reservas que se encuentra a su entera disposici&oacute;n durante las 24 horas.
                     </p>
-
                 </div>
             </div>
-
         </div>
     </div>

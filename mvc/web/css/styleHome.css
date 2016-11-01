@@ -16,6 +16,11 @@
 
 }
 
+.REMIS.jpg {
+-webkit-filter: blur(3px);
+filter: blur(3px);
+}
+
 #boton{
    height: 35px; 
    width: 200px;
@@ -48,7 +53,7 @@
 
 
 p {
-  font: 150% sans-serif;
+  font: 35px/25px "Roboto",Arial,Helvetica,sans-serif;
 }
 
 
@@ -70,16 +75,20 @@ p {
 }
 
 #titulo-contenido{
-    font-size:35px;
-    font-family:Verdana;
-    font-style:italic;
-    color: white;        
-    margin-left:270px;
-    letter-spacing: -0.02em;
+    
+    font: 30px/12px "Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic ;
+    color:white;        
+    margin-left:290px;
+    letter-spacing: -0.0005em;
     vertical-align: central;
-    line-height:-2;
+    line-height:-6;
     margin-top:100px;
+    text-shadow: 5px 5px 5px #642EFE;
 }
+
+
 
 
 #table{
@@ -98,21 +107,11 @@ p {
 }
 
 #col-lg-4{
-    font-size:0px;
-    font-family:Arial;
-    font-style:normal;
-    color:ivory;        
-    letter-spacing: -0.02em;
-    line-height:-2;
+    
+    
+    font: 15px/8px "Arial",Helvetica,sans-serif;
+    color:silver;        
+    letter-spacing: -0.002em;
+    line-height:-0,5;
  
-}
-#parrafo, parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6¨{
-
-    font-size:0px;
-    font-family:Impact;
-    font-style:normal;
-    color:ivory;        
-    letter-spacing: -0.02em;
-    line-height:-2;
-
 }
