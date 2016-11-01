@@ -25,26 +25,12 @@
     color:black;
 
 }
-#lista-empresa{
-    color:cornflowerblue;
-    text-align: center;
-    font-size:17px;
-}
-#lista-mision{
-    color:cornflowerblue;
-    text-align: center;
-    font-size:17px;
-
-}
-#lista-plantel{	
-    color:cornflowerblue;
-    text-align: center;
-    font-size:17px;
-}
-#Servicios{
+#Servicios,#lista-plantel,#lista-mision,#lista-empresa{
     color:cornflowerblue;
     text-align: initial;
     font-size:17px;
     font-family: sans-serif;
+    text-align: justify;
+    padding: 0px 50px;
 
 }
