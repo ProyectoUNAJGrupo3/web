@@ -26,6 +26,7 @@ class AppAssetWebSite extends AssetBundle {
         'css/stylePagesHtml.css',
         'css/styleQuienesSomos.css',
         'css/StyleFormularioUsuario.css',
+        'css/styleSolicitudRegistrarAgencia.css',
     ];
     public $js = [
         'js/Maps.js',
