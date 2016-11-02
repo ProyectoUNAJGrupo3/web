@@ -133,6 +133,9 @@ a.desc:after {
 #map-Index{
 	width: 100%;
 }
+.colorBlack{
+    color:black
+}
 #map {	
 	height:400px 
 }
