@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Usuario\SolicitudRemiseriaModel;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -60,8 +61,12 @@ class ClienteController extends Controller {
         ];
     }
 
-    public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
-        return $this->render('index');
+    public function actionIndex() {
+        $model = new SolicitudRemiseriaModel();
+        if ($model->load(Yii::$app->request->post()) && ($model->GuardarViaje() === true)) {
+            return $this->render('listaHistorialViajes');
+        }
+        return $this->render("index", ['model' => $model]);
     }
 
     public function actionSolicitud_registrar_agencia() {
@@ -70,7 +75,7 @@ class ClienteController extends Controller {
     }
 
     public function actionSolicitar_servicio_remis() {
-        $model = new PSFormularioSolicitarServcioRemiseriaModel();
+        $model = new SolicitudRemiseriaModel();
         return $this->render("solicitudPedirServicioRemiseria", ['model' => $model]);
     }
 
