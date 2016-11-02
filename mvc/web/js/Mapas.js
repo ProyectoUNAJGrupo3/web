@@ -44,47 +44,97 @@ function clearRemo() {
     remoMarks = [];
 
 }
+var prevMarker = undefined;
 
 function getRemiserias(Ubicacion) {
     clearRemo()
     
     var selected = marcadores[0];
-    remos = [{ lat: -34.772015, lng: -58.264468 }, { lat: -34.773216, lng: -58.270884 }, { lat: -34.776670, lng: -58.274574 }];
+    remos =[{
+        AgenciaID:45,
+        Nombre:'Remis Quilmes',
+        Telefono: 42545443,
+        DireccionCoordenada: { lat: -34.7744885, lng: -58.2536508 },
+        infoAgencia: ' Borrachos vamos mas rapido',
+        Tarifa: {
+            ID: 7,
+            PrecioKM: 15,
+
+        }
+
+    },
+        {
+            AgenciaID:54,
+            Nombre:'Remis Estrella',
+            Telefono: 434343400,
+            DireccionCoordenada: { lat: -34.78031000000001, lng: -58.270884 },
+            infoAgencia: ' A la velocidad de la luuuuuuz',
+            Tarifa: {
+                ID: 5,
+                PrecioKM: 13,
+
+            }
+
+        },
+        {
+            AgenciaID:63,
+            Nombre:"Remis Colombia",
+            Telefono: 42102222,
+            DireccionCoordenada: { lat: -34.776670, lng: -58.289105800000016 },
+            infoAgencia: " Te llevamos a tu casa y te vendemos frula",
+            Tarifa: {
+                ID: 9,
+                PrecioKM: 8,
+            }
+        }];
+    var infoWindow;
     for (var i = 0; i < remos.length; i++) {
 
         var remo = new google.maps.Marker({
-                position: remos[i],
-                map: map,
-                title: 'otro string!',//otra info
-                animation: google.maps.Animation.DROP
-            });
+            position: remos[i].DireccionCoordenada,
+            map: map,
+            title: remos[i].Nombre,//otra info
+            animation: google.maps.Animation.DROP
+        });
+        remo.Agencia= remos[i];
+
+        remo.addListener('click', function (event) { // hace cualquier cosa
+            //infoWindow.setPosition(event.latLng)
+            if (infoWindow)
+                infoWindow.close();
+            if (prevMarker != undefined && prevMarker != this) {
+                prevMarker.setAnimation(null);
+                prevMarker.setIcon('http://maps.google.com/mapfiles/marker.png');
+            } else if (prevMarker == this) {
+                $('#btn-solcitar-remis')[0].disabled=true;
+                $('#importeTotal').val('');
+
+                prevMarker = undefined;
+                this.setAnimation(null);
+                this.setIcon('http://maps.google.com/mapfiles/marker.png');
+                return;
+            }
+            this.setAnimation(google.maps.Animation.BOUNCE);
+            this.setIcon('http://maps.google.com/mapfiles/marker_orange.png');
+            var importe= this.Agencia.Tarifa.PrecioKM * (distance.value/1000);
+            $('#idAgencia').val(this.Agencia.AgenciaID);
+            $('#idTarifa').val(this.Agencia.Tarifa.ID);
+            $('#btn-solcitar-remis')[0].disabled=false;
+            $('#importeTotal').val('$'+importe.toFixed(2).toString());
             infoWindow = new google.maps.InfoWindow({
-                content: "<h3>Ubicacion Centrar</h3><p>Debería ir alguna data.</p>" // Deberiamos llenar esto con data que viene de la base sobre la remiseria
+                content: "<div class='colorBlack'><h3>"+this.Agencia.Nombre+"</h3><p>"+this.Agencia.infoAgencia+"</p> </div>"
             });
-            var prevMarker = undefined;
-            remo.addListener('click', function (event) { // hace cualquier cosa 
-                //infoWindow.setPosition(event.latLng)
-                if (prevMarker != undefined && prevMarker != this) {
-                    prevMarker.setAnimation(null);
-                    prevMarker.setIcon('http://maps.google.com/mapfiles/marker.png');
-                } else if (prevMarker == this) {
-                    prevMarker = undefined;
-                    this.setAnimation(null);
-                    this.setIcon('http://maps.google.com/mapfiles/marker.png');
-                    return;
-                }
-                this.setAnimation(google.maps.Animation.BOUNCE);
-                this.setIcon('http://maps.google.com/mapfiles/marker_orange.png');
-                infoWindow.open(map, this)//ow
-                prevMarker = this;
-            });
-            remo.setIcon('http://maps.google.com/mapfiles/marker.png');
-            //remo.setMap(map);
-            remoMarks.push(remo);
 
-       }
+            infoWindow.open(map, this)//ow
+            prevMarker = this;
+        });
+        remo.setIcon('http://maps.google.com/mapfiles/marker.png');
+        //remo.setMap(map);
+        remoMarks.push(remo);
+
+    }
 }
-
+var distance;
 function initMap(isindex) {
 
     var jsonDeLaBase = {
@@ -184,17 +234,26 @@ function initMap(isindex) {
     });
     marcadores = [];
     
-    if (isindex) {
-         directionsService = new google.maps.DirectionsService();
-         directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true })
-         service = new google.maps.DistanceMatrixService();
+    if (isindex) { // puto el que lo lee
+        directionsService = new google.maps.DirectionsService();
+        directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true })
+        service = new google.maps.DistanceMatrixService();
 
-         directionsDisplay.addListener('directions_changed', function () {
-             distanceElement = $('#distancia');
-             distanceElement[0].innerText = 'Distancia : '+directionsDisplay.getDirections().routes[0].legs[0].distance.text;
-             distanceElement.show();
-             remoButton = $('#btn-ver-remiserias')[0];
-             remoButton.disabled= false;
+        directionsDisplay.addListener('directions_changed', function () {
+            remoButton = $('#btn-ver-remiserias')[0];
+            remoButton.disabled= false;
+            var data = directionsDisplay.getDirections().routes[0].legs[0];
+            var distanceElement = $('#distancia');
+            distance=data.distance;
+            distanceElement[0].innerText = 'Distancia : '+data.distance.text;
+            distanceElement.show();
+            $('#FieldDistance').val((data.distance.value/1000).toString());
+            if (prevMarker){ // significa que hay una remiseria elejida, tenemos que recalcular toda la gilada
+
+                var importe= prevMarker.Agencia.Tarifa.PrecioKM * (distance.value/1000);
+                $('#importeTotal').val('$'+importe.toFixed(2).toString());
+
+            }
 
         });
 
@@ -202,6 +261,10 @@ function initMap(isindex) {
         google.maps.event.addListener(map, "rightclick", function (e) {
 
             //latitud y longitud estan disponibles en el evento
+            if (marcadores.length == 2){
+                window.alert("Ya tenes elegidos dos ubicaciones, arrastra los iconitos para cambiar la direccion. El segundo click anda medio mal.")
+                return;
+            }
             var latLng = e.latLng;
             
             var markerOptions = { position: latLng }
@@ -215,7 +278,7 @@ function initMap(isindex) {
                 
                 marcadores[0].setMap(null); // borra el marcador, poniendo visible=false tambien funciona, // TODO: encontrar manera de borrarlo de memoria
                 //la siguiente linea es inutil, encontre otras maneras mas piolas de caalcular distancia por otros servicios
-               // distance = google.maps.geometry.spherical.computeDistanceBetween(marcadores[0].position, marcadores[1].position).toFixed(2);
+                // distance = google.maps.geometry.spherical.computeDistanceBetween(marcadores[0].position, marcadores[1].position).toFixed(2);
                 var request = { 
                     origin: marcadores[0].position,
                     destination: marcadores[1].position,
@@ -223,6 +286,8 @@ function initMap(isindex) {
                 };
                 directionsService.route(request, function (response, status) {
                     if (status == google.maps.DirectionsStatus.OK) {
+                        var utilData=response.routes[0].legs[0];
+                        setPanelData(utilData);
                         directionsDisplay.setDirections(response); // por defecto setea A y B
                         //document.getElementById('distance').innerHTML = response.rows[0].elements[0].distance.text + ' km';
                     } else {
@@ -248,6 +313,8 @@ function initMap(isindex) {
                 //    }
                 //});
             } else {
+                var geocoder = new google.maps.Geocoder();
+                geocodeLatLng(geocoder, map, latLng);
                 marker.setMap(map);
             }
         });
@@ -273,31 +340,58 @@ function initMap(isindex) {
 
         });
     }
+    function setPanelData(data){ // esta funcion tenia mil cosas y las fui acomodando en otras funciones, quedo re pete con dos lineas.
+        $('#destinocoordenada').val("Lat:" + data.end_location.lat().toString() + ",Lng:" + data.end_location.lng().toString());
+        $('#destinoTexto').val(data.end_address);
+
+
+    }
     
     function geocodeLatLng(geocoder, map, latLng) {// <--infowindow-->) {
         var latlng = latLng;
-        $('#coordenadas').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
-        geocoder.geocode({ 'location': latlng }, function (results, status) {
-            if (status === google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
+        if (isindex) {
+            $('#origencoordenada').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
 
-                    $('#psformulariousuariomodel-direccion').val(results[0].formatted_address);
-                    $('#pac-input').val(results[1].formatted_address);
-                    //map.setZoom(11);
-                    //var marker = new google.maps.Marker({
-                    //  position: latlng,
-                    //  map: map
-                    //});
-                    // infowindow.setContent(results[1].formatted_address);
-                    // infowindow.open(map, marker);
+
+            geocoder.geocode({'location': latlng}, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        $('#origenTexto').val(results[0].formatted_address);
+                    }
+                    else {
+                        window.alert('No results found');
+                    }
                 } else {
-                    window.alert('No results found');
+                    window.alert('Geocoder failed due to: ' + status);
+
                 }
+            });
+        }
+
+     else {
+            $('#coordenadas').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
+    geocoder.geocode({'location': latlng}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+
+                $('#psformulariousuariomodel-direccion').val(results[0].formatted_address);
+                $('#pac-input').val(results[1].formatted_address);
+                //map.setZoom(11);
+                //var marker = new google.maps.Marker({
+                //  position: latlng,
+                //  map: map
+                //});
+                // infowindow.setContent(results[1].formatted_address);
+                // infowindow.open(map, marker);
             } else {
-                window.alert('Geocoder failed due to: ' + status);
+                window.alert('No results found');
             }
-        });
-    }
+        } else {
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
+}
+}
 
 };
 
