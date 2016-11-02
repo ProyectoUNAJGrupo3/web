@@ -21,14 +21,14 @@ class SiteController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['login', 'logout', 'administrador', 'recepcionista', 'chofer', 'cliente','registro','contact','about'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'only' => ['login', 'logout', 'administrador', 'recepcionista', 'chofer', 'cliente','registro','contact','about','solicitud_registrar_agencia'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                     [
-                        'actions' => ['login','registro','contact','about'], //para la accion login
+                        'actions' => ['login','registro','contact','about','solicitud_registrar_agencia'], //para la accion login
                         'allow' => true, //Todos los permisos aceptados
                         'roles' => ['?'], //Tienen acceso a esta accion todos los usuarios invitados
                     ],
-                   
+
                       [
                         //el administrador tiene permisos sobre las siguientes acciones
                         'actions' => ['logout', 'administrador'],
