@@ -54,7 +54,7 @@ $this->title = 'RemisYa';
         <?=
         $form->field($model, 'DestinoCoordenada')->hiddenInput(['id' => 'destinocoordenada'])->label(false);
         ?>
-        <div class="row">
+        <div class="row"> 
             <div class="col-md-8">
                 <?= $form->field($model, 'Distancia')->input("text", ['maxlength' => '50'])->label("Distancia"); ?>
             </div>
