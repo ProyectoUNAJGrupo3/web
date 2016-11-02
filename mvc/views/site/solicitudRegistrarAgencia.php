@@ -9,10 +9,6 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 AppAssetCliente::register($this);
 ?>
-<!--<div class="container">
-    <section id="main">
-        <article>
-            <div id="page-single-main">-->
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
 <div class="site-contact">
@@ -78,7 +74,17 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <?= $form->field($model, 'apellidoDuenio')->input("text", ['maxlength' => '50', 'id' => 'apellidoDuenio'])->label("Apellido <b id='asterisco'>*</b>"); ?>
                             <?= $form->field($model, 'dniDuenio')->input("text", ['maxlength' => '50', 'id' => 'dniDuenio'])->label("Documento <b id='asterisco'>*</b>"); ?>
                             <?= $form->field($model, 'email')->input('text', ['maxlength' => '8', 'id' => 'email'])->label("Email <b id='asterisco'>*</b>"); ?>
-
+                            <b>
+                                <h3>
+                                    <u>Datos</u>
+                                    <u>de</u>
+                                    <u>Usuario</u>
+                                </h3>
+                            </b>
+                            <br />
+                            <?= $form->field($model, 'usuario')->textInput(['id' => 'usuarioAgencia'])->label("Usuario"); ?>
+                            <?= $form->field($model, 'contrasenia')->passwordInput(['id' => 'contraseniaAgencia'])->label("Contrase&ntilde;a"); ?>
+                            <?= $form->field($model, 'confirmarContrasenia')->passwordInput(['id' => 'confirmarContraseniaAgencia'])->label("Confirmar Contrase&ntilde;a"); ?>
                             <?php ActiveForm::end(); ?>
                             <br>
                             <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>

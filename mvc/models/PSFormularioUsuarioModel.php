@@ -9,7 +9,6 @@ class PSFormularioUsuarioModel extends Model {
     public $nombre;
     public $apellido;
     public $correo;
-    public $documento;
     public $telefono;
     public $direccion;
     public $coordenadas;
@@ -30,9 +29,6 @@ class PSFormularioUsuarioModel extends Model {
             ['apellido', 'required','message'=>'Campo obligatorio'],
             ['apellido', 'match','pattern'=>'/^[a-zA-Z ]*$/','message'=>'Ingrese solo letras'],
             ['apellido', 'match','pattern'=>'/^.{3,50}$/','message'=>'Ingrese como mínimo 3 y como máximo 50 letras'],
-
-            ['documento', 'required','message'=>'Campo obligatorio'],
-            ['documento', 'match','pattern'=>'/^.{3,50}$/','message'=>'Ingrese como mínimo 8 y como máximo 15 caracteres'],
 
             ['correo', 'required','message'=>'Campo obligatorio'],
             //['correo', 'match','pattern'=>'/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$./','message'=>'Correo No Válido'],
@@ -59,7 +55,7 @@ class PSFormularioUsuarioModel extends Model {
     public function AltaRegistro()
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
-        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'0'","'4'","'$this->documento'","''"); //genera el alta del usuario y lo guarda
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'0'","'4'",null,"''"); //genera el alta del usuario y lo guarda
         return true;
     }
 }
