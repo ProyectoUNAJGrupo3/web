@@ -3,16 +3,15 @@
 namespace app\models\Agencia;
 
 use yii\base\Model;
-
+use app\models\CapaServicio\VehiculosModelo;
+use yii;
 class AltaVehiculoAgenciaModel extends Model {
 
     public $marca;
     public $modelo;
     public $patente;
-    public $anio;
     public $numeroSeguro;
     public $listaEstado;
-    public $listaConductor;
 
     public function rules() {
         return[
@@ -28,15 +27,16 @@ class AltaVehiculoAgenciaModel extends Model {
             ['patente', 'required', 'message' => 'Campo obligatorio'],
             ['patente', 'match', 'pattern' => '/^[a-zA-Z 0-9]*$/', 'message' => 'Ingrese solo letras y números'],
             ['patente', 'match', 'pattern' => '/^.{6,9}$/', 'message' => 'Patente inválida'],
-            ['anio', 'required', 'message' => 'Campo obligatorio'],
-            ['anio', 'match', 'pattern' => '/^[0-9]*$/', 'message' => 'Ingrese solo números'],
-            ['anio', 'match', 'pattern' => '/^.{4,4}$/', 'message' => 'Año inválido'],
-            ['numeroSeguro', 'required', 'message' => 'Campo obligatorio'],
-            ['numeroSeguro', 'match', 'pattern' => '/^[1-9]\d*$/', 'message' => 'Ingrese solo números'],
-            ['numeroSeguro', 'match', 'pattern' => '/^\d{8,20}/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
             ['listaEstado', 'safe', 'message' => 'Campo obligatorio'],
             ['lsitaConductor', 'safe', 'message' => 'Campo obligatorio'],
         ];
     }
-
+    public function registrarvehiculo()
+    {
+        $model = new VehiculosModelo(); //crea un nuevo modelo de personamodelo
+        $app = Yii::$app->user->identity->AgenciaID;
+        $tiempo = time();
+        $model->RegistrarVehiculo("'$this->patente'","'$this->modelo'","'$this->marca'","'$this->listaEstado'","'$tiempo'",null,"'$app'"); //genera el alta del vehiculo y lo guarda
+        return true;
+    }
 }

@@ -5,7 +5,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\assets\AppAsset;
 use app\assets\AppAssetAgencia;
-
+use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 AppAssetAgencia::register($this);
 AppAsset::register($this);
 ?>
@@ -51,61 +52,14 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                         <div>
                             <h1>Ac&aacute; colocamos la grilla para listar veh&iacute;culos</h1>
 
-                            <table class="table table-striped table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Column heading</th>
-                                        <th>Column heading</th>
-                                        <th>Column heading</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="info">
-                                        <td>3</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="success">
-                                        <td>4</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="danger">
-                                        <td>5</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="warning">
-                                        <td>6</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="active">
-                                        <td>7</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                </tbody>
-                            </table> 
-                        </div>
+<?=
+          GridView::widget(['dataProvider' => $model->dataProvider,
+                           'columns' => [
+                           'Marca',
+                           'Modelo',
+                           'Matricula',
+                       ],]);
+?>
                         <div id='botones-group'>
                             <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
