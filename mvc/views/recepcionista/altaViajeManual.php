@@ -1,86 +1,87 @@
 <?php
 
-use yii\helpers\BaseHtml;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use app\assets\AppAssetRecepcionista;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
+
 use app\assets\AppAsset;
+use app\assets\AppAssetRecepcionista;
+use app\assets\AppAssetWebSite;
+
+use yii\grid\GridView;
+use yii\helpers\BaseHtml;
+use yii\widgets\ActiveForm;
+use yii\bootstrap\Dropdown;
+use yii\helpers\ArrayHelper;
+use yii\bootstrap\Button;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
+
 AppAsset::register($this);
 AppAssetRecepcionista::register($this);
+AppAssetWebSite::register($this);
+
+/* @var $this yii\web\View */
+$this->title = 'RemisYa';
+Modal::begin([
+'header' => '<h2>Viajes</h2>',
+'id'=>'modal',
+'size'=>'modal-lg',
+]);
+echo "<div id='modalContent'></div>";
+Modal::end();
+
 ?>
-
-
-<div class="site-contact">
-    <section id="main">
-        <article>
-            <div id="page-single-main-recepcionista">
-                <br />
-                <h1 id="title-form-recepcionista">
-                    <strong>Nuevo Viaje</strong>
-                </h1>
-                <div class="container-form" id="contenedor-formulario-recepcionista">
-                    <h1>
-                        <?= Html::encode($this->title) ?>
-                    </h1>
-
-                    <?php if (Yii::$app->session->hasFlash('Carga exitosa')): ?>
-                        <div class="alert alert-success">
-                            La carga del nuevo viajes ha sido exitosa
-                        </div>
-                    <?php else: ?>
-
-                        <?php $form = ActiveForm::begin(); ?>
-                        <b>
-                            <h3>
-                                <u>Datos</u>
-                                <u>Del</u>
-                                <u>Pasajero</u>
-                            </h3>
-                        </b>
-
-                        <?= $form->field($model, 'nombre')->input("text", ['autofocus' => true, 'maxlength' => '50', 'id' => 'nombrePasajero'])->label("Nombre"); ?>
-                        <?= $form->field($model, 'apellido')->input("text", ['maxlength' => '50', 'id' => 'apellidoPasajero'])->label("Apellido"); ?>
-
-                        <b>
-                            <h3>
-                                <u>Datos</u>
-                                <u>Del</u>
-                                <u>Viaje</u>
-                            </h3>
-                        </b>
-
-                        <?= $form->field($model, 'origen')->input('text', ['readonly' => true, 'id' => 'origenViajeManual'])->label("Origen <b id='asterisco'>*</b>"); ?>
-                        <?= $form->field($model, 'destino')->textInput(['maxlength' => '100', 'id' => 'destinoViajeManual',])->label("Destino <b id='asterisco'>*</b>"); ?>
-                        <b>
-                            <h3>
-                                <u>Datos</u>
-                                <u>Del</u>
-                                <u>Chofer</u>
-                            </h3>
-                        </b>
-
-                        <?php $select = Html::beginForm() ?>
-                        <?php echo Html::label("Choferes <b id='asterisco'>*</b>") ?>
-                        <br>
-                        <?php echo Html::dropDownList('listadoChoferes', $select, ['empty' => 'Seleccion...', '1' => 'Pablo', '2' => 'Martin'], ['id' => 'listadoChoferes']); ?>
-                        <br><br>
-                        <?php echo Html::label("Veh&iacute;culos <b id='asterisco'>*</b>") ?>
-                        <br>
-                        <?php echo Html::dropDownList('listadoCoches', $select, ['empty' => 'Seleccion...', '1' => 'Renault', '2' => 'Fiat'], ['id' => 'listadoCoches']); ?>
-                        <?php ActiveForm::end(); ?>
-                        <br>
-                        <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>
-                        <br><br>
-                        <div id='botones-grupo-viaje-manual'>
-                            <?= Html::submitButton('Cargar Viaje', ['class' => 'btn btn-primary', 'id' => 'btn-cargar-viaje']); ?>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar-viaje']); ?>
-                        </div>
-
-                    <?php endif; ?>
-                </div>
+<div class="row">
+    <div class="col-md-8">
+        <div id="btn-bar">
+            <?=
+            $this->registerJs('$(document).ready(function () {
+            initMap(true);
+            $("#btn-ver-remiserias").on("click", function() {getRemiserias(true)});
+            });', \yii\web\View::POS_READY);
+            ?>
+            <h3>
+                Seleccione origen y destino:
+            </h3>
+        </div>
+        <div id="mapHome" style="width:100%">
+            <div id="map-Index">
+                <div id="map"></div>
             </div>
-        </article>
-    </section>
-</div>
+            <input id="pac-input" class="controls" type="text" placeholder="Busca tu partido / barrio " />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <?php $form = ActiveForm::begin(); ?>
+        <b>
+            <h3>
+                Datos del viaje:
+            </h3>
+        </b>
+        <?= $form->field($model, 'origenTexto')->input("text", ['id'=>'origenTexto','readonly' => true])->label("Origen"); ?>
+        <?= $form->field($model, 'origen')->hiddenInput(['id' => 'origencoordenada'])->label(false); ?>
+        <?= $form->field($model, 'destinoTexto')->input("text", ['id' => 'destinoTexto','readonly' => true])->label("Destino"); ?>
+        <?= $form->field($model, 'destino')->hiddenInput(['id' => 'destinocoordenada'])->label(false);?>
+        <div class="row">
+            <div class="col-md-8">
+                <?= $form->field($model, 'Distancia')->input("text", ['id'=>'distancia','maxlength' => '50','readonly' => true])->label("Distancia"); ?>
+            </div>
+            <div class="col-md-4">
+                <?= Html::label(""); ?>
+                <?= Html::button('Calcular Tarifa', ['id'=>'importetotal','class'=>'btn btn-primary', 'onclick' => '$("#importetotal").val("'."110".'");']) ?>
+            </div>
+        </div>
+        <?= $form->field($model, 'ImporteTotal')->input("text", ['maxlength' => '50'])->label("Importe total"); ?>
+        <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes,['prompt'=>'Seleccione chofer'])?>
+        <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos,['prompt'=>'Seleccione vehiculo'])?>
 
+        <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-crearViaje']); ?>
+        <?= Html::button('Ver Viajes', ['value'=>Url::to('http://localhost:50420/web/index.php?r=recepcionista%2Flistar_solcitudes_servicio'),'class'=>'btn btn-primary btn-lg','id'=>'modalButton']) ?>
+
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>

@@ -1,0 +1,118 @@
+#barra-menu-main{
+    background-color: #2e6da4;
+    border: #2e6da4;
+}
+
+
+#contenedor-home{
+
+    background-image:url(REMISEJECUTIVO5.jpg);
+    background-repeat:no-repeat;
+
+    margin-top:-50px;
+    border-radius:0%;
+    margin-left:-110px;
+    margin-right:-110px;
+
+
+}
+
+.REMIS.jpg {
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+}
+
+#boton{
+    height: 35px; 
+    width: 200px;
+    text-align: center;    
+    font-size:15px;
+    font-style:unset;
+    font-variant-caps:inherit;
+    font-style:oblique;
+    background-color:darkseagreen;
+    margin-bottom:380px;
+    margin-left:1000px; 
+    margin-top:-20px;
+
+    box-shadow:5px 5px 10px #33C4C4;
+}
+
+#boton2{
+    height: 35px; 
+    width: 200px;
+    text-align: center;    
+    font-size:0px;
+    font-style:unset;
+    font-variant-caps:inherit;
+    font-style:oblique;
+    background-color:darkseagreen;
+    margin-bottom:10px;
+    margin-left:100px;
+    box-shadow:0px 0px 0px #33C4C4;
+}
+
+
+p {
+    font: 35px/25px "Roboto",Arial,Helvetica,sans-serif;
+}
+
+
+
+
+#mensaje{
+    font-size:20px;
+    color:chartreuse;
+
+    margin-left:20px;
+    float:right;
+    box-shadow:5px 5px 10px #888888;
+    font-family:Verdana;
+    font-style:italic;
+    vertical-align:initial;
+    line-height:-2;
+
+
+}
+
+#titulo-contenido{
+
+    font: 30px/12px "Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic ;
+    color:white;        
+    margin-left:290px;
+    letter-spacing: -0.0005em;
+    vertical-align: central;
+    line-height:-6;
+    margin-top:100px;
+    text-shadow: 5px 5px 5px #642EFE;
+}
+
+
+
+
+#table{
+    width:auto;
+    height:auto;
+}
+
+
+#jumbotron{
+    background-color: black;        
+    margin-left:-110px;
+    margin-right:-110px;
+    border-radius:0%;
+    margin-top:-100px;
+
+}
+
+#col-lg-4{
+
+
+    font: 15px/8px "Arial",Helvetica,sans-serif;
+    color:silver;        
+    letter-spacing: -0.002em;
+    line-height:-0,5;
+
+}
