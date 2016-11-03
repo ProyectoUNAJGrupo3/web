@@ -32,10 +32,10 @@ class AgenciaController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'only' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia','GetTarifa'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                         //el administrador tiene permisos sobre las siguientes acciones
-                        ['actions' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia'],
+                        ['actions' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia','GetTarifa'],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
@@ -103,6 +103,9 @@ class AgenciaController extends Controller {
 
     public function actionAlta_telefonista_agencia() {
         $model = new AltaRecepcionistaAgenciaModel();
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarrecepcionista() === true)) {
+            Yii::$app->session->setFlash('Empleado creado con exito');
+        }
         return $this->render("altaTelefonista", ['model' => $model]);
     }
 
@@ -161,6 +164,16 @@ class AgenciaController extends Controller {
 
     public function actionListar_viajes_totales_agencia() {
 
+        $model = new ViajesGridModel();
+        $model->setDataProvider();
+        $model->setListChoferes();
+        $model->setListVehiculos();
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
+            Yii::$app->session->setFlash('Viaje creado con exito');
+        }
+        return $this->render("listaViajesTotales", ['model' => $model]);
+    }
+    public function actionGetTarifa() {
         $model = new ViajesGridModel();
         $model->setDataProvider();
         return $this->render("listaViajesTotales", ['model' => $model]);

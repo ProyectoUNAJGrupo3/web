@@ -61,17 +61,33 @@ class RecepcionistaController extends Controller {
     }
 
     public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
-        return $this->render('index');
+        return $this->redirect(['alta_viaje_manual']);
     }
 
     public function actionAlta_viaje_manual() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new AltaViajeManualModel();
+        $model->setDataProvider();
+        $model->setListChoferes();
+        $model->setListVehiculos();
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
+            Yii::$app->session->setFlash('Viaje creado con exito');
+            return $this->refresh();
+        }
         return $this->render("altaViajeManual", ['model' => $model]);
     }
 
     public function actionListar_solcitudes_servicio() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ListaSolicitudesServicioModel();
-        return $this->render("listarSolicitudes", ['model' => $model]);
+        $model->setDataProvider();
+        $model->setListChoferes();
+        $model->setListVehiculos();
+        return $this->renderAjax("listarSolicitudes", ['model' => $model]);
+    }
+
+    public function actionCerrarViaje() {                      //renderiza el index de la carpeta agencia dentro de views
+        $model = new ListaSolicitudesServicioModel();
+        $model->cerrarViaje();
+        return $this->renderAjax("listarSolicitudes", ['model' => $model]);
     }
 
 }

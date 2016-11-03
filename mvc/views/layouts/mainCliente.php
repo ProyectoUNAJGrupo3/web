@@ -6,7 +6,6 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-
 use app\models\TipoUsuario;
 use app\assets\AppAssetCliente;
 use app\assets\AppAssetWebSite;
@@ -64,7 +63,6 @@ $this->title = 'Usuario';
                             ['label' => 'Ver Historial', 'url' => ['/cliente/listar_historial_calificaciones'],],
                         ],
                     ],
-                    ['label' => 'Registrar Agencia', 'url' => ['/cliente/solicitud_registrar_agencia']],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]

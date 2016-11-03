@@ -20,13 +20,16 @@ class AppAsset extends AssetBundle {
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        'css/styleHome.css',
+        'css/styleHomeComunATodasLasVistas.css',
         'css/styleFooter.css',
         'css/styleHeader.css',
         'css/styleHomeAgencia.css',
         'css/styleAccesoDenegado.css',
+        'css/styleQuienesSomos.css',
     ];
     public $js = [
+        /*'js/ViajesModal.js',
+        'js/ViajesGrid_Mapas.js',*/
         'js/Mapas.js',
         'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];

@@ -7,7 +7,7 @@ AppAsset::register($this);
 $this->title = 'Quiénes Somos';
 ?>
 <div class="site-about">
-    <div id="contenedor-nuestro-clientes">
+    <div id="contenedor-quienes-somos">
         <div id="sub-contenedor">
             <div id="imagen-header" src="#" alt="Imagen">
             </div>
@@ -48,7 +48,7 @@ Utilizamos lo mejor de la tecnolog&iacute;a disponible, tanto en el mundo comerc
                      </ul>
               
                     
-                   <h3>El Equipo:</h3>
+                   <h3>Nuestro Equipo</h3>
                     <ul id="lista-plantel">
                         <h4>Nelson Galdeman </h4>
                         <h4>Marcelo Mansilla </h4>
@@ -58,6 +58,7 @@ Utilizamos lo mejor de la tecnolog&iacute;a disponible, tanto en el mundo comerc
                         <h4>Sebastian Encina </h4>
                         <h4>Lilian Silva</h4>
                         <h4>Bruno Vitucci </h4>
+                        <h4>Federico Lozada</h4>
                
 
                  
