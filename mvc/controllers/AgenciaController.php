@@ -88,7 +88,9 @@ class AgenciaController extends Controller {
 
     public function actionAlta_vehiculo_agencia() {
         $model = new AltaVehiculoAgenciaModel();
-
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarvehiculo() === true)) {
+            Yii::$app->session->setFlash('vehiculo creado con exito');
+        }
         return $this->render("altaVehiculo", ['model' => $model]);
     }
 
