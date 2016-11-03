@@ -23,6 +23,7 @@ use app\models\Agencia\ListaViajesTurnoManianaModel;
 use app\models\Agencia\ListaViajesTurnoTardeModel;
 use app\models\Agencia\ListaViajesTurnoNocheModel;
 use app\models\Agencia\ViajesGridModel;
+use app\models\Agencia\GridModel;
 
 class AgenciaController extends Controller {
 
@@ -135,17 +136,20 @@ class AgenciaController extends Controller {
     //******************************Listar**************************************//
 
     public function actionListar_choferes_agencia() {
-        $model = new ListaChoferesModel();
+        $model = new GridModel();
+        $model->setDataProviderChofer();
         return $this->render("listaChoferes", ['model' => $model]);
     }
 
     public function actionListar_recepcionistas_agencia() {
-        $model = new ListaRecepcionistasModel();
+        $model = new GridModel();
+        $model->setDataProviderrecepcionista();
         return $this->render("listaRecepcionistas", ['model' => $model]);
     }
 
     public function actionListar_vehiculo_agencia() {
-        $model = new ListaVehiculoModel();
+        $model = new GridModel();
+        $model->setDataProvidervehiculo();
         return $this->render("listaVehiculos", ['model' => $model]);
     }
 
