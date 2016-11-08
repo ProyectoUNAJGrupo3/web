@@ -57,8 +57,7 @@ $this->title = 'Service Remis';
                 <?=
                 $this->registerJs('$(document).ready(function () {
             initMap(true);
-            $("#btn-ver-remiserias").on("click", function() {getRemiserias(true)});
-
+            $("#btn-ver-remiserias").on("click", function() {doTheAjax()});
 
             });', \yii\web\View::POS_READY);
                 ?>

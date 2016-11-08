@@ -9,8 +9,6 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 AppAssetCliente::register($this);
 ?>
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
 <div class="site-contact">
     <div class="col-lg-20">
         <section id="main">
