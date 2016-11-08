@@ -25,10 +25,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                         <strong>Solicitud Servicio Remis</strong>
                     </h1>
                     <div class="container-form" id="contenedor-formulario">
-                        <div id="map-container">
-                            <div id="map"></div>
-                        </div>
-                        <input id="pac-input" class="controls" type="text" placeholder="Busca tu partido / barrio " />
 
                         <h1>
                             <?= Html::encode($this->title) ?>
@@ -63,12 +59,14 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                 </h3>
                             </b>
 
-                            <?= $form->field($model, 'nombreAgencia')->input("text", ['readonly' => true, 'autofocus' => true, 'maxlength' => '50', 'id' => 'nombreAgenciaSolicitudRemisUsuario'])->label("Nombre Agencia<b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'nombreUsuario')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'nombreSolicitudRemisUsuario'])->label("Nombre Usuario<b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'apellidoUsuario')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'apellidoSolicitudRemisUsuario'])->label("Apellido Usuario<b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'origenUsuario')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'origenSolicitudRemisUsuario'])->label("Origen <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'destinoUsuario')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'destinoSolicitudRemisUsuario'])->label("Destino <b id='asterisco'>*</b>"); ?>
-                            <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
+                            <?= $form->field($model, 'idAgencia')->input("text", ['readonly' => true, 'autofocus' => true, 'maxlength' => '50', 'id' => 'nombreAgenciaSolicitudRemisUsuario'])->label("Nombre Agencia<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'idTarifa')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'nombreSolicitudRemisUsuario'])->label("Nombre Usuario<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'importeTotal')->input("text", ['readonly' => true, 'autofocus' => true, 'maxlength' => '50', 'id' => 'nombreAgenciaSolicitudRemisUsuario'])->label("Nombre Agencia<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'origen')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'nombreSolicitudRemisUsuario'])->label("Nombre Usuario<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'destino')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'apellidoSolicitudRemisUsuario'])->label("Apellido Usuario<b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'OrigenTexto')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'origenSolicitudRemisUsuario'])->label("Origen <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'DestinoTexto')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'destinoSolicitudRemisUsuario'])->label("Destino <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'Distancia')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'destinoSolicitudRemisUsuario'])->label("Destino <b id='asterisco'>*</b>"); ?>
                             <?php ActiveForm::end(); ?>
                             <br>
                             <b>Campos con</b> <b id="asterisco">*</b> <b>son obligatorios</b>

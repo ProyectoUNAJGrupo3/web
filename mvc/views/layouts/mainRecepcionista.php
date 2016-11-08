@@ -15,6 +15,7 @@ $this->title = 'Recepcionista';
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <meta charset="<?= Yii::$app->charset ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <?= Html::csrfMetaTags() ?>
@@ -41,18 +42,19 @@ $this->title = 'Recepcionista';
             ]);
             ;
             echo Nav::widget([
+                  'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['recepcionista/index']],
+                    ['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['recepcionista/index']],
                     [
                         'label' => 'Viajes',
                         'items' => [
-                            ['label' => 'Carga Nuevo viaje', 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                            '<li class="divider"></li>',
-                            ['label' => 'Ver Solicitudes', 'url' => ['/recepcionista/listar_solcitudes_servicio'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            //['label' => 'Carga Nuevo viaje', 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            //'<li class="divider"></li>',
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Solicitudes'), 'url' => ['/recepcionista/listar_solicitudes_servicio'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         ],
                     ],
-                    ['label' => 'Ver Solicitud', 'url' => ['recepcionista/ver_datos_solcitud_de_servicio']],
+                    ['label' => 'Ver Solicitud', 'url' => ['recepcionista/ver_datos_solicitud_de_servicio']],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]
