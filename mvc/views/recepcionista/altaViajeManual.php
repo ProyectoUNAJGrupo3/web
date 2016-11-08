@@ -78,7 +78,7 @@ Modal::end();
         <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos,['prompt'=>'Seleccione vehiculo'])?>
 
         <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-crearViaje']); ?>
-        <?= Html::button('Ver Viajes', ['value'=>Url::to('http://localhost:50420/web/index.php?r=recepcionista%2Flistar_solcitudes_servicio'),'class'=>'btn btn-primary btn-lg','id'=>'modalButton']) ?>
+        <?= Html::button('Ver Viajes', ['value'=>Url::to('http://localhost:50420/web/index.php?r=recepcionista%2Flistar_solicitudes_servicio'),'class'=>'btn btn-primary btn-lg','id'=>'modalButton']) ?>
 
     </div>
 

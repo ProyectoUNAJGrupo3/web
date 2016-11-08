@@ -69,15 +69,15 @@ class ClienteController extends Controller {
         return $this->render("index", ['model' => $model]);
     }
 
-    public function actionSolicitud_registrar_agencia() {
+    /*public function actionSolicitud_registrar_agencia() {
         $model = new PSFormularioSolicitudRegistrarAgenciaModel();
         return $this->render("solicitudRegistrarAgencia", ['model' => $model]);
-    }
+    }*/
 
-    public function actionSolicitar_servicio_remis() {
+    /*public function actionSolicitar_servicio_remis() {
         $model = new SolicitudRemiseriaModel();
         return $this->render("solicitudPedirServicioRemiseria", ['model' => $model]);
-    }
+    }*/
 
     public function actionListar_hisrotial_viajes() {
         $model = new ListaHistorialViajesUsuarioModel();
