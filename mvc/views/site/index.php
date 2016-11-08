@@ -236,4 +236,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
 </div>
 
 
+<<<<<<< HEAD
 >>>>>>> upstream/RemisYa-v2
+=======
+>>>>>>> repocentral/RemisYa-v2
+>>>>>>> 942261ac20eb4e804c63682bfaf391151a16878f
