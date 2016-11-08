@@ -50,6 +50,7 @@ function getRemiserias(Ubicacion) {
     clearRemo()
     
     var selected = marcadores[0];
+    //el ajax debería estar aca
     remos =[{
         AgenciaID:45,
         Nombre:'Remis Quilmes',
@@ -346,6 +347,8 @@ function initMap(isindex) {
 
 
     }
+
+
     
     function geocodeLatLng(geocoder, map, latLng) {// <--infowindow-->) {
         var latlng = latLng;
@@ -373,8 +376,8 @@ function initMap(isindex) {
     geocoder.geocode({'location': latlng}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
             if (results[0]) {
-
-                $('#psformulariousuariomodel-direccion').val(results[0].formatted_address);
+                if ($('#direccionAgencia').length >= 1) $('#direccionAgencia').val(results[0].formatted_address);
+                else   $('#psformulariousuariomodel-direccion').val(results[0].formatted_address);
                 $('#pac-input').val(results[1].formatted_address);
                 //map.setZoom(11);
                 //var marker = new google.maps.Marker({
@@ -394,6 +397,19 @@ function initMap(isindex) {
 }
 
 };
+function doTheAjax() {
+    var id = "agencia seleccionada"; // le pega al controlador piola con la data bien, tengo que armar bien esto con el otro codigo de agencia.
+    $.get({
+        url: 'index.php?r=rest%2Fsearch',
+        dataType: "json",
+        data: {
+            data: id
+        },
+        success: function (data) {
+            console.log(data.search);
+        }
+    });
+}
 
 function calculateDistanceAndStuff(latLng) {
     service.getDistanceMatrix({
