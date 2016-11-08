@@ -5,14 +5,16 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 
-use app\assets\AppAssetAgencia;
+use app\assets\AppAsset;
+use app\assets\AppAssetWebSite;
 use yii\grid\GridView;
 use yii\helpers\BaseHtml;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Dropdown;
 use yii\helpers\ArrayHelper;
-
-AppAssetAgencia::register($this);
+use yii\bootstrap\Button;
+AppAsset::register($this);
+AppAssetWebSite::register($this);
 /* @var $this yii\web\View */
 $this->title = 'RemisYa';
 ?>
@@ -25,14 +27,9 @@ $this->title = 'RemisYa';
             $("#btn-ver-remiserias").on("click", function() {getRemiserias(true)});
             });', \yii\web\View::POS_READY);
             ?>
-            <label id="distancia" class="display:none">
-                <strong>
-                    <p>
-                        Distancia :
-                    </p>
-
-                </strong>
-            </label>
+            <h3>
+                Seleccione origen y destino:
+            </h3>
         </div>
         <div id="mapHome" style="width:100%">
             <div id="map-Index">
@@ -48,27 +45,27 @@ $this->title = 'RemisYa';
                 Datos del viaje:
             </h3>
         </b>
-        <?= $form->field($model, 'Origen')->input("text", ['maxlength' => '50'])->label("Origen"); ?>
-        <?= $form->field($model, 'OrigenCoordenada')->hiddenInput(['id' => 'origencoordenada'])->label(false); ?>
-        <?= $form->field($model, 'Destino')->input("text", ['maxlength' => '50'])->label("Destino"); ?>
-        <?=
-        $form->field($model, 'DestinoCoordenada')->hiddenInput(['id' => 'destinocoordenada'])->label(false);
-        ?>
-        <div class="row">
+        <?= $form->field($model, 'origenTexto')->input("text", ['id'=>'origenTexto','readonly' => true])->label("Origen"); ?>
+        <?= $form->field($model, 'origen')->hiddenInput(['id' => 'origencoordenada'])->label(false); ?>
+        <?= $form->field($model, 'destinoTexto')->input("text", ['id' => 'destinoTexto','readonly' => true])->label("Destino"); ?>
+        <?= $form->field($model, 'destino')->hiddenInput(['id' => 'destinocoordenada'])->label(false);?>
+        <div class="row"> 
             <div class="col-md-8">
-                <?= $form->field($model, 'Distancia')->input("text", ['maxlength' => '50'])->label("Distancia"); ?>
+                <?= $form->field($model, 'Distancia')->input("text", ['maxlength' => '50','readonly' => true])->label("Distancia"); ?>
             </div>
             <div class="col-md-4">
-                <?= Html::a('Calcular Tarifa', $model->setTarifa(), ['class'=>'btn btn-primary']) ?>
+                <?= Html::button('Calcular Tarifa', ['class'=>'btn btn-primary', 'onclick' => '$("#viajesgridmodel-importetotal").val("'."110".'");']) ?>
             </div>
         </div>
         <?= $form->field($model, 'ImporteTotal')->input("text", ['maxlength' => '50'])->label("Importe total"); ?>
-        <?= $form->field($model, 'Chofer')->dropDownList($model->Chofer,['prompt'=>'Seleccione chofer'])?>
-        <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculo,['prompt'=>'Seleccione vehiculo'])?>
+        <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes,['prompt'=>'Seleccione chofer'])?>
+        <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos,['prompt'=>'Seleccione vehiculo'])?>
+
+        <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-crearViaje']); ?>
     </div>
+
     <?php ActiveForm::end(); ?>
 </div>
-
     
 <?=
 GridView::widget([

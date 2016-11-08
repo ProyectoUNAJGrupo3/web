@@ -25,9 +25,10 @@ class AppAssetRecepcionista extends AssetBundle {
         'cssRecepcionista/styleCommon.css',
     ];
     public $js = [
-        'js/Maps.js',
-        'js/Mapas.js',
+        'js/ViajesModal.js',
+        'js/ViajesGrid_Mapas.js',
         'js/AperturaPopupLogin.js',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];
     public $depends = [
         'yii\web\YiiAsset',

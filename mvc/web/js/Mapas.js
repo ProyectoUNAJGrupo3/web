@@ -77,14 +77,14 @@ function getRemiserias(Ubicacion) {
 
         },
         {
-            AgenciaID:63,
-            Nombre:"Remis Colombia",
-            Telefono: 42102222,
+            AgenciaID:1,
+            Nombre:"Remis UNAJ",
+            Telefono: 553153,
             DireccionCoordenada: { lat: -34.776670, lng: -58.289105800000016 },
-            infoAgencia: " Te llevamos a tu casa y te vendemos frula",
+            infoAgencia: " Te llevamos y te trae!",
             Tarifa: {
-                ID: 9,
-                PrecioKM: 8,
+                ID: 3,
+                PrecioKM: 14,
             }
         }];
     var infoWindow;
