@@ -25,7 +25,7 @@ class PSCssAsset extends AssetBundle {
         'cssMainPage/styleHomeAgencia.css',
         //'css/StyleFormularioUsuario.css',
         'cssMainPage/styleHeader.css',
-        'cssMainPage/styleHome.css',
+        'cssMainPage/styleHome.css', 
         'cssMainPAge/stylePagesHtml.css',
     ];
     public $js = [
