@@ -21,11 +21,11 @@ class AppAssetAgencia extends AssetBundle {
     public $css = [
         'cssAgencia/styleAltaChofer.css',
         'cssAgencia/styleVehiculo.css',
-        'css/styleListarSolicitudesDesdeRecepcionista.css',
+        //'css/styleListarSolicitudesDesdeRecepcionista.css',
     ];
     public $js = [
         'js/ViajesGrid_Mapas.js',
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];
     public $depends = [
         'yii\web\YiiAsset',

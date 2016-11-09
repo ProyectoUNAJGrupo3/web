@@ -23,6 +23,7 @@ use app\models\Agencia\ListaViajesTurnoManianaModel;
 use app\models\Agencia\ListaViajesTurnoTardeModel;
 use app\models\Agencia\ListaViajesTurnoNocheModel;
 use app\models\Agencia\ViajesGridModel;
+use app\models\Agencia\GridModel;
 
 class AgenciaController extends Controller {
 
@@ -32,10 +33,10 @@ class AgenciaController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'only' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia','GetTarifa'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                         //el administrador tiene permisos sobre las siguientes acciones
-                        ['actions' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia'],
+                        ['actions' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia','GetTarifa'],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
@@ -88,7 +89,9 @@ class AgenciaController extends Controller {
 
     public function actionAlta_vehiculo_agencia() {
         $model = new AltaVehiculoAgenciaModel();
-
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarvehiculo() === true)) {
+            Yii::$app->session->setFlash('vehiculo creado con exito');
+        }
         return $this->render("altaVehiculo", ['model' => $model]);
     }
 
@@ -133,17 +136,20 @@ class AgenciaController extends Controller {
     //******************************Listar**************************************//
 
     public function actionListar_choferes_agencia() {
-        $model = new ListaChoferesModel();
+        $model = new GridModel();
+        $model->setDataProviderChofer();
         return $this->render("listaChoferes", ['model' => $model]);
     }
 
     public function actionListar_recepcionistas_agencia() {
-        $model = new ListaRecepcionistasModel();
+        $model = new GridModel();
+        $model->setDataProviderrecepcionista();
         return $this->render("listaRecepcionistas", ['model' => $model]);
     }
 
     public function actionListar_vehiculo_agencia() {
-        $model = new ListaVehiculoModel();
+        $model = new GridModel();
+        $model->setDataProvidervehiculo();
         return $this->render("listaVehiculos", ['model' => $model]);
     }
 
@@ -166,12 +172,16 @@ class AgenciaController extends Controller {
 
         $model = new ViajesGridModel();
         $model->setDataProvider();
+        $model->setListChoferes();
+        $model->setListVehiculos();
+        if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
+            Yii::$app->session->setFlash('Viaje creado con exito');
+        }
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
     public function actionGetTarifa() {
-
         $model = new ViajesGridModel();
-        $model->setTarifa();
+        $model->setDataProvider();
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
 }
