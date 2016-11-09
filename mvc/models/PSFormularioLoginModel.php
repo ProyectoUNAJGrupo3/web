@@ -72,6 +72,7 @@ class PSFormularioLoginModel extends Model
      */
     public function getUser()
     {
+
         if ($this->_user === false) {
             User::setUsers();
             $this->_user = User::findByUsername($this->username);

@@ -280,5 +280,3 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 /mvc/vendor
-/tests/test_unitario.php
-/mvc/models
