@@ -19,6 +19,7 @@ $this->title = 'Usuario';
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <meta charset="<?= Yii::$app->charset ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <?= Html::csrfMetaTags() ?>
@@ -46,21 +47,22 @@ $this->title = 'Usuario';
             ;
 
             echo Nav::widget([
+                'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['/cliente/index']],
+                    ['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['/cliente/index']],
                     [
                         'label' => 'Viajes',
                         'items' => [
-                            ['label' => 'Ver Historial', 'url' => ['/cliente/listar_hisrotial_viajes'],],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_hisrotial_viajes'],],
                             '<li class="divider"></li>',
-                            ['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
-                            '<li class="divider"></li>',
+                            //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
+                            //'<li class="divider"></li>',
                             ['label' => 'Calificar Servicio', 'url' => ['#'],],
                         ],
                     ],
                     ['label' => 'Calificaciones', 'url' => ['#'], 'items' => [
-                            ['label' => 'Ver Historial', 'url' => ['/cliente/listar_historial_calificaciones'],],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_calificaciones'],],
                         ],
                     ],
                     Yii::$app->user->isGuest ? (
@@ -81,11 +83,11 @@ $this->title = 'Usuario';
             ?>
 
             <div class="container">
-                <?=
-                Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ])
-                ?>
+<?=
+Breadcrumbs::widget([
+    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+])
+?>
                 <?= $content ?>
             </div>
         </div>
@@ -97,7 +99,7 @@ $this->title = 'Usuario';
             </div>
         </footer>
 
-        <?php $this->endBody() ?>
+<?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

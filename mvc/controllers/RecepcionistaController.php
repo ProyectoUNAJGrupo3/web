@@ -76,7 +76,7 @@ class RecepcionistaController extends Controller {
         return $this->render("altaViajeManual", ['model' => $model]);
     }
 
-    public function actionListar_solcitudes_servicio() {                      //renderiza el index de la carpeta agencia dentro de views
+    public function actionListar_solicitudes_servicio() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ListaSolicitudesServicioModel();
         $model->setDataProvider();
         $model->setListChoferes();
