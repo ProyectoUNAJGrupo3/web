@@ -7,6 +7,7 @@ use app\assets\AppAsset;
 use app\assets\AppAssetAgencia;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
+
 AppAssetAgencia::register($this);
 AppAsset::register($this);
 ?>
@@ -51,26 +52,29 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
 <?php else: ?>
                         <div>
                             <h1> Grilla de choferes</h1>
-<?=
-GridView::widget(['dataProvider' => $model->dataProvider,
-                 'columns' => [
-                 'Usuario',
-                 'Password',
-                 'Nombre',
-                 'Apellido',
-                 'Documento',
-             ],]);
-?>
+                            <?=
+                            GridView::widget(['dataProvider' => $model->dataProvider,
+                                'columns' => [
+                                    ['class' => 'yii\grid\CheckboxColumn'],
+                                    'Usuario',
+                                    'Password',
+                                    'Nombre',
+                                    'Apellido',
+                                    'Documento',
+                                ],]);
+                            ?>
 
-                        <div id='botones-group'>
-                            <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
-                        </div>
+                            <div id='botones-group'>
+                                <?= Html::submitButton('Agregar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                            </div>
 <?php endif; ?>
-                </div>  
-        </article>
-    </section>
-</div>
+                    </div>  
+                    </article>
+                    </section>
+                </div>
