@@ -4,8 +4,6 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-use app\models\CapaServicio\PersonasModelo;
-use app\models\CapaServicio\AgenciaModelo;
 
 /**
  * LoginForm is the model behind the login form.
@@ -61,8 +59,6 @@ class PSFormularioLoginModel extends Model
      */
     public function login()
     {
-        $choferes= new PersonasModelo();
-        $test = $choferes->GetInfoPersonas(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,NULL);
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
