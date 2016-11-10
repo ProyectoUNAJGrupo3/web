@@ -21,150 +21,99 @@ use app\assets\PSCssAsset;
 
 PSCssAsset::register($this);
 /* @var $this yii\web\View */
-$this->title = 'Service Remis';
 ?>
-<div class="site-index">
-
-    <!--<div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>-->
-
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
-
-    <!--<div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>-->
-
-    <div id="contenedor-home">
 
 
-        <div id="titulo">
-            <div>
-                <h1 id="titulo-contenido" size="50px">Bienvenido a RemisYA</h1>
-            </div>
-        </div>
 
-        <div id="descripcion">
-            <strong>
-                <p>
-                    Por medio de la aplicaci&oacute;n usted podr&aacute; solicitar el servicio de remis prestado por las agencias.
-                    Para ello, usted contar&aacute; con la posiblidad de listar las agenias m&aacute;s cercanas y podr&aacute; pedir una prestaci&oacute;n
-                    mediante la opci&oacute;n "Solicitar Servicio Remiseria".
-                </p>
-            </strong>
-        </div>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
+<div class="site-contact">
+    <section id="main">
+        <article id="imagen-fondo">
+            <div style="background-image: url(img/REMISEJECUTIVO5.jpg); background-repeat:no-repeat; " >
+                <div>
+                    <b>
+                        <p id="titulo-contenido"> Bienvenidos a Remis ya!
+                        </p>
+                        <p id="titulo-contenido-dos">
+                            Mejore la manera y el desempe&ntilde;o  de Gestionar su Agencia
+                        </p>
+                    </b>
+                </div>
+                <div>
+                    <a id="boton-solicitar-remis" class="btn btn-primary" href="#">   SOLICITE SU REMIS</a>
+                </div>
+                
 
-        <div id="bar-buttons">
-            <div id="btn-bar">
-                <?= Html::button('Solicitar Servicio Remiseria', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-solcitar-remis']) ?>
-                <?= Html::button('Listar Remiserias', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-ver-remiserias']) ?>
-                <?= Html::button('Obtener ubicaci&oacute;n en el Mapa', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-obtener-ubicacion-en-el-mapa']) ?>
             </div>
 
+        </article>
+        <article id="description">
+            <div class="jumbotron">
+                <div class="row">
+                    <div id="col-lg-4">
+                        <div class="col-lg-4">
+                            <h2>
+                                <img src="img/telefono.jpg" id="telefono.jpg" />   Pedir remises Online
+                            </h2>
 
-            <div id="mapHome"></div>
-            <div id="dvMapHome">
-                <?php
-                $coord = new LatLng(['lat' => 39.720089311812094, 'lng' => 2.91165944519042]);
-                $map = new Map([
-                    'center' => $coord,
-                    'zoom' => 14,
-                ]);
+                            <p>                        
+                                Usted puede Elegir la mejor opcion de remiseria, seleccionando la m&aacute;s cercana, o la que ofresca el mejor precio y servicio adaptandose a sus necesidades.                       
+                            </p>
 
-                // lets use the directions renderer
-                $home = new LatLng(['lat' => 39.720991014764536, 'lng' => 2.911801719665541]);
-                $school = new LatLng(['lat' => 39.719456079114956, 'lng' => 2.8979293346405166]);
-                $santo_domingo = new LatLng(['lat' => 39.72118906848983, 'lng' => 2.907628202438368]);
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>
+                                <img src="img/negocio.jpg" id="negocio.jpg" />  Administre su propia Agencia Online
+                            </h2>
+                            <p>
+                                Ofrecemos un Sistema donde Usted pueda mejorar la gestion de su propia Agencia de remises, pudiendo obtener un seguimiento de las distintas actividades de su empresa de una manera simple y eficiente.
+                            </p>
 
-                // setup just one waypoint (Google allows a max of 8)
-                $waypoints = [
-                    new DirectionsWayPoint(['location' => $santo_domingo])
-                ];
-
-                $directionsRequest = new DirectionsRequest([
-                    'origin' => $home,
-                    'destination' => $school,
-                    'waypoints' => $waypoints,
-                    'travelMode' => TravelMode::DRIVING
-                ]);
-
-                // Lets configure the polyline that renders the direction
-                $polylineOptions = new PolylineOptions([
-                    'strokeColor' => '#FFAA00',
-                    'draggable' => true
-                ]);
-
-                // Now the renderer
-                $directionsRenderer = new DirectionsRenderer([
-                    'map' => $map->getName(),
-                    'polylineOptions' => $polylineOptions
-                ]);
-
-                // Finally the directions service
-                $directionsService = new DirectionsService([
-                    'directionsRenderer' => $directionsRenderer,
-                    'directionsRequest' => $directionsRequest
-                ]);
-
-                // Thats it, append the resulting script to the map
-                $map->appendScript($directionsService->getJs());
-
-                // Lets add a marker now
-                $marker = new Marker([
-                    'position' => $coord,
-                    'title' => 'My Home Town',
-                ]);
-
-                // Provide a shared InfoWindow to the marker
-                $marker->attachInfoWindow(
-                        new InfoWindow([
-                    'content' => '<p>This is my super cool content</p>'
-                        ])
-                );
-
-                // Add marker to the map
-                $map->addOverlay($marker);
-
-                // Now lets write a polygon
-                $coords = [
-                    new LatLng(['lat' => 25.774252, 'lng' => -80.190262]),
-                    new LatLng(['lat' => 18.466465, 'lng' => -66.118292]),
-                    new LatLng(['lat' => 32.321384, 'lng' => -64.75737]),
-                    new LatLng(['lat' => 25.774252, 'lng' => -80.190262])
-                ];
-
-                $polygon = new Polygon([
-                    'paths' => $coords
-                ]);
-
-                // Add a shared info window
-                $polygon->attachInfoWindow(new InfoWindow([
-                    'content' => '<p>This is my super cool Polygon</p>'
-                ]));
-
-                // Add it now to the map
-                $map->addOverlay($polygon);
-
-
-                // Lets show the BicyclingLayer :)
-                $bikeLayer = new BicyclingLayer(['map' => $map->getName()]);
-
-                // Append its resulting script
-                $map->appendScript($bikeLayer->getJs());
-
-// Display the map -finally :)
-                echo $map->display()
-                ?>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>
+                                <img src="img/pesos.jpg" id="pesos.jpg" /> Optimice los costos de Su Agencia
+                            </h2>
+                            <p>
+                                El servicio del sistema le permite realizar sus actividades, pudiendo obtener gestion eficiente de costos y ganancias obtenidas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+
+            <div class="jumbotron">
+                <div class="row">
+                    <div id="col-lg-4">
+                        <div class="col-lg-4">
+                            <h2>
+                                <img src="img/persona.jpg" id="persona.jpg" />  Atenci&oacute;n al cliente
+                            </h2>
+                            <p>
+                                Atenci&oacute;n personalizada de operadores telef&oacute;nicos orientados al cliente, Choferes capacitados, reservas on-line, son algunos de los beneficios de utilizar esta Aplicaci&oacute;n.
+                            </p>
+                        </div>                                 
+                        <div class="col-lg-4">
+                            <h2>
+                                <img src="img/seguridad-logo.png" id="seguridad-logo.png" />Seguridad
+                            </h2>
+                            <p>
+                                Las Agencias pueden hacer un seguimiento de la flota v&iacute;a web. Los clientes pueden obtener datos Chofer y del m&oacute;vil asignado Adem&aacute;s de poder calificar su atenci&oacute;n.
+                            </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>
+                                <img src="img/24horas2.jpg" id="24horas2.jpg" />  24 Horas
+                            </h2>
+                            <p>
+                                Servicio de durante todo el a&ntilde;o, calidad, confianza.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </article>
+    </section>
 </div>
+
+
