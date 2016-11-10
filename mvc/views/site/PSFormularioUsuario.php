@@ -12,9 +12,6 @@ AppAssetWebSite::register($this);
     <section id="main">
         <article>
             <div id="page-single-main">-->
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
-<div class="site-contact">
     <section id="main">
         <article>
             <div id="page-single-main">

@@ -22,13 +22,12 @@ AppAsset::register($this);
                         <?= Html::encode($this->title) ?>
                     </h1>
 
-                    <?php if (Yii::$app->session->hasFlash('Usuario creado con exito')): ?>
+                    <?php if (Yii::$app->session->hasFlash('vehiculo creado con exito')): ?>
                         <div class="alert alert-success">
-                            Thank you for contacting us. We will respond to you as soon as possible.
+                            El alta del vehiculo ha sido un exito
                         </div>
                         <p>
-                            Note that if you turn on the Yii debugger, you should be able
-                            to view the mail message on the mail panel of the debugger.
+                            Dado los datos brindados el vehiculo ha sido dado de alta
                             <?php if (Yii::$app->mailer->useFileTransport): ?>
                                 Because the application is in development mode, the email is not sent but saved as
                                 a file under
@@ -58,8 +57,6 @@ AppAsset::register($this);
                         <?= $form->field($model, 'marca')->input("text", ['maxlength' => '50', 'id' => 'marca', 'autofocus' => true])->label("Marca <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'modelo')->input("text", ['maxlength' => '50', 'id' => 'modelo'])->label("Modelo <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'patente')->input("text", ['maxlength' => '50', 'id' => 'patente'])->label("Patente <b id='asterisco'>*</b>"); ?>
-                        <?= $form->field($model, 'anio')->input("text", ['maxlength' => '4', 'id' => 'anio'])->label("A&ntilde;o <b id='asterisco'>*</b>"); ?>
-                        <?= $form->field($model, 'numeroSeguro')->input('text', ['maxlength' => '10', 'id' => 'numeroSeguro'])->label("N&uacute;mero de Seguro <b id='asterisco'>*</b>"); ?>
 
                         <?php $select = Html::beginForm() ?>
                         <?php echo Html::label("Estado <b id='asterisco'>*</b>") ?>

@@ -5,6 +5,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\assets\AppAsset;
 use app\assets\AppAssetAgencia;
+use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 AppAssetAgencia::register($this);
 AppAsset::register($this);
@@ -49,72 +51,30 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                         </p>
 <?php else: ?>
                         <div>
-                            <h1>Ac&aacute; colocamos la grilla para listar choferes</h1>
+                            <h1> Grilla de choferes</h1>
+                            <?=
+                            GridView::widget(['dataProvider' => $model->dataProvider,
+                                'columns' => [
+                                    ['class' => 'yii\grid\CheckboxColumn'],
+                                    'Usuario',
+                                    'Password',
+                                    'Nombre',
+                                    'Apellido',
+                                    'Documento',
+                                ],]);
+                            ?>
 
-                            <table class="table table-striped table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Column heading</th>
-                                        <th>Column heading</th>
-                                        <th>Column heading</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="info">
-                                        <td>3</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="success">
-                                        <td>4</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="danger">
-                                        <td>5</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="warning">
-                                        <td>6</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr class="active">
-                                        <td>7</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                </tbody>
-                            </table> 
-                        </div>
-                        <div id='botones-group'>
-                            <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
-                        </div>
+                            <div id='botones-group'>
+                                <?= Html::submitButton('Agregar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                            </div>
 <?php endif; ?>
-                </div>  
-        </article>
-    </section>
-</div>
+                    </div>  
+                    </article>
+                    </section>
+                </div>
