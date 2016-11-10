@@ -11,7 +11,7 @@ use yii\base\Model;
  * @property User|null $user This property is read-only.
  *
  */
-class PSFormularioLoginModel extends Model
+class LoginForm extends Model
 {
     public $username;
     public $password;
@@ -72,7 +72,6 @@ class PSFormularioLoginModel extends Model
      */
     public function getUser()
     {
-
         if ($this->_user === false) {
             User::setUsers();
             $this->_user = User::findByUsername($this->username);

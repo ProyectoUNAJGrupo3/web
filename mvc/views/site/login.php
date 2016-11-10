@@ -60,7 +60,7 @@ AppAssetWebSite::register($this);
 
 
 
-                    <div id="imgEmail" align="center">
+                    <!--<div id="imgEmail" align="center">
                         <br />
                         <h4>
                             <p>
@@ -73,7 +73,7 @@ AppAssetWebSite::register($this);
                         <a href="https://www.facebook.com/" target="_blank">
                             <img src="img/facebook_logo.jpg" alt="www.facebook.com" style="width:30px;height:30px;" />
                         </a>
-                    </div>
+                    </div>-->
 
                     <div id="imgEmail" align="center">
                         <br />
@@ -85,7 +85,8 @@ AppAssetWebSite::register($this);
                         <br />
                         <br />
                         <a>
-                            <?= Html::button('Registrarme', ['class' => 'btn btn-primary', 'id' => 'btn-registrarme-login-popup']); ?>
+                            <?= Html::button('Registrarme como Usuario', ['class' => 'btn btn-primary', 'id' => 'btn-registrarme-user-login-popup']); ?>
+                            <?= Html::button('Registrarme como Agencia', ['class' => 'btn btn-primary', 'id' => 'btn-registrarme-agencia-login-popup']); ?>
                         </a>
                     </div>
 

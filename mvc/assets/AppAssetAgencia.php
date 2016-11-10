@@ -21,7 +21,7 @@ class AppAssetAgencia extends AssetBundle {
     public $css = [
         'cssAgencia/styleAltaChofer.css',
         'cssAgencia/styleVehiculo.css',
-        'css/styleListarSolicitudesDesdeRecepcionista.css',
+        //'css/styleListarSolicitudesDesdeRecepcionista.css',
     ];
     public $js = [
         'js/ViajesGrid_Mapas.js',

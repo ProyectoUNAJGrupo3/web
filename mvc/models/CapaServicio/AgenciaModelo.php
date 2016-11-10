@@ -26,7 +26,11 @@ class AgenciaModelo extends Model
 
 
 
+<<<<<<< HEAD
     public function RegistrarAgencia($Nombre,$Direccion, $DireccionCoordenadas , $Telefono, $Email, $Estado)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, AgenciaID y @result).
+=======
+    public function RegistrarAgencia($Nombre,$Direccion, $DireccionCoordenadas , $Telefono, $Email, $Estado,$CUIT)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, AgenciaID y @result).
+>>>>>>> upstream/RemisYa-v2
     {
         $this->Parametros = [
                 'Nombre' => $Nombre,
@@ -35,7 +39,11 @@ class AgenciaModelo extends Model
                 'Telefono' => $Telefono,
                 'Email' => $Email,
                 'Estado' =>$Estado,
+<<<<<<< HEAD
 
+=======
+                'CUIT' =>$CUIT,
+>>>>>>> upstream/RemisYa-v2
                 ];
         $this->setOperacion(self::Operacion_Alta);                                                      //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Alta() DE LA CLASE OPERACIONES.
         $this->Agencia = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Alta()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Agencia QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Agencia insertada).
@@ -51,13 +59,21 @@ class AgenciaModelo extends Model
                 'Telefono' => "",
                 'Email' => "",
                 'Estado' =>"",
+<<<<<<< HEAD
+=======
+                'CUIT' =>"",
+>>>>>>> upstream/RemisYa-v2
                 ];
         $this->setOperacion(self::Operacion_Baja);                                                    //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Baja() DE LA CLASE OPERACIONES.
         $this->Agencia = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);    //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Baja()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Agencia QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Agencia eliminada).
 
         return $this->Agencia;
     }
+<<<<<<< HEAD
     public function ModificarAgencia($AgenciaID, $Nombre,$Direccion, $DireccionCoordenadas,$Telefono, $Email,  $Estado )
+=======
+    public function ModificarAgencia($AgenciaID, $Nombre,$Direccion, $DireccionCoordenadas,$Telefono, $Email,  $Estado,$CUIT )
+>>>>>>> upstream/RemisYa-v2
     {
         $this->Parametros = [
                 'AgenciaID' => $AgenciaID,
@@ -67,12 +83,20 @@ class AgenciaModelo extends Model
                 'Telefono' => $Telefono,
                 'Email' => $Email,
                 'Estado' => $Estado,
+<<<<<<< HEAD
+=======
+                'CUIT' =>$CUIT,
+>>>>>>> upstream/RemisYa-v2
                 ];
         $this->setOperacion(self::Operacion_Modificacion);                                              //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Modificacion() DE LA CLASE OPERACIONES.
         $this->Agencia = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spABM);      //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto Modifcacion()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE ABM. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Agencia QUE SERA UNA LISTA CON UN SOLO VALOR ($id de la Agencia modificada).
         return $this->Agencia;
     }
+<<<<<<< HEAD
     public function GetInfoAgencia($AgenciaID, $Nombre,$Direccion, $DireccionCoordenadas,$Telefono, $Email, $Estado)
+=======
+    public function GetInfoAgencia($AgenciaID, $Nombre,$Direccion, $DireccionCoordenadas,$Telefono, $Email, $Estado,$CUIT)
+>>>>>>> upstream/RemisYa-v2
     {
         $this->Parametros = [
                'AgenciaID' => $AgenciaID,
@@ -82,6 +106,10 @@ class AgenciaModelo extends Model
                 'Telefono' => $Telefono,
                 'Email' => $Email,
                 'Estado' => $Estado,
+<<<<<<< HEAD
+=======
+                'CUIT' =>$CUIT,
+>>>>>>> upstream/RemisYa-v2
                 ];
         $this->setOperacion(self::Operacion_GetInfo);                                                   //LLAMA AL METODO setOperacion y SETEA LA VARIABLE $operacionState CON UN OBJETO Getinfo() DE LA CLASE OPERACIONES.
         $this->Agencia = $this->OperacionState->EjecutarOperacion($this->Parametros,self::spGetInfo);  //EJECUTA EL METODO EjecutarOperacion() DEL OBJETO OperacionState (un objeto GetInfo()) Y LE PASA COMO PARAMETROS LA LISTA DE PARAMETROS Y LA CONSTANTE CON EL NOMBRE DEL STORED PROCEDURE DE GETINFO. GUARDA LA INFORMACION QUE DEVUELVE EN LA VARIABLE $Personas QUE SERA UNA LISTA CON USUARIOS CUYOS VALORES SON LOS MISMOS QUE DEVUELVE EL STORED PROCEDURE.
@@ -113,16 +141,28 @@ class AgenciaModelo extends Model
 
 $test = new AgenciaModelo();
 /*TEST GET INFO
+<<<<<<< HEAD
 print_r($test->GetInfoAgencia(-1,"","","","","",""));
+=======
+print_r($test->GetInfoAgencia(-1,"","","","","","",""));
+>>>>>>> upstream/RemisYa-v2
 */
 
 
 /*TEST ALTA
+<<<<<<< HEAD
 if($test->RegistrarAgencia("'LilianSilva'","'25 de mayo'", "'{101}'", "'42870730'","'lili@silva.com'", 0)!=null) echo 'Agencia registrada correctamente!';
 */
 
 /*TEST MODIFICACION
 if($test->ModificarAgencia(14,"'LilianLeonorSilva'","'25 de mayo'", "'{101}'", "'42870730'","'lilian@silva.com'", 0)!=null) echo 'Agencia modificada correctamente!';
+=======
+if($test->RegistrarAgencia("'LilianSilva'","'25 de mayo'", "'{101}'", "'42870730'","'lili@silva.com'", 0,"'21-66666666-4'")!=null) echo 'Agencia registrada correctamente!';
+*/
+
+/*TEST MODIFICACION
+if($test->ModificarAgencia(14,"'LilianLeonorSilva'","'25 de mayo'", "'{101}'", "'42870730'","'lilian@silva.com'", 0,"'21-66666666-4'")!=null) echo 'Agencia modificada correctamente!';
+>>>>>>> upstream/RemisYa-v2
 */
 
 /*TEST BAJA

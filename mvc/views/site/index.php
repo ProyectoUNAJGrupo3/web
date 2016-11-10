@@ -1,4 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/RemisYa-v2
 use dosamigos\google\maps\LatLng;
 use dosamigos\google\maps\services\DirectionsWayPoint;
 use dosamigos\google\maps\services\TravelMode;
@@ -17,6 +21,10 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\PSCssAsset;
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/RemisYa-v2
 PSCssAsset::register($this);
 /* @var $this yii\web\View */
 ?>
@@ -24,6 +32,7 @@ PSCssAsset::register($this);
 
 
 <script async defer
+<<<<<<< HEAD
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
 <div class="site-contact">
     <section id="main">
@@ -33,6 +42,16 @@ PSCssAsset::register($this);
                     <b>
                         <p id="titulo-contenido">
                             Bienvenidos a Remis ya!
+=======
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
+<div class="site-contact">
+    <section id="main">
+        <article id="imagen-fondo">
+            <div style="background-image: url(img/REMISEJECUTIVO5.jpg); background-repeat:no-repeat; " >
+                <div>
+                    <b>
+                        <p id="titulo-contenido"> Bienvenidos a Remis ya!
+>>>>>>> upstream/RemisYa-v2
                         </p>
                         <p id="titulo-contenido-dos">
                             Mejore la manera y el desempe&ntilde;o  de Gestionar su Agencia
@@ -42,7 +61,11 @@ PSCssAsset::register($this);
                 <div>
                     <a id="boton-solicitar-remis" class="btn btn-primary" href="#">   SOLICITE SU REMIS</a>
                 </div>
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> upstream/RemisYa-v2
 
             </div>
 
@@ -56,8 +79,13 @@ PSCssAsset::register($this);
                                 <img src="img/telefono.jpg" id="telefono.jpg" />   Pedir remises Online
                             </h2>
 
+<<<<<<< HEAD
                             <p>
                                 Usted puede Elegir la mejor opcion de remiseria, seleccionando la m&aacute;s cercana, o la que ofresca el mejor precio y servicio adaptandose a sus necesidades.
+=======
+                            <p>                        
+                                Usted puede Elegir la mejor opcion de remiseria, seleccionando la m&aacute;s cercana, o la que ofresca el mejor precio y servicio adaptandose a sus necesidades.                       
+>>>>>>> upstream/RemisYa-v2
                             </p>
 
                         </div>
@@ -92,7 +120,11 @@ PSCssAsset::register($this);
                             <p>
                                 Atenci&oacute;n personalizada de operadores telef&oacute;nicos orientados al cliente, Choferes capacitados, reservas on-line, son algunos de los beneficios de utilizar esta Aplicaci&oacute;n.
                             </p>
+<<<<<<< HEAD
                         </div>
+=======
+                        </div>                                 
+>>>>>>> upstream/RemisYa-v2
                         <div class="col-lg-4">
                             <h2>
                                 <img src="img/seguridad-logo.png" id="seguridad-logo.png" />Seguridad
@@ -114,3 +146,8 @@ PSCssAsset::register($this);
         </article>
     </section>
 </div>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> upstream/RemisYa-v2
