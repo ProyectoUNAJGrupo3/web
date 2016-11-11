@@ -47,15 +47,15 @@ $this->title = 'Agencia';
                 'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['/agencia/index']],
+                    ['label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'), 'url' => ['/agencia/index']],
                     [
-                        'label' => '<span class="fa fa-user-plus"></span> ' . Html::encode('Choferes'), 'url' => ['/agencia/listar_choferes_agencia'],
-                    //'items' => [
-                    //  ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                    //['label' => '<span class="fa fa-user"></span> ' . Html::encode('Nuevo'), 'url' => ['/agencia/alta_chofer_agencia']],
-                    //'<li class="divider"></li>',
-                    //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                    // ],
+                        'label' => '<span class="fa fa-user-plus"></span> ' . Html::encode('Choferes'),
+                        'items' => [
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        //['label' => '<span class="fa fa-user"></span> ' . Html::encode('Nuevo'), 'url' => ['/agencia/alta_chofer_agencia']],
+                        //'<li class="divider"></li>',
+                        //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],
                     ],
                     //['label' => 'Choferes', 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle', 'items' => [
                     //DatePicker
@@ -63,39 +63,39 @@ $this->title = 'Agencia';
                     //],],
                     //['label' => 'Telefonistas', 'items' => [
                     [
-                        'label' => '<span class="fa fa-user-plus"></span> ' . Html::encode('Telefonistas'), 'url' => ['/agencia/listar_recepcionistas_agencia']
-                    //'items' => [
-                    //    ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listar_recepcionistas_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                    //['label' => '<span class="fa fa-user"></span> ' . Html::encode('Nuevo'), 'url' => ['/agencia/alta_telefonista_agencia'], 'class' => 'dropdown-toggle'],
-                    //'<li class="divider"></li>',
-                    //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_recepcionistas_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                    //],
+                        'label' => '<span class="fa fa-user-plus"></span> ' . Html::encode('Telefonistas'),
+                        'items' => [
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listar_recepcionistas_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        //['label' => '<span class="fa fa-user"></span> ' . Html::encode('Nuevo'), 'url' => ['/agencia/alta_telefonista_agencia'], 'class' => 'dropdown-toggle'],
+                        //'<li class="divider"></li>',
+                        //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_recepcionistas_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],
                     ],
                     //DatePicker                            
                     //['label' => 'Actualizar', 'url' => ['/agencia/actualizar_recepcionista_agencia']],
                     //],],
                     [
-                        'label' => '<span class="fa fa-plus"  ></span> ' . Html::encode('Vehiculos'), 'url' => ['/agencia/listar_vehiculo_agencia']
-                    //'items' => [
-                    //   ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listar_vehiculo_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                    //['label' => '<span class="fa fa-car"></span> ' . Html::encode('Nuevo'), 'url' => ['/agencia/alta_vehiculo_agencia'], 'class' => 'dropdown-toggle'],
-                    //'<li class="divider"></li>',
-                    //['label' => 'Actualizar', 'url' => ['/agencia/actualizar_vehiculo_agencia'], 'class' => 'dropdown-toggle'],
-                    //'<li class="divider"></li>',
-                    //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_vehiculo_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                    // ],
+                        'label' => '<span class="fa fa-plus"  ></span> ' . Html::encode('Vehiculos'),
+                        'items' => [
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listar_vehiculo_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        //['label' => '<span class="fa fa-car"></span> ' . Html::encode('Nuevo'), 'url' => ['/agencia/alta_vehiculo_agencia'], 'class' => 'dropdown-toggle'],
+                        //'<li class="divider"></li>',
+                        //['label' => 'Actualizar', 'url' => ['/agencia/actualizar_vehiculo_agencia'], 'class' => 'dropdown-toggle'],
+                        //'<li class="divider"></li>',
+                        //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_vehiculo_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],
                     ],
                     [
-                        'label' => '<span class="fa fa-suitcase"  ></span> ' . Html::encode('Viajes'), 'url' => ['/agencia/listar_viajes_totales_agencia']
-                    //'items' => [
-                    /* ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Turno Mañana'), 'url' => ['/agencia/listar_viajes_turno_maniana_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                      '<li class="divider"></li>',
-                      ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Turno Tarde'), 'url' => ['/agencia/listar_viajes_turno_tarde_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                      '<li class="divider"></li>',
-                      ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Turno Noche'), 'url' => ['/agencia/listar_viajes_turno_noche_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                      '<li class="divider"></li>', */
-                    //  ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_viajes_totales_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                    //],
+                        'label' => '<span class="fa fa-star"  ></span> ' . Html::encode('Calificaciones'),
+                        'items' => [
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['#'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                        /*  '<li class="divider"></li>',
+                          ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Turno Tarde'), 'url' => ['/agencia/listar_viajes_turno_tarde_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                          '<li class="divider"></li>',
+                          ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Turno Noche'), 'url' => ['/agencia/listar_viajes_turno_noche_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                          '<li class="divider"></li>', */
+                        //  ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_viajes_totales_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],
                     ],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
