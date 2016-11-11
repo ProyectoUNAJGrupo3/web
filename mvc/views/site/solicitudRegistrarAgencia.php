@@ -57,11 +57,18 @@ AppAssetCliente::register($this);
                                 </h3>
                             </b>
                             <?= $form->field($model, 'nombreAgencia')->input("text", ['autofocus' => true, 'maxlength' => '50', 'id' => 'nombreAgencia'])->label("Nombre<b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'telefonoAgencia')->input("text", ['maxlength' => '50', 'id' => 'telefonoAgencia'])->label("Número Cliente (Agua, gas, luz, cable, teléfono) <b id='asterisco'>*</b>"); ?>
-                            <?= $form->field($model, 'numeroClienteServcio')->input('text', ['maxlength' => '4', 'id' => 'numeroClienteServcio'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'telefonoAgencia')->input("text", ['maxlength' => '50', 'id' => 'telefonoAgencia'])->label("Número Teléfono <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'cuit')->textInput(['id' => 'cuit'])->label(""); ?>
+                            <!--toma los campos de arriba para armar el cuit escondido-->
+                            <!--Armo el CUIT-->
+                            <a style="color: black"><b><u><h4>CUIT</h4></u></b></a>
+                            <?= $form->field($model, 'tipo')->input('text', ['maxlength' => '2', 'id' => 'tipo'])->label("Tipo <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'documento')->input('text', ['maxlength' => '8', 'id' => 'documento'])->label("Número <b id='asterisco'>*</b>"); ?>
+                            <?= $form->field($model, 'digitoVerificador')->input('text', ['maxlength' => '1', 'id' => 'digitoVerificador'])->label("Verificador <b id='asterisco'>*</b>"); ?>
                             <?= $form->field($model, 'direccionAgencia')->input("text", ['readonly' => true, 'maxlength' => '50', 'id' => 'direccionAgencia'])->label("Dirección <b id='asterisco'>*</b>"); ?>
                             <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
-                            <br><br>
+                            <?= $form->field($model, 'coordenadas')->textInput(['id' => 'coordenadasRemiseria'])->label(""); ?>
+                            <br>
 
                             <h3>
                                 <u>Datos</u>

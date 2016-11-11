@@ -110,7 +110,7 @@
     text-decoration:none;
 }
 
-#btn-login-popup, #btn-registrarme-login-popup{
+#btn-login-popup, #btn-registrarme-agencia-login-popup,#btn-registrarme-user-login-popup{
     font-family:arial;
     -moz-user-select: none;
     background-image: none;
@@ -132,7 +132,7 @@
     font-size: 17px;
 }
 
-#btn-login-popup > a, #btn-registrarme-login-popup > a{
+#btn-login-popup > a, #btn-registrarme-agencia-login-popup > a, #btn-registrarme-user-login-popup > a{
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     float:center;
     color:#ffffff;
@@ -144,12 +144,18 @@
     text-align: center;
 }
 
-#btn-login-popup:hover, #btn-registrarme-login-popup:hover{
+#btn-login-popup:hover, #btn-registrarme-user-login-popup:hover,#btn-registrarme-agencia-login-popup:hover{
     color:#ffffff;
     background-color:#286090;
     border-color:#2e6da4;
     text-decoration:none;
     cursor:pointer;
     filter:alpha(opacity=50);
-    size:5px 75px;	
+    size:5px 75px;
+    	
+}
+#btn-registrarme-user-login-popup,#btn-registrarme-agencia-login-popup{
+    margin-left: 35px;
+    size:5px 30px;
+    font-size: 15px;
 }
