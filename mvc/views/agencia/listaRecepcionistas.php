@@ -50,6 +50,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <?php endif; ?>
                         </p>
                     <?php else: ?>
+                        <?php $form = ActiveForm::begin(); ?>
                         <div>
                             <h1>Grilla de Recepcionistas</h1>
 
@@ -65,16 +66,17 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                 ],]);
                             ?>
                             <div id='botones-group'>
-                                <?= Html::submitButton('Agregar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                <?= Html::button('Agregar', ['url' => 'agencia/prueba_boton', 'class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                                <?= Html::submitButton('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>
-                        <?php endif; ?>
-                    </div>  
+                        </div>
+                        <?php $form = ActiveForm::end(); ?>
+                    <?php endif; ?>
                     </article>
                     </section>
                 </div>

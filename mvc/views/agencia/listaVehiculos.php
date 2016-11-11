@@ -50,6 +50,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <?php endif; ?>
                         </p>
                     <?php else: ?>
+
+                        <?php $form = ActiveForm::begin(); ?>
                         <div>
                             <h1>Ac&aacute; colocamos la grilla para listar veh&iacute;culos</h1>
 
@@ -69,8 +71,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                                <?= Html::submitButton('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>
+                            <?php $form = ActiveForm::end(); ?>
                         <?php endif; ?>
                     </div>  
                     </article>
