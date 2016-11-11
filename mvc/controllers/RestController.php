@@ -12,9 +12,6 @@ namespace app\controllers;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use Yii;
-use app\models\CapaServicio\AgenciaModelo;
-use yii\web\Response;
-use yii\helpers\Json;
 //use app\models\CapaServicio\ViajesModelo;
 //use yii\rest\ActiveController;
 class RestController extends Controller
@@ -66,29 +63,14 @@ class RestController extends Controller
     {
         //en la variable $_GET tengo la data de lo que me tengo que venir a buscar, necesito hacer un metodo del modelo para pegarle con eso
         //el asunto esta en que no hay datos confiables en la base. Hay que tocar el modelo de registro para que guarde un par de cosas más.
-        $agenciaModel= new AgenciaModelo();
-        $result = $agenciaModel->GetInfoAgencia(null,null,null,null,null,null,null,null);
-        $this->setHeader(200);
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        //Yii::$app->response->format = 'json';
-        return Json::encode($result);
-        //echo json_encode(array('status'=>1,'data'=>array_filter($result->attributes)),JSON_PRETTY_PRINT);
 
 
         ////$model=$this->findModel($id);
-        //
+        
+        //$this->setHeader(200);
+        //echo json_encode(array('status'=>1,'data'=>array_filter($model->attributes)),JSON_PRETTY_PRINT);
         
     } 
-    private function setHeader($status)
-    {
-        
-        $status_header = 'HTTP/1.1 ' . $status . ' ' . $this->_getStatusCodeMessage($status);
-        $content_type="application/json; charset=utf-8";
-        
-        header($status_header);
-        header('Content-type: ' . $content_type);
-        header('X-Powered-By: ' . "Nintriva <nintriva.com>");
-    }
     /* debería crearme el modelo de agencias, pasarle como parametro la que estoy buscando y hacer la gilada */
     protected function findModel()
     {
@@ -102,20 +84,6 @@ class RestController extends Controller
         //    echo json_encode(array('status'=>0,'error_code'=>400,'message'=>'Bad request'),JSON_PRETTY_PRINT);
         //    exit;
         //}
-    }
-    private function _getStatusCodeMessage($status)
-    {
-        $codes = Array(
-        200 => 'OK',
-        400 => 'Bad Request',
-        401 => 'Unauthorized',
-        402 => 'Payment Required',
-        403 => 'Forbidden',
-        404 => 'Not Found',
-        500 => 'Internal Server Error',
-        501 => 'Not Implemented',
-        );
-        return (isset($codes[$status])) ? $codes[$status] : '';
     }
 
     
