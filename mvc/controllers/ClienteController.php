@@ -12,6 +12,7 @@ use app\models\Usuario\PSFormularioSolicitudRegistrarAgenciaModel;
 use app\models\Usuario\PSFormularioSolicitarServcioRemiseriaModel;
 use app\models\Usuario\ListaHistorialViajesUsuarioModel;
 use app\models\Usuario\ListaHistorialCalificacionesUsuarioModel;
+use app\models\Usuario\CalificacionServicioModel;
 
 class ClienteController extends Controller {
 
@@ -79,7 +80,7 @@ class ClienteController extends Controller {
         return $this->render("solicitudPedirServicioRemiseria", ['model' => $model]);
     }*/
 
-    public function actionListar_hisrotial_viajes() {
+    public function actionListar_historial_viajes() {
         $model = new ListaHistorialViajesUsuarioModel();
         return $this->render("listaHistorialViajes", ['model' => $model]);
     }
@@ -87,6 +88,11 @@ class ClienteController extends Controller {
     public function actionListar_historial_calificaciones() {
         $model = new ListaHistorialCalificacionesUsuarioModel();
         return $this->render("listaHistorialCalificaciones", ['model' => $model]);
+    }
+    
+    public function actionCalificar_servicio_remis() {
+        $model = new CalificacionServicioModel();
+        return $this->render("calificarServicio", ['model' => $model]);
     }
 
 }

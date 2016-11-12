@@ -236,5 +236,8 @@ class SiteController extends Controller {
         $model = new PSFormularioSolicitudRegistrarAgencia();
         return $this->render("solicitudRegistrarAgencia", ['model' => $model]);
     }
+    private function actionAgregando() {
+        return $this->redirect(['agencia/alta_chofer_agencia']);//llamada del boton encode agregar en vista listar chofer
+    }
 
 }
