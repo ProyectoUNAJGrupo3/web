@@ -16,13 +16,14 @@ $this->title = 'Chofer';
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <meta charset="<?= Yii::$app->charset ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <?= Html::csrfMetaTags() ?>
+        <?= Html::csrfMetaTags() ?>
         <title>
-        <?= Html::encode($this->title) ?>
+            <?= Html::encode($this->title) ?>
         </title>
-<?php $this->head() ?>
+        <?php $this->head() ?>
     </head>
     <body>
         <?php
@@ -42,15 +43,20 @@ $this->title = 'Chofer';
             ]);
             ;
             echo Nav::widget([
+                'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['chofer/index']],
+                    ['label' => '<span class="fa fa-star" ></span>' . Html::encode(' Califcar Usuario'), 'url' => ['chofer/index']],
                     [
-                        'label' => 'Viajes',
+                        'label' => '<span class="fa fa-suitcase" ></span>' . Html::encode(' Viajes'), 'url' => ['#'],
                         'items' => [
-                            ['label' => 'Viajes Hechos', 'url' => ['#'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
-                            '<li class="divider"></li>',
-                            ['label' => 'Listar Todos', 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-list" ></span>' . Html::encode(' Listar Historial'), 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                        ],
+                    ],
+                    [
+                        'label' => '<span class="fa fa-star" ></span>' . Html::encode(' Calificaciones'), 'url' => ['#'],
+                        'items' => [
+                            ['label' => '<span class="fa fa-list" ></span>' . Html::encode(' Listar Todas'), 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
                         ],
                     ],
                     Yii::$app->user->isGuest ? (
@@ -77,7 +83,7 @@ $this->title = 'Chofer';
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
-<?= $content ?>
+                <?= $content ?>
             </div>
         </div>
 
@@ -88,7 +94,7 @@ $this->title = 'Chofer';
             </div>
         </footer>
 
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>
