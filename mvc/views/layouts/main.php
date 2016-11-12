@@ -7,10 +7,11 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\models\TipoUsuario;
-use app\assets\AppAssetWebSite;
-use yii\bootstrap\BootstrapAsset;
+use app\assets\BootswatchAsset;
 
-AppAssetWebSite::register($this);
+
+BootswatchAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -30,14 +31,12 @@ AppAssetWebSite::register($this);
         $this->beginBody();
         /* include('testMaps.php'); */
         ?>
-
         <div class="wrap">
             <?php
             NavBar::begin([
                 'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">RemisYA</b>',
                 'brandUrl' => Yii::$app->homeUrl,
-                'id' => 'barra-menu-main',
-                'options' => ['class' => 'nav-pills navbar-fixed-top'],
+                'options' => ['class' => 'navbar navbar-default'],
                     //'options' => [
                     //   'class' => 'navbar-inverse navbar-fixed-top',
                     //],
