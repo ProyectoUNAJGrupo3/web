@@ -8,7 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\TipoUsuario;
 //************actualizar***************
-use app\models\Agencia\ActualizarChoferModel;
+use app\models\Agencia\ActualizarChoferModel; 
 use app\models\Agencia\PSActualizacionDatosRecepcionistaModel;
 use app\models\Agencia\ActualizarVehiculoAgenciaModel;
 //************alta***************
