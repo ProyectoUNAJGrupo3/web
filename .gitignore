@@ -9,10 +9,6 @@
 *.sln
 *.phpproj
 *.phpproj.user
-composer.json
-composer.lock
-composer.phar
-/vendor/
 nbproject/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -279,4 +275,3 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
-/mvc/vendor
