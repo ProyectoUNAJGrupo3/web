@@ -185,9 +185,7 @@ class AgenciaController extends Controller {
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
     public function actionAgregandochofer() {
-        if ($model->load(Yii::$app->request->post())){
 
         return $this->redirect(['site/agregando']);//llamada del boton encode agregar en vista listar chofer
-        }
     }
 }
