@@ -50,19 +50,20 @@ $this->title = 'Usuario';
                 'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['/cliente/index']],
-                    [
-                        'label' => 'Viajes',
+                    ['label' => '<span class="fa fa-car"></span> ' . Html::encode('Solicitar Servicio'), 'url' => ['/cliente/index']],
+                    ['label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_hisrotial_viajes'],],
-                            '<li class="divider"></li>',
-                            //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
-                            //'<li class="divider"></li>',
-                            ['label' => 'Calificar Servicio', 'url' => ['#'],],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_viajes'],],
+                        //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
+                        //'<li class="divider"></li>',
                         ],
                     ],
-                    ['label' => 'Calificaciones', 'url' => ['#'], 'items' => [
+                    ['label' => '<span class="fa fa-star"></span> ' . Html::encode('Calificaciones'), 'items' => [
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_calificaciones'],],
+                        ],
+                    ],
+                    ['label' => '<span class="fa fa-eye"></span> ' . Html::encode('Servicio Remisería'), 'items' => [
+                            ['label' => '<span class="fa fa-star"></span> ' . Html::encode('Calificar Servicio'), 'url' => ['/cliente/calificar_servicio_remis'],],
                         ],
                     ],
                     Yii::$app->user->isGuest ? (
@@ -83,11 +84,11 @@ $this->title = 'Usuario';
             ?>
 
             <div class="container">
-<?=
-Breadcrumbs::widget([
-    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-])
-?>
+                <?=
+                Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ])
+                ?>
                 <?= $content ?>
             </div>
         </div>
@@ -99,7 +100,7 @@ Breadcrumbs::widget([
             </div>
         </footer>
 
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

@@ -46,17 +46,17 @@ $this->title = 'Chofer';
                 'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => '<span class="fa fa-star" ></span>' . Html::encode(' Califcar Usuario'), 'url' => ['chofer/index']],
+                    ['label' => '<span class="fa fa-star" ></span>' . Html::encode(' Calificar Usuario'), 'url' => ['chofer/index']],
                     [
                         'label' => '<span class="fa fa-suitcase" ></span>' . Html::encode(' Viajes'), 'url' => ['#'],
                         'items' => [
-                            ['label' => '<span class="fa fa-list" ></span>' . Html::encode(' Listar Historial'), 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-list" ></span>' . Html::encode(' Listar Historial'), 'url' => ['/chofer/listar_historial_viajes'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
                         ],
                     ],
                     [
                         'label' => '<span class="fa fa-star" ></span>' . Html::encode(' Calificaciones'), 'url' => ['#'],
                         'items' => [
-                            ['label' => '<span class="fa fa-list" ></span>' . Html::encode(' Listar Todas'), 'url' => ['#'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-list" ></span>' . Html::encode(' Listar Todas'), 'url' => ['/chofer/listar_historial_calificaciones'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
                         ],
                     ],
                     Yii::$app->user->isGuest ? (

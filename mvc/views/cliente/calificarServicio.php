@@ -18,7 +18,7 @@ AppAssetWebSite::register($this);
         <div id="page-single-main">
             <br />
             <h1 id="title-form">
-                <strong>F&oacute;rmulario Calificaci&oacute;n Usuario</strong>
+                <strong>F&oacute;rmulario Calificaci&oacute;n Servicio Remis</strong>
             </h1>
             <div class="container-form" id="contenedor-formulario">
                 <h1>

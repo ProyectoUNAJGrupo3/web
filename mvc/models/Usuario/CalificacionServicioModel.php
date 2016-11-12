@@ -1,10 +1,10 @@
 <?php
 
-namespace app\models\Chofer;
+namespace app\models\Usuario;
 
 use yii\base\Model;
 
-class CalificacionUsuarioModel extends Model {
+class CalificacionServicioModel extends Model {
 
     public $numeroViaje;
     public $nombreUsuario;
@@ -24,7 +24,7 @@ class CalificacionUsuarioModel extends Model {
             ['puntaje', 'required', 'message' => 'Campo obligatorio'],
             ['fecha', 'required', 'message' => 'Campo obligatorio'],
             ['comentario', 'required', 'message' => 'Campo obligatorio'],
-                //['comentario', 'match', 'pattern' => '/^[a-zA-Z_ 0-9]\d*$/', 'message' => 'Ingrese solo números'],
+                //['comentario', 'match', 'pattern' => '/^[a-zA-Z_ 0-9]\d*$/', 'message' => 'Ingrese números, letras y espacias'],
         ];
     }
 

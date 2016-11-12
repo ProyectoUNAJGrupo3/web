@@ -6,7 +6,9 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use \app\models\Chofer\CalificacionUsuarioModel;
+use app\models\Chofer\CalificacionUsuarioModel;
+use app\models\Chofer\HistorialViajesModel;
+use app\models\Chofer\HistorialCalificacionesModel;
 use app\models\TipoUsuario;
 
 class ChoferController extends Controller {
@@ -60,6 +62,19 @@ class ChoferController extends Controller {
     public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new CalificacionUsuarioModel();
         return $this->render('index', ['model' => $model]);
+        //return $this->render('index');
+    }
+
+    public function actionListar_historial_viajes() {                      //renderiza el index de la carpeta agencia dentro de views
+        $model = new HistorialViajesModel();
+        return $this->render('listarHistorialViajes', ['model' => $model]);
+        //return $this->render('index');
+    }
+
+    public function actionListar_historial_calificaciones() {                      //renderiza el index de la carpeta agencia dentro de views
+        $model = new HistorialCalificacionesModel();
+        return $this->render('listarHistorialCalificaciones', ['model' => $model]);
+        //return $this->render('index');
     }
 
 }
