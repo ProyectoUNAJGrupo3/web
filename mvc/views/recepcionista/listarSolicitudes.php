@@ -20,7 +20,6 @@ AppAssetWebSite::register($this);
 $this->title = 'RemisYa';
 ?>
 
-<div class="container">
     <?=
     GridView::widget([
         'dataProvider' => $model->dataProvider,
@@ -50,4 +49,3 @@ $this->title = 'RemisYa';
 
     <?= Html::button('Cancelar solicitud', ['class' => 'btn btn-primary']) ?>
     <?php ActiveForm::end(); ?>
-</div>
