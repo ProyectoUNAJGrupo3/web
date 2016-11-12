@@ -8,7 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\TipoUsuario;
 //************actualizar***************
-use app\models\Agencia\ActualizarChoferModel; 
+use app\models\Agencia\ActualizarChoferModel;
 use app\models\Agencia\PSActualizacionDatosRecepcionistaModel;
 use app\models\Agencia\ActualizarVehiculoAgenciaModel;
 //************alta***************
@@ -183,9 +183,5 @@ class AgenciaController extends Controller {
         $model = new ViajesGridModel();
         $model->setDataProvider();
         return $this->render("listaViajesTotales", ['model' => $model]);
-    }
-    public function actionAgregandochofer() {
-
-        return $this->redirect(['site/agregando']);//llamada del boton encode agregar en vista listar chofer
     }
 }

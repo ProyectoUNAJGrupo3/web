@@ -1,36 +1,15 @@
 <?php
 
+use yii\helpers\BaseHtml;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-
+use yii\widgets\ActiveForm;
 use app\assets\AppAsset;
 use app\assets\AppAssetAgencia;
-use app\assets\AppAssetWebSite;
-
 use yii\grid\GridView;
-use yii\helpers\BaseHtml;
-use yii\widgets\ActiveForm;
-use yii\bootstrap\Dropdown;
 use yii\helpers\ArrayHelper;
-use yii\bootstrap\Button;
-use yii\bootstrap\Modal;
-use yii\helpers\Url;
-
 
 AppAssetAgencia::register($this);
 AppAsset::register($this);
-AppAssetWebSite::register($this);
-
-/* @var $this yii\web\View */
-Modal::begin([
-'header' => '<h2>Agregar</h2>',
-'id'=>'chofer',
-'size'=>'modal-lg',
-]);
-echo "<div id='choferContent'></div>";
-Modal::end();
 ?>
 <!--<div class="container">
     <section id="main">
@@ -73,7 +52,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
 <?php else: ?>
                         <div>
                             <h1> Grilla de choferes</h1>
-
                             <?=
                             GridView::widget(['dataProvider' => $model->dataProvider,
                                 'columns' => [
@@ -85,9 +63,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                     'Documento',
                                 ],]);
                             ?>
-                           <?php $form = ActiveForm::begin(); ?>
+
                             <div id='botones-group'>
-                                <?=Html::a('agregar', ['agencia/alta_chofer_agencia'], ['class'=>'btn btn-primary btn-lg','id'=>'chofer']);  ?>
+                                <?= Html::submitButton('Agregar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -95,7 +73,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>
-                             <?php ActiveForm::end(); ?>
 <?php endif; ?>
                     </div>  
                     </article>
