@@ -25,11 +25,10 @@ AppAssetWebSite::register($this);
 
 /* @var $this yii\web\View */
 Modal::begin([
-'header' => '<h2>Agregar</h2>',
-'id'=>'chofer',
+'id'=>'modal',
 'size'=>'modal-lg',
 ]);
-echo "<div id='choferContent'></div>";
+echo "<div id='modalContent'></div>";
 Modal::end();
 ?>
 <!--<div class="container">
@@ -87,7 +86,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             ?>
                            <?php $form = ActiveForm::begin(); ?>
                             <div id='botones-group'>
-                                <?=Html::a('agregar', ['agencia/alta_chofer_agencia'], ['class'=>'btn btn-primary btn-lg','id'=>'chofer']);  ?>
+                                <?=Html::button('agregar', ['value'=>Url::toRoute('agencia/alta_chofer_agencia'), 'class'=>'btn btn-primary btn-lg','id'=>'modalButton']);  ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
