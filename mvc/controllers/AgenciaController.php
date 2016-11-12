@@ -33,10 +33,10 @@ class AgenciaController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia','GetTarifa'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'only' => ['index', 'alta_vehiculo_agencia', 'alta_chofer_agencia' ,'alta_telefonista_agencia' , 'actualizar_vehiculo_agencia', ], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                         //el administrador tiene permisos sobre las siguientes acciones
-                        ['actions' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia','GetTarifa'],
+                        ['actions' => ['index', 'alta_vehiculo_agencia', 'alta_chofer_agencia','alta_telefonista_agencia', 'actualizar_vehiculo_agencia',],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
@@ -99,9 +99,11 @@ class AgenciaController extends Controller {
         $model = new AltaChoferAgenciaModel();
         if ($model->load(Yii::$app->request->post()) && ($model->registrarchofer() === true)) {
             Yii::$app->session->setFlash('Empleado creado con exito');
+            return $this->redirect(['agencia/listar_choferes_agencia']);
+
 
         }
-        return $this->render("altaChofer", ['model' => $model]);
+        return $this->renderAjax("altaChofer", ['model' => $model]);
     }
 
     public function actionAlta_telefonista_agencia() {
@@ -184,4 +186,5 @@ class AgenciaController extends Controller {
         $model->setDataProvider();
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
+
 }
