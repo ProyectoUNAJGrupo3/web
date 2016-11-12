@@ -11,19 +11,13 @@ use yii\helpers\ArrayHelper;
 AppAssetAgencia::register($this);
 AppAsset::register($this);
 ?>
-<!--<div class="container">
-    <section id="main">
-        <article>
-            <div id="page-single-main">-->
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
 <div class="site-contact">
     <section id="main">
         <article>
             <div id="page-single-main">
                 <br />
                 <h1 id="title-form">
-                    <strong>Listado de Veh&iacute;culos</strong>
+                    <strong>Historial Viajes</strong>
                 </h1>
                 <div class="container-form" id="contenedor-formulario">
                     <h1>
@@ -50,26 +44,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <?php endif; ?>
                         </p>
                     <?php else: ?>
-
                         <?php $form = ActiveForm::begin(); ?>
                         <div>
-                            <h1>Ac&aacute; colocamos la grilla para listar veh&iacute;culos</h1>
-
-                            <?=
-                            GridView::widget(['dataProvider' => $model->dataProvider,
-                                'columns' => [
-                                    ['class' => 'yii\grid\CheckboxColumn'],
-                                    'Marca',
-                                    'Modelo',
-                                    'Matricula',
-                                ],]);
-                            ?>
                             <div id='botones-group'>
-                                <?= Html::submitButton('Agregar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                <?= Html::submitButton('Volver', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?= Html::submitButton('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>
