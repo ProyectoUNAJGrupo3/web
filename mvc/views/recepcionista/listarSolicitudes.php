@@ -20,49 +20,32 @@ AppAssetWebSite::register($this);
 $this->title = 'RemisYa';
 ?>
 
-<div class="container">
-    <section id="main">
-        <article>
-            <div id="page-single-main-recepcionista">
-                <br />
-                <h1 id="title-form-recepcionista">
-                    <strong>Datos Solicitud</strong>
-                </h1>
-                <div class="container-form" id="contenedor-formulario-recepcionista">
-                    <h1>
-                        <?= Html::encode($this->title) ?>
-                    </h1>
-                    <?=
-                    GridView::widget([
-                        'dataProvider' => $model->dataProvider,
-                        'columns' => [
-                            ['class' => 'yii\grid\CheckboxColumn'],
-                            'ClienteNombre',
-                            'DestinoDireccion',
-                            'ChoferNombre',
-                            'VehiculoMarca',
-                            'VehiculoModelo',
-                            'ViajeTipo',
-                            'Estado',
-                        ],]);
-                    ?>
+    <?=
+    GridView::widget([
+        'dataProvider' => $model->dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\CheckboxColumn'],
+            'ClienteNombre',
+            'DestinoDireccion',
+            'ChoferNombre',
+            'VehiculoMarca',
+            'VehiculoModelo',
+            'ViajeTipo',
+            'Estado',
+        ],]);
+    ?>
 
-                    <?php $form = ActiveForm::begin(); ?>
-                    <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
-                    <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
+    <?php $form = ActiveForm::begin(); ?>
+    <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
+    <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
 
-                    <?= Html::button('Cerrar viaje', ['class' => 'btn btn-primary']) ?>
+    <?= Html::button('Cerrar viaje', ['class' => 'btn btn-primary']) ?>
 
-                    <?= Html::button('Cancelar viaje', ['class' => 'btn btn-primary']) ?>
+    <?= Html::button('Cancelar viaje', ['class' => 'btn btn-primary']) ?>
 
-                    <?= Html::button('Modificar viaje', ['class' => 'btn btn-primary']) ?>
+    <?= Html::button('Modificar viaje', ['class' => 'btn btn-primary']) ?>
 
-                    <?= Html::button('Confirmar solicitud', ['class' => 'btn btn-primary']) ?>
+    <?= Html::button('Confirmar solicitud', ['class' => 'btn btn-primary']) ?>
 
-                    <?= Html::button('Cancelar solicitud', ['class' => 'btn btn-primary']) ?>
-                    <?php ActiveForm::end(); ?>
-                </div>
-            </div>
-        </article>
-    </section>
-</div>
+    <?= Html::button('Cancelar solicitud', ['class' => 'btn btn-primary']) ?>
+    <?php ActiveForm::end(); ?>

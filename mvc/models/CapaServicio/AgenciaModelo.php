@@ -25,9 +25,7 @@ class AgenciaModelo extends Model
     private $Parametros=null;                                                                   //VARIABLE QUE GUARDARA LOS PARAMETROS DEL STORED PROCEDURE
 
 
-    public function setAgencia($resltado){
-        $this->Agencia=$resltado;
-    }
+
     public function RegistrarAgencia($Nombre,$Direccion, $DireccionCoordenadas , $Telefono, $Email, $Estado,$CUIT)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, AgenciaID y @result).
     {
         $this->Parametros = [
