@@ -16,7 +16,6 @@ class ListaHistorialViajesUsuarioModel extends Model {
     public function setDataProvider() {
         $this->PersonaID = Yii::$app->user->identity->PersonaID;
 
-
         $obj = new ViajesModelo();
         $this->dataProvider = new ArrayDataProvider([
         'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,NULL,$this->PersonaID,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
