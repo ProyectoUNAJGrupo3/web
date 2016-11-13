@@ -33,38 +33,43 @@ class AgenciaController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia', 'GetTarifa'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'only' => ['index', 'alta_vehiculo_agencia', 'alta_chofer_agencia' ,'alta_telefonista_agencia' , 'actualizar_vehiculo_agencia', ], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
-                    //el administrador tiene permisos sobre las siguientes acciones
-                    ['actions' => ['index', 'alta_vehiculo_agencia', 'actualizar_vehiculo_agencia', 'nuevo_chofer_agencia', 'nuevo_telefonista_agencia', 'GetTarifa'],
+                        //el administrador tiene permisos sobre las siguientes acciones
+                        ['actions' => ['index', 'alta_vehiculo_agencia', 'alta_chofer_agencia','alta_telefonista_agencia', 'actualizar_vehiculo_agencia',],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
-                    return TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID);
-                    //Llamada al m?todo que comprueba si es un administrador
-                    //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
-                }
+                            return TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID);
+                            //Llamada al m?todo que comprueba si es un administrador
+                            //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
+                        }
+                                               ]
                     ]
                 ]
-            ]
-        ];
+             ];
     }
 
     public function actions() {
 
         if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
-            if (Yii::$app->user->identity->RolID == 1) {                                                                //si el usuario es administrador
+
+            if (Yii::$app->user->identity->RolID==1) {                                                                //si el usuario es administrador
                 Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
-            } elseif (Yii::$app->user->identity->RolID == 2) {
+
+            } elseif (Yii::$app->user->identity->RolID==2) {
                 Yii::$app->errorHandler->errorAction = 'recepcionista/error';
-            } elseif (Yii::$app->user->identity->RolID == 3) {
+
+            } elseif (Yii::$app->user->identity->RolID==3) {
                 Yii::$app->errorHandler->errorAction = 'chofer/error';
-            } elseif (Yii::$app->user->identity->RolID == 4) {
+
+            } elseif (Yii::$app->user->identity->RolID==4) {
                 Yii::$app->errorHandler->errorAction = 'cliente/error';
+
             } else {
                 Yii::$app->errorHandler->errorAction = 'site/error';
             }
-        } else {                                                                                                      //sino (si el usuario es invitado) se muestra la pagina de error del site
+        }else{                                                                                                      //sino (si el usuario es invitado) se muestra la pagina de error del site
             Yii::$app->errorHandler->errorAction = 'site/error';
         }
         //la ruta ya esta harcodeada en config/web en la parte errorHandler
@@ -94,8 +99,11 @@ class AgenciaController extends Controller {
         $model = new AltaChoferAgenciaModel();
         if ($model->load(Yii::$app->request->post()) && ($model->registrarchofer() === true)) {
             Yii::$app->session->setFlash('Empleado creado con exito');
+            return $this->redirect(['agencia/listar_choferes_agencia']);
+
+
         }
-        return $this->render("altaChofer", ['model' => $model]);
+        return $this->renderAjax("altaChofer", ['model' => $model]);
     }
 
     public function actionAlta_telefonista_agencia() {
@@ -173,16 +181,10 @@ class AgenciaController extends Controller {
         }
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
-
     public function actionGetTarifa() {
         $model = new ViajesGridModel();
         $model->setDataProvider();
         return $this->render("listaViajesTotales", ['model' => $model]);
-    }
-
-    public function actionPrueba_boton() {
-        $model = new ListaViajesTurnoNocheModel();
-        return $this->render("listaViajesTurnoNoche", ['model' => $model]);
     }
 
 }
