@@ -29,7 +29,6 @@ class ListaSolicitudesServicioModel extends Model {
     public function setDataProvider() {
         $this->AgenciaID = Yii::$app->user->identity->AgenciaID;
 
-
         $obj = new ViajesModelo();
         $this->dataProvider = new ArrayDataProvider([
         'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,$this->AgenciaID,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
