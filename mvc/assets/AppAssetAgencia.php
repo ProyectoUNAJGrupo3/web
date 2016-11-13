@@ -25,6 +25,7 @@ class AppAssetAgencia extends AssetBundle {
     ];
     public $js = [
         'js/ViajesGrid_Mapas.js',
+        'js/agenciaModal.js',
         'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];
     public $depends = [
