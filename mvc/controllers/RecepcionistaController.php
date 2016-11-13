@@ -81,13 +81,33 @@ class RecepcionistaController extends Controller {
         $model->setDataProvider();
         $model->setListChoferes();
         $model->setListVehiculos();
+
+
         return $this->renderAjax("listarSolicitudes", ['model' => $model]);
     }
 
-    public function actionCerrarViaje() {                      //renderiza el index de la carpeta agencia dentro de views
+    public function actioncerrarviaje() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ListaSolicitudesServicioModel();
+        $action=Yii::$app->request->post('action');
+        $selection=(array)Yii::$app->request->post('selection');//typecasting
+        foreach($selection as $id){
+            $model = Post::findOne((int)$id);//make a typecasting
+            //do your stuff
+            $model->save();
+            // or delete
+        }
         $model->cerrarViaje();
+
         return $this->renderAjax("listarSolicitudes", ['model' => $model]);
     }
-
+    public function actionBulk(){
+        $action=Yii::$app->request->post('action');
+        $selection=(array)Yii::$app->request->post('selection');//typecasting
+        foreach($selection as $id){
+            $model = Post::findOne((int)$id);//make a typecasting
+            //do your stuff
+            $model->save();
+            // or delete
+        }
+    }
 }

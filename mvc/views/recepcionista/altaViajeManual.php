@@ -4,10 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-
-use app\assets\AppAsset;
 use app\assets\AppAssetRecepcionista;
-use app\assets\AppAssetWebSite;
 
 use yii\grid\GridView;
 use yii\helpers\BaseHtml;
@@ -18,9 +15,7 @@ use yii\bootstrap\Button;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
-AppAsset::register($this);
 AppAssetRecepcionista::register($this);
-AppAssetWebSite::register($this);
 
 /* @var $this yii\web\View */
 $this->title = 'RemisYa';
@@ -70,15 +65,15 @@ Modal::end();
             </div>
             <div class="col-md-4">
                 <?= Html::label(""); ?>
-                <?= Html::button('Calcular Tarifa', ['id'=>'importetotal','class'=>'btn btn-primary', 'onclick' => '$("#importetotal").val("'."110".'");']) ?>
+                <?= Html::button('Calcular Tarifa', ['class'=>'btn btn-primary', 'onclick' => '$("#importetotal").val("'."110$".'");']) ?>
             </div>
         </div>
-        <?= $form->field($model, 'ImporteTotal')->input("text", ['maxlength' => '50'])->label("Importe total"); ?>
+        <?= $form->field($model, 'ImporteTotal')->input("text", ['maxlength' => '50','id' => 'importetotal'])->label("Importe total"); ?>
         <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes,['prompt'=>'Seleccione chofer'])?>
         <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos,['prompt'=>'Seleccione vehiculo'])?>
 
         <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-crearViaje']); ?>
-        <?= Html::button('Ver Viajes', ['value'=>Url::to('http://localhost:50420/web/index.php?r=recepcionista%2Flistar_solicitudes_servicio'),'class'=>'btn btn-primary btn-lg','id'=>'modalButton']) ?>
+        <?= Html::button('Ver Viajes', ['value'=>Url::toRoute('recepcionista/listar_solicitudes_servicio'),'class'=>'btn btn-primary btn-lg','id'=>'modalButton']) ?>
 
     </div>
 
