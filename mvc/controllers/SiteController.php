@@ -234,7 +234,10 @@ class SiteController extends Controller {
 
     public function actionSolicitud_registrar_agencia() {
         $model = new PSFormularioSolicitudRegistrarAgencia();
-        return $this->render("solicitudRegistrarAgencia", ['model' => $model]);
+        if ($model->load(Yii::$app->request->post()) && ($model->Registrar() === true)) {
+            return $this->render('about');
+        }
+        return $this->render("solicitarAgencia", ['model' => $model]);
     }
 
 }
