@@ -6,7 +6,6 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAssetWebSite;
 use app\assets\AppAsset;
 use yii\widgets\ActiveForm;
-
 AppAsset::register($this);
 AppAssetWebSite::register($this);
 /* @var $this yii\web\View */
@@ -16,16 +15,12 @@ $this->title = 'Service Remis';
 
     <!--<div class="jumbotron">
         <h1>Congratulations!</h1>
-
         <p class="lead">You have successfully created your Yii-powered application.</p>
-
         <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>-->
     <!--<div class="jumbotron">
         <h1>Congratulations!</h1>
-
         <p class="lead">You have successfully created your Yii-powered application.</p>
-
         <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>-->
 
@@ -42,8 +37,9 @@ $this->title = 'Service Remis';
             <strong>
                 <p>
                     Para seleccionar una ubicacion escriban la direccion en el buscador con el texto "Busca tu partido"
-                    O hagan click secundario sobre el mapa, tanto para la primer ubicacion como para la segunda<br />
-                    para modificar la eleccion arrastren el marcador A o B y se recalcula la distancia y el importe. 
+                    O hagan click secundario sobre el mapa, tanto para la primer ubicacion como para la segunda
+                    <br />
+                    para modificar la eleccion arrastren el marcador A o B y se recalcula la distancia y el importe.
 
                 </p>
             </strong>
@@ -58,7 +54,6 @@ $this->title = 'Service Remis';
                 $this->registerJs('$(document).ready(function () {
             initMap(true);
             $("#btn-ver-remiserias").on("click", function() {doTheAjax()});
-
             });', \yii\web\View::POS_READY);
                 ?>
                 <label id="distancia" class="display:none colorBlack">
@@ -84,28 +79,28 @@ $this->title = 'Service Remis';
             <div class="col-md-4 colorBlack  panel panel-primary">
 
                 <div class="panel-heading ">
-        <b>
-            <h3>
-                Datos del viaje:
-            </h3>
-        </b>
+                    <b>
+                        <h3>
+                            Datos del viaje:
+                        </h3>
+                    </b>
                 </div>
                 <div class="panel-body">
 
 
-                <?= $form->field($model, 'OrigenTexto')->input("text", ['id'=>'origenTexto','readonly' => true])->label("Origen"); ?>
-        <?= $form->field($model, 'origen')->hiddenInput(['id' => 'origencoordenada'])->label(false); ?>
-        <?= $form->field($model, 'DestinoTexto')->input("text", ['id' => 'destinoTexto','readonly' => true])->label("Destino"); ?>
-        <?=
-        $form->field($model, 'destino')->hiddenInput(['id' => 'destinocoordenada'])->label(false);
-        ?>
-                <?= $form->field($model, 'idAgencia')->hiddenInput(['id' => 'idAgencia'])->label(false); ?>
-                <?= $form->field($model, 'idTarifa')->hiddenInput(['id' => 'idTarifa'])->label(false); ?>
+                    <?= $form->field($model, 'OrigenTexto')->input("text", ['id'=>'origenTexto','readonly' => true])->label("Origen"); ?>
+                    <?= $form->field($model, 'origen')->hiddenInput(['id' => 'origencoordenada'])->label(false); ?>
+                    <?= $form->field($model, 'DestinoTexto')->input("text", ['id' => 'destinoTexto','readonly' => true])->label("Destino"); ?>
+                    <?=
+                    $form->field($model, 'destino')->hiddenInput(['id' => 'destinocoordenada'])->label(false);
+                    ?>
+                    <?= $form->field($model, 'idAgencia')->hiddenInput(['id' => 'idAgencia'])->label(false); ?>
+                    <?= $form->field($model, 'idTarifa')->hiddenInput(['id' => 'idTarifa'])->label(false); ?>
 
-                <?= $form->field($model, 'importeTotal')->input("text", ['id' => 'importeTotal','maxlength' => '50','readonly' => true])->label("Importe Aproximado"); ?>
+                    <?= $form->field($model, 'importeTotal')->input("text", ['id' => 'importeTotal','maxlength' => '50','readonly' => true])->label("Importe Aproximado"); ?>
                 </div>
-                </div>
-    <?php ActiveForm::end(); ?>
+            </div>
+            <?php ActiveForm::end(); ?>
 
         </div>
     </div>
