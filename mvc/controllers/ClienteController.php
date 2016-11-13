@@ -79,14 +79,25 @@ class ClienteController extends Controller {
         return $this->render("solicitudPedirServicioRemiseria", ['model' => $model]);
     }*/
 
-    public function actionListar_hisrotial_viajes() {
+    public function actionListar_historial_viajes() {
         $model = new ListaHistorialViajesUsuarioModel();
+        $model->setDataProvider();
         return $this->render("listaHistorialViajes", ['model' => $model]);
     }
 
     public function actionListar_historial_calificaciones() {
         $model = new ListaHistorialCalificacionesUsuarioModel();
         return $this->render("listaHistorialCalificaciones", ['model' => $model]);
+    }
+    public function actionCerrarViaje() {                      //renderiza el index de la carpeta agencia dentro de views
+        $model = new ListaHistorialViajesUsuarioModel();
+        $model->cerrarViaje();
+        return $this->renderAjax("listaHistorialViajes", ['model' => $model]);
+    }
+    public function actionCerrarCalificaciones() {                      //renderiza el index de la carpeta agencia dentro de views
+        $model = new ListaHistorialCalificacionesUsuarioModel();
+        $model->cerrarCalificacion();
+        return $this->renderAjax("listaHistorialCalificaciones", ['model' => $model]);
     }
 
 }

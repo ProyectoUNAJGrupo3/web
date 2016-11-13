@@ -54,7 +54,7 @@ $this->title = 'Usuario';
                     [
                         'label' => 'Viajes',
                         'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_hisrotial_viajes'],],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_viajes'],],
                             '<li class="divider"></li>',
                             //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
                             //'<li class="divider"></li>',
