@@ -12,6 +12,7 @@ use app\models\Usuario\PSFormularioSolicitudRegistrarAgenciaModel;
 use app\models\Usuario\PSFormularioSolicitarServcioRemiseriaModel;
 use app\models\Usuario\ListaHistorialViajesUsuarioModel;
 use app\models\Usuario\ListaHistorialCalificacionesUsuarioModel;
+use app\models\Usuario\CalificacionServicioModel;
 
 class ClienteController extends Controller {
 
@@ -89,6 +90,7 @@ class ClienteController extends Controller {
         $model = new ListaHistorialCalificacionesUsuarioModel();
         return $this->render("listaHistorialCalificaciones", ['model' => $model]);
     }
+<<<<<<< HEAD
     public function actionCerrarViaje() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ListaHistorialViajesUsuarioModel();
         $model->cerrarViaje();
@@ -98,6 +100,12 @@ class ClienteController extends Controller {
         $model = new ListaHistorialCalificacionesUsuarioModel();
         $model->cerrarCalificacion();
         return $this->renderAjax("listaHistorialCalificaciones", ['model' => $model]);
+=======
+    
+    public function actionCalificar_servicio_remis() {
+        $model = new CalificacionServicioModel();
+        return $this->render("calificarServicio", ['model' => $model]);
+>>>>>>> 0f42bfff228a04cc7da245d29e11035f5de4c370
     }
 
 }
