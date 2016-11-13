@@ -45,16 +45,16 @@ $this->title = 'Recepcionista';
                   'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['recepcionista/index']],
+                    //['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['recepcionista/index']],
                     [
-                        'label' => 'Viajes',
+                        'label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [
                             //['label' => 'Carga Nuevo viaje', 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                             //'<li class="divider"></li>',
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Solicitudes'), 'url' => ['/recepcionista/listar_solicitudes_servicio'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/recepcionista/listar_solicitudes_servicio'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         ],
                     ],
-                    ['label' => 'Ver Solicitud', 'url' => ['recepcionista/ver_datos_solicitud_de_servicio']],
+                    //['label' => 'Ver Solicitud', 'url' => ['recepcionista/ver_datos_solicitud_de_servicio']],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]
