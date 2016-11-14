@@ -77,6 +77,7 @@ class ClienteController extends Controller {
     }
     public function actionListar_historial_calificaciones() {
         $model = new ListaHistorialCalificacionesUsuarioModel();
+        $model->setDataProvider();
         return $this->render("listaHistorialCalificaciones", ['model' => $model]);
     }
 
@@ -84,11 +85,12 @@ class ClienteController extends Controller {
         $model = new CalificacionServicioModel();
         return $this->render("calificarServicio", ['model' => $model]);
     }
+    /*
     public function actionCerrarViaje() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ListaHistorialViajesUsuarioModel();
         $model->cerrarViaje();
         return $this->renderAjax("listaHistorialViajes", ['model' => $model]);
-     }
+     }*/
      public function actionCerrarCalificaciones() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ListaHistorialCalificacionesUsuarioModel();
         $model->cerrarCalificacion();
