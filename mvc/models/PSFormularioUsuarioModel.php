@@ -1,8 +1,9 @@
 <?php
 
 namespace app\models;
-use app\models\CapaServicio\PersonasModelo;
 use yii\base\Model;
+use app\models\CapaServicio\PersonasModelo;
+
 
 class PSFormularioUsuarioModel extends Model {
 
@@ -58,5 +59,7 @@ class PSFormularioUsuarioModel extends Model {
         $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'0'","'4'",null,"''"); //genera el alta del usuario y lo guarda
         return true;
     }
+
+    
 }
 

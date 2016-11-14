@@ -7,10 +7,11 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\models\TipoUsuario;
-use app\assets\AppAssetWebSite;
-use yii\bootstrap\BootstrapAsset;
+use app\assets\BootswatchAsset;
 
-AppAssetWebSite::register($this);
+
+BootswatchAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -30,14 +31,12 @@ AppAssetWebSite::register($this);
         $this->beginBody();
         /* include('testMaps.php'); */
         ?>
-
-        <div class="wrap">
+        <div class="wrap" >
             <?php
             NavBar::begin([
                 'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">RemisYA</b>',
                 'brandUrl' => Yii::$app->homeUrl,
-                'id' => 'barra-menu-main',
-                'options' => ['class' => 'nav-pills navbar-fixed-top'],
+                'options' => ['class' => 'navbar navbar-default navbar-fixed-top navbar-transparent'],
                     //'options' => [
                     //   'class' => 'navbar-inverse navbar-fixed-top',
                     //],
@@ -74,7 +73,6 @@ AppAssetWebSite::register($this);
             NavBar::end();
             ?>
 
-            <div class="container">
                 <?=
                 Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -82,12 +80,16 @@ AppAssetWebSite::register($this);
                 ?>
                 <?= $content ?>
             </div>
-        </div>
 
         <footer class="footer">
             <div class="container">
                 <!--<hr style="border:1px solid gray;">-->
-                <span id="footer-copy-right" style="text-align:center">Derechos Reservado &copy 2016</span>
+               
+                <span id="footer-copy-right" style="text-align:center"> 
+                    <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
+                    <i class="fa fa-phone-square"></i> &nbsp; 011-4369-4657 &nbsp; &nbsp; 011-4287-5324 &nbsp; &nbsp;
+                    <i class="fa fa-envelope"></i> &nbsp; administracion@remisya.com
+                 </span>
             </div>
         </footer>
 
