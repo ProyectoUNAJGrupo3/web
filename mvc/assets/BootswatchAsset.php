@@ -20,7 +20,6 @@ class BootswatchAsset extends AssetBundle {
     public $baseUrl = '@web';
     public $css = [
         'cssMainPage/styleHome.css',
-
     ];
     public $js = [
     ];

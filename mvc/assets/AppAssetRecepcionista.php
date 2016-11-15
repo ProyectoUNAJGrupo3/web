@@ -19,15 +19,10 @@ class AppAssetRecepcionista extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'cssRecepcionista/styleVerDatosSolictudServicio.css',
-        'cssRecepcionista/styleListarSolicitudes.css',
-        'cssRecepcionista/styleSolictudServicioRemis.css',
-        'cssRecepcionista/styleCommon.css',
     ];
     public $js = [
         'js/ViajesModal.js',
         'js/ViajesGrid_Mapas.js',
-        'js/AperturaPopupLogin.js',
         'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];
     public $depends = [

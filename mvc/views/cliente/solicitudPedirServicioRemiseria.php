@@ -4,9 +4,7 @@ use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\assets\AppAssetCliente;
-use app\assets\AppAsset;
 
-AppAsset::register($this);
 AppAssetCliente::register($this);
 ?>
 <!--<div class="container">
