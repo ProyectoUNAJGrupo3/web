@@ -3,8 +3,10 @@ use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\assets\BootswatchAsset;
+use app\assets\AppAssetCliente;
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
+AppAssetCliente::register($this);
 ?>
 <div class="container">
     <div class="well bs-component">

@@ -57,7 +57,8 @@ class AltaViajeManualModel extends Model {
     public function setTarifa()
     {
         $tarifas = new TarifasModelo();
-        $precios = array_shift($tarifas->GetInfoTarifas(NULL,NULL,$this->AgenciaID,NULL,NULL,NULL,1));
+        $tarifasResult = $tarifas->GetInfoTarifas(NULL,NULL,$this->AgenciaID,NULL,NULL,NULL,1);
+        $precios = array_shift($tarifasResult);
         $this->TarifaID = $precios['TarifaID'];
         $this->PrecioKM = $precios['PrecioKM'];
     }
