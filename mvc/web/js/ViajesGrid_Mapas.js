@@ -251,8 +251,7 @@ function initMap(isindex) {
 		service = new google.maps.DistanceMatrixService();
 
 		directionsDisplay.addListener('directions_changed', function () {
-			var distanciaInt = Math.round((directionsDisplay.getDirections().routes[0].legs[0].distance.value) / 1000);
-			distanceElement = $('#distancia').val(distanciaInt);
+			distanceElement = $('#distancia').val((directionsDisplay.getDirections().routes[0].legs[0].distance.value / 1000).toFixed(1) + " Km");
 
 		});
 

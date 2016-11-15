@@ -6,8 +6,12 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
-AppAsset::register($this);
+use app\assets\AppAssetRecepcionista;
+use app\assets\BootswatchAsset;
+
+
+BootswatchAsset::register($this);
+AppAssetRecepcionista::register($this);
 
 $this->title = 'Recepcionista';
 ?>
@@ -37,7 +41,7 @@ $this->title = 'Recepcionista';
                 'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Recepcionista</b>',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar navbar-default navbar-fixed-top',
                 ],
             ]);
             ;

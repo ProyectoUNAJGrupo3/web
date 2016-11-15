@@ -69,6 +69,7 @@ class RecepcionistaController extends Controller {
         $model->setDataProvider();
         $model->setListChoferes();
         $model->setListVehiculos();
+        $model->setTarifa();
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
             Yii::$app->session->setFlash('Viaje creado con exito');
             return $this->refresh();
