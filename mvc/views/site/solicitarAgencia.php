@@ -2,12 +2,10 @@
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\assets\AppAsset;
 use app\assets\AppAssetWebSite;
 use app\assets\BootswatchAsset;
-AppAsset::register($this);
-raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 AppAssetWebSite::register($this);
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
 ?>
 <div class="container">

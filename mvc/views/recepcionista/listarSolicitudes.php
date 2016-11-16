@@ -24,8 +24,14 @@ $this->title = 'RemisYa';
     <?=
     GridView::widget([
     'dataProvider' => $model->dataProvider,
+
     'columns' => [
-        ['class' => 'yii\grid\CheckboxColumn'],
+            [
+        'class' => 'yii\grid\CheckboxColumn',
+        'checkboxOptions' => function($model, $key, $index, $widget) {
+            return ['value' => $model['ChoferNombre'] ];
+        },
+    ],
         'ClienteNombre',
         'DestinoDireccion',
         'ChoferNombre',
@@ -34,11 +40,11 @@ $this->title = 'RemisYa';
         'ViajeTipo',
         'Estado',
     ],]);
-    ?>
+?>
     <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
     <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
 
-    <?= Html::a('Cerrar viaje', ['class' => 'btn btn-primary','url' => ['/listar_solicitudes_servicio']]) ?>
+    <?= Html::a('Cerrar viaje',['recepcionista/cerrar'], ['class' => 'btn btn-primary']) ?>
 
     <?= Html::button('Cancelar viaje', ['class' => 'btn btn-primary']) ?>
 

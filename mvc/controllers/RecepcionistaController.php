@@ -21,7 +21,7 @@ class RecepcionistaController extends Controller {
                 'only' => ['index'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                     //el administrador tiene permisos sobre las siguientes acciones
-                    ['actions' => ['index'],
+                    ['actions' => ['index','cerrarviaje'],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
@@ -87,7 +87,7 @@ class RecepcionistaController extends Controller {
         return $this->renderAjax("listarSolicitudes", ['model' => $model]);
     }
 
-    public function actioncerrarviaje() {                      //renderiza el index de la carpeta agencia dentro de views
+    public function actionCerrar() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ListaSolicitudesServicioModel();
         $action=Yii::$app->request->post('action');
         $selection=(array)Yii::$app->request->post('selection');//typecasting
@@ -97,9 +97,7 @@ class RecepcionistaController extends Controller {
             $model->save();
             // or delete
         }
-        $model->cerrarViaje();
-
-        return $this->renderAjax("listarSolicitudes", ['model' => $model]);
+//        $model->cerrarViaje();
     }
     public function actionBulk(){
         $action=Yii::$app->request->post('action');
