@@ -5,10 +5,9 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\assets\AppAssetWebSite;
-use app\assets\AppAsset;
-AppAsset::register($this);
-AppAssetWebSite::register($this);
+use app\assets\BootswatchAsset;
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+BootswatchAsset::register($this);
 ?>
 <div class="site-login">
 
