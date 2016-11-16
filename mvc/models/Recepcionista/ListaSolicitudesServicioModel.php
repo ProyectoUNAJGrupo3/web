@@ -1,0 +1,76 @@
+<?php
+
+namespace app\models\Recepcionista;
+
+use yii;
+use yii\base\Model;
+use yii\helpers\ArrayHelper;
+use app\models\CapaServicio\ViajesModelo;
+use app\models\CapaServicio\ChoferesModelo;
+use app\models\CapaServicio\VehiculosModelo;
+use yii\data\ArrayDataProvider;
+
+class ListaSolicitudesServicioModel extends Model {
+    public $dataProvider;
+    public $origenTexto;
+    public $destinoTexto;
+    public $origen;
+    public $destino;
+    public $Distancia;
+    public $TarifaID;
+    public $ImporteTotal;
+    public $Chofer;
+    public $Choferes;
+    public $Vehiculo;
+    public $Vehiculos;
+    public $coordenadas;
+    public $AgenciaID;
+
+    public function setDataProvider() {
+        $this->AgenciaID = Yii::$app->user->identity->AgenciaID;
+
+        $obj = new ViajesModelo();
+        $this->dataProvider = new ArrayDataProvider([
+        'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,$this->AgenciaID,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+        ]);
+
+        return true;
+    }
+    public function setListChoferes()
+    {
+        $choferes = new ChoferesModelo();
+        $this->Choferes = $choferes->GetInfoChoferes(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,$this->AgenciaID,1);
+        $data = array();
+        foreach ($this->Choferes as $model)
+            $data[$model['PersonaID']] = $model['Nombre'] . ' '. $model['Apellido'];
+        $this->Choferes = $data;
+
+    }
+    public function setListVehiculos()
+    {
+        $vehiculos = new VehiculosModelo();
+        $this->Vehiculos = $vehiculos->GetInfoVehiculos(NULL,NULL,NULL,NULL,NULL,NULL,NULL,$this->AgenciaID,1);
+        $data = array();
+        foreach ($this->Vehiculos as $model)
+            $data[$model['VehiculoID']] = $model['Marca'] . ' '. $model['Modelo'];
+        $this->Vehiculos = $data;
+
+    }
+    public function registrarViaje()
+    {
+        $model = new ViajesModelo(); //crea un nuevo modelo de personamodelo
+        $this->setTarifa();
+
+        $fechaEmision = date('Y-m-d H:i:s');
+        $fechaViaje = date('Y-m-d H:i:s');
+        $viajeCreado = $model->RegistrarViaje($this->Chofer,$this->Vehiculo,$this->TarifaID,1,$this->AgenciaID,NULL,"'$fechaEmision'","'$fechaViaje'",1,"'$this->origen'","'$this->destino'","'$this->destinoTexto'", "'$this->origenTexto'","'COMENTARIO PRUEBA'", $this->ImporteTotal, $this->Distancia, 0);
+        $viajeCreado = array_shift($viajeCreado);
+        if (!is_null($viajeCreado['_Result']))
+        {
+            $this->Chofer = null;
+            $this->Vehiculo = null;
+            return true;
+        }
+        else return false;
+    }
+}

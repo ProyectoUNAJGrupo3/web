@@ -1,29 +1,36 @@
 #contenedor-quienes-somos{
-	width: 100%;
-	background-color:#F5F5DA;
-	margin-left:-15px;
-	padding:20px;
+    margin-top: -20px;
+    width: 100%;
+    background-color:#F5F5DA;
+    margin-left:0px;
+    padding:20px;
 }
 #sub-contenedor{
-	margin: 30px 100px;
-	box-shadow: 21px 21px 51px #999;
-	border-radius: 70px;
-	padding:10px 50px;
-	float:center;
-	size:500px;
-	position: relative;
-	vertical-align: top;	
+    margin: 30px 100px;
+    box-shadow: 21px 21px 51px #999;
+    border-radius: 70px;
+    padding:10px 50px;
+    float:center;
+    size:500px;
+    position: relative;
+    vertical-align: top;	
+
 }
 #imagen-header{
-	color:black;
-	text-align: center;
-	font-size:40px;
+    color:black;
+    text-align: center;
+    font-size:40px;
 }
 #contenido{
+    color:black;
+
 }
-#lista-empresa{
-}
-#lista-mision{
-}
-#lista-plantel{	
+#Servicios,#lista-plantel,#lista-mision,#lista-empresa{
+    color:cornflowerblue;
+    text-align: initial;
+    font-size:17px;
+    font-family: sans-serif;
+    text-align: justify;
+    padding: 0px 50px;
+
 }

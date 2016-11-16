@@ -1,0 +1,24 @@
+#btn-ver-solicitud{
+    margin-left: 0px;
+    font-size:20px;
+    size:70px;
+}
+#btn-rechazar-solicitud{
+    font-size:20px;
+    size:70px;
+    margin-left: 00px;
+}
+#btn-aceptar-solicitud{
+    font-size:20px;
+    size:70px;
+    margin-left: 00px;
+}
+
+#botones-grupo-ver-datos-solicitud{
+    margin-top: 10px;
+    margin-left: 350px;
+    display:inline-block;
+    float: center;
+    position: relative;
+}
+
