@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use app\models\TipoUsuario;
 use app\models\Recepcionista\AltaViajeManualModel;
 use app\models\Recepcionista\ListaSolicitudesServicioModel;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 class RecepcionistaController extends Controller {
 
@@ -21,7 +23,7 @@ class RecepcionistaController extends Controller {
                 'only' => ['index'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                     //el administrador tiene permisos sobre las siguientes acciones
-                    ['actions' => ['index','cerrarviaje'],
+                    ['actions' => ['index'],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
@@ -87,26 +89,10 @@ class RecepcionistaController extends Controller {
         return $this->renderAjax("listarSolicitudes", ['model' => $model]);
     }
 
-    public function actionCerrar() {                      //renderiza el index de la carpeta agencia dentro de views
-        $model = new ListaSolicitudesServicioModel();
+    public function actionCerrar()
+    {
         $action=Yii::$app->request->post('action');
-        $selection=(array)Yii::$app->request->post('selection');//typecasting
-        foreach($selection as $id){
-            $model = Post::findOne((int)$id);//make a typecasting
-            //do your stuff
-            $model->save();
-            // or delete
-        }
-//        $model->cerrarViaje();
-    }
-    public function actionBulk(){
-        $action=Yii::$app->request->post('action');
-        $selection=(array)Yii::$app->request->post('selection');//typecasting
-        foreach($selection as $id){
-            $model = Post::findOne((int)$id);//make a typecasting
-            //do your stuff
-            $model->save();
-            // or delete
-        }
+        $selection=(array)Yii::$app->request->post('selection');
+        print_r($selection);
     }
 }
