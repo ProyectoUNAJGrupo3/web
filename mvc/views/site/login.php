@@ -3,12 +3,13 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\assets\AppAssetWebSite;
-use app\assets\AppAsset;
-AppAsset::register($this);
-AppAssetWebSite::register($this);
+use app\assets\BootswatchAsset;
+
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+BootswatchAsset::register($this);
 ?>
 <div class="site-login">
 
@@ -57,9 +58,6 @@ AppAssetWebSite::register($this);
                     </div>
                     <br />
                     <br />
-
-
-
                     <!--<div id="imgEmail" align="center">
                         <br />
                         <h4>
@@ -85,15 +83,10 @@ AppAssetWebSite::register($this);
                         <br />
                         <br />
                         <a>
-                            <?= Html::button('Registrarme como Usuario', ['class' => 'btn btn-primary', 'id' => 'btn-registrarme-user-login-popup']); ?>
-                            <?= Html::button('Registrarme como Agencia', ['class' => 'btn btn-primary', 'id' => 'btn-registrarme-agencia-login-popup']); ?>
+                            <?= Html::submitButton('Registrarme como Usuario', ['value' => Url::toRoute('/site/registro'), 'class' => 'btn btn-primary', 'id' => 'btn-registrarme-user-login-popup']); ?>
+                            <?= Html::submitButton('Registrarme como Agencia', ['value' => Url::toRoute('/site/solicitud_registrar_agencia'), 'class' => 'btn btn-primary', 'id' => 'btn-registrarme-agencia-login-popup']); ?>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                     </div>
-
-
-
-
-
                 </div>
 
                 <?php ActiveForm::end(); ?>

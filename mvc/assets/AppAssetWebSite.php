@@ -19,20 +19,10 @@ class AppAssetWebSite extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-
-        'css/styleContentMap.css',
-        'css/styleLoginPopup.css',
-        'css/styleNuestrosClientes.css',
-        'css/stylePagesHtml.css',
-        'css/styleQuienesSomos.css',
-        'css/StyleFormularioUsuario.css',
-        'css/styleSolicitudRegistrarAgencia.css',
     ];
     public $js = [
-        'js/Maps.js',
         'js/Mapas.js',
-       /* 'js/ViajesGrid_Mapas.js',*/
-        'js/AperturaPopupLogin.js',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];
     public $depends = [
         'yii\web\YiiAsset',
