@@ -6,8 +6,6 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\BootswatchAsset;
 
-
-
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
 ?>
@@ -33,7 +31,7 @@ BootswatchAsset::register($this);
                     <i class="fa fa-thumbs-up"></i>  Satisfacci&oacute;n a los requerimientos de los clientes
                 </h3>
                 <p class="caracteristicas"> Al brindarle una atenci&oacute;n r&aacute;pida y personalizada, pudiendo elegir la remiseria que m&aacute;s le convenga en ubicacion, precio y servicio. Entre otros beneficios, el cliente tiene acceso inmediato a su historial y estad&iacute;sticas de consumo.
-                 </p>
+                </p>
             </div>
             <div class="col-lg-4 col-sm-6">
                 <h3 class="caracteristicasTitulo">
@@ -43,7 +41,7 @@ BootswatchAsset::register($this);
                     Adaptable a sus modalidades operativas y administrativas, ofreciendo la mejor alternativas de funcionamiento para uno o varios equipos y operadores.
                 </p>
             </div>
-          
+
             <div class="col-lg-4 col-sm-6">
                 <h3 class="caracteristicasTitulo">
                     <i class="fa fa-sitemap"></i>  Dise&ntilde;o espec&iacute;fico
@@ -53,7 +51,7 @@ BootswatchAsset::register($this);
                 </p>
                 <br />
             </div>
-        
+
             <div class="col-lg-4 col-sm-6">
                 <h3 class="caracteristicasTitulo">
                     <i class="fa fa-line-chart"></i>  Reducci&oacute;n de costos que optimizan las ganancias de negocio

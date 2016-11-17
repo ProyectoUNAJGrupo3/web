@@ -35,8 +35,6 @@ Modal::end();
     <section id="main">
         <article>
             <div id="page-single-main">-->
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
 <!--<div class="site-contact">
     <section id="main">
         <article>
@@ -45,7 +43,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
     <div class="well bs-component">
         <div class="row">
             <div class="col-lg-8">
-                <h1 id="title-form">
+                <h1 >
                     <strong>Listado de Choferes</strong>
                 </h1>
                 <!--<div class="container-form" id="contenedor-formulario">-->
@@ -74,8 +72,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                     </p>
                 <?php else: ?>
                     <div>
-                        <h1> Grilla de choferes</h1>
-
                         <?=
                         GridView::widget(['dataProvider' => $model->dataProvider,
                             'columns' => [
@@ -98,8 +94,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                         </div>
                         <?php ActiveForm::end(); ?>
-                    <?php endif; ?>
-                </div>  
+                    </div>  
+                <?php endif; ?>
+
                 <!--</article>
                 </section>
             </div>
