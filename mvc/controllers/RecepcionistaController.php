@@ -89,10 +89,18 @@ class RecepcionistaController extends Controller {
         return $this->renderAjax("listarSolicitudes", ['model' => $model]);
     }
 
-    public function actionCerrar()
-    {
-        $action=Yii::$app->request->post('action');
-        $selection=(array)Yii::$app->request->post('selection');
-        print_r($selection);
+
+    public function actionCerrar(){
+        $model = new ListaSolicitudesServicioModel();
+
+        If (\Yii::$app->request->isPost) {
+            switch (\Yii::$app->request->post('submit')) {
+                case 'cerrar_viaje':
+                    $selection=(array)Yii::$app->request->post('selection');
+                case 'actualizar_viaje':
+                    $prueba=(array)Yii::$app->request->post('viajes_grid');//typecasting
+            }
+        }
+        return $this->refresh();
     }
 }
