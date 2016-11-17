@@ -14,30 +14,37 @@ use yii\bootstrap\Dropdown;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\Button;
 use yii\bootstrap\Modal;
+use app\assets\BootswatchAsset;
 
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+BootswatchAsset::register($this);
 AppAsset::register($this);
 AppAssetCliente::register($this);
 //AppAssetWebSite::register($this);
 /* @var $this yii\web\View */
 //$this->title = 'RemisYa';
 ?>
-
-    <?=
-    GridView::widget([
-        'dataProvider' => $model->dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\CheckboxColumn'],
-               'ClienteNombre',
-               'AgenciaNombre',
-               'OrigenDireccion',
-               'DestinoDireccion',
-               'ChoferNombre',
-               'VehiculoMarca',
-               'VehiculoModelo',
-               'FechaSalida',
-               'ImporteTotal',
-               'Distancia',
-               'ViajeTipo',
-               'Estado',
+<div class="container">
+    <div class="well bs-component">
+        <?=
+        GridView::widget([
+            'dataProvider' => $model->dataProvider,
+            'columns' => [
+                ['class' => 'yii\grid\CheckboxColumn'],
+                'ClienteNombre',
+                'AgenciaNombre',
+                'OrigenDireccion',
+                'DestinoDireccion',
+                'ChoferNombre',
+                'VehiculoMarca',
+                'VehiculoModelo',
+                'FechaSalida',
+                'ImporteTotal',
+                'Distancia',
+                'ViajeTipo',
+                'Estado',
             ],]);
-    ?>
+        ?>
+
+    </div>
+</div>
