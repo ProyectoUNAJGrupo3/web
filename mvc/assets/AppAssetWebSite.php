@@ -22,7 +22,7 @@ class AppAssetWebSite extends AssetBundle {
     ];
     public $js = [
         'js/Mapas.js',
-        'js/AperturaPopupLogin.js',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];
     public $depends = [
         'yii\web\YiiAsset',

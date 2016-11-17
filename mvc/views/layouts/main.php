@@ -34,7 +34,7 @@ BootswatchAsset::register($this);
         <div class="wrap" >
             <?php
             NavBar::begin([
-                'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">RemisYA</b>',
+                'brandLabel' => '<img src="img/LogoApp.png" style="display:inline; margin-top: -20px; vertical-align: top; width:120px; height:55px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">RemisYA</b>',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => ['class' => 'navbar navbar-default navbar-fixed-top navbar-transparent'],
                     //'options' => [

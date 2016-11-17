@@ -34,7 +34,7 @@ $this->title = 'Usuario';
     <div class="wrap">
         <?php
         NavBar::begin([
-            'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Usuario</b>',
+            'brandLabel' => '<img src="img/LogoApp.png" style="display:inline; margin-top: -20px; vertical-align: top; width:120px; height:55px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Usuario</b>',
             'brandUrl' => Yii::$app->homeUrl,
             'id' => 'barra-menu-main',
             'options' => [
@@ -58,7 +58,7 @@ $this->title = 'Usuario';
                         ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_calificaciones'],],
                     ],
                 ],
-                ['label' => '<span class="fa fa-eye"></span> ' . Html::encode('Servicio Remisería'), 'items' => [
+                ['label' => '<span class="fa fa-eye"></span> ' . Html::encode('Servicio RemiserÃ­a'), 'items' => [
                         ['label' => '<span class="fa fa-star"></span> ' . Html::encode('Calificar Servicio'), 'url' => ['/cliente/calificar_servicio_remis'],],
                     ],
                 ],
