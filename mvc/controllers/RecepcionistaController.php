@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use app\models\TipoUsuario;
 use app\models\Recepcionista\AltaViajeManualModel;
 use app\models\Recepcionista\ListaSolicitudesServicioModel;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 class RecepcionistaController extends Controller {
 
@@ -87,28 +89,10 @@ class RecepcionistaController extends Controller {
         return $this->renderAjax("listarSolicitudes", ['model' => $model]);
     }
 
-    public function actioncerrarviaje() {                      //renderiza el index de la carpeta agencia dentro de views
-        $model = new ListaSolicitudesServicioModel();
+    public function actionCerrar()
+    {
         $action=Yii::$app->request->post('action');
-        $selection=(array)Yii::$app->request->post('selection');//typecasting
-        foreach($selection as $id){
-            $model = Post::findOne((int)$id);//make a typecasting
-            //do your stuff
-            $model->save();
-            // or delete
-        }
-        $model->cerrarViaje();
-
-        return $this->renderAjax("listarSolicitudes", ['model' => $model]);
-    }
-    public function actionBulk(){
-        $action=Yii::$app->request->post('action');
-        $selection=(array)Yii::$app->request->post('selection');//typecasting
-        foreach($selection as $id){
-            $model = Post::findOne((int)$id);//make a typecasting
-            //do your stuff
-            $model->save();
-            // or delete
-        }
+        $selection=(array)Yii::$app->request->post('selection');
+        print_r($selection);
     }
 }
