@@ -8,8 +8,6 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\models\TipoUsuario;
 use app\assets\BootswatchAsset;
-
-
 BootswatchAsset::register($this);
 
 ?>
