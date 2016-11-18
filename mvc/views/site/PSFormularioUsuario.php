@@ -41,7 +41,7 @@ AppAssetCliente::register($this);
                 <?= $form->field($model, 'correo')->input("email")->label("Correo"); ?>
                 <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20'])->label("Tel&eacute;fono"); ?>
                 <?= $form->field($model, 'direccion')->textInput(['readonly' => true])->label("Direcci&oacute;n"); ?>
-                <?= $form->field($model, 'coordenadas')->textInput(['id' => 'coordenadas'])->label(""); ?>
+                <?= $form->field($model, 'coordenadas')->textInput(['id' => 'coordenadas','style'=>'display:none;'])->label(""); ?>
                 <?= Html::Button('Buscar Dirección', ['class' => 'btn btn-primary', 'onClick' => 'initMap();']); ?>
                 <h3>Datos de usuario</h3>
                 <?= $form->field($model, 'usuario')->textInput()->label("Usuario"); ?>
