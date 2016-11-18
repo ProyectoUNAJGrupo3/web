@@ -7,7 +7,10 @@
 use yii\helpers\Html;
 use app\assets\AppAsset;
 use app\assets\AppAssetAgencia;
+use app\assets\BootswatchAsset;
 
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+BootswatchAsset::register($this);
 AppAssetAgencia::register($this);
 AppAsset::register($this);
 $this->title = $name;
