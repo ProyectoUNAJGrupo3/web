@@ -56,8 +56,6 @@ $this->title = 'Agencia';
                         'items' => [
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
                         //['label' => '<span class="fa fa-user"></span> ' . Html::encode('Nuevo'), 'url' => ['/agencia/alta_chofer_agencia']],
-                        //'<li class="divider"></li>',
-                        //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
                         ],
                     ],
                     //['label' => 'Choferes', 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle', 'items' => [
