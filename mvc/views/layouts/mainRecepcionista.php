@@ -41,7 +41,7 @@ $this->title = 'Recepcionista';
                 'brandLabel' => '<img src="img/LogoApp.png" style="display:inline; margin-top: -20px; vertical-align: top; width:120px; height:55px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Recepcionista</b>',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar navbar-default navbar-fixed-top',
+                    'class' => 'navbar navbar-default',
                 ],
             ]);
             ;
@@ -77,14 +77,12 @@ $this->title = 'Recepcionista';
             ?>
 
 
-            <div class="container">
                 <?=
                 Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
                 <?= $content ?>
-            </div>
         </div>
 
         <footer class="footer">
