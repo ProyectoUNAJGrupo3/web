@@ -6,7 +6,10 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\AppAssetAgencia;
+use app\assets\BootswatchAsset;
 
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+BootswatchAsset::register($this);
 AppAssetAgencia::register($this);
 AppAsset::register($this);
 /* @var $this yii\web\View */             //modifique el div class ="site-index" por el "agencia-index"
