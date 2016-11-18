@@ -73,7 +73,7 @@ class RecepcionistaController extends Controller {
         $model->setListVehiculos();
         $model->setTarifa();
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
-            Yii::$app->session->setFlash('Viaje creado con exito');
+            Yii::$app->session->setFlash('viajeCreado');
             return $this->refresh();
         }
         return $this->render("altaViajeManual", ['model' => $model]);
@@ -85,22 +85,24 @@ class RecepcionistaController extends Controller {
         $model->setListChoferes();
         $model->setListVehiculos();
 
-
-        return $this->renderAjax("listarSolicitudes", ['model' => $model]);
-    }
-
-
-    public function actionCerrar(){
-        $model = new ListaSolicitudesServicioModel();
-
         If (\Yii::$app->request->isPost) {
             switch (\Yii::$app->request->post('submit')) {
                 case 'cerrar_viaje':
                     $selection=(array)Yii::$app->request->post('selection');
-                case 'actualizar_viaje':
-                    $prueba=(array)Yii::$app->request->post('viajes_grid');//typecasting
+                    $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+                    $operacion = 3;//CERRAR
+                    $model->ViajeOperacion($viajeSelected,$operacion);
+                    Yii::$app->session->setFlash('viajeCerrado');
+                case 'cancelar_viaje':
+                    $selection=(array)Yii::$app->request->post('selection');
+                    $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+                    $operacion = 2;//CANCELAR
+                    $model->ViajeOperacion($viajeSelected,$operacion);
+                    Yii::$app->session->setFlash('viajeCerrado');
+                default :
+                    return $this->redirect('cerrar');
             }
         }
-        return $this->refresh();
+        else{return $this->renderAjax("listarSolicitudes", ['model' => $model]);}
     }
 }

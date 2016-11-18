@@ -13,15 +13,17 @@ use yii\helpers\ArrayHelper;
 use yii\bootstrap\Button;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
+use yii\bootstrap\Alert;
 
 AppAssetRecepcionista::register($this);
-/* @var $this yii\web\View */
 $this->title = 'RemisYa';
 ?>
 
-<?php
- $form = ActiveForm::begin(['action' =>['recepcionista/cerrar'], 'id' => 'forum_post', 'method' => 'post',]);
-?>    
+<div class="panel panel-primary">
+
+    <?php $form = ActiveForm::begin();?>
+        <?php Pjax::begin(); ?>
     <?=
     GridView::widget([
     'id' => 'viajes_grid',
@@ -37,16 +39,17 @@ $this->title = 'RemisYa';
         'ViajeTipo',
         'Estado',
     ],]);
-?>
-
+    ?>
+    <?php Pjax::end(); ?>
 
     <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
     <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
-    
+
     <?= Html::submitButton('Cerrar viaje', ['class' => 'btn btn-primary','name' => 'submit', 'value' => 'cerrar_viaje']) ?>
     <?= Html::submitButton('Cancelar viaje', ['class' => 'btn btn-primary','name' => 'submit', 'value' => 'cancelar_viaje']) ?>
     <?= Html::submitButton('Actualizar viaje', ['class' => 'btn btn-primary','name' => 'submit', 'value' => 'actualizar_viaje']) ?>
 
     <?= Html::button('Confirmar solicitud', ['class' => 'btn btn-primary']) ?>
     <?= Html::button('Cancelar solicitud', ['class' => 'btn btn-primary']) ?>
-<?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
+</div>
