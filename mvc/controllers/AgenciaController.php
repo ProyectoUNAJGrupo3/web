@@ -92,7 +92,7 @@ class AgenciaController extends Controller {
         if ($model->load(Yii::$app->request->post()) && ($model->registrarvehiculo() === true)) {
             Yii::$app->session->setFlash('vehiculo creado con exito');
         }
-        return $this->render("altaVehiculo", ['model' => $model]);
+        return $this->renderAjax("altaVehiculo", ['model' => $model]);
     }
 
     public function actionAlta_chofer_agencia() {
@@ -111,7 +111,7 @@ class AgenciaController extends Controller {
         if ($model->load(Yii::$app->request->post()) && ($model->registrarrecepcionista() === true)) {
             Yii::$app->session->setFlash('Empleado creado con exito');
         }
-        return $this->render("altaTelefonista", ['model' => $model]);
+        return $this->renderAjax("altaTelefonista", ['model' => $model]);
     }
 
     //**************************************************************************//
@@ -122,17 +122,16 @@ class AgenciaController extends Controller {
         return $this->render("actualizarVehiculo", ['model' => $model]);
     }
 
-    /* Date Picker
-     * public function actionActualizar_chofer_agencia() {
+     public function actionActualizar_chofer_agencia() {
       $model = new ActualizarChoferModel();
       return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
-      } */
+      } 
 
-    /* DatePicker
-     * public function actionActualizar_recepcionista_agencia() {
+
+      public function actionActualizar_recepcionista_agencia() {
       $model = new PSActualizacionDatosRecepcionistaModel();
       return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
-      } */
+      } 
 
     //**************************************************************************//
     //******************************Listar**************************************//

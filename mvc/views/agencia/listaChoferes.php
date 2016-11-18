@@ -88,9 +88,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJX
                             <div id='botones-group'>
                                 <?=Html::button('agregar', ['value'=>Url::toRoute('agencia/alta_chofer_agencia'), 'class'=>'btn btn-primary btn-lg','id'=>'modalButton']);  ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                <?= Html::Button('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                                <?= Html::Button('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                             </div>
