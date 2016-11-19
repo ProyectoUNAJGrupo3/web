@@ -13,7 +13,7 @@ $(function() {
 });
 
 $(function() {
-    $('#modalButtonRegistrarAgencias').click(function()
+    $('#modalButtonLogin').click(function()
     {
         $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
     });
