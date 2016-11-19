@@ -5,6 +5,7 @@
     text-align: center;
     font-size: 30px;
     clear:both;
+    width: 100%;
 }
 
 #cuerpo-modal{
@@ -13,7 +14,6 @@
     padding: 15px;
     position: relative;
     box-sizing: border-box;
-    box-sizing: border-box;
     float:center;
     background-color:white;
     color: black !important;
@@ -21,6 +21,7 @@
     font-size: 15px;
     clear:both;
     color:#337ab7;
+    width: 100%;
 }
 
 #cruz-close:hover{
@@ -41,10 +42,11 @@
 
 #pie-modal{
     /*background-color: #f9f9f9;*/
+    margin-left: 0%;
+    width: 100%;
 }
 
 #img-avatar-login{
-    margin-left:185px;
     width: 20%;
     border-radius: 50%;
     vertical-align:middle;
@@ -160,5 +162,6 @@
     font-size: 15px;
 }
 #btn-login-popup{
+    margin-left: 35px;
     width: 100%;
 }

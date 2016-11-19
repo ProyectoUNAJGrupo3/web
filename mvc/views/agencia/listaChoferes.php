@@ -89,7 +89,7 @@ Modal::end();
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar','confirm' => 'Are you sure you want to permanently delete these comments?']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                         </div>
