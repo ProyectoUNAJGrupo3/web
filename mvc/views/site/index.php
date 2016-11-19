@@ -4,10 +4,23 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
+use yii\bootstrap\Modal;
 use app\assets\BootswatchAsset;
+use app\assets\AppAssetPopups;
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
+AppAssetPopups::register($this);
+
+
+Modal::begin([
+    'id' => 'modal',
+    'size' => 'modal-lg',
+]);
+echo "<div id='modalContent'></div>";
+Modal::end();
 ?>
 
 <div class="wrap" style="background-image:url(img/remis2.jpg)">
@@ -18,9 +31,11 @@ BootswatchAsset::register($this);
         <h1>Bienvenidos a RemisYa!</h1>
         <p>La primera aplicacion web en el mercado pensada para su Agencia y sus clientes..</p>
         <p>Administre de manera mas eficaz la gestion, minimice costos y errores humanos, aproveche un nuevo canal de ventas.</p>
+        <?php ActiveForm::begin() ?>
         <p>
-            <a class="btn btn-primary btn-lg">Solicitar Remis</a>
+            <?= Html::button('Solicitar Remis', ['value' => Url::toRoute('/site/login'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
         </p>
+        <?php ActiveForm::end() ?>
     </div>
 </div>
 <div class="section-tout" style="background-color:#eaf1f1">

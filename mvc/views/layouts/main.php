@@ -8,8 +8,19 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\models\TipoUsuario;
 use app\assets\BootswatchAsset;
+
+//use yii\bootstrap\Modal;
+//use yii\helpers\Url;
+//use app\assets\AppAssetWebSite;
+
 BootswatchAsset::register($this);
 
+/* Modal::begin([
+  'id' => 'modal',
+  'size' => 'modal-lg',
+  ]);
+  echo "<div id='modalContent'></div>";
+  Modal::end(); */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -18,11 +29,11 @@ BootswatchAsset::register($this);
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <meta charset="<?= Yii::$app->charset ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <?= Html::csrfMetaTags() ?>
+            <?= Html::csrfMetaTags() ?>
         <title>
-            <?= Html::encode($this->title) ?>
+        <?= Html::encode($this->title) ?>
         </title>
-        <?php $this->head() ?>
+<?php $this->head() ?>
     </head>
     <body>
         <?php
@@ -56,7 +67,9 @@ BootswatchAsset::register($this);
                         ],],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
-                            ['label' => '<span class="fa fa-sign-in"></span> ' . Html::encode('Login'), 'url' => ['/site/login']]
+                            ['label' => '<span class="fa fa-sign-in"></span> ' . Html::encode('Login'), 'url' => ['/site/login']]// 
+                            //['label' => '<span class="fa fa-sign-in"></span> ' . Html::encode('Login'), 'value' => Url::toRoute('site/login'),'id' => 'modalButton']
+
                             ) : (
                             '<li>'
                             . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -71,27 +84,27 @@ BootswatchAsset::register($this);
             NavBar::end();
             ?>
 
-                <?=
-                Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ])
-                ?>
-                <?= $content ?>
-            </div>
+            <?=
+            Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ])
+            ?>
+<?= $content ?>
+        </div>
 
         <footer class="footer">
             <div class="container">
                 <!--<hr style="border:1px solid gray;">-->
-               
+
                 <span id="footer-copy-right" style="text-align:center"> 
                     <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
                     <i class="fa fa-phone-square"></i> &nbsp; 011-4369-4657 &nbsp; &nbsp; 011-4287-5324 &nbsp; &nbsp;
                     <i class="fa fa-envelope"></i> &nbsp; administracion@remisya.com
-                 </span>
+                </span>
             </div>
         </footer>
 
-        <?php $this->endBody() ?>
+<?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>
