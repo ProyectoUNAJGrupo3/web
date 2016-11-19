@@ -1,5 +1,5 @@
 #cabecera-modal{
-    background-color:#337ab7;
+    /*background-color:#337ab7;*/
     border-color:#122b40;
     color: white !important;
     text-align: center;
@@ -40,7 +40,7 @@
 }
 
 #pie-modal{
-    background-color: #f9f9f9;
+    /*background-color: #f9f9f9;*/
 }
 
 #img-avatar-login{
@@ -87,7 +87,7 @@
 
 #link-olvidaste-contrasenia{
     font-size: 14px;
-    color: #337ab7;
+    color: white;
     background-color:transparent;
     float: right;
     margin-top: -10px;
@@ -100,7 +100,7 @@
 
 #link-olvidaste-contrasenia:hover{
     font-size: 14px;
-    color: #23527c;
+    color: white;
     float: right;
     margin-top: -10px;
     margin-left: 75px;
@@ -126,8 +126,8 @@
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
-    background-color: #337ab7;
-    border-color: #2e6da4;
+    /*background-color: #337ab7;
+    border-color: #2e6da4;*/
     color: #fff;
     font-size: 17px;
 }
@@ -146,16 +146,19 @@
 
 #btn-login-popup:hover, #btn-registrarme-user-login-popup:hover,#btn-registrarme-agencia-login-popup:hover{
     color:#ffffff;
-    background-color:#286090;
-    border-color:#2e6da4;
+    /*background-color:#286090;
+    border-color:#2e6da4;*/
     text-decoration:none;
     cursor:pointer;
     filter:alpha(opacity=50);
     size:5px 75px;
-    	
+
 }
 #btn-registrarme-user-login-popup,#btn-registrarme-agencia-login-popup{
     margin-left: 35px;
     size:5px 30px;
     font-size: 15px;
+}
+#btn-login-popup{
+    width: 100%;
 }

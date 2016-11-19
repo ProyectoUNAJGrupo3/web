@@ -14,21 +14,16 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle {
+class AppAssetPopups extends AssetBundle {
 
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/styleHomeComunATodasLasVistas.css',
-        'css/styleFooter.css',
-        'css/styleHeader.css',
-        'css/styleHomeAgencia.css',
-        'css/styleAccesoDenegado.css',
-        'css/styleQuienesSomos.css',
-        'css/styleLoginPopup.css',
     ];
     public $js = [
+        'js/PopupLogin.js',
+        //'js/PopupLoginRegistrarUsuario.js',
+        //'js/PopupRegistrarAgencia.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

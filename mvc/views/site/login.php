@@ -7,22 +7,42 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\assets\BootswatchAsset;
+use app\assets\AppAsset;
+use yii\bootstrap\Modal;
+use app\assets\AppAssetPopups;
+
+AppAsset::register($this);
+AppAssetPopups::register($this);
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
+
+/*Modal::begin([
+    'id' => 'modal',
+    'size' => 'modal-lg',
+]);
+echo "<div id='modalContent'></div>";
+Modal::end();
+*/
 ?>
-<div class="site-login">
 
-    <!--<div class="modal fade" id="myModal" role="dialog">-->
-
-    <div class="modal-dialog">
-
-        <div class="modal-content">
-            <div class="modal-header" id="cabecera-modal" style="padding:35px 50px;">
+<div class="container">
+    <!--<div class="well bs-component">-->
+    <div class="row">
+        <div class="col-lg-8">
+            <!--<div class="site-login">
+            
+            <!--<div class="modal fade" id="myModal" role="dialog">-->
+            <!--
+                <div class="modal-dialog">
+            
+                    <div class="modal-content">-->
+            <!--<div class="modal-header" id="cabecera-modal" style="padding:35px 50px;">
                 <button type="button" class="close" id="cruz-close" data-dismiss="modal">&times;</button>
+            </div>-->
+            <div class="container-form" >
                 <img src="img/avatarUser.png" id="img-avatar-login" alt="Logo P&aacute;gina" align="top" />
-            </div>
-            <div class="modal-body" style="padding:20px 50px;">
+                <!--<div class="modal-body" style="padding:20px 50px;">-->
                 <h4>
                     <strong>
                         <p style="text-align: center">Ingrese su usario y contrase&ntilde;a</p>
@@ -54,10 +74,12 @@ BootswatchAsset::register($this);
 
                 <div class="form-group">
                     <div class="col-lg-offset-1 col-lg-11">
-                        <?= Html::submitButton('Login', ['class' => 'btn btn-success btn-block', 'name' => 'login-button', 'id' => 'btn-login-popup']) ?>
+                        <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button', 'id' => 'btn-login-popup']) ?>
                     </div>
-                    <br />
-                    <br />
+
+                    <br>
+                    <br>
+
                     <!--<div id="imgEmail" align="center">
                         <br />
                         <h4>
@@ -73,31 +95,37 @@ BootswatchAsset::register($this);
                         </a>
                     </div>-->
 
-                    <div id="imgEmail" align="center">
-                        <br />
-                        <h4>
-                            <p>
-                                <strong>&#191No est&aacute; registrado o quer&eacute;s que tu remiser&iacute;a aparezca?</strong>
-                            </p>
-                        </h4>
-                        <br />
-                        <br />
+                    <!--<div id="imgEmail" align="center">-->
+                    <br />
+                    <h4 style="margin-left:40px">
+                        <p>
+                            <strong>&#191No est&aacute; registrado o quer&eacute;s que tu remiser&iacute;a aparezca?</strong>
+                        </p>
+                    </h4>
+                    <br />
+                    <br />
+                    <div style="margin-left: 75px;">
                         <a>
-                            <?= Html::submitButton('Registrarme como Usuario', ['value' => Url::toRoute('/site/registro'), 'class' => 'btn btn-primary', 'id' => 'btn-registrarme-user-login-popup']); ?>
-                            <?= Html::submitButton('Registrarme como Agencia', ['value' => Url::toRoute('/site/solicitud_registrar_agencia'), 'class' => 'btn btn-primary', 'id' => 'btn-registrarme-agencia-login-popup']); ?>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            
+                            <?= Html::Button('Registrarme como Usuario', ['value' => Url::toRoute('/site/registro'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarUsuario']); ?>
+                            <?= Html::Button('Registrarme como Agencia', ['value' => Url::toRoute('/site/solicitud_registrar_agencia'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarAgencias']); ?> 
                         </a>
                     </div>
                 </div>
 
                 <?php ActiveForm::end(); ?>
 
+                <!--</div>-->
+                <div class="modal-footer" id="pie-modal">
+                    <b>
+                        <a id="link-olvidaste-contrasenia" href="#">&#191;Has olvidado la contrase&ntilde;a?</a>
+                    </b>
+                </div>
+                <!--</div>
             </div>
-            <div class="modal-footer" id="pie-modal">
-                <b>
-                    <a id="link-olvidaste-contrasenia" href="#">&#191;Has olvidado la contrase&ntilde;a?</a>
-                </b>
+        </div>-->
+                <!--</div> -->
             </div>
         </div>
     </div>
 </div>
-<!--</div>-->
