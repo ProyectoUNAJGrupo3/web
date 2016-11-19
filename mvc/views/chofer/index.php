@@ -1,166 +1,90 @@
 <?php
 
-use dosamigos\google\maps\LatLng;
-use dosamigos\google\maps\services\DirectionsWayPoint;
-use dosamigos\google\maps\services\TravelMode;
-use dosamigos\google\maps\overlays\PolylineOptions;
-use dosamigos\google\maps\services\DirectionsRenderer;
-use dosamigos\google\maps\services\DirectionsService;
-use dosamigos\google\maps\overlays\InfoWindow;
-use dosamigos\google\maps\overlays\Marker;
-use dosamigos\google\maps\Map;
-use dosamigos\google\maps\services\DirectionsRequest;
-use dosamigos\google\maps\overlays\Polygon;
-use dosamigos\google\maps\layers\BicyclingLayer;
+use yii\helpers\BaseHtml;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use yii\widgets\ActiveForm;
+use app\assets\AppAssetWebSite;
 use app\assets\AppAsset;
+use app\assets\BootswatchAsset;
+
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+BootswatchAsset::register($this);
 AppAsset::register($this);
-/* @var $this yii\web\View */            
-$this->title = 'Service Remis';
+AppAssetWebSite::register($this);
 ?>
-<div class="chofer-index">             
-
-    <!--<div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>-->
-
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
-
-    <!--<div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>-->
-
-    <div id="contenedor-home">
+<!--<div class="container">
+    <section id="main">
+        <article>
+            <div id="page-single-main">-->
+<div class="container">
+    <div class="well bs-component">
+        <div class="row">
+        <!--<section id="main">
+            <article>
+                <div id="page-single-main">
+                    <br />-->
+            <h1>
+            <strong>F&oacute;rmulario Calificaci&oacute;n Usuario</strong>
+            </h1>
 
 
-        <div id="titulo">
-            <div>
-                <h1 id="titulo-contenido" size="50px">Bienvenido a RemisYA</h1>
-            </div>
-        </div>
+            <!--<div class="container-form" id="contenedor-formulario">-->
+            <h1>
+                <?= Html::encode($this->title) ?>
+            </h1>
 
-        <div id="descripcion">
-            <strong>
+            <?php if (Yii::$app->session->hasFlash('Clasificaci&oacute;n exitosa')): ?>
+                <div class="alert alert-success">
+                    Thank you for contacting us. We will respond to you as soon as possible.
+                </div>
                 <p>
-                   blalblalblalblabla. chofer
+                    Note that if you turn on the Yii debugger, you should be able
+                    to view the mail message on the mail panel of the debugger.
+                    <?php if (Yii::$app->mailer->useFileTransport): ?>
+                        Because the application is in development mode, the email is not sent but saved as
+                        a file under
+                        <code>
+                            <?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?>
+                        </code>.
+                        Please configure the
+                        <code>useFileTransport</code>property of the
+                        <code>mail</code>
+                        application component to be false to enable email sending.
+                    <?php endif; ?>
                 </p>
-            </strong>
-        </div>
+            <?php else: ?>
 
-        <div id="bar-buttons">
-            <div id="btn-bar">
-                <?= Html::button('Solicitar Servicio Remiseria', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-solcitar-remis']) ?>
-                <?= Html::button('Listar Remiserias', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-ver-remiserias']) ?>
-                <?= Html::button('Obtener ubicaci&oacute;n en el Mapa', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-obtener-ubicacion-en-el-mapa']) ?>
-            </div>
+                <div class="col-lg-11">
+                    <!--<div class="row">
 
+                        <div class="col-lg-5">-->
+                    <?php $form = ActiveForm::begin(); ?>
+                    <b>
+                        <h3>
+                            <u>Datos</u>
+                            <u>Calificaci&oacute;n</u>
+                        </h3>
+                    </b>
+                    <?= $form->field($model, 'numeroViaje')->input("text", ['readonly' => true, 'maxlength' => '50'])->label("N° Viaje"); ?>
+                    <?= $form->field($model, 'nombreUsuario')->input("text", ['readonly' => true, 'maxlength' => '50'])->label("Usuario"); ?>
+                    <?= $form->field($model, 'nombreChofer')->input("text", ['readonly' => true,])->label("Chofer"); ?>
+                    <?= $form->field($model, 'puntaje')->dropDownList(['prompt' => 'Seleccione...', 'uno' => '1', 'dos' => '2', 'tres' => '3', 'cuatro' => '4', 'cinco' => '5', 'seis' => '6', 'siete' => '7', 'ocho' => '8', 'nueve' => '9', 'diez' => '10']) ?>
+                    <?= $form->field($model, 'fecha')->input('text', ['readonly' => true,])->label("Fecha"); ?>
+                    <?= $form->field($model, 'comentario')->textArea(['rows' => 7, 'column' => 4])->label('Comentario'); ?>
+                    <?= Html::submitButton('Calificar', ['class' => 'btn btn-primary', 'id' => 'btn-carga-calificacion']); ?>
+                    <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cerrar']); ?>
+                    <?php ActiveForm::end(); ?>
+                    <!--</div>
+                </div>-->
 
-            <div id="mapHome"></div>
-            <div id="dvMapHome">
-                <?php
-                $coord = new LatLng(['lat' => 39.720089311812094, 'lng' => 2.91165944519042]);
-                $map = new Map([
-                    'center' => $coord,
-                    'zoom' => 14,
-                ]);
+                </div>
+            <?php endif; ?>
 
-                // lets use the directions renderer
-                $home = new LatLng(['lat' => 39.720991014764536, 'lng' => 2.911801719665541]);
-                $school = new LatLng(['lat' => 39.719456079114956, 'lng' => 2.8979293346405166]);
-                $santo_domingo = new LatLng(['lat' => 39.72118906848983, 'lng' => 2.907628202438368]);
-
-                // setup just one waypoint (Google allows a max of 8)
-                $waypoints = [
-                    new DirectionsWayPoint(['location' => $santo_domingo])
-                ];
-
-                $directionsRequest = new DirectionsRequest([
-                    'origin' => $home,
-                    'destination' => $school,
-                    'waypoints' => $waypoints,
-                    'travelMode' => TravelMode::DRIVING
-                ]);
-
-                // Lets configure the polyline that renders the direction
-                $polylineOptions = new PolylineOptions([
-                    'strokeColor' => '#FFAA00',
-                    'draggable' => true
-                ]);
-
-                // Now the renderer
-                $directionsRenderer = new DirectionsRenderer([
-                    'map' => $map->getName(),
-                    'polylineOptions' => $polylineOptions
-                ]);
-
-                // Finally the directions service
-                $directionsService = new DirectionsService([
-                    'directionsRenderer' => $directionsRenderer,
-                    'directionsRequest' => $directionsRequest
-                ]);
-
-                // Thats it, append the resulting script to the map
-                $map->appendScript($directionsService->getJs());
-
-                // Lets add a marker now
-                $marker = new Marker([
-                    'position' => $coord,
-                    'title' => 'My Home Town',
-                ]);
-
-                // Provide a shared InfoWindow to the marker
-                $marker->attachInfoWindow(
-                        new InfoWindow([
-                    'content' => '<p>This is my super cool content</p>'
-                        ])
-                );
-
-                // Add marker to the map
-                $map->addOverlay($marker);
-
-                // Now lets write a polygon
-                $coords = [
-                    new LatLng(['lat' => 25.774252, 'lng' => -80.190262]),
-                    new LatLng(['lat' => 18.466465, 'lng' => -66.118292]),
-                    new LatLng(['lat' => 32.321384, 'lng' => -64.75737]),
-                    new LatLng(['lat' => 25.774252, 'lng' => -80.190262])
-                ];
-
-                $polygon = new Polygon([
-                    'paths' => $coords
-                ]);
-
-                // Add a shared info window
-                $polygon->attachInfoWindow(new InfoWindow([
-                    'content' => '<p>This is my super cool Polygon</p>'
-                ]));
-
-                // Add it now to the map
-                $map->addOverlay($polygon);
-
-
-                // Lets show the BicyclingLayer :)
-                $bikeLayer = new BicyclingLayer(['map' => $map->getName()]);
-
-                // Append its resulting script
-                $map->appendScript($bikeLayer->getJs());
-
-// Display the map -finally :)
-                echo $map->display()
-                ?>
-            </div>
         </div>
     </div>
 </div>
+<!--</div>
+</article>
+</section>-->
+
+

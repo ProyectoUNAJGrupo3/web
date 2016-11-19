@@ -9,17 +9,18 @@ use yii\widgets\Breadcrumbs;
 use app\models\TipoUsuario;
 use app\assets\AppAssetCliente;
 use app\assets\AppAssetWebSite;
+use app\assets\BootswatchAsset;
 
+BootswatchAsset::register($this);
 AppAssetWebSite::register($this);
 AppAssetCliente::register($this);
-
 $this->title = 'Usuario';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
     <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
         <meta charset="<?= Yii::$app->charset ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <?= Html::csrfMetaTags() ?>
@@ -37,32 +38,33 @@ $this->title = 'Usuario';
         <div class="wrap">
             <?php
             NavBar::begin([
-                'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Usuario</b>',
+                'brandLabel' => '<img src="img/LogoApp.png" style="display:inline; margin-top: -20px; vertical-align: top; width:120px; height:55px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Usuario</b>',
                 'brandUrl' => Yii::$app->homeUrl,
                 'id' => 'barra-menu-main',
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
+                'options' => ['class' => 'navbar navbar-default navbar-fixed-top navbar-transparent'],
+                    //'options' => [
+                    //    'class' => 'navbar-inverse navbar-fixed-top',
+                    //],
             ]);
             ;
-
             echo Nav::widget([
                 'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['/cliente/index']],
-                    [
-                        'label' => 'Viajes',
+                    ['label' => '<span class="fa fa-car"></span> ' . Html::encode('Solicitar Servicio'), 'url' => ['/cliente/index']],
+                    ['label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_hisrotial_viajes'],],
-                            '<li class="divider"></li>',
-                            //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
-                            //'<li class="divider"></li>',
-                            ['label' => 'Calificar Servicio', 'url' => ['#'],],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_viajes'],],
+                        //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
+                        //'<li class="divider"></li>',
                         ],
                     ],
-                    ['label' => 'Calificaciones', 'url' => ['#'], 'items' => [
+                    ['label' => '<span class="fa fa-star"></span> ' . Html::encode('Calificaciones'), 'items' => [
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_calificaciones'],],
+                        ],
+                    ],
+                    ['label' => '<span class="fa fa-eye"></span> ' . Html::encode('Servicio Remisería'), 'items' => [
+                            ['label' => '<span class="fa fa-star"></span> ' . Html::encode('Calificar Servicio'), 'url' => ['/cliente/calificar_servicio_remis'],],
                         ],
                     ],
                     Yii::$app->user->isGuest ? (
@@ -83,23 +85,26 @@ $this->title = 'Usuario';
             ?>
 
             <div class="container">
-<?=
-Breadcrumbs::widget([
-    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-])
-?>
+                <?=
+                Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ])
+                ?>
                 <?= $content ?>
             </div>
         </div>
 
         <footer class="footer">
             <div class="container">
-                <!--<hr style="border:1px solid gray;">-->
-                <span id="footer-copy-right" style="text-align:center">Derechos Reservado &copy 2016</span>
+                <span id="footer-copy-right" style="text-align:center"> 
+                    <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
+                    <i class="fa fa-phone-square"></i> &nbsp; 011-4369-4657 &nbsp; &nbsp; 011-4287-5324 &nbsp; &nbsp;
+                    <i class="fa fa-envelope"></i> &nbsp; administracion@remisya.com
+                </span>
             </div>
         </footer>
 
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

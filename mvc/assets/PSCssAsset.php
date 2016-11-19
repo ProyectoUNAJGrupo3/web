@@ -29,6 +29,7 @@ class PSCssAsset extends AssetBundle {
         'cssMainPAge/stylePagesHtml.css',
     ];
     public $js = [
+        'js/Maps.js',
         'js/Mapas.js',
         'js/AperturaPopupLogin.js',
     ];

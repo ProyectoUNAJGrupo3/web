@@ -46,61 +46,58 @@ function clearRemo() {
 }
 var prevMarker = undefined;
 
-function setRemiserias(RemoJson) {
+function getRemiserias(Ubicacion) {
     clearRemo()
     
     var selected = marcadores[0];
     //el ajax debería estar aca
-    //remos =[{
-    //    AgenciaID:45,
-    //    Nombre:'Remis Quilmes',
-    //    Telefono: 42545443,
-    //    DireccionCoordenada: { lat: -34.7744885, lng: -58.2536508 },
-    //    infoAgencia: ' Borrachos vamos mas rapido',
-    //    Tarifa: {
-    //        ID: 7,
-    //        PrecioKM: 15,
+    remos =[{
+        AgenciaID:45,
+        Nombre:'Remis Quilmes',
+        Telefono: 42545443,
+        DireccionCoordenada: { lat: -34.7744885, lng: -58.2536508 },
+        infoAgencia: ' Borrachos vamos mas rapido',
+        Tarifa: {
+            ID: 7,
+            PrecioKM: 15,
 
-    //    }
+        }
 
-    //},
-    //    {
-    //        AgenciaID:54,
-    //        Nombre:'Remis Estrella',
-    //        Telefono: 434343400,
-    //        DireccionCoordenada: { lat: -34.78031000000001, lng: -58.270884 },
-    //        infoAgencia: ' A la velocidad de la luuuuuuz',
-    //        Tarifa: {
-    //            ID: 5,
-    //            PrecioKM: 13,
+    },
+        {
+            AgenciaID:54,
+            Nombre:'Remis Estrella',
+            Telefono: 434343400,
+            DireccionCoordenada: { lat: -34.78031000000001, lng: -58.270884 },
+            infoAgencia: ' A la velocidad de la luuuuuuz',
+            Tarifa: {
+                ID: 5,
+                PrecioKM: 13,
 
-    //        }
+            }
 
-    //    },
-    //    {
-    //        AgenciaID:1,
-    //        Nombre:"Remis UNAJ",
-    //        Telefono: 553153,
-    //        DireccionCoordenada: { lat: -34.776670, lng: -58.289105800000016 },
-    //        infoAgencia: " Te llevamos y te trae!",
-    //        Tarifa: {
-    //            ID: 3,
-    //            PrecioKM: 14,
-    //        }
-    //    }];
+        },
+        {
+            AgenciaID:1,
+            Nombre:"Remis UNAJ",
+            Telefono: 553153,
+            DireccionCoordenada: { lat: -34.776670, lng: -58.289105800000016 },
+            infoAgencia: " Te llevamos y te trae!",
+            Tarifa: {
+                ID: 3,
+                PrecioKM: 14,
+            }
+        }];
     var infoWindow;
-    for (var i = 0; i < RemoJson.length; i++) {
-        if (RemoJson[i].DireccionCoordenada == null) continue;
-        RemoJson[i].Tarifa = {
-            PrecioKM: 5
-        };
+    for (var i = 0; i < remos.length; i++) {
+
         var remo = new google.maps.Marker({
-            position: getCoord(RemoJson[i].DireccionCoordenada),
+            position: remos[i].DireccionCoordenada,
             map: map,
-            title: RemoJson[i].Nombre,//otra info
+            title: remos[i].Nombre,//otra info
             animation: google.maps.Animation.DROP
         });
-        remo.Agencia = RemoJson[i];
+        remo.Agencia= remos[i];
 
         remo.addListener('click', function (event) { // hace cualquier cosa
             //infoWindow.setPosition(event.latLng)
@@ -409,8 +406,7 @@ function doTheAjax() {
             data: id
         },
         success: function (data) {
-            var info = JSON.parse(data);
-            setRemiserias(info);
+            console.log(data.search);
         }
     });
 }
@@ -431,13 +427,4 @@ function calculateDistanceAndStuff(latLng) {
             alert("Algo anda mal y no andubo ):");
         }
     });
-}
-function getCoord(stringCoord) {
-
-    var array = stringCoord.split(",");
-    var initIndex = array[0].indexOf("-") >= 0 ? array[0].indexOf("-") : array[0].indexOf(" ");
-    var lat = Number(array[0].substring(initIndex, array[0].length));
-    var initIndex = array[1].indexOf("-") >= 0 ? array[1].indexOf("-") : array[1].indexOf(" ");
-    var lng = Number(array[1].substring(initIndex, array[1].length));
-    return { lat: lat, lng: lng };
 }

@@ -6,8 +6,12 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
-AppAsset::register($this);
+use app\assets\AppAssetRecepcionista;
+use app\assets\BootswatchAsset;
+
+
+BootswatchAsset::register($this);
+AppAssetRecepcionista::register($this);
 
 $this->title = 'Recepcionista';
 ?>
@@ -34,10 +38,10 @@ $this->title = 'Recepcionista';
             <?php
             NavBar::begin([
                 'id' => 'barra-agencia',
-                'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Recepcionista</b>',
+                'brandLabel' => '<img src="img/LogoApp.png" style="display:inline; margin-top: -20px; vertical-align: top; width:120px; height:55px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Recepcionista</b>',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar navbar-default',
                 ],
             ]);
             ;
@@ -45,16 +49,16 @@ $this->title = 'Recepcionista';
                   'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['recepcionista/index']],
+                    //['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['recepcionista/index']],
                     [
-                        'label' => 'Viajes',
+                        'label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [
                             //['label' => 'Carga Nuevo viaje', 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                             //'<li class="divider"></li>',
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Solicitudes'), 'url' => ['/recepcionista/listar_solicitudes_servicio'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         ],
                     ],
-                    ['label' => 'Ver Solicitud', 'url' => ['recepcionista/ver_datos_solicitud_de_servicio']],
+                    //['label' => 'Ver Solicitud', 'url' => ['recepcionista/ver_datos_solicitud_de_servicio']],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]
@@ -73,14 +77,12 @@ $this->title = 'Recepcionista';
             ?>
 
 
-            <div class="container">
                 <?=
                 Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
                 <?= $content ?>
-            </div>
         </div>
 
         <footer class="footer">
