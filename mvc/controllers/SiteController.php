@@ -228,7 +228,7 @@ class SiteController extends Controller {
         if ($model->load(Yii::$app->request->post()) && ($model->AltaRegistro() === true)) {
             return $this->render('about');
         }
-        return $this->renderAjax("PSFormularioUsuario", ['model' => $model]);
+        return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
 
     public function actionSolicitud_registrar_agencia() {
@@ -236,7 +236,7 @@ class SiteController extends Controller {
         if ($model->load(Yii::$app->request->post()) && ($model->Registrar() === true)) {
             return $this->render('about');
         }
-        return $this->renderAjax("solicitarAgencia", ['model' => $model]);
+        return $this->render("solicitarAgencia", ['model' => $model]);
     }
 
     private function actionAgregando() {
