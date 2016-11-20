@@ -8,19 +8,9 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\models\TipoUsuario;
 use app\assets\BootswatchAsset;
-
-//use yii\bootstrap\Modal;
-//use yii\helpers\Url;
-//use app\assets\AppAssetWebSite;
+use yii\helpers\Url;
 
 BootswatchAsset::register($this);
-
-/* Modal::begin([
-  'id' => 'modal',
-  'size' => 'modal-lg',
-  ]);
-  echo "<div id='modalContent'></div>";
-  Modal::end(); */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -29,11 +19,11 @@ BootswatchAsset::register($this);
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <meta charset="<?= Yii::$app->charset ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <?= Html::csrfMetaTags() ?>
+        <?= Html::csrfMetaTags() ?>
         <title>
-        <?= Html::encode($this->title) ?>
+            <?= Html::encode($this->title) ?>
         </title>
-<?php $this->head() ?>
+        <?php $this->head() ?>
     </head>
     <body>
         <?php
@@ -66,9 +56,7 @@ BootswatchAsset::register($this);
                             ['label' => '<span class="fa fa-industry"></span> ' . Html::encode('Remiseria'), 'url' => ['/site/solicitud_registrar_agencia'],],
                         ],],
                     Yii::$app->user->isGuest ? (
-                            //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
-                            ['label' => '<span class="fa fa-sign-in"></span> ' . Html::encode('Login'), 'url' => ['/site/login']]// 
-                            //['label' => '<span class="fa fa-sign-in"></span> ' . Html::encode('Login'), 'value' => Url::toRoute('site/login'),'id' => 'modalButton']
+                            ['label' => '<span class="fa fa-sign-in"></span> ' . Html::button('Login', ['value' => Url::toRoute('/site/login'), 'class' => 'btn btn-primary', 'id' => 'modalButtonLogin', 'style' => 'background-color:#4e5d6c;margin-top:-5px;font-size:13px;'])]
 
                             ) : (
                             '<li>'
@@ -89,7 +77,7 @@ BootswatchAsset::register($this);
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ])
             ?>
-<?= $content ?>
+            <?= $content ?>
         </div>
 
         <footer class="footer">
@@ -104,7 +92,7 @@ BootswatchAsset::register($this);
             </div>
         </footer>
 
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>
