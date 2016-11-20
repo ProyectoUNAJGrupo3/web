@@ -221,6 +221,7 @@ function initMap(isindex) {
                 $('#importeTotal').val('$' + importe.toFixed(2).toString());
 
             }
+            setPanelData(data);
 
         });
 
@@ -310,7 +311,8 @@ function initMap(isindex) {
     function setPanelData(data) { // esta funcion tenia mil cosas y las fui acomodando en otras funciones, quedo re pete con dos lineas.
         $('#destinocoordenada').val("Lat:" + data.end_location.lat().toString() + ",Lng:" + data.end_location.lng().toString());
         $('#destinoTexto').val(data.end_address);
-
+        $('#origencoordenada').val("Lat:" + data.start_location.lat().toString() + ",Lng:" + data.start_location.lng().toString());
+        $('#origenTexto').val(data.start_address);
 
     }
 
