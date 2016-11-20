@@ -22,6 +22,10 @@ class AgenciaModelo extends Model
     private $OperacionState=null;                                                               //VARIABLE QUE GUARDARA EL ESTADO DE LA OPERACION ACTUAL (ALTA, BAJA, MODIFICACION o GETINFO).
     private $Agencia=null;                                                                     //VARIABLE QUE SERVIRA PARA GUARDAR LAS PERSONAS QUE DEVUELVA EL METODO GETINFO.
     private $Parametros=null;                                                                   //VARIABLE QUE GUARDARA LOS PARAMETROS DEL STORED PROCEDURE
+   
+    public function setAgencia($resltado){
+     $this->Agencia=$resltado;
+ }
     public function RegistrarAgencia($Nombre,$Direccion, $DireccionCoordenadas , $Telefono, $Email, $Estado,$CUIT)                                               //ESTE METODO RECIBE UN Lista COMO PARAMETRO, LA Lista DEBE CONTENER LA MISMA CANTIDAD DE PARAMETROS QUE SE UTILIZAN EN EL STORE PROCEDURE CON LOS MISMOS NOMBRES EXCEPTUANDO LOS PARAMETROS (operacion, AgenciaID y @result).
     {
         $this->Parametros = [

@@ -58,7 +58,8 @@ class ClienteController extends Controller {
     public function actionIndex() {
         $model = new SolicitudRemiseriaModel();
         if ($model->load(Yii::$app->request->post()) && ($model->GuardarViaje() === true)) {
-            return $this->render('listaHistorialViajes');
+            return $this->redirect(['cliente/listar_historial_viajes']);
+
         }
         return $this->render("index", ['model' => $model]);
     }

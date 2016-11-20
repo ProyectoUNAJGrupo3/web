@@ -46,58 +46,24 @@ function clearRemo() {
 }
 var prevMarker = undefined;
 
-function getRemiserias(Ubicacion) {
-    clearRemo()
-    
+function setRemiserias(RemoJson) {
+    clearRemo();
+
     var selected = marcadores[0];
     //el ajax debería estar aca
-    remos =[{
-        AgenciaID:45,
-        Nombre:'Remis Quilmes',
-        Telefono: 42545443,
-        DireccionCoordenada: { lat: -34.7744885, lng: -58.2536508 },
-        infoAgencia: ' Borrachos vamos mas rapido',
-        Tarifa: {
-            ID: 7,
-            PrecioKM: 15,
-
-        }
-
-    },
-        {
-            AgenciaID:54,
-            Nombre:'Remis Estrella',
-            Telefono: 434343400,
-            DireccionCoordenada: { lat: -34.78031000000001, lng: -58.270884 },
-            infoAgencia: ' A la velocidad de la luuuuuuz',
-            Tarifa: {
-                ID: 5,
-                PrecioKM: 13,
-
-            }
-
-        },
-        {
-            AgenciaID:1,
-            Nombre:"Remis UNAJ",
-            Telefono: 553153,
-            DireccionCoordenada: { lat: -34.776670, lng: -58.289105800000016 },
-            infoAgencia: " Te llevamos y te trae!",
-            Tarifa: {
-                ID: 3,
-                PrecioKM: 14,
-            }
-        }];
     var infoWindow;
-    for (var i = 0; i < remos.length; i++) {
-
+    for (var i = 0; i < RemoJson.length; i++) {
+        if (RemoJson[i].DireccionCoordenada == null) continue;
+        //RemoJson[i].Tarifa = {
+        //    PrecioKM: 5
+        //};
         var remo = new google.maps.Marker({
-            position: remos[i].DireccionCoordenada,
+            position: getCoord(RemoJson[i].DireccionCoordenada),
             map: map,
-            title: remos[i].Nombre,//otra info
+            title: RemoJson[i].Nombre,//otra info
             animation: google.maps.Animation.DROP
         });
-        remo.Agencia= remos[i];
+        remo.Agencia = RemoJson[i];
 
         remo.addListener('click', function (event) { // hace cualquier cosa
             //infoWindow.setPosition(event.latLng)
@@ -107,7 +73,7 @@ function getRemiserias(Ubicacion) {
                 prevMarker.setAnimation(null);
                 prevMarker.setIcon('http://maps.google.com/mapfiles/marker.png');
             } else if (prevMarker == this) {
-                $('#btn-solcitar-remis')[0].disabled=true;
+                $('#btn-solcitar-remis')[0].disabled = true;
                 $('#importeTotal').val('');
 
                 prevMarker = undefined;
@@ -117,13 +83,13 @@ function getRemiserias(Ubicacion) {
             }
             this.setAnimation(google.maps.Animation.BOUNCE);
             this.setIcon('http://maps.google.com/mapfiles/marker_orange.png');
-            var importe= this.Agencia.Tarifa.PrecioKM * (distance.value/1000);
+            var importe = Number(this.Agencia.Tarifa.PrecioKM) * (distance.value / 1000);
             $('#idAgencia').val(this.Agencia.AgenciaID);
-            $('#idTarifa').val(this.Agencia.Tarifa.ID);
-            $('#btn-solcitar-remis')[0].disabled=false;
-            $('#importeTotal').val('$'+importe.toFixed(2).toString());
+            $('#idTarifa').val(this.Agencia.Tarifa.TarifaID);
+            $('#btn-solcitar-remis')[0].disabled = false;
+            $('#importeTotal').val('$' + importe.toFixed(2).toString());
             infoWindow = new google.maps.InfoWindow({
-                content: "<div class='colorBlack'><h3>"+this.Agencia.Nombre+"</h3><p>"+this.Agencia.infoAgencia+"</p> </div>"
+                content: "<div class='colorBlack'><h3>" + this.Agencia.Nombre + "</h3><p>" + this.Agencia.infoAgencia + "</p> </div>"
             });
 
             infoWindow.open(map, this)//ow
@@ -234,7 +200,7 @@ function initMap(isindex) {
         map.fitBounds(bounds);
     });
     marcadores = [];
-    
+
     if (isindex) { // puto el que lo lee
         directionsService = new google.maps.DirectionsService();
         directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true })
@@ -242,19 +208,20 @@ function initMap(isindex) {
 
         directionsDisplay.addListener('directions_changed', function () {
             remoButton = $('#btn-ver-remiserias')[0];
-            remoButton.disabled= false;
+            remoButton.disabled = false;
             var data = directionsDisplay.getDirections().routes[0].legs[0];
             var distanceElement = $('#distancia');
-            distance=data.distance;
-            distanceElement[0].innerText = 'Distancia : '+data.distance.text;
+            distance = data.distance;
+            distanceElement[0].innerText = 'Distancia : ' + data.distance.text;
             distanceElement.show();
-            $('#FieldDistance').val((data.distance.value/1000).toString());
-            if (prevMarker){ // significa que hay una remiseria elejida, tenemos que recalcular toda la gilada
+            $('#FieldDistance').val((data.distance.value / 1000).toString());
+            if (prevMarker) { // significa que hay una remiseria elejida, tenemos que recalcular toda la gilada
 
-                var importe= prevMarker.Agencia.Tarifa.PrecioKM * (distance.value/1000);
-                $('#importeTotal').val('$'+importe.toFixed(2).toString());
+                var importe = prevMarker.Agencia.Tarifa.PrecioKM * (distance.value / 1000);
+                $('#importeTotal').val('$' + importe.toFixed(2).toString());
 
             }
+            setPanelData(data);
 
         });
 
@@ -262,32 +229,32 @@ function initMap(isindex) {
         google.maps.event.addListener(map, "rightclick", function (e) {
 
             //latitud y longitud estan disponibles en el evento
-            if (marcadores.length == 2){
+            if (marcadores.length == 2) {
                 window.alert("Ya tenes elegidos dos ubicaciones, arrastra los iconitos para cambiar la direccion. El segundo click anda medio mal.")
                 return;
             }
             var latLng = e.latLng;
-            
+
             var markerOptions = { position: latLng }
             var marker = new google.maps.Marker(markerOptions);
 
             marcadores.push(marker); // coloco la ubicacion del click en el array, despues decido que hacer si
             var distance;
             if (marcadores.length >= 2) {
-                if (marcadores.length > 2) 
+                if (marcadores.length > 2)
                     marcadores = marcadores.splice(1, 2);
-                
+
                 marcadores[0].setMap(null); // borra el marcador, poniendo visible=false tambien funciona, // TODO: encontrar manera de borrarlo de memoria
                 //la siguiente linea es inutil, encontre otras maneras mas piolas de caalcular distancia por otros servicios
                 // distance = google.maps.geometry.spherical.computeDistanceBetween(marcadores[0].position, marcadores[1].position).toFixed(2);
-                var request = { 
+                var request = {
                     origin: marcadores[0].position,
                     destination: marcadores[1].position,
                     travelMode: google.maps.TravelMode.DRIVING
                 };
                 directionsService.route(request, function (response, status) {
                     if (status == google.maps.DirectionsStatus.OK) {
-                        var utilData=response.routes[0].legs[0];
+                        var utilData = response.routes[0].legs[0];
                         setPanelData(utilData);
                         directionsDisplay.setDirections(response); // por defecto setea A y B
                         //document.getElementById('distance').innerHTML = response.rows[0].elements[0].distance.text + ' km';
@@ -308,7 +275,7 @@ function initMap(isindex) {
                 //    if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
                 //        var distance = response.rows[0].elements[0].distance.text;
                 //        var duration = response.rows[0].elements[0].duration.text;
- 
+
                 //    } else {
                 //        alert("Algo anda mal y no andubo ):");
                 //    }
@@ -341,22 +308,23 @@ function initMap(isindex) {
 
         });
     }
-    function setPanelData(data){ // esta funcion tenia mil cosas y las fui acomodando en otras funciones, quedo re pete con dos lineas.
+    function setPanelData(data) { // esta funcion tenia mil cosas y las fui acomodando en otras funciones, quedo re pete con dos lineas.
         $('#destinocoordenada').val("Lat:" + data.end_location.lat().toString() + ",Lng:" + data.end_location.lng().toString());
         $('#destinoTexto').val(data.end_address);
-
+        $('#origencoordenada').val("Lat:" + data.start_location.lat().toString() + ",Lng:" + data.start_location.lng().toString());
+        $('#origenTexto').val(data.start_address);
 
     }
 
 
-    
+
     function geocodeLatLng(geocoder, map, latLng) {// <--infowindow-->) {
         var latlng = latLng;
         if (isindex) {
             $('#origencoordenada').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
 
 
-            geocoder.geocode({'location': latlng}, function (results, status) {
+            geocoder.geocode({ 'location': latlng }, function (results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
                     if (results[0]) {
                         $('#origenTexto').val(results[0].formatted_address);
@@ -371,30 +339,30 @@ function initMap(isindex) {
             });
         }
 
-     else {
+        else {
             $('#coordenadas').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
-    geocoder.geocode({'location': latlng}, function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-            if (results[0]) {
-                if ($('#direccionAgencia').length >= 1) $('#direccionAgencia').val(results[0].formatted_address);
-                else   $('#psformulariousuariomodel-direccion').val(results[0].formatted_address);
-                $('#pac-input').val(results[1].formatted_address);
-                //map.setZoom(11);
-                //var marker = new google.maps.Marker({
-                //  position: latlng,
-                //  map: map
-                //});
-                // infowindow.setContent(results[1].formatted_address);
-                // infowindow.open(map, marker);
-            } else {
-                window.alert('No results found');
-            }
-        } else {
-            window.alert('Geocoder failed due to: ' + status);
+            geocoder.geocode({ 'location': latlng }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        if ($('#direccionAgencia').length >= 1) $('#direccionAgencia').val(results[0].formatted_address);
+                        else $('#psformulariousuariomodel-direccion').val(results[0].formatted_address);
+                        $('#pac-input').val(results[1].formatted_address);
+                        //map.setZoom(11);
+                        //var marker = new google.maps.Marker({
+                        //  position: latlng,
+                        //  map: map
+                        //});
+                        // infowindow.setContent(results[1].formatted_address);
+                        // infowindow.open(map, marker);
+                    } else {
+                        window.alert('No results found');
+                    }
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+            });
         }
-    });
-}
-}
+    }
 
 };
 function doTheAjax() {
@@ -406,9 +374,20 @@ function doTheAjax() {
             data: id
         },
         success: function (data) {
-            console.log(data.search);
+            var info = JSON.parse(data);
+            setRemiserias(info);
         }
     });
+}
+
+function getCoord(stringCoord) {
+
+    var array = stringCoord.split(",");
+    var initIndex = array[0].indexOf("-") >= 0 ? array[0].indexOf("-") : array[0].indexOf(" ");
+    var lat = Number(array[0].substring(initIndex, array[0].length));
+    initIndex = array[1].indexOf("-") >= 0 ? array[1].indexOf("-") : array[1].indexOf(" ");
+    var lng = Number(array[1].substring(initIndex, array[1].length));
+    return { lat: lat, lng: lng };
 }
 
 function calculateDistanceAndStuff(latLng) {
