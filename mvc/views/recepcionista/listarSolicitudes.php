@@ -19,11 +19,10 @@ use yii\bootstrap\Alert;
 AppAssetRecepcionista::register($this);
 $this->title = 'RemisYa';
 ?>
-
+<?php Pjax::begin(['id' => 'viajegrid_pjax']); ?>
 <div class="panel panel-primary">
-
-    <?php $form = ActiveForm::begin();?>
-        <?php Pjax::begin(); ?>
+    
+    <?php $form = ActiveForm::begin(['id'=>'viajeForm','enableAjaxValidation'=>true,'enableClientScript' => true,'options' => ['data-pjax' => true ]]);?>
     <?=
     GridView::widget([
     'id' => 'viajes_grid',
@@ -40,7 +39,7 @@ $this->title = 'RemisYa';
         'Estado',
     ],]);
     ?>
-    <?php Pjax::end(); ?>
+
 
     <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
     <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
@@ -52,4 +51,31 @@ $this->title = 'RemisYa';
     <?= Html::button('Confirmar solicitud', ['class' => 'btn btn-primary']) ?>
     <?= Html::button('Cancelar solicitud', ['class' => 'btn btn-primary']) ?>
     <?php ActiveForm::end(); ?>
+    
 </div>
+<?php Pjax::end(); ?>
+
+
+
+<?php
+$this->registerJs('
+    // obtener la id del formulario y establecer el manejador de eventos
+        $("form#viajeForm").on("beforeSubmit", function(e) {
+            var form = $(this);
+            $.post(
+                form.attr("action"),
+                form.serialize()
+            )
+            .done(function(result) {
+alert("prp");
+  form.parent().html(result.message);
+                $.pjax.reload({container:"#viajes_grid", timeout: false});
+            });
+            return false;
+        }).on("submit", function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            return false;
+        });
+    ');
+?>

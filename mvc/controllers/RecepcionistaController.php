@@ -72,9 +72,14 @@ class RecepcionistaController extends Controller {
         $model->setListChoferes();
         $model->setListVehiculos();
         $model->setTarifa();
+
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
             Yii::$app->session->setFlash('viajeCreado');
-            return $this->refresh();
+            $model = new AltaViajeManualModel();
+            $model->setDataProvider();
+            $model->setListChoferes();
+            $model->setListVehiculos();
+            $model->setTarifa();
         }
         return $this->render("altaViajeManual", ['model' => $model]);
     }
@@ -85,24 +90,50 @@ class RecepcionistaController extends Controller {
         $model->setListChoferes();
         $model->setListVehiculos();
 
-        If (\Yii::$app->request->isPost) {
-            switch (\Yii::$app->request->post('submit')) {
+        if (\Yii::$app->request->isPost) {
+            /*switch (\Yii::$app->request->post('submit')) {
                 case 'cerrar_viaje':
                     $selection=(array)Yii::$app->request->post('selection');
                     $viajeSelected = $model->dataProvider->allModels[$selection[0]];
                     $operacion = 3;//CERRAR
                     $model->ViajeOperacion($viajeSelected,$operacion);
                     Yii::$app->session->setFlash('viajeCerrado');
+                    $model = new ListaSolicitudesServicioModel();
+                    $model->setDataProvider();
+                    $model->setListChoferes();
+                    $model->setListVehiculos();
+                    break;
+
                 case 'cancelar_viaje':
                     $selection=(array)Yii::$app->request->post('selection');
                     $viajeSelected = $model->dataProvider->allModels[$selection[0]];
                     $operacion = 2;//CANCELAR
                     $model->ViajeOperacion($viajeSelected,$operacion);
                     Yii::$app->session->setFlash('viajeCerrado');
-                default :
-                    return $this->redirect('cerrar');
-            }
+                    $model = new ListaSolicitudesServicioModel();
+                    $model->setDataProvider();
+                    $model->setListChoferes();
+                    $model->setListVehiculos();
+                    break;
+                default :*/
+                    $selection=(array)Yii::$app->request->post('selection');
+                    $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+                    $operacion = 3;//CERRAR
+                    $model->ViajeOperacion($viajeSelected,$operacion);
+                    Yii::$app->session->setFlash('viajeCerrado');
+                    $model = new ListaSolicitudesServicioModel();
+                    $model->setDataProvider();
+                    $model->setListChoferes();
+                    $model->setListVehiculos();
+                    Yii::$app->response->format = Response::FORMAT_JSON;
+                    return [
+                        'message' => '¡Éxito!',
+                    ];
+                   /* break;
+            }*/
         }
-        else{return $this->renderAjax("listarSolicitudes", ['model' => $model]);}
+        return $this->renderAjax("listarSolicitudes", ['model' => $model]);
+
+
     }
 }
