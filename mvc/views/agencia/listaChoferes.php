@@ -75,6 +75,7 @@ Modal::end();
                         <?=
                         GridView::widget(['dataProvider' => $model->dataProvider,
                             'columns' => [
+                                ['class' => 'yii\grid\SerialColumn'],
                                 ['class' => 'yii\grid\CheckboxColumn'],
                                 'Usuario',
                                 'Password',
@@ -82,16 +83,18 @@ Modal::end();
                                 'Apellido',
                                 'Documento',
                             ],]);
+
+
                         ?>
                         <?php $form = ActiveForm::begin(); ?>
                         <div id='botones-group'>
                             <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_chofer_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            <?= Html::button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_chofer_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            <?= Html::button('Eliminar', ['value' => Url::toRoute('agencia/actualizar_chofer_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'eliminarButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                            <?= Html::a('Cerrar', [Url::toRoute('/agencia/index') ,'class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                         </div>
                         <?php ActiveForm::end(); ?>
                     </div>  

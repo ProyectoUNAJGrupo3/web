@@ -123,15 +123,15 @@ class AgenciaController extends Controller {
     }
 
      public function actionActualizar_chofer_agencia() {
-      $model = new ActualizarChoferModel();
-      return $this->render("PSActualizacionDatosChofer", ['model' => $model]);
-      } 
+         $model = new AltaChoferAgenciaModel();
+         return $this->render("altaChofer", ['model' => $model]);
+      }
 
 
       public function actionActualizar_recepcionista_agencia() {
       $model = new PSActualizacionDatosRecepcionistaModel();
       return $this->render("PSActualizacionDatosRecepcionista", ['model' => $model]);
-      } 
+      }
 
     //**************************************************************************//
     //******************************Listar**************************************//
