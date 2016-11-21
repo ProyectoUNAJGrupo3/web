@@ -21,15 +21,14 @@ class SiteController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['login', 'logout', 'administrador', 'recepcionista', 'chofer', 'cliente','registro','contact','about','solicitud_registrar_agencia'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'only' => ['login', 'logout', 'administrador', 'recepcionista', 'chofer', 'cliente', 'registro', 'contact', 'about', 'solicitud_registrar_agencia'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                     [
-                        'actions' => ['login','registro','contact','about','solicitud_registrar_agencia'], //para la accion login
+                        'actions' => ['login', 'registro', 'contact', 'about', 'solicitud_registrar_agencia'], //para la accion login
                         'allow' => true, //Todos los permisos aceptados
                         'roles' => ['?'], //Tienen acceso a esta accion todos los usuarios invitados
                     ],
-
-                      [
+                    [
                         //el administrador tiene permisos sobre las siguientes acciones
                         'actions' => ['logout', 'administrador'],
                         'allow' => true,
@@ -181,7 +180,7 @@ class SiteController extends Controller {
                 return $this->goBack();
             }
         }
-        return $this->render('login', [
+        return $this->renderAjax('login', [
                     'model' => $model,
         ]);
     }
@@ -239,8 +238,9 @@ class SiteController extends Controller {
         }
         return $this->render("solicitarAgencia", ['model' => $model]);
     }
+
     private function actionAgregando() {
-        return $this->redirect(['agencia/alta_chofer_agencia']);//llamada del boton encode agregar en vista listar chofer
+        return $this->redirect(['agencia/alta_chofer_agencia']); //llamada del boton encode agregar en vista listar chofer
     }
 
 }

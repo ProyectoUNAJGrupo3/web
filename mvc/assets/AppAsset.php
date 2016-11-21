@@ -26,6 +26,7 @@ class AppAsset extends AssetBundle {
         'css/styleHomeAgencia.css',
         'css/styleAccesoDenegado.css',
         'css/styleQuienesSomos.css',
+        'css/styleLoginPopup.css',
     ];
     public $js = [
     ];
