@@ -24,6 +24,8 @@ class AppAssetCliente extends AssetBundle {
         'cssCliente/styleSolicitudRegistrarAgencia.css',
     ];
     public $js = [
+                'js/Mapas.js',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];
     public $depends = [
         'yii\web\YiiAsset',

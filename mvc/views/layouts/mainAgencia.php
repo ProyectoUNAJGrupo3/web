@@ -6,9 +6,10 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
-
-AppAsset::register($this);
+//use app\assets\AppAsset;
+use app\assets\BootswatchAsset;
+BootswatchAsset::register($this);
+//AppAsset::register($this);
 
 
 $this->title = 'Agencia';
@@ -36,16 +37,17 @@ $this->title = 'Agencia';
             <?php
             NavBar::begin([
                 'id' => 'barra-agencia',
-                'brandLabel' => '<img src="img/logo.ico" style="display:inline; margin-top: -15px; vertical-align: top; width:50px; height:50px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Agencia</b>',
+                'brandLabel' => '<img src="img/LogoApp.png" style="display:inline; margin-top: -20px; vertical-align: top; width:120px; height:55px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Agencia</b>',
                 'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
+                'options' => ['class' => 'navbar navbar-default navbar-fixed-top navbar-transparent'],
+                    //'options' => [
+                    //    'class' => 'navbar-inverse navbar-fixed-top',
+                    //],
             ]);
             ;
             echo Nav::widget([
                 'encodeLabels' => false,
-                'options' => ['class' => 'nav-pills navbar-right'],
+                'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => '<span class="fa fa-suitcase"  ></span> ' . Html::encode('Viajes'), 'url' => ['/agencia/index']],
                     [
@@ -53,8 +55,6 @@ $this->title = 'Agencia';
                         'items' => [
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
                         //['label' => '<span class="fa fa-user"></span> ' . Html::encode('Nuevo'), 'url' => ['/agencia/alta_chofer_agencia']],
-                        //'<li class="divider"></li>',
-                        //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_choferes_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
                         ],
                     ],
                     //['label' => 'Choferes', 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle', 'items' => [
@@ -115,20 +115,25 @@ $this->title = 'Agencia';
             ?>
 
 
-            <div class="container">
-                <?=
-                Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ])
-                ?>
-                <?= $content ?>
-            </div>
+            <!--<div class="container">-->
+            <?=
+            Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ])
+            ?>
+            <?= $content ?>
+            <!--</div>-->
         </div>
 
         <footer class="footer">
             <div class="container">
                 <!--<hr style="border:1px solid gray;">-->
-                <span id="footer-copy-right" style="text-align:center">Derechos Reservado &copy 2016</span>
+
+                <span id="footer-copy-right" style="text-align:center"> 
+                    <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
+                    <i class="fa fa-phone-square"></i> &nbsp; 011-4369-4657 &nbsp; &nbsp; 011-4287-5324 &nbsp; &nbsp;
+                    <i class="fa fa-envelope"></i> &nbsp; administracion@remisya.com
+                </span>
             </div>
         </footer>
 

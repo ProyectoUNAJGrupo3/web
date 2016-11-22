@@ -16,11 +16,6 @@ return array(
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'raoul2000\\bootswatch\\' => array($vendorDir . '/raoul2000/yii2-bootswatch-asset'),
-    'dosamigos\\google\\maps\\' => array($vendorDir . '/2amigos/yii2-google-maps-library'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
-    'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
-    'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
-    'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
 );

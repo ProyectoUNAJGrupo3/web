@@ -26,12 +26,9 @@ class AppAsset extends AssetBundle {
         'css/styleHomeAgencia.css',
         'css/styleAccesoDenegado.css',
         'css/styleQuienesSomos.css',
+        'css/styleLoginPopup.css',
     ];
     public $js = [
-        /*'js/ViajesModal.js',
-        'js/ViajesGrid_Mapas.js',*/
-        'js/Mapas.js',
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];
     public $depends = [
         'yii\web\YiiAsset',
