@@ -3,13 +3,23 @@
 
 use yii\helpers\Html;
 use app\assets\BootswatchAsset;
+use app\assets\AppAssetPopups;
+use yii\bootstrap\Modal;
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
+AppAssetPopups::register($this);
 $this->title = 'Quiénes Somos';
+
+Modal::begin([
+    'id' => 'modal',
+    'size' => 'modal-lg',
+]);
+echo "<div id='modalContent'></div>";
+Modal::end();
 ?>
 <div class="container">
-    <div class="well bs-component">
+    <div class="well bs-component" style='color: white; text-align: justify;'>
         <h3>Nuestra Empresa</h3>
         <ul id="lista-empresa">
             <li> En Remis Ya! nos dedicamos plenamente a mejorar nuestro desempeño para poder ofrecer un producto de competencia, no s&oacute;lo en el aspecto tecnol&oacute;gico, sino tambi&eacute;n en lo profesional, y as&iacute;, destacarnos como una empresa desarrolldora de Software de Gestin l&iacute;der en Argentina.  </li>

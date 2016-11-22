@@ -72,30 +72,26 @@ Modal::end();
                     </p>
                 <?php else: ?>
                     <div>
-                        <?php $form = ActiveForm::begin(); ?>
                         <?=
                         GridView::widget(['dataProvider' => $model->dataProvider,
                             'columns' => [
-                                ['class' => 'yii\grid\CheckboxColumn', 'multiple' => False],
+                                ['class' => 'yii\grid\CheckboxColumn'],
                                 'Usuario',
                                 'Password',
                                 'Nombre',
                                 'Apellido',
                                 'Documento',
-
                             ],]);
-
-
                         ?>
-
+                        <?php $form = ActiveForm::begin(); ?>
                         <div id='botones-group'>
                             <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_chofer_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_chofer_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
+                            <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::button('Eliminar', ['value' => Url::toRoute('agencia/actualizar_chofer_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'eliminarButton']); ?>
+                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar','confirm' => 'Are you sure you want to permanently delete these comments?']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::a('Cerrar', [Url::toRoute('/agencia/index') ,'class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                            <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                         </div>
                         <?php ActiveForm::end(); ?>
                     </div>  
