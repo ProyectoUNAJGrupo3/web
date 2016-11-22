@@ -38,21 +38,6 @@ Modal::end();
     <a href="#" class="alert-link">Viaje creado correctamente</a>.
 </div>
 <?php endif ?>
-<?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
-<div class="alert alert-dismissible alert-success">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Operacion exitosa!</strong>
-    <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
-</div>
-<?php endif ?>
-<?php if (Yii::$app->session->hasFlash('viajeCancelado')): ?>
-<div class="alert alert-dismissible alert-warning">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Operacion exitosa!</strong>
-    <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
-</div>
-<?php endif ?>
-
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4 class="panel-title">Administrador de Viajes</h4>
@@ -123,7 +108,7 @@ Modal::end();
 
                             <div class="btn-group">
                                 <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-crearViaje']); ?>
-                                <?= Html::button('Ver Viajes', ['value'=>Url::toRoute('listar_solicitudes_servicio'),'class'=>'btn btn-primary btn-lg','id'=>'modalButton']) ?>
+                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary']) ?>
                             </div>
                         </fieldset>
                     </div>

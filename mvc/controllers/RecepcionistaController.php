@@ -39,7 +39,7 @@ class RecepcionistaController extends Controller {
 
     public function actions() {
         //Control de errores en caso de que se quiera acceder a las acciones de este controlador
-        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+        /*if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
             if (Yii::$app->user->identity->RolID == 1) {                                                                //si el usuario es administrador
                 Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
             } elseif (Yii::$app->user->identity->RolID == 2) {
@@ -59,7 +59,7 @@ class RecepcionistaController extends Controller {
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-        ];
+        ];*/
     }
 
     public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
@@ -85,55 +85,28 @@ class RecepcionistaController extends Controller {
     }
 
     public function actionListar_solicitudes_servicio() {                      //renderiza el index de la carpeta agencia dentro de views
+
+        $time = date('H:i:s');
+        return $this->renderAjax("listarSolicitudes", ['time' => $time]);
+
+
+    }
+    public function actionListaviajes() {                      //renderiza el index de la carpeta agencia dentro de views
+
         $model = new ListaSolicitudesServicioModel();
         $model->setDataProvider();
         $model->setListChoferes();
         $model->setListVehiculos();
 
-        if (\Yii::$app->request->isPost) {
-            /*switch (\Yii::$app->request->post('submit')) {
-                case 'cerrar_viaje':
-                    $selection=(array)Yii::$app->request->post('selection');
-                    $viajeSelected = $model->dataProvider->allModels[$selection[0]];
-                    $operacion = 3;//CERRAR
-                    $model->ViajeOperacion($viajeSelected,$operacion);
-                    Yii::$app->session->setFlash('viajeCerrado');
-                    $model = new ListaSolicitudesServicioModel();
-                    $model->setDataProvider();
-                    $model->setListChoferes();
-                    $model->setListVehiculos();
-                    break;
-
-                case 'cancelar_viaje':
-                    $selection=(array)Yii::$app->request->post('selection');
-                    $viajeSelected = $model->dataProvider->allModels[$selection[0]];
-                    $operacion = 2;//CANCELAR
-                    $model->ViajeOperacion($viajeSelected,$operacion);
-                    Yii::$app->session->setFlash('viajeCerrado');
-                    $model = new ListaSolicitudesServicioModel();
-                    $model->setDataProvider();
-                    $model->setListChoferes();
-                    $model->setListVehiculos();
-                    break;
-                default :*/
-                    $selection=(array)Yii::$app->request->post('selection');
-                    $viajeSelected = $model->dataProvider->allModels[$selection[0]];
-                    $operacion = 3;//CERRAR
-                    $model->ViajeOperacion($viajeSelected,$operacion);
-                    Yii::$app->session->setFlash('viajeCerrado');
-                    $model = new ListaSolicitudesServicioModel();
-                    $model->setDataProvider();
-                    $model->setListChoferes();
-                    $model->setListVehiculos();
-                    Yii::$app->response->format = Response::FORMAT_JSON;
-                    return [
-                        'message' => '¡Éxito!',
-                    ];
-                   /* break;
-            }*/
+        if (\Yii::$app->request->isAjax) {
+            $selection=(array)Yii::$app->request->post('keylist');
+            $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+            $operacion = 3;//CERRAR
+            $model->ViajeOperacion($viajeSelected,$operacion);
+            Yii::$app->session->setFlash('viajeCerrado');
         }
-        return $this->renderAjax("listarSolicitudes", ['model' => $model]);
-
+        $time = date('H:i:s');
+        return $this->render("listarSolicitudes", ['model' => $model,'time' => $time]);
 
     }
 }
