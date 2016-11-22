@@ -72,21 +72,22 @@ Modal::end();
                     </p>
                 <?php else: ?>
                     <div>
+                        <?php $form = ActiveForm::begin(); ?>
                         <?=
                         GridView::widget(['dataProvider' => $model->dataProvider,
                             'columns' => [
-                                ['class' => 'yii\grid\SerialColumn'],
-                                ['class' => 'yii\grid\CheckboxColumn'],
+                                ['class' => 'yii\grid\CheckboxColumn', 'multiple' => False],
                                 'Usuario',
                                 'Password',
                                 'Nombre',
                                 'Apellido',
                                 'Documento',
+
                             ],]);
 
 
                         ?>
-                        <?php $form = ActiveForm::begin(); ?>
+
                         <div id='botones-group'>
                             <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_chofer_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
