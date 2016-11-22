@@ -73,11 +73,10 @@ BootswatchAsset::register($this);
             ?>
 
             <div class="form-group">
-                <div class="col-lg-offset-1 col-lg-10">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button', 'id' => 'btn-login-popup']) ?>
-                </div>
+                <!--<div class="col-lg-offset-1 col-lg-8">-->
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button', 'id' => 'btn-login-popup']) ?>
+                <!--</div>-->
 
-                <br>
                 <br>
 
                 <!--<div id="imgEmail" align="center">
@@ -97,14 +96,14 @@ BootswatchAsset::register($this);
 
                 <!--<div id="imgEmail" align="center">-->
                 <br />
-                <h4 style="margin-left:20%">
+                <h4>
                     <p>
                         <strong>&#191No est&aacute; registrado o quer&eacute;s que tu remiser&iacute;a aparezca?</strong>
                     </p>
                 </h4>
                 <br />
                 <br />
-                <div style="margin-left: 25%;">
+                <div>
                     <a>
 
                         <?= Html::Button('Registrarme como Usuario', ['value' => Url::toRoute('/site/registro'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarUsuario']); ?>

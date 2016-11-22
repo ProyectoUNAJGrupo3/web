@@ -49,6 +49,7 @@ BootswatchAsset::register($this);
                     ['label' => '<span class="fa fa-home"></span> ' . Html::encode('Home'), 'url' => ['/site/index']],
                     ['label' => '<span class="fa fa-users"></span> ' . Html::encode('Quiénes Somos'), 'url' => ['/site/about']],
                     ['label' => '<span class="fa fa-comment-o"></span> ' . Html::encode('Contactarnos'), 'url' => ['/site/contact']],
+                    ['label' => '<span class="fa fa-comment-o"></span> ' . Html::encode('Prueba'), 'url' => ['/site/confirmacionNuevoUsuarioDesdeEmail']],
                     ['label' => '<span class="fa fa-user-plus"></span> ' . Html::encode('Registrar'),
                         'items' => [
                             ['label' => '<span class="fa fa-user"></span> ' . Html::encode('Usuario'), 'url' => ['/site/registro'],],
