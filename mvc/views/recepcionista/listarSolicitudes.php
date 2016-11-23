@@ -43,7 +43,6 @@ Modal::end();
 </div>
 <?php endif ?>
 
-
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4 class="panel-title">Listado de viajes emitidos</h4>
@@ -51,16 +50,10 @@ Modal::end();
     <div class="panel-body">
         <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]);?>
 
-        <?php Pjax::begin(['timeout' => false]); ?>
-        <?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Operacion exitosa!</strong>
-            <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
-        </div>
-        <?php endif ?>
+        <?php Pjax::begin(['id'=>'formsection','timeout' => false]); ?>
+        
         <?= Html::a("Refresh", ['recepcionista/listaviajes'], ['class' => 'btn btn-lg btn-primary']) ?>
-        <?= Html::button('Cerrar viaje', ['id'=>'cerrarid','class' => 'btn btn-lg btn-primary']);?>
+        <?= Html::button('Cerrar viaje', ['id'=>'cerrarid','class' => 'btn btn-lg btn-primary'],['data-pjax'=> '#formsection']);?>
 
         <h1>
             Current time: <?= $time ?>
@@ -102,7 +95,7 @@ Modal::end();
 $this->registerJs(
    "$('#cerrarid').click(function(){
      var keys = $('#viajes_grid').yiiGridView('getSelectedRows');
-$('#processmodal').modal('show');
+                        $('#processmodal').modal('show');
                          $.ajax({
                         type     :'post',
                         cache    : false,
@@ -110,11 +103,12 @@ $('#processmodal').modal('show');
                         processData: true,
                         url  : '".Url::to(['recepcionista/listaviajes'])."',
                         success  : function() {
-$('#processmodal').modal('hide');
+                            $('#processmodal').modal('hide');
+                            //$.pjax.reload({container:'#formsection'});
                         },
                         error: function(){
                            alert('Error');
-$('#processmodal').modal('hide');
+                            $('#processmodal').modal('hide');
                         }
                         });return false;
 });"
