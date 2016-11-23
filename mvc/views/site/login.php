@@ -73,11 +73,10 @@ BootswatchAsset::register($this);
             ?>
 
             <div class="form-group">
-                <div class="col-lg-offset-1 col-lg-10">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button', 'id' => 'btn-login-popup']) ?>
-                </div>
+                <!--<div class="col-lg-offset-1 col-lg-8">-->
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button', 'id' => 'btn-login-popup']) ?>
+                <!--</div>-->
 
-                <br>
                 <br>
 
                 <!--<div id="imgEmail" align="center">
@@ -97,19 +96,16 @@ BootswatchAsset::register($this);
 
                 <!--<div id="imgEmail" align="center">-->
                 <br />
-                <h4 style="margin-left:20%">
-                    <p>
+                <h4>
+                    <p id="mesagge-login">
                         <strong>&#191No est&aacute; registrado o quer&eacute;s que tu remiser&iacute;a aparezca?</strong>
                     </p>
                 </h4>
                 <br />
                 <br />
-                <div style="margin-left: 25%;">
-                    <a>
-
-                        <?= Html::Button('Registrarme como Usuario', ['value' => Url::toRoute('/site/registro'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarUsuario']); ?>
-                        <?= Html::Button('Registrarme como Agencia', ['value' => Url::toRoute('/site/solicitud_registrar_agencia'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarAgencias']); ?> 
-                    </a>
+                <div id="btn-grupo-resgistrar">
+                    <?= Html::Button('Registrarme como Usuario', ['value' => Url::toRoute('/site/registro'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarUsuario']); ?>
+                    <?= Html::Button('Registrarme como Agencia', ['value' => Url::toRoute('/site/solicitud_registrar_agencia'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarAgencias']); ?> 
                 </div>
             </div>
 

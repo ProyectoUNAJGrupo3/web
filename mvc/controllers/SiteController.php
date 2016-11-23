@@ -11,6 +11,7 @@ use app\models\TipoUsuario;
 use app\models\PSFormularioLoginModel;
 use app\models\PSFormularioUsuarioModel;
 use app\models\PSFormularioSolicitudRegistrarAgencia;
+use app\models\ValidacionNuevoUsuarioDesdeEmailModel;
 
 class SiteController extends Controller {
 
@@ -241,6 +242,11 @@ class SiteController extends Controller {
 
     private function actionAgregando() {
         return $this->redirect(['agencia/alta_chofer_agencia']); //llamada del boton encode agregar en vista listar chofer
+    }
+
+    public function actionConfirmacion_nuevo_usuario_desde_email() {
+        $model = new ValidacionNuevoUsuarioDesdeEmailModel();
+        return $this->render("VistaConfirmacionNuevoUsuarioDesdeEmail", ['model' => $model]);
     }
 
 }
