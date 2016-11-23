@@ -1,10 +1,11 @@
 #cabecera-modal{
-    background-color:#337ab7;
+    /*background-color:#337ab7;*/
     border-color:#122b40;
     color: white !important;
     text-align: center;
     font-size: 30px;
     clear:both;
+    width: 100%;
 }
 
 #cuerpo-modal{
@@ -13,7 +14,6 @@
     padding: 15px;
     position: relative;
     box-sizing: border-box;
-    box-sizing: border-box;
     float:center;
     background-color:white;
     color: black !important;
@@ -21,6 +21,7 @@
     font-size: 15px;
     clear:both;
     color:#337ab7;
+    width: 100%;
 }
 
 #cruz-close:hover{
@@ -40,11 +41,12 @@
 }
 
 #pie-modal{
-    background-color: #f9f9f9;
+    /*background-color: #f9f9f9;*/
+    margin-left: 0%;
+    width: 100%;
 }
 
 #img-avatar-login{
-    margin-left:185px;
     width: 20%;
     border-radius: 50%;
     vertical-align:middle;
@@ -87,7 +89,7 @@
 
 #link-olvidaste-contrasenia{
     font-size: 14px;
-    color: #337ab7;
+    color: white;
     background-color:transparent;
     float: right;
     margin-top: -10px;
@@ -100,7 +102,7 @@
 
 #link-olvidaste-contrasenia:hover{
     font-size: 14px;
-    color: #23527c;
+    color: white;
     float: right;
     margin-top: -10px;
     margin-left: 75px;
@@ -110,7 +112,8 @@
     text-decoration:none;
 }
 
-#btn-login-popup, #btn-registrarme-agencia-login-popup,#btn-registrarme-user-login-popup{
+
+#btn-login-popup,#btn-registrarme-agencia-login-popup,#btn-registrarme-user-login-popup{
     font-family:arial;
     -moz-user-select: none;
     background-image: none;
@@ -126,13 +129,13 @@
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
-    background-color: #337ab7;
-    border-color: #2e6da4;
+    /*background-color: #337ab7;
+    border-color: #2e6da4;*/
     color: #fff;
     font-size: 17px;
 }
 
-#btn-login-popup > a, #btn-registrarme-agencia-login-popup > a, #btn-registrarme-user-login-popup > a{
+#btn-login-popup > a,#btn-registrarme-agencia-login-popup > a, #btn-registrarme-user-login-popup > a{
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     float:center;
     color:#ffffff;
@@ -144,18 +147,29 @@
     text-align: center;
 }
 
-#btn-login-popup:hover, #btn-registrarme-user-login-popup:hover,#btn-registrarme-agencia-login-popup:hover{
+
+#btn-login-popup:hover,#btn-registrarme-user-login-popup:hover,#btn-registrarme-agencia-login-popup:hover{
     color:#ffffff;
-    background-color:#286090;
-    border-color:#2e6da4;
+    /*background-color:#286090;
+    border-color:#2e6da4;*/
     text-decoration:none;
     cursor:pointer;
     filter:alpha(opacity=50);
     size:5px 75px;
-    	
+
 }
-#btn-registrarme-user-login-popup,#btn-registrarme-agencia-login-popup{
-    margin-left: 35px;
-    size:5px 30px;
-    font-size: 15px;
+//#btn-registrarme-user-login-popup,#btn-registrarme-agencia-login-popup{
+//margin-left: 35px;
+/*size:5px 30px;*/
+//font-size: 10%;
+//}
+#btn-login-popup {
+    width: 100%;
+}
+#btn-grupo-resgistrar{
+    float: center;
+    margin-left: 12%;
+}
+#mesagge-login{
+    margin-left: 10%;
 }

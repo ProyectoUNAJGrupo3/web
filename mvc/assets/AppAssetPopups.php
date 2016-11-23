@@ -14,18 +14,16 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAssetRecepcionista extends AssetBundle {
+class AppAssetPopups extends AssetBundle {
 
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css'
     ];
     public $js = [
-        //'js/Viajes_Administrar.js',
-        'js/ViajesModal.js',
-        'js/ViajesGrid_Mapas.js',
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
+        'js/PopupLogin.js',
+        //'js/PopupLoginRegistrarUsuario.js',
+        //'js/PopupRegistrarAgencia.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

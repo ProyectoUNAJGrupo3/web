@@ -5,6 +5,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAssetWebSite;
+use yii\helpers\Url;
 use app\assets\AppAsset;
 use yii\widgets\ActiveForm;
 use app\assets\BootswatchAsset;
@@ -20,6 +21,7 @@ $this->title = 'Service Remis';
 <!--<div class="site-index">
     <div id="contenedor-home">-->
 <div class="container">
+<div id="LoadingBlocker">  <div style="background-image:url(img/Loading.gif)" id="LoadingImage"></div></div>
     <div class="well bs-component">
         <div class="row">
 

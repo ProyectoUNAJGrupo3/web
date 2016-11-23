@@ -1,41 +1,27 @@
-function abrirLoginDesdeBotonSolicitarServicioRemiseria() {
-    /**Corresponder al Login de Menu*/
-    var loginDescargado = false;
-    $(document).ready(function () {
-        $("#btn-login").click(function () {
-            if (!loginDescargado) {
-                $.ajax({
-                    url: 'login.php',
-                    dataType: 'text',
-                    async: false,
-                    success: function (data) {
-                        $('site-index').append(data);
-                        loginDescargado = true;
-                    },
-                });
-            }
-            $("#myModal").modal();
-        });
+$(function() {
+    $('#modalButton').click(function()
+    {
+        $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
     });
-}
+});
 
-function abrirLoginDesdeBotonLoginHeader() {
-    /**Corresponder al Login de Menu*/
-    var loginDescargado = false;
-    $(document).ready(function () {
-        $("#btn-login").click(function () {
-            if (!loginDescargado) {
-                $.ajax({
-                    url: 'login.php',
-                    dataType: 'text',
-                    async: false,
-                    success: function (data) {
-                        $('site-index').append(data);
-                        loginDescargado = true;
-                    },
-                });
-            }
-            $("#myModal").modal();
-        });
+$(function() {
+    $('#modalButtonRegistrarUsuario').click(function()
+    {
+        $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
     });
-}
+});
+
+$(function() {
+    $('#modalButtonLogin').click(function()
+    {
+        $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
+    });
+});
+
+$(function() {
+    $('#modalButtonEmail').click(function()
+    {
+        $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
+    });
+});
