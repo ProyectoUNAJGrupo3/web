@@ -23,7 +23,14 @@ echo "<div id='modalContent'></div>";
 Modal::end();
 ?>
 <div class="container">
+   
     <div class="well bs-component">
+        <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
+        <div class="alert alert-success">
+            Operacion exitosa! Gracias por contactarnos.
+        </div>
+        
+        <?php else: ?>
         <div class="row">
             <div class="col-lg-12">
                 <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
@@ -39,6 +46,7 @@ Modal::end();
                 </div>
                 <?php ActiveForm::end(); ?>
             </div>
+            <?php endif ?>
         </div>
 
     </div>
