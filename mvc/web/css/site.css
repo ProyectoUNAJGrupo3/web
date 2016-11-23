@@ -144,3 +144,30 @@ a.desc:after {
 	width: 40%;
 
 }
+#LoadingBlocker
+{
+	z-index: 999999;
+	min-height: 800px;
+    height: 100%;
+    min-width: 1200px;
+    width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+    display: none;
+}
+
+#LoadingImage{
+	z-index: 999999;
+	position: absolute;
+    top: 350px;
+    left: 490px;
+    height: 30px;
+    width: 30px;
+
+    
+}
