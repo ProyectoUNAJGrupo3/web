@@ -72,37 +72,43 @@ class RecepcionistaController extends Controller {
         $model->setListChoferes();
         $model->setListVehiculos();
         $model->setTarifa();
+
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
             Yii::$app->session->setFlash('viajeCreado');
-            return $this->refresh();
+            $model = new AltaViajeManualModel();
+            $model->setDataProvider();
+            $model->setListChoferes();
+            $model->setListVehiculos();
+            $model->setTarifa();
         }
         return $this->render("altaViajeManual", ['model' => $model]);
     }
 
     public function actionListar_solicitudes_servicio() {                      //renderiza el index de la carpeta agencia dentro de views
+
+        $time = date('H:i:s');
+        return $this->renderAjax("listarSolicitudes", ['time' => $time]);
+
+
+    }
+    public function actionListaviajes() {                      //renderiza el index de la carpeta agencia dentro de views
+
         $model = new ListaSolicitudesServicioModel();
         $model->setDataProvider();
         $model->setListChoferes();
         $model->setListVehiculos();
 
-        If (\Yii::$app->request->isPost) {
-            switch (\Yii::$app->request->post('submit')) {
-                case 'cerrar_viaje':
-                    $selection=(array)Yii::$app->request->post('selection');
-                    $viajeSelected = $model->dataProvider->allModels[$selection[0]];
-                    $operacion = 3;//CERRAR
-                    $model->ViajeOperacion($viajeSelected,$operacion);
-                    Yii::$app->session->setFlash('viajeCerrado');
-                case 'cancelar_viaje':
-                    $selection=(array)Yii::$app->request->post('selection');
-                    $viajeSelected = $model->dataProvider->allModels[$selection[0]];
-                    $operacion = 2;//CANCELAR
-                    $model->ViajeOperacion($viajeSelected,$operacion);
-                    Yii::$app->session->setFlash('viajeCerrado');
-                default :
-                    return $this->redirect('cerrar');
-            }
+        if (\Yii::$app->request->isAjax) {
+            $selection=(array)Yii::$app->request->post('keylist');
+            $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+            $operacion = 3;//CERRAR
+            $model->ViajeOperacion($viajeSelected,$operacion);
+            Yii::$app->session->setFlash('viajeCerrado');
+            $time = date('H:i:s');
+            return $this->renderAjax("listarSolicitudes", ['model' => $model,'time' => $time]);
         }
-        else{return $this->renderAjax("listarSolicitudes", ['model' => $model]);}
+        $time = date('H:i:s');
+        return $this->render("listarSolicitudes", ['model' => $model,'time' => $time]);
+
     }
 }
