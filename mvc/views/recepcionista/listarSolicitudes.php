@@ -18,6 +18,14 @@ AppAssetRecepcionista::register($this);
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 AppAssetRecepcionista::register($this);
 $this->title = 'RemisYa';
+Modal::begin([
+'header' => '<h4>Mensaje</h4>',
+'id'=>'processmodal',
+'size'=>'modal-sm',
+'options'=>['class'=>'modal']
+]);
+echo "Procesando...";
+Modal::end();
 ?>
 
 <?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
@@ -43,27 +51,21 @@ $this->title = 'RemisYa';
     <div class="panel-body">
         <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]);?>
 
-        <?php Pjax::begin(['timeout' => false, 'clientOptions' => ['method' => 'POST'] ]); ?>
-        <?= Html::a('Cerrar viaje', '#', ['class' => 'btn btn-lg btn-primary','onclick'=>"
-                        var keys = $('#viajes_grid').yiiGridView('getSelectedRows');
-                         $.ajax({
-                        type     :'POST',
-                        cache    : false,
-                        data: {keylist: keys},
-                        url  : '".Url::to(['recepcionista/listaviajes'])."',
-                        success  : function(response) {
-                                console.log('success: '+response.filename);
-                        },
-                        error: function(){
-                          alert('error');
-                        }
-                        });return false;",]); ?>
-        <?= Html::a("Cancelar viaje", ['recepcionista/listaviajes'], ['class' => 'btn btn-lg btn-primary','name' => 'submit', 'value' => 'cancelar_viaje']);?>
-        <?= Html::submitButton('Cerrar viaje2', ['class' => 'btn btn-primary','name' => 'submit', 'value' => 'cerrar_viaje']) ?>
-        
+        <?php Pjax::begin(['timeout' => false]); ?>
+        <?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Operacion exitosa!</strong>
+            <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
+        </div>
+        <?php endif ?>
+        <?= Html::a("Refresh", ['recepcionista/listaviajes'], ['class' => 'btn btn-lg btn-primary']) ?>
+        <?= Html::button('Cerrar viaje', ['id'=>'cerrarid','class' => 'btn btn-lg btn-primary']);?>
+
         <h1>
             Current time: <?= $time ?>
         </h1>
+        
         <?php Pjax::end(); ?>
 
         <?=
@@ -82,7 +84,7 @@ $this->title = 'RemisYa';
             'Estado',
         ],]);
         ?>
-
+        
 
         <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
         <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
@@ -98,20 +100,23 @@ $this->title = 'RemisYa';
 
 <?php
 $this->registerJs(
-   '$("#cerrarid").on("click", function(){
-$.ajax({
-       url: "<?php echo Yii::$app->request->baseUrl. "/supermarkets/sample" ?>",
-       type: "post",
-       data: {
-                 searchname: $("#searchname").val() ,
-                 searchby:$("#searchby").val() ,
-                 _csrf : "<?=Yii::$app->request->getCsrfToken()?>"
-             },
-       success: function (data) {
-          console.log(data.search);
-       }
-  });
-
-});'
+   "$('#cerrarid').click(function(){
+     var keys = $('#viajes_grid').yiiGridView('getSelectedRows');
+$('#processmodal').modal('show');
+                         $.ajax({
+                        type     :'post',
+                        cache    : false,
+                        data: {keylist: keys},
+                        processData: true,
+                        url  : '".Url::to(['recepcionista/listaviajes'])."',
+                        success  : function() {
+$('#processmodal').modal('hide');
+                        },
+                        error: function(){
+                           alert('Error');
+$('#processmodal').modal('hide');
+                        }
+                        });return false;
+});"
 );
 ?>

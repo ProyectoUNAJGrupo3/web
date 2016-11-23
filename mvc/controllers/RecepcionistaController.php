@@ -99,11 +99,13 @@ class RecepcionistaController extends Controller {
         $model->setListVehiculos();
 
         if (\Yii::$app->request->isAjax) {
-            $selection=(array)Yii::$app->request->post('keylist');
-            $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+            //$selection=(array)Yii::$app->request->post('keylist');
+            $viajeSelected = $model->dataProvider->allModels[4];
             $operacion = 3;//CERRAR
             $model->ViajeOperacion($viajeSelected,$operacion);
             Yii::$app->session->setFlash('viajeCerrado');
+            $time = date('H:i:s');
+            return $this->renderAjax("listarSolicitudes", ['model' => $model,'time' => $time]);
         }
         $time = date('H:i:s');
         return $this->render("listarSolicitudes", ['model' => $model,'time' => $time]);
