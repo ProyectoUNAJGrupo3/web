@@ -133,6 +133,13 @@ class AgenciaController extends Controller {
     public function actionListar_choferes_agencia() {
         $model = new GridModel();
         $model->setDataProviderChofer();
+        if (\Yii::$app->request->isPost)  {
+            $selection =(array)Yii::$app->request->post('selection');
+            $personaSelected = $model->dataProvider->allModels[$selection[0]];
+            $model->eliminarEmpleado($personaSelected);
+            Yii::$app->session->setFlash('Chofer eliminado con exito');
+            return $this->refresh();
+        }
         return $this->render("listaChoferes", ['model' => $model]);
     }
 
