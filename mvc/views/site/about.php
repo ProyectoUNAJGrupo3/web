@@ -13,7 +13,7 @@ $this->title = 'Quiénes Somos';
 
 Modal::begin([
     'id' => 'modal',
-    'size' => 'modal-lg',
+    //'size' => 'modal-lg',
 ]);
 echo "<div id='modalContent'></div>";
 Modal::end();
