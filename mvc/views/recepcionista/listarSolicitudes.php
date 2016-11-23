@@ -48,18 +48,26 @@ Modal::end();
         <h4 class="panel-title">Listado de viajes emitidos</h4>
     </div>
     <div class="panel-body">
+        <?php Pjax::begin(['id'=>'containerpjax','timeout' => false]); ?>
+
+        <?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Operacion exitosa!</strong>
+                <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
+            </div>
+        <?php endif ?>
+
         <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]);?>
 
-        <?php Pjax::begin(['id'=>'formsection','timeout' => false]); ?>
-        
         <?= Html::a("Refresh", ['recepcionista/listaviajes'], ['class' => 'btn btn-lg btn-primary']) ?>
-        <?= Html::button('Cerrar viaje', ['id'=>'cerrarid','class' => 'btn btn-lg btn-primary'],['data-pjax'=> '#formsection']);?>
+        <?= Html::a('Cerrar viaje','#' ,['id'=>'cerrarid','class' => 'btn btn-lg btn-primary']);?>
 
         <h1>
             Current time: <?= $time ?>
         </h1>
         
-        <?php Pjax::end(); ?>
+        
 
         <?=
         GridView::widget([
@@ -88,6 +96,7 @@ Modal::end();
         <?= Html::button('Confirmar solicitud', ['class' => 'btn btn-primary']) ?>
         <?= Html::button('Cancelar solicitud', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
+        <?php Pjax::end(); ?>
     </div>
 </div>
 
@@ -100,11 +109,10 @@ $this->registerJs(
                         type     :'post',
                         cache    : false,
                         data: {keylist: keys},
-                        processData: true,
                         url  : '".Url::to(['recepcionista/listaviajes'])."',
                         success  : function() {
                             $('#processmodal').modal('hide');
-                            //$.pjax.reload({container:'#formsection'});
+                            $.pjax.reload({container:'#containerpjax',timeout: 20000});
                         },
                         error: function(){
                            alert('Error');
