@@ -97,18 +97,15 @@ BootswatchAsset::register($this);
                 <!--<div id="imgEmail" align="center">-->
                 <br />
                 <h4>
-                    <p>
+                    <p id="mesagge-login">
                         <strong>&#191No est&aacute; registrado o quer&eacute;s que tu remiser&iacute;a aparezca?</strong>
                     </p>
                 </h4>
                 <br />
                 <br />
-                <div>
-                    <a>
-
-                        <?= Html::Button('Registrarme como Usuario', ['value' => Url::toRoute('/site/registro'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarUsuario']); ?>
-                        <?= Html::Button('Registrarme como Agencia', ['value' => Url::toRoute('/site/solicitud_registrar_agencia'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarAgencias']); ?> 
-                    </a>
+                <div id="btn-grupo-resgistrar">
+                    <?= Html::Button('Registrarme como Usuario', ['value' => Url::toRoute('/site/registro'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarUsuario']); ?>
+                    <?= Html::Button('Registrarme como Agencia', ['value' => Url::toRoute('/site/solicitud_registrar_agencia'), 'class' => 'btn btn-primary', 'id' => 'modalButtonRegistrarAgencias']); ?> 
                 </div>
             </div>
 

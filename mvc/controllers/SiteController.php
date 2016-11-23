@@ -244,7 +244,7 @@ class SiteController extends Controller {
         return $this->redirect(['agencia/alta_chofer_agencia']); //llamada del boton encode agregar en vista listar chofer
     }
 
-    public function actionConfirmacionNuevoUsuarioDesdeEmail() {
+    public function actionConfirmacion_nuevo_usuario_desde_email() {
         $model = new ValidacionNuevoUsuarioDesdeEmailModel();
         return $this->render("VistaConfirmacionNuevoUsuarioDesdeEmail", ['model' => $model]);
     }
