@@ -40,31 +40,18 @@ AppAsset::register($this);
                     </h1>
 
                     <?php if (Yii::$app->session->hasFlash('Empleado creado con exito')): ?>
-                        <div class="alert alert-success">
-                            Gracias por confiar en nosotros, El chofer ha sido creado con exito
-                        </div>
-                        <p>
-                            Deberias de poder ver el chofer, en tu lista de choferes
-                            <?php if (Yii::$app->mailer->useFileTransport): ?>
-                                Because the application is in development mode, the email is not sent but saved as
-                                a file under
-                                <code>
-                                    <?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?>
-                                </code>.
-                                Please configure the
-                                <code>useFileTransport</code>property of the
-                                <code>mail</code>
-                                application component to be false to enable email sending.
-                            <?php endif; ?>
-                        </p>
-                    <?php else: ?>
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Operacion exitosa!</strong>
+                        <a href="#" class="alert-link">Viaje creado correctamente</a>.
+                    </div>
+                    <?php endif ?>
 
                         <?php $form = ActiveForm::begin(); ?>
                         <b>
-                            <h3>
                                 <u>Datos</u>
                                 <u>Personales</u>
-                            </h3>
+
                         </b>
 
                         <?= $form->field($model, 'nombre')->input("text", ['autofocus' => true, 'maxlength' => '50', 'id' => 'nombre'])->label("Nombre <b id='asterisco'>*</b>"); ?>
@@ -72,11 +59,10 @@ AppAsset::register($this);
                         <?= $form->field($model, 'dni')->input('text', ['maxlength' => '8', 'id' => 'dni'])->label("Documento <b id='asterisco'>*</b>"); ?>
                         <?= $form->field($model, 'telefono')->input('text', ['maxlength' => '20', 'id' => 'telefono'])->label("Tel&eacute;fono <b id='asterisco'>*</b>"); ?>
                         <b>
-                            <h3>
                                 <u>Datos</u>
                                 <u>del</u>
                                 <u>Chofer</u>
-                            </h3>
+
                         </b>
                         <br />
                         <?= $form->field($model, 'usuario')->textInput(['maxlength' => '50', 'id' => 'usuario'])->label("Usuario <b id='asterisco'>*</b>"); ?>
@@ -89,16 +75,8 @@ AppAsset::register($this);
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                         </div>
-                        <?php ActiveForm::end(); ?>
-                    <?php endif; ?>
-                    <!--       </div>
-                       </div>
-                       </div>
-                   </article>
-               </section>
-            </div>-->
-                </div>
-            </div>
+
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>
