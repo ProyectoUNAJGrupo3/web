@@ -41,10 +41,10 @@ AppAsset::register($this);
                 </h1>
 
                 <?php if (Yii::$app->session->hasFlash('Empleado actualizado con exito')): ?>
-                <div class="alert alert-dismissible alert-warning">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Operacion exitosa!</strong>
-                    <a href="#" class="alert-link">Empleado actualizado correctamente</a>.
+                    <div class="alert alert-dismissible alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Operacion exitosa!</strong>
+                        <a href="#" class="alert-link">Empleado actualizado correctamente</a>.
                     <?php endif; ?>
 
 
@@ -79,7 +79,6 @@ AppAsset::register($this);
                         <?= Html::button('Cancelar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                     </div>
                     <?php ActiveForm::end(); ?>
-                    <?php endif; ?>
                     <!--       </div>
                    </div>
                    </div>
@@ -87,6 +86,6 @@ AppAsset::register($this);
            </section>
         </div>-->
                 </div>
+            </div>
         </div>
     </div>
-</div>
