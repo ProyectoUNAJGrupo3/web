@@ -256,7 +256,7 @@ class SiteController extends Controller {
 
 
         if ($model->load(Yii::$app->request->post()) && ($model->AltaRegistro() === true)) {
-            // $id = urlencode(uniqid());          codigo �nico generado
+            // $id = urlencode(uniqid());          codigo unico generado
             $id = urlencode((string)$model->getPersonaID());                          //Tomo el id de la persona registrada y lo transformo en codigo url
             $subject = "Confirmar registro";
             $body = "<h1>Haga click en el siguiente enlace para finalizar tu registro</h1>";

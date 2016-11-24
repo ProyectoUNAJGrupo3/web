@@ -2,26 +2,25 @@
 
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use app\assets\AppAsset;
+//use app\assets\AppAsset;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
-use app\assets\BootswatchAsset;
-use yii\bootstrap\Modal;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
+use yii\bootstrap\Modal;
+use app\assets\BootswatchAsset;
 use app\assets\AppAssetPopups;
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
-AppAsset::register($this);
+//AppAsset::register($this);
 AppAssetPopups::register($this);
-
 
 Modal::begin([
     'id' => 'modal',
-        //'size' => 'modal-lg',
+    //'size' => 'modal-lg',
 ]);
-echo "<div id='modalContent'></div>";
+echo "<div id='modalContentChofer'></div>";
 Modal::end();
 ?>
 <div class="container">
@@ -34,7 +33,7 @@ Modal::end();
                 <h1>
                     <?= Html::encode($this->title) ?>
                 </h1>
-                <?php if (Yii::$app->session->hasFlash('Usuario creado con exito')): ?>
+                <?php if (Yii::$app->session->hasFlash('Index Chofer')): ?>
                     <div class="alert alert-success">
                         Thank you for contacting us. We will respond to you as soon as possible.
                     </div>
@@ -56,9 +55,7 @@ Modal::end();
                 <?php else: ?>
                     <?php $form = ActiveForm::begin(); ?>
                     <div id='botones-group'>
-                        <?= Html::submitButton('Abrir ventana calificar', ['value' => Url::toRoute('/chofer/calificar_conducta_usuario'), 'class' => 'btn btn-primary', 'id' => 'btn-guardar', 'id' => 'modalButtonCalificarUsuario']); ?>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?= Html::submitButton('Volver', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                        <?= Html::button('Abrir ventana calificar', ['value' => Url::toRoute('/chofer/calificar_conducta_usuario'), 'class' => 'btn btn-primary', 'id' => 'modalButtonCalificarUsuario']); ?>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <?= Html::submitButton('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
                     </div>
