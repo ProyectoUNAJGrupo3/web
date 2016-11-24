@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-
+use Yii;
 use yii\base\Model;
 use app\models\CapaServicio\PersonasModelo;
 use app\models\CapaServicio\AgenciaModelo;
@@ -30,7 +30,7 @@ class PSFormularioSolicitudRegistrarAgencia extends Model {
 
 
 
-  public function rules() {
+    public function rules() {
         return[
 //([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
 //(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
@@ -60,8 +60,8 @@ class PSFormularioSolicitudRegistrarAgencia extends Model {
             ['contrasenia', 'match', 'pattern' => '/^.{6,50}$/', 'message' => 'Ingrese como mínimo 6 caracteres'],
             ['confirmarContrasenia', 'required', 'message' => 'Campo obligatorio'],
             ['confirmarContrasenia', 'match', 'pattern' => '/^.{6,50}$/', 'message' => 'Ingrese como mínimo 6 caracteres'],
-     //       ['confirmarContrasenia', 'compare', 'compareAttribute' => 'contrasenia', 'message' => 'Las constraseñas deben Coincidir'],
-     //       ['confirmarContrasenia', 'compare', 'compareAttribute' => 'contrasenia', 'message' => 'Las constraseñas deben Coincidir', 'on' => 'register'],
+    //        ['confirmarContrasenia', 'compare', 'compareAttribute'=>'contrasenia' , 'message'=>'Las constraseñas deben Coincidir'],
+
         ];
     }
 
@@ -70,17 +70,11 @@ class PSFormularioSolicitudRegistrarAgencia extends Model {
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
         $model2 = new AgenciaModelo();
-        $model2->RegistrarAgencia("'$this->nombreAgencia'","'$this->direccionAgencia'", "'$this->direccionCoordenadas'" , "'$this->telefonoAgencia'", "'$this->emailAgencia'", "'0'","'$this->CUIT'");
-        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->email'",NULL,NULL,"'0'","'0'","'1'","'$this->dni'","''"); //genera el alta del usuario y lo guarda
+        $model2->RegistrarAgencia("'$this->nombreAgencia'","'$this->direccionAgencia'", "'$this->direccionCoordenadas'" , "'$this->telefonoAgencia'", "'$this->emailAgencia'", "'1'","'$this->CUIT'");
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->email'",NULL,NULL,"'0'","'1'","'1'","'$this->dni'","''"); //genera el alta del usuario y lo guarda
 
         return true;
     }
 
- /*/   public function AltaAgencia(){
-        $model = new AgenciaModelo();
-        $model->RegistrarAgencia("'$this->nombreAgencia'","'$this->direccion'", "'$this->direccionCoordenadas'" , "'$this->telefono'", "'$this->email'", "'0'","'$this->CUIT'");
-        return true;
-    }
 
-/*/
 }

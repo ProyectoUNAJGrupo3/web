@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -15,41 +14,103 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 use yii\bootstrap\Alert;
-
+AppAssetRecepcionista::register($this);
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 AppAssetRecepcionista::register($this);
 $this->title = 'RemisYa';
+Modal::begin([
+'header' => '<h4>Mensaje</h4>',
+'id'=>'processmodal',
+'size'=>'modal-sm',
+'options'=>['class'=>'modal']
+]);
+echo "Procesando...";
+Modal::end();
 ?>
 
-<div class="panel panel-primary">
-
-    <?php $form = ActiveForm::begin();?>
-        <?php Pjax::begin(); ?>
-    <?=
-    GridView::widget([
-    'id' => 'viajes_grid',
-    'dataProvider' => $model->dataProvider,
-    'tableOptions' => ['class' => 'table  table-bordered table-hover'],
-    'columns' => [
-    ['class' => 'yii\grid\CheckboxColumn'],
-        'ClienteNombre',
-        'DestinoDireccion',
-        'ChoferNombre',
-        'VehiculoMarca',
-        'VehiculoModelo',
-        'ViajeTipo',
-        'Estado',
-    ],]);
-    ?>
-    <?php Pjax::end(); ?>
-
-    <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
-    <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
-
-    <?= Html::submitButton('Cerrar viaje', ['class' => 'btn btn-primary','name' => 'submit', 'value' => 'cerrar_viaje']) ?>
-    <?= Html::submitButton('Cancelar viaje', ['class' => 'btn btn-primary','name' => 'submit', 'value' => 'cancelar_viaje']) ?>
-    <?= Html::submitButton('Actualizar viaje', ['class' => 'btn btn-primary','name' => 'submit', 'value' => 'actualizar_viaje']) ?>
-
-    <?= Html::button('Confirmar solicitud', ['class' => 'btn btn-primary']) ?>
-    <?= Html::button('Cancelar solicitud', ['class' => 'btn btn-primary']) ?>
-    <?php ActiveForm::end(); ?>
+<?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Operacion exitosa!</strong>
+    <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
 </div>
+<?php endif ?>
+<?php if (Yii::$app->session->hasFlash('viajeCancelado')): ?>
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Operacion exitosa!</strong>
+    <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
+</div>
+<?php endif ?>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title">Listado de viajes emitidos</h4>
+    </div>
+    <div class="panel-body">
+        <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]);?>
+
+        <?php Pjax::begin(['id'=>'formsection','timeout' => false]); ?>
+        
+        <?= Html::a("Refresh", ['recepcionista/listaviajes'], ['class' => 'btn btn-lg btn-primary']) ?>
+        <?= Html::button('Cerrar viaje', ['id'=>'cerrarid','class' => 'btn btn-lg btn-primary'],['data-pjax'=> '#formsection']);?>
+
+        <h1>
+            Current time: <?= $time ?>
+        </h1>
+        
+        <?php Pjax::end(); ?>
+
+        <?=
+        GridView::widget([
+        'id' => 'viajes_grid',
+        'dataProvider' => $model->dataProvider,
+        'tableOptions' => ['class' => 'table  table-bordered table-hover'],
+        'columns' => [
+        ['class' => 'yii\grid\CheckboxColumn'],
+            'ClienteNombre',
+            'DestinoDireccion',
+            'ChoferNombre',
+            'VehiculoMarca',
+            'VehiculoModelo',
+            'ViajeTipo',
+            'Estado',
+        ],]);
+        ?>
+        
+
+        <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
+        <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
+
+        
+        
+
+        <?= Html::button('Confirmar solicitud', ['class' => 'btn btn-primary']) ?>
+        <?= Html::button('Cancelar solicitud', ['class' => 'btn btn-primary']) ?>
+        <?php ActiveForm::end(); ?>
+    </div>
+</div>
+
+<?php
+$this->registerJs(
+   "$('#cerrarid').click(function(){
+     var keys = $('#viajes_grid').yiiGridView('getSelectedRows');
+                        $('#processmodal').modal('show');
+                         $.ajax({
+                        type     :'post',
+                        cache    : false,
+                        data: {keylist: keys},
+                        processData: true,
+                        url  : '".Url::to(['recepcionista/listaviajes'])."',
+                        success  : function() {
+                            $('#processmodal').modal('hide');
+                            //$.pjax.reload({container:'#formsection'});
+                        },
+                        error: function(){
+                           alert('Error');
+                            $('#processmodal').modal('hide');
+                        }
+                        });return false;
+});"
+);
+?>

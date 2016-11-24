@@ -367,6 +367,7 @@ function initMap(isindex) {
 };
 function doTheAjax() {
     var id = "agencia seleccionada"; // le pega al controlador piola con la data bien, tengo que armar bien esto con el otro codigo de agencia.
+    $('#LoadingBlocker').show();
     $.get({
         url: 'index.php?r=rest%2Fsearch',
         dataType: "json",
@@ -374,6 +375,8 @@ function doTheAjax() {
             data: id
         },
         success: function (data) {
+            $('#LoadingBlocker').hide();
+
             var info = JSON.parse(data);
             setRemiserias(info);
         }
