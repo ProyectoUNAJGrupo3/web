@@ -21,15 +21,14 @@ raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 /* @var $this yii\web\View */
 $this->title = 'RemisYa';
 Modal::begin([
-'header' => '<h2>Viajes</h2>',
-'id'=>'modal',
-'size'=>'modal-lg',
-'clientOptions' => ['backdrop' => false],
+'header' => '<h4>Mensaje</h4>',
+'id'=>'processmodal',
+'size'=>'modal-sm',
+'options'=>['class'=>'modal']
 ]);
-echo "<div id='modalContent'></div>";
+echo "Procesando...";
 Modal::end();
 ?>
-<?php Pjax::begin(['id' => 'viaje_pjax']); ?>
 
 <?php if (Yii::$app->session->hasFlash('viajeCreado')): ?>
 <div class="alert alert-dismissible alert-success">
@@ -44,16 +43,18 @@ Modal::end();
     </div>
     <div class="panel-body">
         <div class="row">
-            
-            <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true ]]); ?>
+
+            <?php $form = ActiveForm::begin(); ?>
             <div class="col-lg-8">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3>Seleccione Origen y Destino: </h3></div>
+                    <div class="panel-heading">
+                        <h3>Seleccione Origen y Destino: </h3>
+                    </div>
                     <div class="panel-body">
                         <fieldset>
                             <div id="btn-bar">
                                 <?=
-                                    $this->registerJs('$(document).ready(function () {
+                                $this->registerJs('$(document).ready(function () {
             initMap(true);
             $("#btn-ver-remiserias").on("click", function() {getRemiserias(true)});
             });', \yii\web\View::POS_READY);
@@ -95,7 +96,7 @@ Modal::end();
 
                                             <span class="input-group-btn">
                                                 <?=
- Html::button('Calcular', ['class'=>'btn btn-primary', 'onclick' => '$("#importetotal").val((($("#precioKM").val())*($("#distancia").val().replace(" Km",""))).toFixed(0) + " $");'])
+                                                Html::button('Calcular', ['class'=>'btn btn-primary', 'onclick' => '$("#importetotal").val((($("#precioKM").val())*($("#distancia").val().replace(" Km",""))).toFixed(0) + " $");'])
                                                 ?>
                                             </span>
                                         </div>
@@ -107,8 +108,10 @@ Modal::end();
                             <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos,['prompt'=>'Seleccione vehiculo'])?>
 
                             <div class="btn-group">
-                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-crearViaje']); ?>
-                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary']) ?>
+                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {
+$("#processmodal").modal("hide");
+});']); ?>
+                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary btn-lg']) ?>
                             </div>
                         </fieldset>
                     </div>
@@ -116,18 +119,7 @@ Modal::end();
 
             </div>
             <?php ActiveForm::end(); ?>
-            
+
         </div>
     </div>
 </div>
-<?php Pjax::end(); ?>
-
-<?php
-
-$this->registerJs(
-   '$("document").ready(function(){
-        $("#viaje_pjax").on("pjax:end", function() {
-        });
-    });'
-);
-?>
