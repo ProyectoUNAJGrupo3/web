@@ -6,11 +6,10 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
 use app\assets\BootswatchAsset;
+use yii\helpers\Url;
 
 BootswatchAsset::register($this);
-AppAsset::register($this);
 
 $this->title = 'Chofer';
 ?>
@@ -36,12 +35,13 @@ $this->title = 'Chofer';
         <div class="wrap">
             <?php
             NavBar::begin([
-                'id' => 'barra-agencia',
+                //'id' => 'barra-agencia',
                 'brandLabel' => '<img src="img/LogoApp.png" style="display:inline; margin-top: -20px; vertical-align: top; width:120px; height:55px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Chofer</b>',
                 'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
+                'options' => ['class' => 'navbar navbar-default navbar-fixed-top navbar-transparent'],
+                    /* 'options' => [
+                      'class' => 'navbar-inverse navbar-fixed-top',
+                      ], */
             ]);
             ;
             echo Nav::widget([
@@ -87,10 +87,14 @@ $this->title = 'Chofer';
         <footer class="footer">
             <div class="container">
                 <!--<hr style="border:1px solid gray;">-->
-                <span id="footer-copy-right" style="text-align:center">Derechos Reservado &copy 2016</span>
+
+                <span id="footer-copy-right" style="text-align:center"> 
+                    <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
+                    <i class="fa fa-phone-square"></i> &nbsp; 011-4369-4657 &nbsp; &nbsp; 011-4287-5324 &nbsp; &nbsp;
+                    <i class="fa fa-envelope"></i> &nbsp; administracion@remisya.com
+                </span>
             </div>
         </footer>
-
         <?php $this->endBody() ?>
     </body>
 </html>
