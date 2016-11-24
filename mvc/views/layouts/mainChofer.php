@@ -8,6 +8,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\BootswatchAsset;
+
 BootswatchAsset::register($this);
 AppAsset::register($this);
 
@@ -47,17 +48,12 @@ $this->title = 'Chofer';
                 'encodeLabels' => false,
                 'options' => ['class' => 'nav-pills navbar-right'],
                 'items' => [
-                    ['label' => '<span class="fa fa-star" ></span>' . Html::encode(' Calificar Usuario'), 'url' => ['chofer/index']],
-                    [
-                        'label' => '<span class="fa fa-suitcase" ></span>' . Html::encode(' Viajes'), 'url' => ['#'],
-                        'items' => [
-                            ['label' => '<span class="fa fa-list" ></span>' . Html::encode(' Listar Historial'), 'url' => ['/chofer/listar_historial_viajes'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],
-                    ],
+                    [ 'label' => '<span class="fa fa-suitcase" ></span>' . Html::encode(' Viajes'), 'url' => ['/chofer/index']],
+                    //[ 'label' => '<span class="fa fa-suitcase" ></span>' . Html::encode(' Calificar Conducta Usuario'), 'url' => ['/chofer/calificar_conducta_usuario']],
                     [
                         'label' => '<span class="fa fa-star" ></span>' . Html::encode(' Calificaciones'), 'url' => ['#'],
                         'items' => [
-                            ['label' => '<span class="fa fa-list" ></span>' . Html::encode(' Listar Todas'), 'url' => ['/chofer/listar_historial_calificaciones'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-list" ></span>' . Html::encode(' Administrar'), 'url' => ['/chofer/listar_historial_calificaciones'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
                         ],
                     ],
                     Yii::$app->user->isGuest ? (
