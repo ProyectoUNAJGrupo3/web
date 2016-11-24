@@ -16,59 +16,40 @@ use yii\widgets\Pjax;
 use yii\bootstrap\Alert;
 AppAssetRecepcionista::register($this);
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
-AppAssetRecepcionista::register($this);
 $this->title = 'RemisYa';
-Modal::begin([
-'header' => '<h4>Mensaje</h4>',
-'id'=>'processmodal',
-'size'=>'modal-sm',
-'options'=>['class'=>'modal']
-]);
-echo "Procesando...";
-Modal::end();
+
 ?>
 
-<?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
-<div class="alert alert-dismissible alert-success">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Operacion exitosa!</strong>
-    <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
-</div>
-<?php endif ?>
-<?php if (Yii::$app->session->hasFlash('viajeCancelado')): ?>
-<div class="alert alert-dismissible alert-warning">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Operacion exitosa!</strong>
-    <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
-</div>
-<?php endif ?>
 
+<?php  Modal::begin([
+'header' => '
+        <h4>Mensaje</h4>',
+'id'=>'processmodal',
+'size'=>'modal-sm',
+'options'=>['class'=>'modal'],
+'clientOptions' => ['backdrop' => 'static', 'keyboard' => false]
+]);
+       echo "Procesando...";
+       Modal::end();
+?>
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4 class="panel-title">Listado de viajes emitidos</h4>
     </div>
     <div class="panel-body">
+        
+
         <?php Pjax::begin(['id'=>'containerpjax','timeout' => false]); ?>
-
         <?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
-            <div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Operacion exitosa!</strong>
-                <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
-            </div>
-        <?php endif ?>
-
+        <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">X</button>
+            <h4>
+                <i class="icon fa fa-check"></i>Operacion realizada.
+            </h4>
+            <?= Yii::$app->session->getFlash('viajeCerrado') ?>
+        </div>
+        <?php endif; ?>
         <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]);?>
-
-        <?= Html::a("Refresh", ['recepcionista/listaviajes'], ['class' => 'btn btn-lg btn-primary']) ?>
-        <?= Html::a('Cerrar viaje','#' ,['id'=>'cerrarid','class' => 'btn btn-lg btn-primary']);?>
-
-        <h1>
-            Current time: <?= $time ?>
-        </h1>
-        
-        
-
         <?=
         GridView::widget([
         'id' => 'viajes_grid',
@@ -89,26 +70,28 @@ Modal::end();
 
         <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
         <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
-
-        
-        
-
-        <?= Html::button('Confirmar solicitud', ['class' => 'btn btn-primary']) ?>
-        <?= Html::button('Cancelar solicitud', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
         <?php Pjax::end(); ?>
-    </div>
+        <div id="buttonsOperaciones">
+            <?= Html::button('Cerrar viaje',['class' => 'btn btn-lg btn-primary','name'=>'submit','value'=>'cerrar']);?>
+            <?= Html::button('Cancelar viaje',['class' => 'btn btn-lg btn-primary','name'=>'submit','value'=>'cancelar']);?>
+        </div>
+
+        </div>
 </div>
 
 <?php
 $this->registerJs(
-   "$('#cerrarid').click(function(){
-     var keys = $('#viajes_grid').yiiGridView('getSelectedRows');
+
+   "$( document ).ready(function() {
+$('#buttonsOperaciones :button').click(function(){
+        var keys = $('#viajes_grid').yiiGridView('getSelectedRows');
+        var operacion = $(this).attr('value');
                         $('#processmodal').modal('show');
                          $.ajax({
                         type     :'post',
-                        cache    : false,
-                        data: {keylist: keys},
+                        cache    : true,
+                        data: {keylist: keys,viajeoperacion: operacion},
                         url  : '".Url::to(['recepcionista/listaviajes'])."',
                         success  : function() {
                             $('#processmodal').modal('hide');
@@ -119,6 +102,7 @@ $this->registerJs(
                             $('#processmodal').modal('hide');
                         }
                         });return false;
+});
 });"
 );
 ?>
