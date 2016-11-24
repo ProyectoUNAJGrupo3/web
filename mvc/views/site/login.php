@@ -16,14 +16,6 @@ AppAssetPopups::register($this);
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
-
-/* Modal::begin([
-  'id' => 'modal',
-  'size' => 'modal-lg',
-  ]);
-  echo "<div id='modalContent'></div>";
-  Modal::end();
- */
 ?>
 <div class="container" style="width: 100%;">
 
