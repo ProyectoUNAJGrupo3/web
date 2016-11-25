@@ -172,8 +172,9 @@ class SiteController extends Controller {
         if ($model->load(Yii::$app->request->post()) && $model->login()) {          //cuando el cliente ingresa los datos en el login
             if (Yii::$app->user->identity->Estado == 1) {                            //se evalua si la cuenta esta validada, si ==1 es invalidada
                 Yii::$app->user->logout();                                          //se cierra la sesion y se muestra un mensaje
-                Yii::$app->session->setFlash('UsuarioNoValidado');
-                return $this->refresh();
+                return $this->render('VistaInvalidoUsuarioDesdeLogin');
+    //            Yii::$app->session->setFlash('UsuarioNoValidado');
+    //            return $this->refresh();
             } else {
                 if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)) {         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
                     return $this->redirect(['site/administrador']);
@@ -249,11 +250,11 @@ class SiteController extends Controller {
 
 
         if ($model->load(Yii::$app->request->post()) && ($model->AltaRegistro() === true)) {
-            // $id = urlencode(uniqid());          codigo unico generado
+            $authKey = urlencode(uniqid());         // codigo unico generado
             $id = urlencode((string) $model->getPersonaID());                          //Tomo el id de la persona registrada y lo transformo en codigo url
             $subject = "Confirmar registro";
             $body = "<h1>Haga click en el siguiente enlace para finalizar tu registro</h1>";
-            $link = "http://" . $_SERVER['HTTP_HOST'] . "/web/index.php?r=site%2Fconfirmar&id=" . $id;     //url de enlace que direcciona al action Confirmar con el que habilito al usuario
+            $link = "http://" . $_SERVER['SERVER_NAME'] .":".$_SERVER['SERVER_PORT']. Url::toRoute("site/confirmar")."&id=" . $id."&key=".$authKey;     //url de enlace que direcciona al action Confirmar con el que habilito al usuario
             $body .= "<a href='" . $link . "'>Confirmar</a>";
             Yii::$app->mailer->compose()
                     ->setTo($model->correo)

@@ -19,11 +19,6 @@ BootswatchAsset::register($this);
 ?>
 <div class="container" style="width: 100%;">
 
-    <?php if (Yii::$app->session->hasFlash('UsuarioNoValidado')): ?>
-        <div class="alert alert-success">
-            Su usuario aun no ha sido validado
-        </div>
-    <?php else: ?>
         <div class="row">
             <div class="col-lg-15">
                 <img src="img/avatarUser.png" id="img-avatar-login" alt="Logo P&aacute;gina" align="top" style="margin-left:40%;"/>
@@ -73,5 +68,4 @@ BootswatchAsset::register($this);
                 </div>
             </div>
         </div>
-    <?php endif; ?>
 </div>
