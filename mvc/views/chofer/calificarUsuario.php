@@ -24,31 +24,14 @@ AppAssetWebSite::register($this);
 
             <?php if (Yii::$app->session->hasFlash('Clasificaci&oacute;n exitosa')): ?>
                 <div class="alert alert-success">
-                    Thank you for contacting us. We will respond to you as soon as possible.
+                    Gracias por su opini&oacute;n.
                 </div>
-                <p>
-                    Note that if you turn on the Yii debugger, you should be able
-                    to view the mail message on the mail panel of the debugger.
-                    <?php if (Yii::$app->mailer->useFileTransport): ?>
-                        Because the application is in development mode, the email is not sent but saved as
-                        a file under
-                        <code>
-                            <?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?>
-                        </code>.
-                        Please configure the
-                        <code>useFileTransport</code>property of the
-                        <code>mail</code>
-                        application component to be false to enable email sending.
-                    <?php endif; ?>
-                </p>
             <?php else: ?>
                 <?php $form = ActiveForm::begin(); ?>
-                <b>
-                    <h4>
-                        <u>Datos</u>
-                        <u>Calificaci&oacute;n</u>
-                    </h4>
-                </b>
+                <h4>
+                    <u>Datos</u>
+                    <u>Calificaci&oacute;n</u>
+                </h4>
                 <?= $form->field($model, 'puntaje')->dropDownList(['prompt' => 'Seleccione...', 'uno' => '1', 'dos' => '2', 'tres' => '3', 'cuatro' => '4', 'cinco' => '5', 'seis' => '6', 'siete' => '7', 'ocho' => '8', 'nueve' => '9', 'diez' => '10']) ?>
                 <?= $form->field($model, 'comentario')->textArea(['rows' => 7, 'column' => 4])->label('Comentario'); ?>
                 <?= Html::submitButton('Calificar', ['class' => 'btn btn-primary', 'id' => 'btn-carga-calificacion']); ?>
