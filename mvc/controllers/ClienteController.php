@@ -84,7 +84,12 @@ class ClienteController extends Controller {
 
     public function actionCalificar_servicio_remis() {
         $model = new CalificacionServicioModel();
-        return $this->render("calificarServicio", ['model' => $model]);
+        if (\Yii::$app->request->isAjax) {
+
+            $selection=(array)Yii::$app->request->post('keylist');
+            $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+        }
+        return $this->renderAjax("calificarServicio", ['model' => $model]);
     }
     /*
     public function actionCerrarViaje() {                      //renderiza el index de la carpeta agencia dentro de views
