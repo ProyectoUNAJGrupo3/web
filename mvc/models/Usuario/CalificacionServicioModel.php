@@ -2,6 +2,7 @@
 
 namespace app\models\Usuario;
 
+use yii;
 use yii\base\Model;
 
 class CalificacionServicioModel extends Model {
@@ -29,6 +30,7 @@ class CalificacionServicioModel extends Model {
     }
 
 }
+
 /*namespace app\models\Usuario;
 
 use yii\base\Model;
