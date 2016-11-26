@@ -67,7 +67,7 @@ class RestController extends Controller
     public function actionSearch()
     {
         //en la variable $_GET tengo la data de lo que me tengo que venir a buscar, necesito hacer un metodo del modelo para pegarle con eso
-        //el asunto esta en que no hay datos confiables en la base. Hay que tocar el modelo de registro para que guarde un par de cosas más.
+        //el asunto esta en que no hay datos confiables en la base. Hay que tocar el modelo de registro para que guarde un par de cosas mas.
         $tarifa= new TarifasModelo();
 
         $agenciaModel= new AgenciaModelo();
