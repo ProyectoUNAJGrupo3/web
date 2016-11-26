@@ -55,7 +55,6 @@ $this->title = 'Usuario';
                     ['label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_viajes'],],
-                        //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
                         //'<li class="divider"></li>',
                         ],
                     ],
@@ -94,7 +93,7 @@ $this->title = 'Usuario';
             </div>
         </div>
 
-       <footer class="footer">
+        <footer class="footer">
             <div class="container">
                 <!--<hr style="border:1px solid gray;">-->
 
