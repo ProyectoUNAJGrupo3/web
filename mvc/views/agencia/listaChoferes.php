@@ -62,7 +62,9 @@ Modal::end();
                     <div>
                         <?php $form = ActiveForm::begin(); ?>
                         <?=
-                        GridView::widget(['dataProvider' => $model->dataProvider,
+                        GridView::widget(['id' => 'grid',
+                        'dataProvider' => $model->dataProvider,
+                        'tableOptions' => ['class' => 'table  table-bordered table-hover'],
                             'columns' => [
                                 ['class' => 'yii\grid\CheckboxColumn'],
                                 'Usuario',
@@ -76,11 +78,11 @@ Modal::end();
                         <div id='botones-group'>
                             <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_chofer_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::Button('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            <?= Html::Button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_chofer_agencia'),'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary','name' => 'submit', 'value' => 'Eliminar']); ?>
+                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary btn-lg','name' => 'submit', 'value' => 'Eliminar']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                            <?= Html::a('Cerrar', [('/agencia/index'),'class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
                         </div>
                         <?php ActiveForm::end(); ?>
                     </div>  
@@ -93,3 +95,26 @@ Modal::end();
 
     </div>
 </div>
+<?php
+/*$this->registerJs(
+   "$('#actualizarButton').click(function(){
+     var keys = $('#grid').yiiGridView('getSelectedRows');
+
+                         $.ajax({
+                        type     :'post',
+                        cache    : false,
+                        data: {keylist: keys},
+                        processData: true,
+                        url  : '".Url::to(['agencia/listar_choferes_agencia'])."',
+                        success  : function() {
+                            $('#modal').modal('show').find('#modalContent').load('value');;
+                            //$.pjax.reload({container:'#formsection'});
+                        },
+                        error: function(){
+                           alert('Error');
+                            $('#processmodal').modal('hide');
+                        }
+                        });$('#modal').modal('show').find('#modalContent').load('value');
+});"
+);
+?>*/

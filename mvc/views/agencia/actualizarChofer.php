@@ -18,7 +18,7 @@ AppAsset::register($this);
         <article>
             <div id="page-single-main">-->
 <div class="container">
-    <div class="well bs-component">
+    <!--<div class="well bs-component">-->
         <div class="row">
             <div class="col-lg-8">
                 <!--<div class="site-contact">
@@ -85,7 +85,6 @@ AppAsset::register($this);
                </article>
            </section>
         </div>-->
-                </div>
             </div>
         </div>
     </div>
