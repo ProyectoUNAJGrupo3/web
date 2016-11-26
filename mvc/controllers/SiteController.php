@@ -254,7 +254,13 @@ class SiteController extends Controller {
             $id = urlencode((string) $model->getPersonaID());                          //Tomo el id de la persona registrada y lo transformo en codigo url
             $subject = "Confirmar registro";
             $body = "<h1>Haga click en el siguiente enlace para finalizar tu registro</h1>";
-            $link = "http://" . $_SERVER['SERVER_NAME'] .":".$_SERVER['SERVER_PORT']. Url::toRoute("site/confirmar")."&id=" . $id."&key=".$authKey;     //url de enlace que direcciona al action Confirmar con el que habilito al usuario
+            $server = $_SERVER['SERVER_NAME'];
+            if ($server === "localhost"){
+                $link = "http://" . $server .":".$_SERVER['SERVER_PORT']. Url::toRoute("site/confirmar")."&id=" . $id."&key=".$authKey;     //url de enlace que direcciona al action Confirmar con el que habilito al usuario
+            }
+            else{
+                $link = "http://" . $_SERVER['SERVER_NAME'] . Url::toRoute("site/confirmar")."&id=" . $id."&key=".$authKey;     //url de enlace que direcciona al action Confirmar con el que habilito al usuario
+            }
             $body .= "<a href='" . $link . "'>Confirmar</a>";
             Yii::$app->mailer->compose()
                     ->setTo($model->correo)
