@@ -31,8 +31,3 @@ $(function() {
         $('#modal').modal('show').find('#modalContentChofer').load($(this).attr('value'));
     });
 });
-$(function () {
-    $('#modalButtonCalificarServicio').click(function () {
-        $('#modal').modal('show').find('#modalContentCliente').load($(this).attr('value'));
-    });
-});
