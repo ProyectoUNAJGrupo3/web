@@ -60,7 +60,7 @@ class ChoferController extends Controller {
     }
 
     public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
-        $model = new CalificacionUsuarioModel();
+        $model = new HistorialViajesModel();
         return $this->render('index', ['model' => $model]);
         //return $this->render('index');
     }
@@ -75,6 +75,11 @@ class ChoferController extends Controller {
         $model = new HistorialCalificacionesModel();
         return $this->render('listarHistorialCalificaciones', ['model' => $model]);
         //return $this->render('index');
+    }
+
+    public function actionCalificar_conducta_usuario() {                      //renderiza el index de la carpeta agencia dentro de views
+        $model = new CalificacionUsuarioModel();
+        return $this->renderAjax('calificarUsuario', ['model' => $model]);
     }
 
 }

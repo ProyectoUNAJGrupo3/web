@@ -13,6 +13,7 @@ use app\models\TipoUsuario;
 use app\models\PSFormularioLoginModel;
 use app\models\PSFormularioUsuarioModel;
 use app\models\PSFormularioSolicitudRegistrarAgencia;
+use app\models\InvalidoUsuarioModel;
 
 class SiteController extends Controller {
 
@@ -23,24 +24,23 @@ class SiteController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['login', 'logout', 'administrador', 'recepcionista', 'chofer', 'cliente','registro','contact','about','solicitud_registrar_agencia'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'only' => ['login', 'logout', 'administrador', 'recepcionista', 'chofer', 'cliente', 'registro', 'contact', 'about', 'solicitud_registrar_agencia'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                     [
-                        'actions' => ['login','registro','contact','about','solicitud_registrar_agencia'], //para la accion login
+                        'actions' => ['login', 'registro', 'contact', 'about', 'solicitud_registrar_agencia'], //para la accion login
                         'allow' => true, //Todos los permisos aceptados
                         'roles' => ['?'], //Tienen acceso a esta accion todos los usuarios invitados
                     ],
-
-                      [
+                    [
                         //el administrador tiene permisos sobre las siguientes acciones
                         'actions' => ['logout', 'administrador'],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
-                            return TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID);
-                            //Llamada al m?todo que comprueba si es un administrador
-                            //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
-                        },
+                    return TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID);
+                    //Llamada al m?todo que comprueba si es un administrador
+                    //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
+                },
                     ],
                     [
                         //el recepcionista tiene permisos sobre las siguientes acciones
@@ -48,9 +48,9 @@ class SiteController extends Controller {
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID);
-                            //Llamada al m?todo que comprueba si es un recepcionista
-                        },
+                    return TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID);
+                    //Llamada al m?todo que comprueba si es un recepcionista
+                },
                     ],
                     [
                         //el chofer tiene permisos sobre las siguientes acciones
@@ -58,9 +58,9 @@ class SiteController extends Controller {
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID);
-                            //Llamada al m?todo que comprueba si es un chofer
-                        },
+                    return TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID);
+                    //Llamada al m?todo que comprueba si es un chofer
+                },
                     ],
                     [
                         //el cliente tiene permisos sobre las siguientes acciones
@@ -68,9 +68,9 @@ class SiteController extends Controller {
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID);
-                            //Llamada al m?todo que comprueba si es un cliente
-                        },
+                    return TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID);
+                    //Llamada al m?todo que comprueba si es un cliente
+                },
                     ],
                 ],
             ],
@@ -170,12 +170,12 @@ class SiteController extends Controller {
 
         $model = new PSFormularioLoginModel();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {          //cuando el cliente ingresa los datos en el login
-            if (Yii::$app->user->identity->Estado ==1){                            //se evalua si la cuenta esta validada, si ==1 es invalidada
+            if (Yii::$app->user->identity->Estado == 1) {                            //se evalua si la cuenta esta validada, si ==1 es invalidada
                 Yii::$app->user->logout();                                          //se cierra la sesion y se muestra un mensaje
-                Yii::$app->session->setFlash('UsuarioNoValidado');
-                return $this->refresh();
-            }
-            else{
+                return $this->render('VistaInvalidoUsuarioDesdeLogin');
+    //            Yii::$app->session->setFlash('UsuarioNoValidado');
+    //            return $this->refresh();
+            } else {
                 if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)) {         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
                     return $this->redirect(['site/administrador']);
                 } elseif (TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID)) {
@@ -188,10 +188,8 @@ class SiteController extends Controller {
                     return $this->goBack();
                 }
             }
-
-
         }
-        return $this->render('login', [
+        return $this->renderAjax('login', [
                     'model' => $model,
         ]);
     }
@@ -235,39 +233,35 @@ class SiteController extends Controller {
 
     public function actionConfirmar() {
         $model = new PSFormularioUsuarioModel();
-        if (Yii::$app->request->get()){
+        if (Yii::$app->request->get()) {
 
             $id = Html::encode($_GET["id"]);
-            (int)$id;
+            (int) $id;
             $model->validarRegistro($id);
 
             return $this->render('VistaConfirmacionNuevoUsuarioDesdeEmail');
-
-
-        }
-        else{
+        } else {
             return $this->redirect(['site/login']);
         }
     }
-
 
     public function actionRegistro() {
         $model = new PSFormularioUsuarioModel();
 
 
         if ($model->load(Yii::$app->request->post()) && ($model->AltaRegistro() === true)) {
-            // $id = urlencode(uniqid());          codigo único generado
-            $id = urlencode((string)$model->getPersonaID());                          //Tomo el id de la persona registrada y lo transformo en codigo url
+            $authKey = urlencode(uniqid());         // codigo unico generado
+            $id = urlencode((string) $model->getPersonaID());                          //Tomo el id de la persona registrada y lo transformo en codigo url
             $subject = "Confirmar registro";
             $body = "<h1>Haga click en el siguiente enlace para finalizar tu registro</h1>";
-            $link= "http://".$_SERVER['HTTP_HOST']."/web/index.php?r=site%2Fconfirmar&id=".$id;     //url de enlace que direcciona al action Confirmar con el que habilito al usuario
-            $body .= "<a href='".$link."'>Confirmar</a>";
+            $link = "http://" . $_SERVER['SERVER_NAME'] .":".$_SERVER['SERVER_PORT']. Url::toRoute("site/confirmar")."&id=" . $id."&key=".$authKey;     //url de enlace que direcciona al action Confirmar con el que habilito al usuario
+            $body .= "<a href='" . $link . "'>Confirmar</a>";
             Yii::$app->mailer->compose()
-							->setTo($model->correo)
-							->setFrom(Yii::$app->params["adminEmail"])
-							->setSubject($subject)
-							->setHtmlBody($body)
-							->send();
+                    ->setTo($model->correo)
+                    ->setFrom(Yii::$app->params["adminEmail"])
+                    ->setSubject($subject)
+                    ->setHtmlBody($body)
+                    ->send();
             Yii::$app->session->setFlash('MailEnviado');
             return $this->refresh();
         }
@@ -279,30 +273,36 @@ class SiteController extends Controller {
         if ($model->load(Yii::$app->request->post()) && ($model->Registrar() === true)) {
             $subject = "Validar agencia y usuario";
             $body = "<h1>Datos de principales de Usuario: </h1>";
-            $body.= "<p>Nombre: ". $model->nombre ."</p>";
-            $body.= "<p>Apellido: ". $model->apellido ."</p>";
-            $body.= "<p>Telefono personal: ". $model->telefono ."</p>";
-            $body.= "<p>DNI: ". $model->dni ."</p>";
-            $body.= "<p>Mail de usuario: ". $model->email ."</p>";
-            $body.= "<p>Usuario: ". $model->usuario ."</p>";
+            $body.= "<p>Nombre: " . $model->nombre . "</p>";
+            $body.= "<p>Apellido: " . $model->apellido . "</p>";
+            $body.= "<p>Telefono personal: " . $model->telefono . "</p>";
+            $body.= "<p>DNI: " . $model->dni . "</p>";
+            $body.= "<p>Mail de usuario: " . $model->email . "</p>";
+            $body.= "<p>Usuario: " . $model->usuario . "</p>";
             $body.= "<h1>Datos principales de la Agencia: </h1>";
-            $body.= "<p>Nombre de la Agencia: ". $model->nombreAgencia ."</p>";
-            $body.= "<p>Telefono de Agencia: ". $model->telefonoAgencia ."</p>";
-            $body.= "<p>CUIT: ". $model->CUIT ."</p>";
-            $body.= "<p>Mail de Agencia: ". $model->emailAgencia ."</p>";
+            $body.= "<p>Nombre de la Agencia: " . $model->nombreAgencia . "</p>";
+            $body.= "<p>Telefono de Agencia: " . $model->telefonoAgencia . "</p>";
+            $body.= "<p>CUIT: " . $model->CUIT . "</p>";
+            $body.= "<p>Mail de Agencia: " . $model->emailAgencia . "</p>";
             Yii::$app->mailer->compose()
-							->setTo(Yii::$app->params["adminEmail"])
-							->setFrom(Yii::$app->params["adminEmail"])
-							->setSubject($subject)
-							->setHtmlBody($body)
-							->send();
+                    ->setTo(Yii::$app->params["adminEmail"])
+                    ->setFrom(Yii::$app->params["adminEmail"])
+                    ->setSubject($subject)
+                    ->setHtmlBody($body)
+                    ->send();
             Yii::$app->session->setFlash('MailEnviado');
             return $this->refresh();
         }
         return $this->render("solicitarAgencia", ['model' => $model]);
     }
+
+    public function actionInvalido_usuario() {
+        $model = new InvalidoUsuarioModel();
+        return $this->render("VistaInvalidoUsuarioDesdeLogin", ['model' => $model]);
+    }
+
     private function actionAgregando() {
-        return $this->redirect(['agencia/alta_chofer_agencia']);//llamada del boton encode agregar en vista listar chofer
+        return $this->redirect(['agencia/alta_chofer_agencia']); //llamada del boton encode agregar en vista listar chofer
     }
 
 }
