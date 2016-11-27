@@ -118,9 +118,16 @@ class AgenciaController extends Controller {
     }
 
     public function actionActualizar_chofer_agencia() {
-        $model = new ActualizarChoferModel();
-        return $this->render("actualizarChofer", ['model' => $model]);
-    }
+        if (isset(Yii::$app->session['actualizar'])) {
+             $param = Yii::$app->session['actualizar'];
+             } 
+            else {
+                $param = null;
+        }
+            $selection=(array)Yii::$app->request->post('keylist');
+            $model = new ActualizarChoferModel();
+            return $this->renderAjax("actualizarChofer", ['model' => $model]);
+     }
 
     public function actionActualizar_recepcionista_agencia() {
         $model = new ActualizarRecepcionistaModel();
@@ -133,6 +140,22 @@ class AgenciaController extends Controller {
     public function actionListar_choferes_agencia() {
         $model = new GridModel();
         $model->setDataProviderChofer();
+        if (\Yii::$app->request->isPost)  {
+            if (\Yii::$app->request->isAjax) {
+                $selection=(array)Yii::$app->request->post('keylist');
+                $personaselected=$model->dataProvider->allModels[$selection[0]];
+                Yii::$app->session['actualizar'] = $personaselected;
+
+            }
+            else{
+
+                $selection =(array)Yii::$app->request->post('selection');
+                $personaSelected = $model->dataProvider->allModels[$selection[0]];
+                $model->eliminarEmpleado($personaSelected);
+                Yii::$app->session->setFlash('Chofer eliminado con exito');
+                return $this->refresh();
+            }
+        }
         return $this->render("listaChoferes", ['model' => $model]);
     }
 

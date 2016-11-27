@@ -14,20 +14,22 @@ use yii\helpers\ArrayHelper;
 use yii\bootstrap\Button;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 AppAssetRecepcionista::register($this);
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 /* @var $this yii\web\View */
 $this->title = 'RemisYa';
 Modal::begin([
-'header' => '<h2>Viajes</h2>',
-'id'=>'modal',
-'size'=>'modal-lg',
+'header' => '<h4>Mensaje</h4>',
+'id'=>'processmodal',
+'size'=>'modal-sm',
+'options'=>['class'=>'modal']
 ]);
-echo "<div id='modalContent'></div>";
+echo "Procesando...";
 Modal::end();
-
 ?>
+
 <?php if (Yii::$app->session->hasFlash('viajeCreado')): ?>
 <div class="alert alert-dismissible alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -35,38 +37,24 @@ Modal::end();
     <a href="#" class="alert-link">Viaje creado correctamente</a>.
 </div>
 <?php endif ?>
-<?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
-
-<div class="alert alert-dismissible alert-success">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Operacion exitosa!</strong>
-    <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
-</div>
-<?php endif ?>
-<?php if (Yii::$app->session->hasFlash('viajeCancelado')): ?>
-
-<div class="alert alert-dismissible alert-warning">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Operacion exitosa!</strong>
-    <a href="#" class="alert-link">Viaje cerrado correctamente</a>.
-</div>
-<?php endif ?>
 <div class="panel panel-primary">
-    
     <div class="panel-heading">
         <h4 class="panel-title">Administrador de Viajes</h4>
     </div>
     <div class="panel-body">
         <div class="row">
+
             <?php $form = ActiveForm::begin(); ?>
             <div class="col-lg-8">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3>Seleccione Origen y Destino: </h3></div>
+                    <div class="panel-heading">
+                        <h3>Seleccione Origen y Destino: </h3>
+                    </div>
                     <div class="panel-body">
                         <fieldset>
                             <div id="btn-bar">
                                 <?=
-                                    $this->registerJs('$(document).ready(function () {
+                                $this->registerJs('$(document).ready(function () {
             initMap(true);
             $("#btn-ver-remiserias").on("click", function() {getRemiserias(true)});
             });', \yii\web\View::POS_READY);
@@ -108,7 +96,7 @@ Modal::end();
 
                                             <span class="input-group-btn">
                                                 <?=
- Html::button('Calcular', ['class'=>'btn btn-primary', 'onclick' => '$("#importetotal").val((($("#precioKM").val())*($("#distancia").val().replace(" Km",""))).toFixed(0) + " $");'])
+                                                Html::button('Calcular', ['class'=>'btn btn-primary', 'onclick' => '$("#importetotal").val((($("#precioKM").val())*($("#distancia").val().replace(" Km",""))).toFixed(0) + " $");'])
                                                 ?>
                                             </span>
                                         </div>
@@ -120,8 +108,10 @@ Modal::end();
                             <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos,['prompt'=>'Seleccione vehiculo'])?>
 
                             <div class="btn-group">
-                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-crearViaje']); ?>
-                                <?= Html::button('Ver Viajes', ['value'=>Url::toRoute('listar_solicitudes_servicio'),'class'=>'btn btn-primary btn-lg','id'=>'modalButton']) ?>
+                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {
+$("#processmodal").modal("hide");
+});']); ?>
+                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary btn-lg']) ?>
                             </div>
                         </fieldset>
                     </div>
@@ -129,6 +119,7 @@ Modal::end();
 
             </div>
             <?php ActiveForm::end(); ?>
+
         </div>
     </div>
 </div>

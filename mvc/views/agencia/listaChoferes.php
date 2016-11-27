@@ -18,7 +18,7 @@ use yii\helpers\Url;
 use app\assets\BootswatchAsset;
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
-BootswatchAsset::register($this);
+/*BootswatchAsset::register($this);*/
 AppAssetAgencia::register($this);
 AppAsset::register($this);
 AppAssetWebSite::register($this);
@@ -31,78 +31,88 @@ Modal::begin([
 echo "<div id='modalContent'></div>";
 Modal::end();
 ?>
-<!--<div class="container">
-    <section id="main">
-        <article>
-            <div id="page-single-main">-->
-<!--<div class="site-contact">
-    <section id="main">
-        <article>
-<div id="page-single-main">-->
-<div class="container">
-    <div class="well bs-component">
-        <div class="row">
-            <div class="col-lg-8">
-                <h1 >
-                    <strong>Listado de Choferes</strong>
-                </h1>
-                <!--<div class="container-form" id="contenedor-formulario">-->
+
                 <h1>
                     <?= Html::encode($this->title) ?>
                 </h1>
+                <?php if (Yii::$app->session->hasFlash('Chofer eliminado con exito')): ?>
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Operacion exitosa!</strong>
+                    <a href="#" class="alert-link">Chofer Eliminado correctamente</a>.
+                </div>
+                <?php endif ?>
 
-                <?php if (Yii::$app->session->hasFlash('Usuario creado con exito')): ?>
-                    <div class="alert alert-success">
-                        Thank you for contacting us. We will respond to you as soon as possible.
-                    </div>
-                    <p>
-                        Note that if you turn on the Yii debugger, you should be able
-                        to view the mail message on the mail panel of the debugger.
-                        <?php if (Yii::$app->mailer->useFileTransport): ?>
-                            Because the application is in development mode, the email is not sent but saved as
-                            a file under
-                            <code>
-                                <?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?>
-                            </code>.
-                            Please configure the
-                            <code>useFileTransport</code>property of the
-                            <code>mail</code>
-                            application component to be false to enable email sending.
-                        <?php endif; ?>
-                    </p>
-                <?php else: ?>
                     <div>
+                   <?php $form = ActiveForm::begin(); ?>
+                        <br />
+                        <br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">&ensp; &ensp; Listado de Choferes</h4>
+        </div>
+        <div class="container">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="table-responsive">
                         <?=
-                        GridView::widget(['dataProvider' => $model->dataProvider,
-                            'columns' => [
-                                ['class' => 'yii\grid\CheckboxColumn'],
-                                'Usuario',
-                                'Password',
-                                'Nombre',
-                                'Apellido',
-                                'Documento',
-                            ],]);
+                        GridView::widget(['id' => 'grid',
+                        'dataProvider' => $model->dataProvider,
+                        'tableOptions' => ['class' => 'table table-bordered table-hover', 'style'=>'border-collapse: collapse; border: 3px solid #df691a; '],
+                        'columns' => [
+                              ['class'  => 'yii\grid\CheckboxColumn','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                              ['header' => '<h5>Usuario</h5>','attribute' => 'Usuario','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                              ['header' => '<h5>Password</h5>','attribute' => 'Password','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                              ['header' => '<h5>Nombre</h5>','attribute' => 'Nombre','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                              ['header' => '<h5>Apellido</h5>','attribute' => 'Apellido','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                              ['header' => '<h5>Documento</h5>','attribute' => 'Documento','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                            ],
+                         'rowOptions' => function ($model, $key, $index, $grid) {
+                                return ['rowid' => $key, 'onclick' => '$(this).addClass("success").siblings().removeClass("success");','style' => 'cursor:pointer'];
+                            },
+                            ]);
                         ?>
-                        <?php $form = ActiveForm::begin(); ?>
+
                         <div id='botones-group'>
                             <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_chofer_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            <?= Html::Button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_chofer_agencia'),'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar','confirm' => 'Are you sure you want to permanently delete these comments?']); ?>
+                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary btn-lg','name' => 'submit', 'value' => 'Eliminar']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                            <?= Html::a('Cerrar', [('/agencia/index'),'class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
                         </div>
+                    </div>
+                </div>
                         <?php ActiveForm::end(); ?>
-                    </div>  
-                <?php endif; ?>
-
-                <!--</article>
-                </section>
-            </div>
-            </div>-->
+                    </div>
+                    <!--</article>
+                        </section>
+                    </div>
+                    </div>-->
+                </div>
             </div>
         </div>
-
-    </div>
-</div>
+  
+    <?php
+/*$this->registerJs(
+   "$('#actualizarButton').click(function(){
+     var keys = $('#grid').yiiGridView('getSelectedRows');
+                         $.ajax({
+                        type     :'post',
+                        cache    : false,
+                        data: {keylist: keys},
+                        processData: true,
+                        url  : '".Url::to(['agencia/listar_choferes_agencia'])."',
+                        success  : function() {
+                            $('#modal').modal('show').find('#modalContent').load('value');;
+                            //$.pjax.reload({container:'#formsection'});
+                        },
+                        error: function(){
+                           alert('Error');
+                            $('#processmodal').modal('hide');
+                        }
+                        });$('#modal').modal('show').find('#modalContent').load('value');
+});"
+);
+?>*/

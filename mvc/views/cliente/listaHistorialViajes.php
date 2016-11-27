@@ -15,36 +15,87 @@ use yii\helpers\ArrayHelper;
 use yii\bootstrap\Button;
 use yii\bootstrap\Modal;
 use app\assets\BootswatchAsset;
+use yii\helpers\Url;
 
+$this->title = 'RemisYa';
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
-AppAsset::register($this);
+//AppAsset::register($this);
 AppAssetCliente::register($this);
-//AppAssetWebSite::register($this);
-/* @var $this yii\web\View */
-//$this->title = 'RemisYa';
+
+Modal::begin([
+    'id' => 'modal',
+        //'size' => 'modal-lg',
+]);
+echo "<div id='modalContent'></div>";
+Modal::end();
 ?>
 <div class="container">
-    <div class="well bs-component">
-        <?=
-        GridView::widget([
-            'dataProvider' => $model->dataProvider,
-            'columns' => [
-                ['class' => 'yii\grid\CheckboxColumn'],
-                'ClienteNombre',
-                'AgenciaNombre',
-                'OrigenDireccion',
-                'DestinoDireccion',
-                'ChoferNombre',
-                'VehiculoMarca',
-                'VehiculoModelo',
-                'FechaSalida',
-                'ImporteTotal',
-                'Distancia',
-                'ViajeTipo',
-                'Estado',
-            ],]);
-        ?>
+    <!--<div class="well bs-component">-->
 
+    <?=
+    GridView::widget([
+        'dataProvider' => $model->dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\CheckboxColumn'],
+            'ClienteNombre',
+            'AgenciaNombre',
+            'OrigenDireccion',
+            'DestinoDireccion',
+            'ChoferNombre',
+            'VehiculoMarca',
+            'VehiculoModelo',
+            'FechaSalida',
+            'ImporteTotal',
+            'Distancia',
+            'ViajeTipo',
+            'Estado',
+            /*Probando agregar botones en la gridview*/
+            [ 'class' => 'yii\grid\ActionColumn',
+                'template' => '{Calificar}',
+                'buttonOptions' => [
+                    'Calificar' => [
+                        'label' => 'calificar',
+                        'class' => 'btn btn-primary',
+                    ]
+                //'class' => 'btn btn-primary',
+                //'id' => 'modalButtonCalificar',
+                //['value' => Url::toRoute('/cliente/calificar_servicio')],
+                ],
+            ],
+        ],
+    ]);
+    ?>
+    <?php $form = ActiveForm::begin(); ?>
+    <div id='botones-group'>
+        <?= Html::button('Abrir ventana calificar', ['value' => Url::toRoute('/cliente/calificar_servicio'), 'class' => 'btn btn-primary', 'id' => 'modalButtonCalificar']); ?>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <?= Html::submitButton('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
     </div>
+    <?php $form = ActiveForm::end(); ?>
 </div>
+<!--</div>-->
+<?php
+/*$this->registerJs(
+        "$( document ).ready(function() {
+$('#modalButtonCalificarServicio').click(function(){
+        var keys = $('#calificar_grid').yiiGridView('getSelectedRows');
+
+                                                $.ajax({
+                        type     :'post',
+                        cache    : true,
+                        data: {keylist: keys},
+                        url  : '" . Url::to(['cliente/calificar_servicio_remis']) . "',
+                        success  : function() {
+                            alert('prueba');
+
+                        },
+                        error: function(){
+                           alert('Error');
+                            $('#processmodal').modal('hide');
+                        }
+                        });return false;
+});
+});"
+);
+?>*/
