@@ -12,13 +12,13 @@ class Internet extends \Faker\Provider\Internet
         'com.cn', 'edu.cn', 'net.cn', 'biz.cn', 'gov.cn', 'org.cn'
     );
 
-    protected static $usernameFormats = array(
+    protected static $userNameFormats = array(
         '{{word}}.{{word}}',
         '{{word}}_{{word}}',
         '{{word}}##',
         '?{{word}}',
     );
     protected static $emailFormats = array(
-        '{{username}}@{{freeEmailDomain}}',
+        '{{userName}}@{{freeEmailDomain}}',
     );
 }

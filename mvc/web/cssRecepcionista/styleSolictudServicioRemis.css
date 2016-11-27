@@ -1,0 +1,30 @@
+#nombrePasajero,#apellidoPasajero,#origenViajeManual,#destinoViajeManual{
+    font-size:16px;
+    width: 50%;
+    size:60px;
+    float:center;	
+}
+#botones-grupo-viaje-manual{
+    margin-top: 10px;
+    margin-left: 300px;
+    display:inline-block;
+    float: center;
+    position: relative;
+}
+#listadoChoferes,#listadoCoches{
+    font-size:16px;
+    width: 50%;
+    height: 20%;
+    size:70px;
+    float:center;	
+}
+#btn-cargar-viaje{
+    margin-left: 0px;
+    font-size:20px;
+    size:70px;
+}
+#btn-cancelar-viaje{
+    font-size:20px;
+    size:70px;
+    margin-left: 00px;
+}

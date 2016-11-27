@@ -1,0 +1,28 @@
+
+#nombreAgencia,#telefonoAgencia,
+#numeroClienteServcio,#direccionAgencia,
+#nombreDuenio,
+#apellidoDuenio,#dniDuenio,#email{
+    font-size:16px;
+    width: 50%;
+    size:60px;
+    float:center;	
+}
+#btn-enviar-solicitud{
+    font-size:16px;
+    size:70px;
+    margin-left: 0px;
+}
+#btn-cancelar{
+    font-size:16px;
+    size:50px;
+    margin-left: 0px;
+}
+
+#botones-group{
+    margin-top: 10px;
+    margin-left: 250px;
+    display:inline-block;
+    float: center;
+    position: relative;
+}

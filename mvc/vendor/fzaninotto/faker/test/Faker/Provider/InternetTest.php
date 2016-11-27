@@ -55,7 +55,7 @@ class InternetTest extends \PHPUnit_Framework_TestCase
      * @requires PHP 5.4
      * @dataProvider localeDataProvider
      */
-    public function testusernameIsValid($locale)
+    public function testUsernameIsValid($locale)
     {
         $this->loadLocalProviders($locale);
         $pattern = '/^[A-Za-z0-9._]+$/';

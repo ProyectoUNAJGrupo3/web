@@ -54,7 +54,7 @@ class AgenciaModelo //extends Model
 
         return $this->Agencia;
     }
-    public function ModificarAgencia($AgenciaID, $Nombre, $Direccion, $DireccionCoordenadas, $Telefono, $Email, $Estado)
+    public function ModificarAgencia($AgenciaID, $Nombre,$Direccion, $DireccionCoordenadas,$Telefono, $Email,  $Estado)
     {
         $this->Parametros = [
                 'AgenciaID' => $AgenciaID,
@@ -98,30 +98,30 @@ class AgenciaModelo //extends Model
         }
         else if($this->Operacion==self::Operacion_Modificacion)
         {
-            $this->OperacionState=new Modificacion();
+            $this->OperacionState= new Modificacion();
         }
         else if($this->Operacion==self::Operacion_GetInfo)
         {
-            $this->OperacionState =new GetInfo();
+            $this->OperacionState = new GetInfo();
         }
     }                                                  //ESTE METODO RECIBE LA CONSTANTE DE OPERACION Y SETEA LA VARIABLE OperacionState CON UN OBJETO, EL OBJETO SE CREA A PARTIR DE LA CLASE Operaciones.php y PUEDE SER ALTA, BAJA, MODIFICACION o GETINFO.
 }
 
 
 //$test = new AgenciaModelo();
-//TEST GET INFO
-//print_r($test->GetInfoAgencia(-1,"","","","","",""));
+/*TEST GET INFO
+print_r($test->GetInfoAgencia(-1,"","","","","",""));
+*/
 
 
+/*TEST ALTA
+if($test->RegistrarAgencia("'LilianSilva'","'25 de mayo'", "'{101}'", "'42870730'","'lili@silva.com'", 0)!=null) echo 'Agencia registrada correctamente!';
+*/
 
-//TEST ALTA
-//if($test->RegistrarAgencia("'LilianSilva'","'25 de mayo'", "'{101}'", "'42870730'","'lili@silva.com'", 0)!=null) echo 'Agencia registrada correctamente!';
+/*TEST MODIFICACION
+if($test->ModificarAgencia(14,"'LilianLeonorSilva'","'25 de mayo'", "'{101}'", "'42870730'","'lilian@silva.com'", 0)!=null) echo 'Agencia modificada correctamente!';
+*/
 
-
-//TEST MODIFICACION
-//if($test->ModificarAgencia(14,"'LilianLeonorSilva'","'25 de mayo'", "'{101}'", "'42870730'","'lilian@silva.com'", 0)!=null) echo 'Agencia modificada correctamente!';
-
-
-//TEST BAJA
-//if($test->EliminarAgencia(14)!=null) echo 'Agencia eliminada correctamente!';
-
+/*TEST BAJA
+if($test->EliminarAgencia(14)!=null) echo 'Agencia eliminada correctamente!';
+ */

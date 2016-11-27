@@ -8,12 +8,12 @@ class Internet extends \Faker\Provider\Internet
     protected static $tld = array('com', 'com', 'com', 'net', 'org');
 
     protected static $emailFormats = array(
-        '{{username}}@{{domainName}}',
-        '{{username}}@{{domainName}}',
-        '{{username}}@{{freeEmailDomain}}',
-        '{{username}}@{{domainName}}.np',
-        '{{username}}@{{domainName}}.np',
-        '{{username}}@{{domainName}}.np',
+        '{{userName}}@{{domainName}}',
+        '{{userName}}@{{domainName}}',
+        '{{userName}}@{{freeEmailDomain}}',
+        '{{userName}}@{{domainName}}.np',
+        '{{userName}}@{{domainName}}.np',
+        '{{userName}}@{{domainName}}.np',
     );
 
     protected static $urlFormats = array(

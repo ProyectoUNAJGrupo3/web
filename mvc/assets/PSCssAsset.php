@@ -20,17 +20,13 @@ class PSCssAsset extends AssetBundle {
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        'css/styleContentMap.css',
-        'css/styleFooter.css',
-        'css/StyleFormularioUsuario.css',
-        'css/styleHeader.css',
-        'css/styleHome.css',
-        'css/styleLoginPopup.css',
-        'css/styleNuestrosClientes.css',
-        'css/stylePagesHtml.css',
-        'css/styleQuienesSomos.css',
-        'css/styleFormulariosVehiculo.css',
-        'css/styleFormularioEmpleado.css',
+        'cssMainPAge/styleContentMap.css',
+        'cssMainPage/styleFooter.css',
+        'cssMainPage/styleHomeAgencia.css',
+        //'css/StyleFormularioUsuario.css',
+        'cssMainPage/styleHeader.css',
+        'cssMainPage/styleHome.css',
+        'cssMainPAge/stylePagesHtml.css',
     ];
     public $js = [
         'js/Maps.js',

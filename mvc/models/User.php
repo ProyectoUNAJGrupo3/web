@@ -1,7 +1,9 @@
 <?php
 
 namespace app\models;
-
+use Yii;
+use yii\base\Model;
+use app\models\CapaServicio\PersonasModelo;
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
     public $PersonaID;
@@ -105,7 +107,12 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validatePassword($Password)
     {
-        return $this->Password === $Password;
+ /*/       if (Yii::$app->getSecurity()->validatePassword($Password, $this->Password)) {
+            return true;
+        } else {
+            return false;
+        }
+ /*/    return $this->Password === $Password;
     }
 
     public function getListaPersonas()
@@ -121,5 +128,5 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     }
 
 
-    
+
 }

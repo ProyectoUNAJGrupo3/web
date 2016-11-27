@@ -7,15 +7,15 @@ class Internet extends \Faker\Provider\Base
     protected static $freeEmailDomain = array('gmail.com', 'yahoo.com', 'hotmail.com');
     protected static $tld = array('com', 'com', 'com', 'com', 'com', 'com', 'biz', 'info', 'net', 'org');
 
-    protected static $usernameFormats = array(
+    protected static $userNameFormats = array(
         '{{lastName}}.{{firstName}}',
         '{{firstName}}.{{lastName}}',
         '{{firstName}}##',
         '?{{lastName}}',
     );
     protected static $emailFormats = array(
-        '{{username}}@{{domainName}}',
-        '{{username}}@{{freeEmailDomain}}',
+        '{{userName}}@{{domainName}}',
+        '{{userName}}@{{freeEmailDomain}}',
     );
     protected static $urlFormats = array(
         'http://www.{{domainName}}/',
@@ -45,7 +45,7 @@ class Internet extends \Faker\Provider\Base
      */
     final public function safeEmail()
     {
-        return preg_replace('/\s/u', '', $this->username() . '@' . static::safeEmailDomain());
+        return preg_replace('/\s/u', '', $this->userName() . '@' . static::safeEmailDomain());
     }
 
     /**
@@ -53,7 +53,7 @@ class Internet extends \Faker\Provider\Base
      */
     public function freeEmail()
     {
-        return preg_replace('/\s/u', '', $this->username() . '@' . static::freeEmailDomain());
+        return preg_replace('/\s/u', '', $this->userName() . '@' . static::freeEmailDomain());
     }
 
     /**
@@ -61,7 +61,7 @@ class Internet extends \Faker\Provider\Base
      */
     public function companyEmail()
     {
-        return preg_replace('/\s/u', '', $this->username() . '@' . $this->domainName());
+        return preg_replace('/\s/u', '', $this->userName() . '@' . $this->domainName());
     }
 
     /**
@@ -88,9 +88,9 @@ class Internet extends \Faker\Provider\Base
     /**
      * @example 'jdoe'
      */
-    public function username()
+    public function userName()
     {
-        $format = static::randomElement(static::$usernameFormats);
+        $format = static::randomElement(static::$userNameFormats);
         $username = static::bothify($this->generator->parse($format));
 
         return strtolower(static::transliterate($username));
