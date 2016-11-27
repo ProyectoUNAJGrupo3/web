@@ -40,7 +40,7 @@ $this->title = 'Usuario';
             NavBar::begin([
                 'brandLabel' => '<img src="img/LogoApp.png" style="display:inline; margin-top: -20px; vertical-align: top; width:120px; height:55px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Usuario</b>',
                 'brandUrl' => Yii::$app->homeUrl,
-                'id' => 'barra-menu-main',
+                //'id' => 'barra-menu-main',
                 'options' => ['class' => 'navbar navbar-default navbar-fixed-top navbar-transparent'],
                     //'options' => [
                     //    'class' => 'navbar-inverse navbar-fixed-top',
@@ -55,7 +55,6 @@ $this->title = 'Usuario';
                     ['label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_viajes'],],
-                        //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
                         //'<li class="divider"></li>',
                         ],
                     ],
@@ -96,6 +95,8 @@ $this->title = 'Usuario';
 
         <footer class="footer">
             <div class="container">
+                <!--<hr style="border:1px solid gray;">-->
+
                 <span id="footer-copy-right" style="text-align:center"> 
                     <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
                     <i class="fa fa-phone-square"></i> &nbsp; 011-4369-4657 &nbsp; &nbsp; 011-4287-5324 &nbsp; &nbsp;

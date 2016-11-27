@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -11,6 +13,7 @@ use app\models\TipoUsuario;
 use app\models\PSFormularioLoginModel;
 use app\models\PSFormularioUsuarioModel;
 use app\models\PSFormularioSolicitudRegistrarAgencia;
+use app\models\InvalidoUsuarioModel;
 
 class SiteController extends Controller {
 
@@ -166,18 +169,24 @@ class SiteController extends Controller {
         }
 
         $model = new PSFormularioLoginModel();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
-            if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)) {         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
-                return $this->redirect(['site/administrador']);
-            } elseif (TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID)) {
-                return $this->redirect(['site/recepcionista']);
-            } elseif (TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID)) {
-                return $this->redirect(['site/chofer']);
-            } elseif (TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID)) {
-                return $this->redirect(['site/cliente']);
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {          //cuando el cliente ingresa los datos en el login
+            if (Yii::$app->user->identity->Estado == 1) {                            //se evalua si la cuenta esta validada, si ==1 es invalidada
+                Yii::$app->user->logout();                                          //se cierra la sesion y se muestra un mensaje
+                return $this->render('VistaInvalidoUsuarioDesdeLogin');
+    //            Yii::$app->session->setFlash('UsuarioNoValidado');
+    //            return $this->refresh();
             } else {
-                return $this->goBack();
+                if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)) {         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
+                    return $this->redirect(['site/administrador']);
+                } elseif (TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID)) {
+                    return $this->redirect(['site/recepcionista']);
+                } elseif (TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID)) {
+                    return $this->redirect(['site/chofer']);
+                } elseif (TipoUsuario::usuarioCliente(Yii::$app->user->identity->RolID)) {
+                    return $this->redirect(['site/cliente']);
+                } else {
+                    return $this->goBack();
+                }
             }
         }
         return $this->renderAjax('login', [
@@ -222,11 +231,45 @@ class SiteController extends Controller {
         return $this->render('about');
     }
 
+    public function actionConfirmar() {
+        $model = new PSFormularioUsuarioModel();
+        if (Yii::$app->request->get()) {
+
+            $id = Html::encode($_GET["id"]);
+            (int) $id;
+            $model->validarRegistro($id);
+
+            return $this->render('VistaConfirmacionNuevoUsuarioDesdeEmail');
+        } else {
+            return $this->redirect(['site/login']);
+        }
+    }
+
     public function actionRegistro() {
         $model = new PSFormularioUsuarioModel();
 
+
         if ($model->load(Yii::$app->request->post()) && ($model->AltaRegistro() === true)) {
-            return $this->render('about');
+            $authKey = urlencode(uniqid());         // codigo unico generado
+            $id = urlencode((string) $model->getPersonaID());                          //Tomo el id de la persona registrada y lo transformo en codigo url
+            $subject = "Confirmar registro";
+            $body = "<h1>Haga click en el siguiente enlace para finalizar tu registro</h1>";
+            $server = $_SERVER['SERVER_NAME'];
+            if ($server === "localhost"){
+                $link = "http://" . $server .":".$_SERVER['SERVER_PORT']. Url::toRoute("site/confirmar")."&id=" . $id."&key=".$authKey;     //url de enlace que direcciona al action Confirmar con el que habilito al usuario
+            }
+            else{
+                $link = "http://" . $_SERVER['SERVER_NAME'] . Url::toRoute("site/confirmar")."&id=" . $id."&key=".$authKey;     //url de enlace que direcciona al action Confirmar con el que habilito al usuario
+            }
+            $body .= "<a href='" . $link . "'>Confirmar</a>";
+            Yii::$app->mailer->compose()
+                    ->setTo($model->correo)
+                    ->setFrom(Yii::$app->params["adminEmail"])
+                    ->setSubject($subject)
+                    ->setHtmlBody($body)
+                    ->send();
+            Yii::$app->session->setFlash('MailEnviado');
+            return $this->refresh();
         }
         return $this->render("PSFormularioUsuario", ['model' => $model]);
     }
@@ -234,9 +277,34 @@ class SiteController extends Controller {
     public function actionSolicitud_registrar_agencia() {
         $model = new PSFormularioSolicitudRegistrarAgencia();
         if ($model->load(Yii::$app->request->post()) && ($model->Registrar() === true)) {
-            return $this->render('about');
+            $subject = "Validar agencia y usuario";
+            $body = "<h1>Datos de principales de Usuario: </h1>";
+            $body.= "<p>Nombre: " . $model->nombre . "</p>";
+            $body.= "<p>Apellido: " . $model->apellido . "</p>";
+            $body.= "<p>Telefono personal: " . $model->telefono . "</p>";
+            $body.= "<p>DNI: " . $model->dni . "</p>";
+            $body.= "<p>Mail de usuario: " . $model->email . "</p>";
+            $body.= "<p>Usuario: " . $model->usuario . "</p>";
+            $body.= "<h1>Datos principales de la Agencia: </h1>";
+            $body.= "<p>Nombre de la Agencia: " . $model->nombreAgencia . "</p>";
+            $body.= "<p>Telefono de Agencia: " . $model->telefonoAgencia . "</p>";
+            $body.= "<p>CUIT: " . $model->CUIT . "</p>";
+            $body.= "<p>Mail de Agencia: " . $model->emailAgencia . "</p>";
+            Yii::$app->mailer->compose()
+                    ->setTo(Yii::$app->params["adminEmail"])
+                    ->setFrom(Yii::$app->params["adminEmail"])
+                    ->setSubject($subject)
+                    ->setHtmlBody($body)
+                    ->send();
+            Yii::$app->session->setFlash('MailEnviado');
+            return $this->refresh();
         }
         return $this->render("solicitarAgencia", ['model' => $model]);
+    }
+
+    public function actionInvalido_usuario() {
+        $model = new InvalidoUsuarioModel();
+        return $this->render("VistaInvalidoUsuarioDesdeLogin", ['model' => $model]);
     }
 
     private function actionAgregando() {

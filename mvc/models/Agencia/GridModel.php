@@ -15,17 +15,9 @@ class GridModel extends Model {
 
     public function setDataProviderChofer() {
         $obj = new PersonasModelo();
-        $listachofer = [];
         $app = Yii::$app->user->identity->AgenciaID;
-        $todo = $obj->GetInfoPersonas(null,null, null,null,null,null,null,null,null,null,null,null);
-        foreach ($todo as $choferes){
-            if ($choferes['RolID'] === "3" and $choferes['AgenciaID'] === "$app") {
-                array_push ($listachofer, $choferes);
+        $listachofer = $obj->GetInfoPersonas(null,null, null,null,null,null,null,null,null,'3',null,"$app");
 
-            }
-            unset($choferes);
-            unset($todo);
-        }
         $this->dataProvider = new ArrayDataProvider([
         'allModels' => $listachofer
         ]);
@@ -34,17 +26,9 @@ class GridModel extends Model {
     }
     public function setDataProviderrecepcionista() {
         $obj = new PersonasModelo();
-        $listarecepcionista = [];
         $app = Yii::$app->user->identity->AgenciaID;
-        $todo = $obj->GetInfoPersonas(null,null, null,null,null,null,null,null,null,null,null,null);
-        foreach ($todo as $recepcionista){
-            if ($recepcionista['RolID'] === "2" and $recepcionista['AgenciaID'] === "$app") {
-                array_push ($listarecepcionista, $recepcionista);
+        $listarecepcionista = $obj->GetInfoPersonas(null,null, null,null,null,null,null,null,null,'2',null,"$app");
 
-            }
-            unset($recepcionista);
-            unset($todo);
-        }
         $this->dataProvider = new ArrayDataProvider([
         'allModels' => $listarecepcionista
         ]);
@@ -58,6 +42,12 @@ class GridModel extends Model {
         $this->dataProvider = new ArrayDataProvider([
         'allModels' => $autos
         ]);
+        return true;
+    }
+    public function eliminarEmpleado($persona)
+    {
+        $obj = new PersonasModelo();
+        $obj->EliminarPersona($persona['PersonaID']);
         return true;
     }
 }
