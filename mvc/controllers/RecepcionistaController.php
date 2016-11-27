@@ -91,16 +91,16 @@ class RecepcionistaController extends Controller {
             if(\Yii::$app->request->isPost) {
                 switch (\Yii::$app->request->post('viajeoperacion')) {
                     case 'cerrar':
-                        $selection=(array)Yii::$app->request->post('keylist');
-                        $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+                        $selection=Yii::$app->request->post('keylist');
+                        $viajeSelected = $model->dataProvider->allModels[$selection];
                         $operacion = 3;//CERRAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
                         $message = "Viaje cerrado correctamente";
                         Yii::$app->session->setFlash('viajeCerrado', $message);
                         break;
                     case 'cancelar':
-                        $selection=(array)Yii::$app->request->post('keylist');
-                        $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+                        $selection=Yii::$app->request->post('keylist');
+                        $viajeSelected = $model->dataProvider->allModels[$selection];
                         $operacion = 2;//CANCELAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
                         $message = "Viaje cancelado correctamente";
