@@ -68,7 +68,7 @@ $this->title = 'RemisYa';
             ],
             'rowOptions' => function ($model, $key, $index, $grid) {
                 return ['rowid' => $key, 'onclick' => '
-$(this).addClass("danger").siblings().removeClass("danger");
+$(this).addClass("success").siblings().removeClass("success");
 ',
 'style' => 'cursor:pointer'];
             },
