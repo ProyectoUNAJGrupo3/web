@@ -10,25 +10,11 @@ use yii\helpers\ArrayHelper;
 use app\assets\BootswatchAsset;
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
-BootswatchAsset::register($this);
+/*BootswatchAsset::register($this);*/
 AppAssetAgencia::register($this);
 AppAsset::register($this);
 ?>
-<!--<div class="container">
-    <section id="main">
-        <article>
-            <div id="page-single-main">-->
-<div class="container">
-    <div class="well bs-component">
-        <!--<div class="site-contact">
-            <section id="main">
-                <article>
-                    <div id="page-single-main">-->
-        <br />
-        <h1>
-            <strong>Listado de Veh&iacute;culos</strong>
-        </h1>
-        <!--<div class="container-form" id="contenedor-formulario">-->
+
         <h1>
             <?= Html::encode($this->title) ?>
         </h1>
@@ -53,31 +39,50 @@ AppAsset::register($this);
                 <?php endif; ?>
             </p>
         <?php else: ?>
-            <div>
-                <?=
-                GridView::widget(['dataProvider' => $model->dataProvider,
+            
+    <br />
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">&ensp; &ensp; Listado de Vehiculos</h4>
+        </div>
+        <div class="container">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="table-responsive">
+
+                        <?=
+                GridView::widget([
+                    'dataProvider' => $model->dataProvider,
+                    'tableOptions' => ['class' => 'table table-bordered table-hover', 'style'=>'border-collapse: collapse; border: 3px solid #df691a; '],
                     'columns' => [
-                        ['class' => 'yii\grid\CheckboxColumn'],
-                        'Marca',
-                        'Modelo',
-                        'Matricula',
-                    ],]);
-                ?>
-                <div id='botones-group'>
-                    <?= Html::submitButton('Agregar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                        ['class'  => 'yii\grid\CheckboxColumn','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                        ['header' => '<h5>Marca</h5>','attribute' => 'Marca','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                        ['header' => '<h5>Modelo</h5>','attribute' => 'Modelo','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                        ['header' => '<h5>Matricula</h5>','attribute' => 'Matricula','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                    ],
+                       'rowOptions' => function ($model, $key, $index, $grid) {
+                           return ['rowid' => $key, 'onclick' => '$(this).addClass("success").siblings().removeClass("success");','style' => 'cursor:pointer'];
+                       },
+               ]);
+                        ?>
+                        <div id='botones-group'>
+                            <?= Html::submitButton('Agregar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <!--</div>
+                        </article>
+                        </section>
+                    </div>-->
                 </div>
             </div>
-        <?php endif; ?>
-
-        <!--</div>  
-        </article>
-        </section>
-    </div>-->
+        </div>
     </div>
-</div>
