@@ -6,7 +6,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\AppAssetCliente;
-//use app\assets\AppAssetWebSite;
+use app\assets\AppAssetWebSite;
 use yii\grid\GridView;
 use yii\helpers\BaseHtml;
 use yii\widgets\ActiveForm;
@@ -16,12 +16,16 @@ use yii\bootstrap\Button;
 use yii\bootstrap\Modal;
 use app\assets\BootswatchAsset;
 use yii\helpers\Url;
+use app\assets\AppAssetPopups;
 
 $this->title = 'RemisYa';
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
+//AppAssetCliente::register($this);
+AppAssetPopups::register($this);
 //AppAsset::register($this);
-AppAssetCliente::register($this);
+//AppAssetWebSite::register($this);
+//AppAsset::register($this);
 
 Modal::begin([
     'id' => 'modal',
@@ -34,7 +38,7 @@ Modal::end();
     <!--<div class="well bs-component">-->
 
     <?=
-    GridView::widget([
+    GridView::widget(['id' => 'grid',
         'dataProvider' => $model->dataProvider,
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
@@ -51,6 +55,7 @@ Modal::end();
             'ViajeTipo',
             'Estado',
             /*Probando agregar botones en la gridview*/
+            /*
             [ 'class' => 'yii\grid\ActionColumn',
                 'template' => '{Calificar}',
                 'buttonOptions' => [
@@ -62,16 +67,12 @@ Modal::end();
                 //'id' => 'modalButtonCalificar',
                 //['value' => Url::toRoute('/cliente/calificar_servicio')],
                 ],
-            ],
+            ],*/
         ],
     ]);
     ?>
     <?php $form = ActiveForm::begin(); ?>
-    <div id='botones-group'>
-        <?= Html::button('Abrir ventana calificar', ['value' => Url::toRoute('/cliente/calificar_servicio'), 'class' => 'btn btn-primary', 'id' => 'modalButtonCalificar']); ?>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <?= Html::submitButton('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
-    </div>
+    <?= Html::Button('Abrir ventana calificar', ['value' => Url::toRoute('/cliente/calificar_servicio'), 'class' => 'btn btn-primary', 'id' => 'buttonAbrirCalificacion']); ?>
     <?php $form = ActiveForm::end(); ?>
 </div>
 <!--</div>-->

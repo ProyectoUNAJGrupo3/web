@@ -4,6 +4,7 @@ namespace app\models\Usuario;
 
 use yii;
 use yii\base\Model;
+use app\models\CapaServicio\CalificacionesModelo;
 
 class CalificacionServicioModel extends Model {
     /* public $numeroViaje;
@@ -29,6 +30,14 @@ class CalificacionServicioModel extends Model {
         ];
     }
 
+    public function setCalificaciones(){
+
+        /*
+        genera un setviaje... o algo asi
+        para pasarle los parametros que trajiste de la grilla y poder traer los datos correspondientes de la base
+        o generas una funcion llamada nuevo comentario
+        y le pasas todo directo*/
+    }
 }
 
 /*namespace app\models\Usuario;

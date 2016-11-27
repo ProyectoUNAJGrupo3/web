@@ -90,8 +90,8 @@ class ClienteController extends Controller {
         $model->setDataProvider();
         return $this->render("listaHistorialCalificaciones", ['model' => $model]);
     }
-
-    public function actionCalificar_servicio_remis() {
+    /*
+    public function actionCalificar_servicio() { //prueba de ale
         $model = new CalificacionServicioModel();
         if (\Yii::$app->request->isAjax) {
 
@@ -99,24 +99,37 @@ class ClienteController extends Controller {
             $viajeSelected = $model->dataProvider->allModels[$selection[0]];
         }
         return $this->renderAjax("calificarServicio", ['model' => $model]);
+    }*/
+
+
+    public function actionCalificar_servicio() {
+        if (isset(Yii::$app->session['actualizar'])) {
+            $param = Yii::$app->session['actualizar'];
+        }
+        else {
+            $param = null;
+        }
+        $selection=(array)Yii::$app->request->post('keylist');
+        $model = new CalificacionServicioModel();
+        return $this->renderAjax("calificarServicio", ['model' => $model]);
     }
 
     /*
-      public function actionCerrarViaje() {                      //renderiza el index de la carpeta agencia dentro de views
+    public function actionCerrarViaje() {                      //renderiza el index de la carpeta agencia dentro de views
       $model = new ListaHistorialViajesUsuarioModel();
       $model->cerrarViaje();
       return $this->renderAjax("listaHistorialViajes", ['model' => $model]);
-      } */
+      }
 
     public function actionCerrarCalificaciones() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ListaHistorialCalificacionesUsuarioModel();
         $model->cerrarCalificacion();
         return $this->renderAjax("listaHistorialCalificaciones", ['model' => $model]);
-    }
-
+    }*/
+    /*
     public function actionCalificar_servicio() {                      //este es el modal que se levanta desde el boton
         $model = new CalificacionServicioModel();
         return $this->renderAjax("calificarServicio", ['model' => $model]);
-    }
+    }*/
 
 }
