@@ -67,10 +67,7 @@ $this->title = 'RemisYa';
                 ['header' => '<h5>Estado</h5>','attribute' => 'Estado','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ],
             'rowOptions' => function ($model, $key, $index, $grid) {
-                return ['rowid' => $key, 'onclick' => '
-$(this).addClass("success").siblings().removeClass("success");
-',
-'style' => 'cursor:pointer'];
+                return ['rowid' => $key, 'onclick' => '$(this).addClass("success").siblings().removeClass("success");','style' => 'cursor:pointer'];
             },
       ]);
             ?>
@@ -93,8 +90,7 @@ $this->registerJs(
 
    "$( document ).ready(function() {
 $('#buttonsOperaciones :button').click(function(){
-
-var keys = $('#viajes_grid tr.sucess').attr('rowid');
+        var keys = $('#viajes_grid tr.success').attr('rowid');
         var operacion = $(this).attr('value');
                         $('#processmodal').modal('show');
                          $.ajax({
