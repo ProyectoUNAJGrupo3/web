@@ -1,45 +1,64 @@
 <?php
 
-use yii\helpers\BaseHtml;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\AppAssetAgencia;
+use app\assets\AppAssetWebSite;
 use yii\grid\GridView;
+use yii\helpers\BaseHtml;
+use yii\widgets\ActiveForm;
+use yii\bootstrap\Dropdown;
 use yii\helpers\ArrayHelper;
+use yii\bootstrap\Button;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 use app\assets\BootswatchAsset;
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 /*BootswatchAsset::register($this);*/
 AppAssetAgencia::register($this);
 AppAsset::register($this);
+AppAssetWebSite::register($this);
+
+/* @var $this yii\web\View */
+Modal::begin([
+    'id' => 'modal',
+    'size' => 'modal-lg',
+]);
+echo "<div id='modalContent'></div>";
+Modal::end();
 ?>
 
         <h1>
             <?= Html::encode($this->title) ?>
         </h1>
-
-        <?php if (Yii::$app->session->hasFlash('Usuario creado con exito')): ?>
-            <div class="alert alert-success">
-                Thank you for contacting us. We will respond to you as soon as possible.
+        <?php if (Yii::$app->session->hasFlash('Vehiculo eliminado con exito')): ?>
+            <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Operacion exitosa!</strong>
+            <a href="#" class="alert-link">Vehiculo Eliminado correctamente</a>.
             </div>
-            <p>
-                Note that if you turn on the Yii debugger, you should be able
-                to view the mail message on the mail panel of the debugger.
-                <?php if (Yii::$app->mailer->useFileTransport): ?>
-                    Because the application is in development mode, the email is not sent but saved as
-                    a file under
-                    <code>
-                        <?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?>
-                    </code>.
-                    Please configure the
-                    <code>useFileTransport</code>property of the
-                    <code>mail</code>
-                    application component to be false to enable email sending.
-                <?php endif; ?>
-            </p>
-        <?php else: ?>
-            
+        <?php endif ?>
+        <?php if (Yii::$app->session->hasFlash('vehiculo creado con exito')): ?>
+            <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Operacion exitosa!</strong>
+            <a href="#" class="alert-link">Vehiculo creado con exito</a>.
+            </div>
+        <?php endif ?>
+        <?php if (Yii::$app->session->hasFlash('Vehiculo actualizado con exito')): ?>
+            <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Operacion exitosa!</strong>
+            <a href="#" class="alert-link">Vehiculo actualizado correctamente</a>.
+            </div>
+        <?php endif ?>
+
+
+ <?php $form = ActiveForm::begin(); ?>           
     <br />
     <br />
     <div class="panel panel-primary">
@@ -52,11 +71,11 @@ AppAsset::register($this);
                     <div class="table-responsive">
 
                         <?=
-                GridView::widget([
+                        GridView::widget(['id' => 'grid',
+                    'summary'=>'',
                     'dataProvider' => $model->dataProvider,
                     'tableOptions' => ['class' => 'table table-bordered table-hover', 'style'=>'border-collapse: collapse; border: 3px solid #df691a; '],
                     'columns' => [
-                        ['class'  => 'yii\grid\CheckboxColumn','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                         ['header' => '<h5>Marca</h5>','attribute' => 'Marca','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                         ['header' => '<h5>Modelo</h5>','attribute' => 'Modelo','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                         ['header' => '<h5>Matricula</h5>','attribute' => 'Matricula','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
@@ -67,16 +86,16 @@ AppAsset::register($this);
                ]);
                         ?>
                         <div id='botones-group'>
-                            <?= Html::submitButton('Agregar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_telefonista_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            <?= Html::Button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_recepcionista_agencia'),'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
+                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary btn-lg','name' => 'submit', 'value' => 'Eliminar']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                            <?= Html::a('Cerrar', [('/agencia/index')],['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
                         </div>
                     </div>
-                    <?php endif; ?>
+                    <?php ActiveForm::end(); ?>
 
                     <!--</div>
                         </article>
