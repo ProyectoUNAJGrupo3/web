@@ -9,6 +9,7 @@ use app\models\CapaServicio\ViajesModelo;
 use app\models\CapaServicio\ChoferesModelo;
 use app\models\CapaServicio\VehiculosModelo;
 use app\models\CapaServicio\TarifasModelo;
+use app\models\CapaServicio\AgenciaModelo;
 use yii\data\ArrayDataProvider;
 
 class AltaViajeManualModel extends Model {
@@ -42,6 +43,14 @@ class AltaViajeManualModel extends Model {
             ['Vehiculo', 'required', 'message' => 'Campo obligatorio'],
             ['Comentario', 'required'],
         ];
+    }
+
+    public function agenciaCoords() {
+        $obj = new AgenciaModelo();
+        $agencia=$obj->GetInfoAgencia($this->AgenciaID,null,null,null,null,null,null,null);
+        if ($agencia != null ){
+            return $agencia[0]["DireccionCoordenada"];
+        }
     }
     public function setDataProvider() {
         $this->AgenciaID = Yii::$app->user->identity->AgenciaID;
