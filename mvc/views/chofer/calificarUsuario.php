@@ -16,7 +16,8 @@ AppAssetWebSite::register($this);
     <div class="row">
         <div class="col-lg-5">
             <h3>
-                <strong>Calificar Usuario</strong>
+                <u>Datos</u>
+                <u>Calificaci&oacute;n</u>
             </h3>
             <h1>
                 <?= Html::encode($this->title) ?>
@@ -28,10 +29,6 @@ AppAssetWebSite::register($this);
                 </div>
             <?php else: ?>
                 <?php $form = ActiveForm::begin(); ?>
-                <h4>
-                    <u>Datos</u>
-                    <u>Calificaci&oacute;n</u>
-                </h4>
                 <?= $form->field($model, 'puntaje')->dropDownList(['prompt' => 'Seleccione...', 'uno' => '1', 'dos' => '2', 'tres' => '3', 'cuatro' => '4', 'cinco' => '5', 'seis' => '6', 'siete' => '7', 'ocho' => '8', 'nueve' => '9', 'diez' => '10']) ?>
                 <?= $form->field($model, 'comentario')->textArea(['rows' => 7, 'column' => 4])->label('Comentario'); ?>
                 <?= Html::submitButton('Calificar', ['class' => 'btn btn-primary', 'id' => 'btn-carga-calificacion']); ?>

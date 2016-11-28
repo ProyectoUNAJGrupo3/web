@@ -14,6 +14,7 @@ use app\models\PSFormularioLoginModel;
 use app\models\PSFormularioUsuarioModel;
 use app\models\PSFormularioSolicitudRegistrarAgencia;
 use app\models\InvalidoUsuarioModel;
+use app\models\RecuperarContraseniaModel;
 
 class SiteController extends Controller {
 
@@ -305,6 +306,11 @@ class SiteController extends Controller {
     public function actionInvalido_usuario() {
         $model = new InvalidoUsuarioModel();
         return $this->render("VistaInvalidoUsuarioDesdeLogin", ['model' => $model]);
+    }
+    
+    public function actionRecuperar_contrasenia() {
+        $model = new RecuperarContraseniaModel();
+        return $this->render("RecuperarContrasenia", ['model' => $model]);
     }
 
     private function actionAgregando() {
