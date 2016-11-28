@@ -43,11 +43,13 @@ class CalificacionServicioModel extends Model {
     }
 
     public function setCalificacion(){
-        $calificacion = new CalificacionesModelo(); //o ModificarCalificacion($CalificacionID, $ViajeID,$Quien, $ParaQuien,$Puntaje,$Fecha, $Comentario, $AgenciaID)
-        $app = Yii::$app->user->identity->ViajeID;
-        $calificacion->RegistrarCalificacion("'$app'",$Quien, $ParaQuien,"'$this->puntaje'",$Fecha, "'$this->comentario'", $AgenciaID);
+        $calificacion = new CalificacionesModelo();
+        $fechaCalificacion = date('Y-m-d H:i:s');
+        //$IDpersona = Yii::$app->user->identity->PersonaID;
+       // $IDagencia = Yii::$app->user->identity->AgenciaID;
 
-
+        $calificacion->RegistrarCalificacion(/*"'1'"*/$this->viajeSelected['ViajeID'], /*"'4'"*/$this->viajeSelected['ClienteID'], /*"'3'"*/$this->viajeSelected['ChoferID'],"'$this->puntaje'","'$fechaCalificacion'", "'$this->comentario'", $this->viajeSelected['AgenciaID']);
+        //RegistrarCalificacion($ViajeID, $Quien, $ParaQuien, $Puntaje, $Fecha, $Comentario, $AgenciaID)
     }
 }
 

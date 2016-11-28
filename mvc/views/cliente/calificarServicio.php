@@ -14,7 +14,10 @@ BootswatchAsset::register($this);
 AppAsset::register($this);
 //AppAssetWebSite::register($this);
 //'value' => Url::toRoute('/cliente/listaHistorialCalificaciones')
+//<?= $form->field($model, 'puntaje')->dropDownList(['prompt' => 'Seleccione...', 'uno' => '1', 'dos' => '2', 'tres' => '3', 'cuatro' => '4', 'cinco' => '5', 'seis' => '6', 'siete' => '7', 'ocho' => '8', 'nueve' => '9', 'diez' => '10'])
+
 AppAssetCliente::register($this);
+
 ?>
 <div class="container">
     <div class="row">
@@ -36,7 +39,7 @@ AppAssetCliente::register($this);
                     <u>Datos</u>
                     <u>Calificaci&oacute;n</u>
                 </h4>
-                <?= $form->field($model, 'puntaje')->dropDownList(['prompt' => 'Seleccione...', 'uno' => '1', 'dos' => '2', 'tres' => '3', 'cuatro' => '4', 'cinco' => '5', 'seis' => '6', 'siete' => '7', 'ocho' => '8', 'nueve' => '9', 'diez' => '10']) ?>
+                <?= $form->field($model, 'puntaje')->dropDownList(['prompt' => 'Seleccione...', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10']) ?>
                 <?= $form->field($model, 'comentario')->textArea(['rows' => 7, 'column' => 4])->label('Comentario'); ?>
                 <div id='botones-group'>
                     <?= Html::submitButton('Calificar', ['value' => Url::toRoute('/cliente/listar_historial_calificaciones'),'class' => 'btn btn-primary', 'id' => 'btn-carga-calificacion']); ?>

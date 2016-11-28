@@ -44,6 +44,7 @@ Modal::end();
             ['class' => 'yii\grid\CheckboxColumn'],
             'ClienteNombre',
             'AgenciaNombre',
+            'AgenciaID',
             'OrigenDireccion',
             'DestinoDireccion',
             'ChoferNombre',

@@ -103,20 +103,44 @@ class ClienteController extends Controller {
         }
         return $this->renderAjax("calificarServicio", ['model' => $model]);
     }*/
-
+    /*
     public function actionCalificar_servicio() {
         $model = new CalificacionServicioModel();
-        if (isset(Yii::$app->session['actualizar'])) {
+        if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion() === true))
+        {
+            Yii::$app->session->setFlash('calificacionSeteada');
+            return $this->redirect(['listarHistorialCalificaciones']);
+        }
+        else{
+            if (isset(Yii::$app->session['actualizar'])) {
+                $viajeSelected = Yii::$app->session['actualizar'];
+                $model->setUpdateInfo($viajeSelected);
+            }
+            else {
+                $viajeSelected = null;
+            }
+            //$selection=(array)Yii::$app->request->post('keylist');
+
+            return $this->renderAjax("calificarServicio", ['model' => $model]);
+        }
+    }*/
+    public function actionCalificar_servicio() {
+        $model = new CalificacionServicioModel();
+        if (\Yii::$app->request->isPost)
+        {
             $viajeSelected = Yii::$app->session['actualizar'];
             $model->setUpdateInfo($viajeSelected);
         }
-        else {
-            $viajeSelected = null;
-        }
-        $selection=(array)Yii::$app->request->post('keylist');
+            if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion() === true)) {
+                Yii::$app->session->setFlash('calificacionSeteada');
+                return $this->redirect(['listarHistorialCalificaciones']);
+            }
+         
+            //$selection=(array)Yii::$app->request->post('keylist');
 
         return $this->renderAjax("calificarServicio", ['model' => $model]);
     }
+
     public function actionListar_historial_viajes() {
         $model = new ListaHistorialViajesUsuarioModel();
         $model->setDataProvider();
