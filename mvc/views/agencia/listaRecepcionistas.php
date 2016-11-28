@@ -34,6 +34,27 @@ Modal::end();
                     <h1>
                         <?= Html::encode($this->title) ?>
                     </h1>
+                    <?php if (Yii::$app->session->hasFlash('Recepcionista eliminado con exito')): ?>
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Operacion exitosa!</strong>
+                        <a href="#" class="alert-link">Recepcionista Eliminado correctamente</a>.
+                    </div>
+                    <?php endif ?>
+                    <?php if (Yii::$app->session->hasFlash('Recepcionista creado con exito')): ?>
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Operacion exitosa!</strong>
+                        <a href="#" class="alert-link">Recepcionista creado con exito</a>.
+                    </div>
+                    <?php endif ?>
+                    <?php if (Yii::$app->session->hasFlash('Recepcionista actualizado con exito')): ?>
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Operacion exitosa!</strong>
+                        <a href="#" class="alert-link">Recepcionista actualizado correctamente</a>.
+                    </div>
+                    <?php endif ?>
 
 
                     <?php $form = ActiveForm::begin(); ?>
@@ -52,7 +73,6 @@ Modal::end();
                                                 'dataProvider' => $model->dataProvider,
                                                 'tableOptions' => ['class' => 'table table-bordered table-hover', 'style'=>'border-collapse: collapse; border: 3px solid #df691a; '],
                                                 'columns' => [
-                                                     ['class'  => 'yii\grid\CheckboxColumn','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                                                      ['header' => '<h5>Usuario</h5>','attribute' => 'Usuario','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],                                
                                                      ['header' => '<h5>Password</h5>','attribute' => 'Password','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                                                      ['header' => '<h5>Nombre</h5>','attribute' => 'Nombre','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
@@ -65,18 +85,17 @@ Modal::end();
                                                 ]);
                     ?>
                     <div id='botones-group'>
-                        <?= Html::submitButton('Agregar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?= Html::submitButton('Actualizar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary', 'id' => 'btn-guardar']); ?>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?= Html::button('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                        <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_telefonista_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <?= Html::Button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_recepcionista_agencia'),'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary btn-lg','name' => 'submit', 'value' => 'Eliminar']); ?>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <?= Html::a('Cerrar', [('/agencia/index')],['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
                     </div>
 
                 </div>
                 <?php ActiveForm::end(); ?>
-                <?php endif; ?>
                 <!--</div>
                     </article>
                     </section>
