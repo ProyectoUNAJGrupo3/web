@@ -19,7 +19,18 @@ AppAssetRecepcionista::register($this);
 $this->title = 'RemisYa';
 
 ?>
-
+<?php
+  Modal::begin([
+'header' => '
+        <h4>Mensaje</h4>',
+'id'=>'processmodal',
+'size'=>'modal-sm',
+'options'=>['class'=>'modal'],
+'clientOptions' => ['backdrop' => 'static', 'keyboard' => false]
+]);
+       echo "Procesando...";
+       Modal::end();
+?>
 <?php
 Modal::begin([
 'id' => 'modal',
@@ -34,15 +45,14 @@ Modal::end();
     </div>
     <div class="panel-body">
         
-
         <?php Pjax::begin(['id'=>'containerpjax','timeout' => false]); ?>
-        <?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
+        <?php if (Yii::$app->session->hasFlash('viajeActualizado')): ?>
         <div class="alert alert-success alert-dismissable">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">X</button>
             <h4>
                 <i class="icon fa fa-check"></i>Operacion realizada.
             </h4>
-            <?= Yii::$app->session->getFlash('viajeCerrado') ?>
+            <?= Yii::$app->session->getFlash('viajeActualizado') ?>
         </div>
         <?php endif; ?>
         <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]);?>
@@ -74,35 +84,34 @@ Modal::end();
         <div id="buttonsOperaciones">
             <?= Html::button('Cerrar viaje',['class' => 'btn btn-lg btn-primary','name'=>'submit','value'=>'cerrar']);?>
             <?= Html::button('Cancelar viaje',['class' => 'btn btn-lg btn-primary','name'=>'submit','value'=>'cancelar']);?>
-            <?= Html::button('Actualizar viaje',['value' => Url::toRoute('recepcionista/actualizarviaje'), 'class' => 'btn btn-lg btn-primary', 'id' => 'actualizarButton']);?>
         </div>
+        <?= Html::button('Actualizar viaje',['value' => Url::toRoute('recepcionista/actualizarviaje'), 'class' => 'btn btn-lg btn-primary', 'id' => 'actualizarButton']);?>
 
         </div>
 </div>
 
 <?php
-/*$this->registerJs(
-   "$( document ).ready(function() {
-$('#buttonsOperaciones :button').click(function(){
-        var keys = $('#viajes_grid tr.success').attr('rowid');
-        var operacion = $(this).attr('value');
-                        $('#processmodal').modal('show');
-                         $.ajax({
-                        type     :'post',
-                        cache    : true,
-                        data: {keylist: keys,viajeoperacion: operacion},
-                        url  : '".Url::to(['recepcionista/listaviajes'])."',
-                        success  : function() {
-                            $('#processmodal').modal('hide');
-                            $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-                            $.pjax.reload({container:'#containerpjax',timeout: 20000});
-                        },
-                        error: function(){
-                           alert('Error');
-                            $('#processmodal').modal('hide');
-                        }
-                        });return false;
+$this->registerJs(
+  "$( document ).ready(function() {
+	$('#buttonsOperaciones :button').click(function(){
+		var keys = $('#viajes_grid tr.success').attr('rowid');
+		var operacion = $(this).attr('value');
+		$('#processmodal').modal('show');
+		$.ajax({
+			type     :'post',
+			cache    : true,
+			data: {keylist: keys,viajeoperacion: operacion},
+			url  : '".Url::to(['recepcionista/listaviajes'])."',
+			success: function () {
+			$('#processmodal').modal('hide');
+			$.pjax.reload({container:'#containerpjax',timeout: 20000});
+		},
+		error: function(){
+			alert('Error');
+			$('#processmodal').modal('hide');
+		}
+	});return false;
 });
 });"
-);*/
+);
 ?>

@@ -27,8 +27,7 @@ $this->title = 'RemisYa';
     </div>
     <div class="panel-body">
         
-        <?php $form = ActiveForm::begin['action' =>['recepcionista/actualizarviaje'], 'id' => 'form_actualizarviaje', 'method' => 'post',]();?>
-        <?= $form->field($model, 'test')->input("text")->label("test"); ?>
+        <?php $form = ActiveForm::begin();?>
         <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
         <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
         
