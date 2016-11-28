@@ -54,7 +54,7 @@ BootswatchAsset::register($this);
                     </p>
                 </h4>
                 <br />
-                <div id="btn-grupo-resgistrar" style="text-align: center">
+                <div id="btn-grupo-resgistrar">
                     <?= Html::a('Registrarme como Usuario', [('/site/registro'), 'class' => 'btn btn-primary btn-lg']); ?>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <?= Html::a('Registrarme como Agencia', [('/site/solicitud_registrar_agencia'), 'class' => 'btn btn-primary btn-lg']); ?>
