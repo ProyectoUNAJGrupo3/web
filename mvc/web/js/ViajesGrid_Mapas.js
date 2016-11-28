@@ -48,7 +48,6 @@ function clearRemo() {
 
 }
 var prevMarker = undefined;
-
 function getRemiserias(Ubicacion) {
 	clearRemo()
 
@@ -157,7 +156,7 @@ function initMap(isindex) {
 		mapTypeControl: false,
 		panControl: false,
 	});
-	if (navigator.geolocation)
+	if (navigator.geolocation && !isindex)
 	{
 		navigator.geolocation.getCurrentPosition(function (position) {
 			var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -252,6 +251,8 @@ function initMap(isindex) {
 
 		directionsDisplay.addListener('directions_changed', function () {
 			distanceElement = $('#distancia').val((directionsDisplay.getDirections().routes[0].legs[0].distance.value / 1000).toFixed(1) + " Km");
+			var data =directionsDisplay.getDirections().routes[0].legs[0];
+			setPanelData(data);
 
 		});
 
@@ -347,6 +348,8 @@ function initMap(isindex) {
 	function setPanelData(data) { // esta funcion tenia mil cosas y las fui acomodando en otras funciones, quedo re pete con dos lineas.
 		$('#destinocoordenada').val("Lat:" + data.end_location.lat().toString() + ",Lng:" + data.end_location.lng().toString());
 		$('#destinoTexto').val(data.end_address);
+        $('#origencoordenada').val("Lat:" + data.start_location.lat().toString() + ",Lng:" + data.start_location.lng().toString());
+        $('#origenTexto').val(data.start_address);
 	}
 
 	function geocodeLatLng(geocoder, map, latLng) {// <--infowindow-->) {
@@ -425,4 +428,30 @@ function calculateDistanceAndStuff(latLng) {
 			alert("Algo anda mal y no andubo ):");
 		}
 	});
+};
+
+function getCoord(stringCoord) {
+
+    var array = stringCoord.split(",");
+    var initIndex = array[0].indexOf("-") >= 0 ? array[0].indexOf("-") : array[0].indexOf(" ");
+    var lat = Number(array[0].substring(initIndex, array[0].length));
+    initIndex = array[1].indexOf("-") >= 0 ? array[1].indexOf("-") : array[1].indexOf(" ");
+    var lng = Number(array[1].substring(initIndex, array[1].length));
+    return { lat: lat, lng: lng };
+};
+function initializeCenteredMap(StringCoord) {
+	if (StringCoord != null && StringCoord != ""){
+		    var latLng = getCoord(StringCoord);
+		    console.log(latLng);
+		    initMap(true);
+			var marker = new google.maps.Marker({ position: latLng });
+			marcadores.push(marker)
+		    map.setCenter(latLng);
+		    marker.setMap(map);
+	}
+	else{
+		    initMap(false);
+
+	}
+
 }
