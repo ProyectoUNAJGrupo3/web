@@ -88,15 +88,14 @@ class AgenciaController extends Controller {
         $model = new AltaVehiculoAgenciaModel();
         if ($model->load(Yii::$app->request->post()) && ($model->registrarvehiculo() === true)) {
             Yii::$app->session->setFlash('vehiculo creado con exito');
-            return $this->redirect(['agencia/Listar_vehiculo_agencia']);
         }
-        return $this->renderAjax("altaVehiculo", ['model' => $model]);
+        return $this->render("altaVehiculo", ['model' => $model]);
     }
 
     public function actionAlta_chofer_agencia() {
         $model = new AltaChoferAgenciaModel();
         if ($model->load(Yii::$app->request->post()) && ($model->registrarchofer() === true)) {
-            Yii::$app->session->setFlash('Chofer creado con exito');
+            Yii::$app->session->setFlash('Empleado creado con exito');
             return $this->redirect(['agencia/listar_choferes_agencia']);
         }
         return $this->renderAjax("altaChofer", ['model' => $model]);
@@ -105,23 +104,15 @@ class AgenciaController extends Controller {
     public function actionAlta_telefonista_agencia() {
         $model = new AltaRecepcionistaAgenciaModel();
         if ($model->load(Yii::$app->request->post()) && ($model->registrarrecepcionista() === true)) {
-            Yii::$app->session->setFlash('Recepcionista creado con exito');
-            return $this->redirect(['agencia/listar_recepcionistas_agencia']);
+            Yii::$app->session->setFlash('Empleado creado con exito');
         }
-        return $this->renderAjax("altaTelefonista", ['model' => $model]);
+        return $this->render("altaTelefonista", ['model' => $model]);
     }
 
     //**************************************************************************//
     //******************************Actualizacion**************************************//
 
     public function actionActualizar_vehiculo_agencia() {
-        if (isset(Yii::$app->session['actualizar'])) {
-            $param = Yii::$app->session['actualizar'];
-        }
-        else {
-            $param = null;
-        }
-
         $model = new ActualizarVehiculoAgenciaModel();
         return $this->render("actualizarVehiculo", ['model' => $model]);
     }
@@ -129,21 +120,16 @@ class AgenciaController extends Controller {
     public function actionActualizar_chofer_agencia() {
         if (isset(Yii::$app->session['actualizar'])) {
              $param = Yii::$app->session['actualizar'];
-             }
+             } 
             else {
                 $param = null;
         }
+            $selection=(array)Yii::$app->request->post('keylist');
             $model = new ActualizarChoferModel();
             return $this->renderAjax("actualizarChofer", ['model' => $model]);
      }
 
     public function actionActualizar_recepcionista_agencia() {
-        if (isset(Yii::$app->session['actualizar'])) {
-            $param = Yii::$app->session['actualizar'];
-        }
-        else {
-            $param = null;
-        }
         $model = new ActualizarRecepcionistaModel();
         return $this->render("actualizarRecepcionista", ['model' => $model]);
     }
@@ -176,44 +162,12 @@ class AgenciaController extends Controller {
     public function actionListar_recepcionistas_agencia() {
         $model = new GridModel();
         $model->setDataProviderrecepcionista();
-        if (\Yii::$app->request->isPost)  {
-            if (\Yii::$app->request->isAjax) {
-                $selection=(array)Yii::$app->request->post('keylist');
-                $personaselected=$model->dataProvider->allModels[$selection[0]];
-                Yii::$app->session['actualizar'] = $personaselected;
-
-            }
-            else{
-
-                $selection =(array)Yii::$app->request->post('selection');
-                $personaSelected = $model->dataProvider->allModels[$selection[0]];
-                $model->eliminarEmpleado($personaSelected);
-                Yii::$app->session->setFlash('Recepcionista eliminado con exito');
-                return $this->refresh();
-            }
-        }
         return $this->render("listaRecepcionistas", ['model' => $model]);
     }
 
     public function actionListar_vehiculo_agencia() {
         $model = new GridModel();
         $model->setDataProvidervehiculo();
-        if (\Yii::$app->request->isPost)  {
-            if (\Yii::$app->request->isAjax) {
-                $selection=(array)Yii::$app->request->post('keylist');
-                $personaselected=$model->dataProvider->allModels[$selection[0]];
-                Yii::$app->session['actualizar'] = $personaselected;
-
-            }
-            else{
-
-                $selection =(array)Yii::$app->request->post('selection');
-                $personaSelected = $model->dataProvider->allModels[$selection[0]];
-                $model->eliminarEmpleado($personaSelected);
-                Yii::$app->session->setFlash('Vehiculo eliminado con exito');
-                return $this->refresh();
-            }
-        }
         return $this->render("listaVehiculos", ['model' => $model]);
     }
 

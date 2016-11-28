@@ -36,26 +36,13 @@ Modal::end();
                     <?= Html::encode($this->title) ?>
                 </h1>
                 <?php if (Yii::$app->session->hasFlash('Chofer eliminado con exito')): ?>
-                    <div class="alert alert-dismissible alert-success">
+                <div class="alert alert-dismissible alert-success">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Operacion exitosa!</strong>
                     <a href="#" class="alert-link">Chofer Eliminado correctamente</a>.
-                    </div>
+                </div>
                 <?php endif ?>
-                <?php if (Yii::$app->session->hasFlash('Chofer creado con exito')): ?>
-                    <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Operacion exitosa!</strong>
-                    <a href="#" class="alert-link">Chofer creado con exito</a>.
-                    </div>
-                <?php endif ?>
-                <?php if (Yii::$app->session->hasFlash('Chofer actualizado con exito')): ?>
-                    <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Operacion exitosa!</strong>
-                    <a href="#" class="alert-link">Chofer actualizado correctamente</a>.
-                    </div>
-                    <?php endif ?>
+
                     <div>
                    <?php $form = ActiveForm::begin(); ?>
                         <br />
@@ -68,13 +55,12 @@ Modal::end();
             <div class="panel-body">
                 <div class="row">
                     <div class="table-responsive">
-                        
                         <?=
                         GridView::widget(['id' => 'grid',
-                        'summary'=>'',
                         'dataProvider' => $model->dataProvider,
                         'tableOptions' => ['class' => 'table table-bordered table-hover', 'style'=>'border-collapse: collapse; border: 3px solid #df691a; '],
                         'columns' => [
+                              ['class'  => 'yii\grid\CheckboxColumn','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                               ['header' => '<h5>Usuario</h5>','attribute' => 'Usuario','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                               ['header' => '<h5>Password</h5>','attribute' => 'Password','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                               ['header' => '<h5>Nombre</h5>','attribute' => 'Nombre','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
@@ -94,7 +80,7 @@ Modal::end();
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary btn-lg','name' => 'submit', 'value' => 'Eliminar']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::a('Cerrar', [('/agencia/index')],['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
+                            <?= Html::a('Cerrar', [('/agencia/index'),'class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
                         </div>
                     </div>
                 </div>
@@ -107,3 +93,26 @@ Modal::end();
                 </div>
             </div>
         </div>
+  
+    <?php
+/*$this->registerJs(
+   "$('#actualizarButton').click(function(){
+     var keys = $('#grid').yiiGridView('getSelectedRows');
+                         $.ajax({
+                        type     :'post',
+                        cache    : false,
+                        data: {keylist: keys},
+                        processData: true,
+                        url  : '".Url::to(['agencia/listar_choferes_agencia'])."',
+                        success  : function() {
+                            $('#modal').modal('show').find('#modalContent').load('value');;
+                            //$.pjax.reload({container:'#formsection'});
+                        },
+                        error: function(){
+                           alert('Error');
+                            $('#processmodal').modal('hide');
+                        }
+                        });$('#modal').modal('show').find('#modalContent').load('value');
+});"
+);
+?>*/
