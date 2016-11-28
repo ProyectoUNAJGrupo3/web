@@ -69,11 +69,12 @@ Modal::end();
             <div class="row">
                 <div class="table-responsive">
                     <?=
-                                            GridView::widget([
+                    GridView::widget(['id' => 'grid',
+                                      'summary'=>'',
                                                 'dataProvider' => $model->dataProvider,
                                                 'tableOptions' => ['class' => 'table table-bordered table-hover', 'style'=>'border-collapse: collapse; border: 3px solid #df691a; '],
                                                 'columns' => [
-                                                     ['header' => '<h5>Usuario</h5>','attribute' => 'Usuario','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],                                
+                                                     ['header' => '<h5>Usuario</h5>','attribute' => 'Usuario','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                                                      ['header' => '<h5>Password</h5>','attribute' => 'Password','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                                                      ['header' => '<h5>Nombre</h5>','attribute' => 'Nombre','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                                                      ['header' => '<h5>Apellido</h5>','attribute' => 'Apellido','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
