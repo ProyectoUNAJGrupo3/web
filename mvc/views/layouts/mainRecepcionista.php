@@ -55,6 +55,7 @@ $this->title = 'Recepcionista';
                             //['label' => 'Carga Nuevo viaje', 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                             //'<li class="divider"></li>',
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Solicitudes Online'), 'url' => ['/recepcionista/listar_solicitudes_online'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         ],
                     ],
                     //['label' => 'Ver Solicitud', 'url' => ['recepcionista/ver_datos_solicitud_de_servicio']],
