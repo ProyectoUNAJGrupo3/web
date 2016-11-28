@@ -28,10 +28,10 @@ class RecepcionistaController extends Controller {
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
-                    return TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID);
-                    //Llamada al m?todo que comprueba si es un administrador
-                    //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
-                }
+                            return TipoUsuario::usuarioRecepcionista(Yii::$app->user->identity->RolID);
+                            //Llamada al m?todo que comprueba si es un administrador
+                            //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
+                        }
                     ]
                 ]
             ]
@@ -40,26 +40,26 @@ class RecepcionistaController extends Controller {
 
     public function actions() {
         //Control de errores en caso de que se quiera acceder a las acciones de este controlador
-       /*if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
-            if (Yii::$app->user->identity->RolID == 1) {                                                                //si el usuario es administrador
-                Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
-            } elseif (Yii::$app->user->identity->RolID == 2) {
-                Yii::$app->errorHandler->errorAction = 'recepcionista/error';
-            } elseif (Yii::$app->user->identity->RolID == 3) {
-                Yii::$app->errorHandler->errorAction = 'chofer/error';
-            } elseif (Yii::$app->user->identity->RolID == 4) {
-                Yii::$app->errorHandler->errorAction = 'cliente/error';
-            } else {
-                Yii::$app->errorHandler->errorAction = 'site/error';
-            }
+        /*if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+        if (Yii::$app->user->identity->RolID == 1) {                                                                //si el usuario es administrador
+        Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
+        } elseif (Yii::$app->user->identity->RolID == 2) {
+        Yii::$app->errorHandler->errorAction = 'recepcionista/error';
+        } elseif (Yii::$app->user->identity->RolID == 3) {
+        Yii::$app->errorHandler->errorAction = 'chofer/error';
+        } elseif (Yii::$app->user->identity->RolID == 4) {
+        Yii::$app->errorHandler->errorAction = 'cliente/error';
+        } else {
+        Yii::$app->errorHandler->errorAction = 'site/error';
+        }
         } else {                                                                                                      //sino (si el usuario es invitado) se muestra la pagina de error del site
-            Yii::$app->errorHandler->errorAction = 'site/error';
+        Yii::$app->errorHandler->errorAction = 'site/error';
         }
 
         return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
+        'error' => [
+        'class' => 'yii\web\ErrorAction',
+        ],
         ];*/
     }
 
@@ -104,29 +104,30 @@ class RecepcionistaController extends Controller {
 
         $model = new ListaSolicitudesServicioModel();
         $model->setDataProvider();
-        $message = '';
         if (\Yii::$app->request->isAjax) {
-            $selection=Yii::$app->request->post('keylist');
-            $viajeSelected=$model->dataProvider->allModels[$selection];
-            Yii::$app->session['actualizar'] = $viajeSelected;
+
             if(\Yii::$app->request->isPost) {
-                switch (\Yii::$app->request->post('viajeoperacion')) {
-                    case 'cerrar':
+                $selection=Yii::$app->request->post('keylist');
+                $viajeSelected=$model->dataProvider->allModels[$selection];
+                Yii::$app->session['actualizar'] = $viajeSelected; //CUANDO LA OPERACION ES ACTUALIZAR LE PASO LA SELECCION A LA OTRA VISTA (POPUP)
+
+                switch (\Yii::$app->request->post('viajeoperacion')) { //TOMA EL VIAJEOPERACION QUE LE PASA EN EL DATA DEL AJAX
+                    case 'cerrar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
                         $operacion = 3;//CERRAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
-                        $message = "Viaje cerrado correctamente";
-                        Yii::$app->session->setFlash('viajeCerrado', $message);
+                        Yii::$app->session['message'] = "Viaje cerrado correctamente"; //GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
+                        Yii::$app->session['operacion'] = "viajeCerrado";
                         break;
                     case 'cancelar':
                         $operacion = 2;//CANCELAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
-                        $message = "Viaje cancelado correctamente";
-                        Yii::$app->session->setFlash('viajeCancelado', $message);
+                        Yii::$app->session['message'] = "Viaje cancelado correctamente";//GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
+                        Yii::$app->session['operacion'] = "viajeCancelado";
                         break;
                 }
             }
         }
-        //Yii::$app->session->setFlash('viajeCerrado', $message);
+        Yii::$app->session->setFlash(Yii::$app->session['operacion'], Yii::$app->session['message']);
         return $this->render("listarSolicitudes", ['model' => $model]);
 
     }
