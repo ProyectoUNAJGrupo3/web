@@ -1,7 +1,5 @@
 <?php
-
 namespace app\controllers;
-
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -10,13 +8,11 @@ use app\models\TipoUsuario;
 use app\models\Recepcionista\AltaViajeManualModel;
 use app\models\Recepcionista\ActualizarViajeModel;
 use app\models\Recepcionista\ListaSolicitudesServicioModel;
+use app\models\Recepcionista\ListaSolicitudesOnlineModel;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
-
 class RecepcionistaController extends Controller {
-
     public $layout = 'mainRecepcionista';                           //se asocia al layout predeterminado
-
     public function behaviors() {
         return [
             'access' => [
@@ -37,7 +33,6 @@ class RecepcionistaController extends Controller {
             ]
         ];
     }
-
     public function actions() {
         //Control de errores en caso de que se quiera acceder a las acciones de este controlador
         /*if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
@@ -55,39 +50,34 @@ class RecepcionistaController extends Controller {
         } else {                                                                                                      //sino (si el usuario es invitado) se muestra la pagina de error del site
         Yii::$app->errorHandler->errorAction = 'site/error';
         }
-
         return [
         'error' => [
         'class' => 'yii\web\ErrorAction',
         ],
         ];*/
     }
-
     public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
         return $this->redirect(['alta_viaje_manual']);
     }
-
     public function actionAlta_viaje_manual() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new AltaViajeManualModel();
         $model->setDataProvider();
         $model->setListChoferes();
         $model->setListVehiculos();
         $model->setTarifa();
-
+        $info = $model->agenciaCoords();
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
             Yii::$app->session->setFlash('viajeCreado');
             return $this->refresh();
         }
-        return $this->render("altaViajeManual", ['model' => $model]);
+        return $this->render("altaViajeManual", ['model' => $model, 'info' => $info]);
     }
     public function actionActualizarviaje() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ActualizarViajeModel();
-
         if(\Yii::$app->request->isPost)
         {
             $viajeSelected = Yii::$app->session['actualizar'];
             $model->setUpdateInfo($viajeSelected);
-
             if ($model->load(Yii::$app->request->post()) && ($model->actualizarViaje() === true)) {
                 Yii::$app->session->setFlash('viajeActualizado','Viaje actualizado.');
                 return $this->redirect(['listaviajes']);
@@ -97,20 +87,16 @@ class RecepcionistaController extends Controller {
             $model->setListChoferes();
             $model->setListVehiculos();
         }
-
         return $this->renderAjax("actualizarViaje", ['model' => $model]);
     }
     public function actionListaviajes() {                      //renderiza el index de la carpeta agencia dentro de views
-
         $model = new ListaSolicitudesServicioModel();
         $model->setDataProvider();
         if (\Yii::$app->request->isAjax) {
-
             if(\Yii::$app->request->isPost) {
                 $selection=Yii::$app->request->post('keylist');
                 $viajeSelected=$model->dataProvider->allModels[$selection];
                 Yii::$app->session['actualizar'] = $viajeSelected; //CUANDO LA OPERACION ES ACTUALIZAR LE PASO LA SELECCION A LA OTRA VISTA (POPUP)
-
                 switch (\Yii::$app->request->post('viajeoperacion')) { //TOMA EL VIAJEOPERACION QUE LE PASA EN EL DATA DEL AJAX
                     case 'cerrar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
                         $operacion = 3;//CERRAR
@@ -129,6 +115,9 @@ class RecepcionistaController extends Controller {
         }
         Yii::$app->session->setFlash(Yii::$app->session['operacion'], Yii::$app->session['message']);
         return $this->render("listarSolicitudes", ['model' => $model]);
-
+    }
+    public function actionListar_solicitudes_online() {
+        $model = new ListaSolicitudesOnlineModel();
+        return $this->render('listaSolicitudesOnline', ['model' => $model]);
     }
 }
