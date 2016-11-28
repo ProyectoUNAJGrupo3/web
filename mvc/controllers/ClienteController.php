@@ -104,16 +104,17 @@ class ClienteController extends Controller {
         return $this->renderAjax("calificarServicio", ['model' => $model]);
     }*/
 
-
     public function actionCalificar_servicio() {
+        $model = new CalificacionServicioModel();
         if (isset(Yii::$app->session['actualizar'])) {
-            $param = Yii::$app->session['actualizar'];
+            $viajeSelected = Yii::$app->session['actualizar'];
+            $model->setUpdateInfo($viajeSelected);
         }
         else {
-            $param = null;
+            $viajeSelected = null;
         }
         $selection=(array)Yii::$app->request->post('keylist');
-        $model = new CalificacionServicioModel();
+
         return $this->renderAjax("calificarServicio", ['model' => $model]);
     }
     public function actionListar_historial_viajes() {

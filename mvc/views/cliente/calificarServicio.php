@@ -7,11 +7,13 @@ use yii\widgets\ActiveForm;
 use app\assets\AppAssetCliente;
 use app\assets\AppAsset;
 use app\assets\BootswatchAsset;
+use yii\helpers\Url;
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
 AppAsset::register($this);
 //AppAssetWebSite::register($this);
+//'value' => Url::toRoute('/cliente/listaHistorialCalificaciones')
 AppAssetCliente::register($this);
 ?>
 <div class="container">
@@ -36,8 +38,10 @@ AppAssetCliente::register($this);
                 </h4>
                 <?= $form->field($model, 'puntaje')->dropDownList(['prompt' => 'Seleccione...', 'uno' => '1', 'dos' => '2', 'tres' => '3', 'cuatro' => '4', 'cinco' => '5', 'seis' => '6', 'siete' => '7', 'ocho' => '8', 'nueve' => '9', 'diez' => '10']) ?>
                 <?= $form->field($model, 'comentario')->textArea(['rows' => 7, 'column' => 4])->label('Comentario'); ?>
-                <?= Html::submitButton('Calificar', ['class' => 'btn btn-primary', 'id' => 'btn-carga-calificacion']); ?>
-                <?= Html::button('Cancelar', [('/cliente/listaHistorialViajes'),'class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
+                <div id='botones-group'>
+                    <?= Html::submitButton('Calificar', ['value' => Url::toRoute('/cliente/listar_historial_calificaciones'),'class' => 'btn btn-primary', 'id' => 'btn-carga-calificacion']); ?>
+                    <?= Html::button('Cancelar', ['value' => Url::toRoute('/cliente/listar_historial_viajes'),'class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
+                 </div>
                 <?php ActiveForm::end(); ?>
 
             <?php endif; ?>
