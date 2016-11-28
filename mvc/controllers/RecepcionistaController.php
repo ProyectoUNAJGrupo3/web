@@ -9,9 +9,9 @@ use yii\filters\VerbFilter;
 use app\models\TipoUsuario;
 use app\models\Recepcionista\AltaViajeManualModel;
 use app\models\Recepcionista\ListaSolicitudesServicioModel;
+use app\models\Recepcionista\ListaSolicitudesOnlineModel;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
-
 
 class RecepcionistaController extends Controller {
 
@@ -40,7 +40,7 @@ class RecepcionistaController extends Controller {
 
     public function actions() {
         //Control de errores en caso de que se quiera acceder a las acciones de este controlador
-       /* if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
             if (Yii::$app->user->identity->RolID == 1) {                                                                //si el usuario es administrador
                 Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
             } elseif (Yii::$app->user->identity->RolID == 2) {
@@ -60,7 +60,7 @@ class RecepcionistaController extends Controller {
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-        ];*/
+        ];
     }
 
     public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
@@ -79,41 +79,43 @@ class RecepcionistaController extends Controller {
             Yii::$app->session->setFlash('viajeCreado');
             return $this->refresh();
         }
-        return $this->render("altaViajeManual", ['model' => $model, 'info'=> $info]);
+        return $this->render("altaViajeManual", ['model' => $model, 'info' => $info]);
     }
 
     public function actionListaviajes() {                      //renderiza el index de la carpeta agencia dentro de views
-
         $model = new ListaSolicitudesServicioModel();
         $model->setDataProvider();
         $model->setListChoferes();
         $model->setListVehiculos();
-        $message='';
+        $message = '';
         if (\Yii::$app->request->isAjax) {
-            if(\Yii::$app->request->isPost) {
+            if (\Yii::$app->request->isPost) {
                 switch (\Yii::$app->request->post('viajeoperacion')) {
                     case 'cerrar':
-                        $selection=Yii::$app->request->post('keylist');
+                        $selection = Yii::$app->request->post('keylist');
                         $viajeSelected = $model->dataProvider->allModels[$selection];
-                        $operacion = 3;//CERRAR
-                        $model->ViajeOperacion($viajeSelected,$operacion);
+                        $operacion = 3; //CERRAR
+                        $model->ViajeOperacion($viajeSelected, $operacion);
                         $message = "Viaje cerrado correctamente";
                         Yii::$app->session->setFlash('viajeCerrado', $message);
                         break;
                     case 'cancelar':
-                        $selection=Yii::$app->request->post('keylist');
+                        $selection = Yii::$app->request->post('keylist');
                         $viajeSelected = $model->dataProvider->allModels[$selection];
-                        $operacion = 2;//CANCELAR
-                        $model->ViajeOperacion($viajeSelected,$operacion);
+                        $operacion = 2; //CANCELAR
+                        $model->ViajeOperacion($viajeSelected, $operacion);
                         $message = "Viaje cancelado correctamente";
                         Yii::$app->session->setFlash('viajeCerrado', $message);
                         break;
-
                 }
             }
         }
         Yii::$app->session->setFlash('viajeCerrado', $message);
         return $this->render("listarSolicitudes", ['model' => $model]);
-
     }
+     public function actionListar_solicitudes_online() {
+        $model = new ListaSolicitudesOnlineModel();
+        return $this->render('listaSolicitudesOnline', ['model' => $model]);
+    }
+
 }
