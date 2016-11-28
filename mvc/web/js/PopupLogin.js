@@ -38,6 +38,7 @@ $(function () {
     });
 });
 */
+/*
 $(function () {
     $('#buttonAbrirCalificacion').click(function () {
         var keys = $('#grid').yiiGridView('getSelectedRows');
@@ -48,7 +49,7 @@ $(function () {
             processData: true,
             success: function () {
                 $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-                alert('sucess');
+                alert('Sucess');
             },
             error: function () {
                 alert('Error');
@@ -58,3 +59,4 @@ $(function () {
 
     });
 });
+*/

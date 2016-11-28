@@ -3,7 +3,7 @@
 use yii\helpers\BaseHtml;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\assets\AppAssetWebSite;
+//use app\assets\AppAssetWebSite;
 use app\assets\AppAssetCliente;
 use app\assets\AppAsset;
 use app\assets\BootswatchAsset;
@@ -11,7 +11,8 @@ use app\assets\BootswatchAsset;
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
 AppAsset::register($this);
-AppAssetWebSite::register($this);
+//AppAssetWebSite::register($this);
+AppAssetCliente::register($this);
 ?>
 <div class="container">
     <div class="row">

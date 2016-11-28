@@ -13,6 +13,8 @@ use app\models\Usuario\PSFormularioSolicitarServcioRemiseriaModel;
 use app\models\Usuario\ListaHistorialViajesUsuarioModel;
 use app\models\Usuario\ListaHistorialCalificacionesUsuarioModel;
 use app\models\Usuario\CalificacionServicioModel;
+use app\models\Agencia\ViajesGridModel;
+use app\models\Agencia\GridModel;
 
 class ClienteController extends Controller {
 
@@ -79,11 +81,12 @@ class ClienteController extends Controller {
       return $this->render("solicitudPedirServicioRemiseria", ['model' => $model]);
       } */
 
+    /*
     public function actionListar_historial_viajes() {
         $model = new ListaHistorialViajesUsuarioModel();
         $model->setDataProvider();
         return $this->render("listaHistorialViajes", ['model' => $model]);
-    }
+    }*/
 
     public function actionListar_historial_calificaciones() {
         $model = new ListaHistorialCalificacionesUsuarioModel();
@@ -112,6 +115,20 @@ class ClienteController extends Controller {
         $selection=(array)Yii::$app->request->post('keylist');
         $model = new CalificacionServicioModel();
         return $this->renderAjax("calificarServicio", ['model' => $model]);
+    }
+    public function actionListar_historial_viajes() {
+        $model = new ListaHistorialViajesUsuarioModel();
+        $model->setDataProvider();
+        if (\Yii::$app->request->isPost)  {
+            if (\Yii::$app->request->isAjax) {
+                $selection=(array)Yii::$app->request->post('keylist');
+                $personaselected=$model->dataProvider->allModels[$selection[0]];
+                Yii::$app->session['actualizar'] = $personaselected;
+
+            }
+            //else{}*/
+        }
+        return $this->render("listaHistorialViajes", ['model' => $model]);
     }
 
     /*
