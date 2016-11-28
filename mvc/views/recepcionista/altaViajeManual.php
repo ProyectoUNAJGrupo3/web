@@ -55,9 +55,12 @@ Modal::end();
                             <div id="btn-bar">
                                 <?=
                                 $this->registerJs('$(document).ready(function () {
-            initMap(true);
             $("#btn-ver-remiserias").on("click", function() {getRemiserias(true)});
+
             });', \yii\web\View::POS_READY);
+$this->registerJs("var agenciaCoord = ". json_encode($info).";
+initializeCenteredMap(agenciaCoord)",\yii\web\View::POS_READY);
+
                                 ?>
                             </div>
                             <div id="mapHome">

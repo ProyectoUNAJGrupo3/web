@@ -12,8 +12,8 @@ use app\assets\AppAssetWebSite;
 use app\assets\BootswatchAsset;
 
 BootswatchAsset::register($this);
-AppAssetWebSite::register($this);
 AppAssetCliente::register($this);
+
 $this->title = 'Usuario';
 ?>
 <?php $this->beginPage() ?>
@@ -34,14 +34,12 @@ $this->title = 'Usuario';
         $this->beginBody();
         /* include('testMaps.php'); */
         ?>
-
         <div class="wrap">
             <?php
             NavBar::begin([
                 'brandLabel' => '<img src="img/LogoApp.png" style="display:inline; margin-top: -20px; vertical-align: top; width:120px; height:55px;">&nbsp&nbsp&nbsp&nbsp<b styel="size:15px">Usuario</b>',
                 'brandUrl' => Yii::$app->homeUrl,
-                //'id' => 'barra-menu-main',
-                'options' => ['class' => 'navbar navbar-default navbar-fixed-top navbar-transparent'],
+                'options' => ['class' => 'navbar navbar-default',]
                     //'options' => [
                     //    'class' => 'navbar-inverse navbar-fixed-top',
                     //],
@@ -57,7 +55,7 @@ $this->title = 'Usuario';
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_viajes'],],
                         //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
                         //'<li class="divider"></li>',
-                        ],
+                     ],
                     ],
                     ['label' => '<span class="fa fa-star"></span> ' . Html::encode('Calificaciones'), 'items' => [
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_calificaciones'],],
@@ -83,26 +81,19 @@ $this->title = 'Usuario';
             ]);
             NavBar::end();
             ?>
-
-            <div class="container">
                 <?=
                 Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
                 <?= $content ?>
-            </div>
-        </div>
+     </div>
 
-       <footer class="footer">
-            <div class="container">
-                <!--<hr style="border:1px solid gray;">-->
-
-                <span id="footer-copy-right" style="text-align:center"> 
-                    <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
-                    <i class="fa fa-phone-square"></i> &nbsp; 011-4369-4657 &nbsp; &nbsp; 011-4287-5324 &nbsp; &nbsp;
-                    <i class="fa fa-envelope"></i> &nbsp; administracion@remisya.com
-                </span>
+        <footer class="footer">
+            <div class="container">          
+                <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
+                <i class="fa fa-phone-square"></i> &nbsp; 011-4369-4657 &nbsp; &nbsp; 011-4287-5324 &nbsp; &nbsp;
+                <i class="fa fa-envelope"></i> &nbsp; administracion@remisya.com           
             </div>
         </footer>
 

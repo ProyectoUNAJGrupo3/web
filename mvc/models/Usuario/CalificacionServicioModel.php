@@ -2,7 +2,9 @@
 
 namespace app\models\Usuario;
 
+use yii;
 use yii\base\Model;
+use app\models\CapaServicio\CalificacionesModelo;
 
 class CalificacionServicioModel extends Model {
     /* public $numeroViaje;
@@ -28,7 +30,11 @@ class CalificacionServicioModel extends Model {
         ];
     }
 
+    public function setCalificaciones(){
+
+    }
 }
+
 /*namespace app\models\Usuario;
 
 use yii\base\Model;

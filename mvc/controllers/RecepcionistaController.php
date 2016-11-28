@@ -12,6 +12,7 @@ use app\models\Recepcionista\ListaSolicitudesServicioModel;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
+
 class RecepcionistaController extends Controller {
 
     public $layout = 'mainRecepcionista';                           //se asocia al layout predeterminado
@@ -72,12 +73,13 @@ class RecepcionistaController extends Controller {
         $model->setListChoferes();
         $model->setListVehiculos();
         $model->setTarifa();
+        $info = $model->agenciaCoords();
 
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
             Yii::$app->session->setFlash('viajeCreado');
             return $this->refresh();
         }
-        return $this->render("altaViajeManual", ['model' => $model]);
+        return $this->render("altaViajeManual", ['model' => $model, 'info'=> $info]);
     }
 
     public function actionListaviajes() {                      //renderiza el index de la carpeta agencia dentro de views
@@ -91,16 +93,16 @@ class RecepcionistaController extends Controller {
             if(\Yii::$app->request->isPost) {
                 switch (\Yii::$app->request->post('viajeoperacion')) {
                     case 'cerrar':
-                        $selection=(array)Yii::$app->request->post('keylist');
-                        $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+                        $selection=Yii::$app->request->post('keylist');
+                        $viajeSelected = $model->dataProvider->allModels[$selection];
                         $operacion = 3;//CERRAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
                         $message = "Viaje cerrado correctamente";
                         Yii::$app->session->setFlash('viajeCerrado', $message);
                         break;
                     case 'cancelar':
-                        $selection=(array)Yii::$app->request->post('keylist');
-                        $viajeSelected = $model->dataProvider->allModels[$selection[0]];
+                        $selection=Yii::$app->request->post('keylist');
+                        $viajeSelected = $model->dataProvider->allModels[$selection];
                         $operacion = 2;//CANCELAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
                         $message = "Viaje cancelado correctamente";
