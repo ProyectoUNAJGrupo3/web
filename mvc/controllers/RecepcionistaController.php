@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\TipoUsuario;
 use app\models\Recepcionista\AltaViajeManualModel;
+use app\models\Recepcionista\ActualizarViajeModel;
 use app\models\Recepcionista\ListaSolicitudesServicioModel;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
@@ -79,16 +80,36 @@ class RecepcionistaController extends Controller {
         }
         return $this->render("altaViajeManual", ['model' => $model]);
     }
+    public function actionActualizarviaje() {                      //renderiza el index de la carpeta agencia dentro de views
+        $model = new ActualizarViajeModel();
 
+        if ($model->load(Yii::$app->request->post()) && ($model->actualizarViaje() === true)) {
+            Yii::$app->session->setFlash('viajeActualizado');
+            return $this->refresh();
+        }
+        else{
+            if (isset(Yii::$app->session['actualizar'])) {
+                $model->setListChoferes();
+                $model->setListVehiculos();
+                $viajeSelected = Yii::$app->session['actualizar'];
+                $model->setUpdateInfo($viajeSelected);
+            }
+            else {
+                $viajeSelected = null;
+            }
+        }
+        return $this->refresh();
+    }
     public function actionListaviajes() {                      //renderiza el index de la carpeta agencia dentro de views
 
         $model = new ListaSolicitudesServicioModel();
         $model->setDataProvider();
-        $model->setListChoferes();
-        $model->setListVehiculos();
-        $message='';
+        $message = '';
         if (\Yii::$app->request->isAjax) {
-            if(\Yii::$app->request->isPost) {
+            $selection=Yii::$app->request->post('keylist');
+            $viajeSelected=$model->dataProvider->allModels[$selection];
+            Yii::$app->session['actualizar'] = $viajeSelected;
+            /*if(\Yii::$app->request->isPost) {
                 switch (\Yii::$app->request->post('viajeoperacion')) {
                     case 'cerrar':
                         $selection=Yii::$app->request->post('keylist');
@@ -108,7 +129,7 @@ class RecepcionistaController extends Controller {
                         break;
 
                 }
-            }
+            }*/
         }
         Yii::$app->session->setFlash('viajeCerrado', $message);
         return $this->render("listarSolicitudes", ['model' => $model]);

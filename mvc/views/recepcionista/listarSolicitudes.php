@@ -20,17 +20,13 @@ $this->title = 'RemisYa';
 
 ?>
 
-
-<?php  Modal::begin([
-'header' => '
-        <h4>Mensaje</h4>',
-'id'=>'processmodal',
-'size'=>'modal-sm',
-'options'=>['class'=>'modal'],
-'clientOptions' => ['backdrop' => 'static', 'keyboard' => false]
+<?php
+Modal::begin([
+'id' => 'modal',
+'size' => 'modal-sm',
 ]);
-       echo "Procesando...";
-       Modal::end();
+echo "<div id='modalContent'></div>";
+Modal::end();
 ?>
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -73,21 +69,19 @@ $this->title = 'RemisYa';
             ?>
         </div>
 
-        <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes, ['prompt' => 'Seleccione chofer']) ?>
-        <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos, ['prompt' => 'Seleccione vehiculo']) ?>
         <?php ActiveForm::end(); ?>
         <?php Pjax::end(); ?>
         <div id="buttonsOperaciones">
             <?= Html::button('Cerrar viaje',['class' => 'btn btn-lg btn-primary','name'=>'submit','value'=>'cerrar']);?>
             <?= Html::button('Cancelar viaje',['class' => 'btn btn-lg btn-primary','name'=>'submit','value'=>'cancelar']);?>
+            <?= Html::button('Actualizar viaje',['value' => Url::toRoute('recepcionista/actualizarviaje'), 'class' => 'btn btn-lg btn-primary', 'id' => 'actualizarButton']);?>
         </div>
 
         </div>
 </div>
 
 <?php
-$this->registerJs(
-
+/*$this->registerJs(
    "$( document ).ready(function() {
 $('#buttonsOperaciones :button').click(function(){
         var keys = $('#viajes_grid tr.success').attr('rowid');
@@ -100,6 +94,7 @@ $('#buttonsOperaciones :button').click(function(){
                         url  : '".Url::to(['recepcionista/listaviajes'])."',
                         success  : function() {
                             $('#processmodal').modal('hide');
+                            $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
                             $.pjax.reload({container:'#containerpjax',timeout: 20000});
                         },
                         error: function(){
@@ -109,5 +104,5 @@ $('#buttonsOperaciones :button').click(function(){
                         });return false;
 });
 });"
-);
+);*/
 ?>
