@@ -22,8 +22,8 @@ use app\models\Agencia\ListaChoferesModel;
 use app\models\Agencia\ListaRecepcionistasModel;
 use app\models\Agencia\ListaVehiculoModel;
 use app\models\Agencia\ListaViajesTurnoManianaModel;
-use app\models\Agencia\ListaViajesTurnoTardeModel;
-use app\models\Agencia\ListaViajesTurnoNocheModel;
+use app\models\Agencia\ListadoCalificacionesModel;
+use app\models\Agencia\ListadoViajesModel;
 use app\models\Agencia\ViajesGridModel;
 use app\models\Agencia\GridModel;
 
@@ -243,16 +243,15 @@ class AgenciaController extends Controller {
         return $this->render("listaViajesTurnoManiana", ['model' => $model]);
     }
 
-    public function actionListar_viajes_turno_tarde_agencia() {
-        $model = new ListaViajesTurnoTardeModel();
-        return $this->render("listaViajesTurnoTarde", ['model' => $model]);
+    public function actionListado_calificaciones() {
+        $model = new ListadoCalificacionesModel();
+        return $this->render("listadoCalificaciones", ['model' => $model]);
     }
 
-    public function actionListar_viajes_turno_noche_agencia() {
-        $model = new ListaViajesTurnoNocheModel();
-        return $this->render("listaViajesTurnoNoche", ['model' => $model]);
+    public function actionListado_viajes() {
+        $model = new ListadoViajesModel();
+        return $this->render("listadoViajes", ['model' => $model]);
     }
-
     public function actionListar_viajes_totales_agencia() {
 
         $model = new ViajesGridModel();
