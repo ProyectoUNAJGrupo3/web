@@ -88,18 +88,29 @@ class ChoferController extends Controller {
         return $this->render("listaHistorialCalificaciones", ['model' => $model]);
     }
 
+    public function actionActualizar_historial_calificaciones() { //para probar por error de PersonaID non
+        $model = new ListaHistorialCalificacionesChoferModel();
+        $viajeSelected = Yii::$app->session['actualizar'];
+        $model->setUpdateInfo($viajeSelected);
+        $model->setDataProviderActualizado();
+        if (\Yii::$app->request->isPost)  {
+        }
+        return $this->render("listaHistorialCalificaciones", ['model' => $model]);
+    }
+
     public function actionCalificar_cliente() {
         $model = new CalificacionClienteModel();
         if (\Yii::$app->request->isPost)
         {
             $viajeSelected = Yii::$app->session['actualizar'];
             $model->setUpdateInfo($viajeSelected);
-            //Yii::$app->session->setFlash('Calificacion Exitosa!');
-            //return $this->redirect(['cliente/listar_historial_calificaciones']);
-        }
+            Yii::$app->session->setFlash('Calificacion Exitosa!'); //no ejecuta
+            //return $this->redirect(['chofer/lista_historial_calificaciones']);  //ESTA ES LA LINEA QUE ME TIRA EL ERROR DE PERSONAID
+            }
+
         if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion() === true)) {
-            Yii::$app->session->setFlash('Calificacion Exitosa!');
-            return $this->redirect(['chofer/lista_historial_calificaciones']);
+            Yii::$app->session->setFlash('Calificacion Exitosa!'); //no ejecuta
+            return $this->redirect(['chofer/lista_historial_calificaciones']); //no ejecuta
         }
         return $this->renderAjax("calificarCliente", ['model' => $model]);
     }
