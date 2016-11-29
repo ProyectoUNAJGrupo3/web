@@ -56,7 +56,7 @@ Modal::end();
             'ViajeTipo',
             'Estado',
             /*Probando agregar botones en la gridview*/
-            
+
             [ 'class' => 'yii\grid\ActionColumn',
                 'template' => '{Calificar}',
                 'buttonOptions' => [
@@ -67,6 +67,7 @@ Modal::end();
                 //'class' => 'btn btn-primary',
                 //'id' => 'modalButtonCalificar',
                 //['value' => Url::toRoute('/cliente/calificar_servicio')],
+                //Html::Button('Abrir ventana calificar', ['value' => Url::toRoute('/cliente/calificar_servicio'), 'class' => 'btn btn-primary', 'id' => 'buttonAbrirCalificacion']);
                 ],
             ],
         ],
