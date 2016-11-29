@@ -11,7 +11,7 @@ use app\models\CapaServicio\VehiculosModelo;
 use app\models\CapaServicio\TurnosModelo;
 use yii\data\ArrayDataProvider;
 
-class ListaSolicitudesServicioModel extends Model {
+class ListaSolicitudesOnlineModel extends Model {
     public $dataProvider;
     public $origenTexto;
     public $destinoTexto;
@@ -32,8 +32,9 @@ class ListaSolicitudesServicioModel extends Model {
 
         $obj = new ViajesModelo();
         $this->dataProvider = new ArrayDataProvider([
-        'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,$this->AgenciaID,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,4),
+        'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,$this->AgenciaID,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),
         'pagination' => [ 'pageSize' => 10 ],
+
         ]);
 
         return true;

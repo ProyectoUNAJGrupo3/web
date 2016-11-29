@@ -23,7 +23,7 @@ $this->title = 'RemisYa';
 Modal::begin([
 'header' => '
         <h4>Mensaje</h4>',
-'id'=>'processmodal',
+'id'=>'solicitudes_processmodal',
 'size'=>'modal-sm',
 'options'=>['class'=>'modal'],
 'clientOptions' => ['backdrop' => 'static', 'keyboard' => false]
@@ -33,7 +33,7 @@ Modal::end();
 ?>
 <?php
 Modal::begin([
-'id' => 'modal',
+'id' => 'solicitudes_modal',
 'size' => 'modal-sm',
 ]);
 echo "<div id='modalContent'></div>";
@@ -41,43 +41,34 @@ Modal::end();
 ?>
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h4 class="panel-title">Listado de viajes emitidos</h4>
+        <h4 class="panel-title">Listado de solicitudes online</h4>
     </div>
     <div class="panel-body">
 
-        <?php Pjax::begin(['id'=>'containerpjax','timeout' => false]); ?>
-        <?php if (Yii::$app->session->hasFlash('viajeActualizado')): ?>
+        <?php Pjax::begin(['id'=>'solicitudes_containerpjax','timeout' => false]); ?>
+        <?php if (Yii::$app->session->hasFlash('solicitudAutorizada')): ?>
         <div class="alert alert-success alert-dismissable">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">X</button>
             <h4>
                 <i class="icon fa fa-check"></i>Operacion realizada.
             </h4>
-            <?= Yii::$app->session->getFlash('viajeActualizado') ?>
+            <?= Yii::$app->session->getFlash('solicitudAutorizada') ?>
         </div>
         <?php endif; ?>
-        <?php if (Yii::$app->session->hasFlash('viajeCerrado')): ?>
+        <?php if (Yii::$app->session->hasFlash('solicitudRechazada')): ?>
         <div class="alert alert-success alert-dismissable">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">X</button>
             <h4>
                 <i class="icon fa fa-check"></i>Operacion realizada.
             </h4>
-            <?= Yii::$app->session->getFlash('viajeCerrado') ?>
-        </div>
-        <?php endif; ?>
-        <?php if (Yii::$app->session->hasFlash('viajeCancelado')): ?>
-        <div class="alert alert-success alert-dismissable">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">X</button>
-            <h4>
-                <i class="icon fa fa-check"></i>Operacion realizada.
-            </h4>
-            <?= Yii::$app->session->getFlash('viajeCancelado') ?>
+            <?= Yii::$app->session->getFlash('solicitudRechazada') ?>
         </div>
         <?php endif; ?>
         <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]);?>
         <div class="table-responsive">
             <?=
             GridView::widget([
-            'id' => 'viajes_grid',
+            'id' => 'solicitudes_grid',
             'summary'=>'',
             'dataProvider' => $model->dataProvider,
             'tableOptions' => ['class' => 'table table-bordered table-hover', 'style'=>'border-collapse: collapse; border: 3px solid #df691a; '],
@@ -99,10 +90,9 @@ Modal::end();
 
         <?php ActiveForm::end(); ?>
         <?php Pjax::end(); ?>
-        <div id="buttonsOperaciones">
-            <?= Html::button('Cerrar viaje',['value' => Url::toRoute('recepcionista/listaviajes'),'class' => 'btn btn-lg btn-primary','name'=>'submit','operacion'=>'cerrar']);?>
-            <?= Html::button('Cancelar viaje',['value' => Url::toRoute('recepcionista/listaviajes'),'class' => 'btn btn-lg btn-primary','name'=>'submit','operacion'=>'cancelar']);?>
-            <?= Html::button('Actualizar viaje',['value' => Url::toRoute('recepcionista/actualizarviaje'), 'class' => 'btn btn-lg btn-primary', 'id' => 'actualizarButton','operacion'=>'actualizar',]);?>
+        <div id="solicitudesbuttonsOperaciones">
+            <?= Html::button('Autorizar solicitud',['value' => Url::toRoute('recepcionista/autorizarsolicitud'), 'class' => 'btn btn-lg btn-primary', 'id' => 'autorizarButton','operacion'=>'autorizar',]);?>
+            <?= Html::button('Rechazar solicitud',['value' => Url::toRoute('recepcionista/listasolicitudes'),'class' => 'btn btn-lg btn-primary','name'=>'submit','operacion'=>'rechazar']);?>
         </div>
     </div>
 </div>
