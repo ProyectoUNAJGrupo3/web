@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\Usuario;
+namespace app\models\Chofer;
 
 use yii;
 use yii\base\Model;
@@ -8,7 +8,7 @@ use app\models\CapaServicio\ViajesModelo;
 use yii\helpers\ArrayHelper;
 use yii\data\ArrayDataProvider;
 
-class ListaHistorialViajesUsuarioModel extends Model {
+class ListaHistorialViajesChoferModel extends Model {
 
     public $dataProvider;
     public $PersonaID;
@@ -18,7 +18,7 @@ class ListaHistorialViajesUsuarioModel extends Model {
 
         $obj = new ViajesModelo();
         $this->dataProvider = new ArrayDataProvider([
-        'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,NULL,$this->PersonaID,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+        'allModels' => $obj->GetInfoViajes(NULL,$this->PersonaID,NULL,NULL,NULL,NULL,null,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
         ]);
 
         return true;

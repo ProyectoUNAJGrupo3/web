@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\Usuario;
+namespace app\models\Chofer;
 
 use yii;
 use yii\base\Model;
@@ -8,7 +8,7 @@ use app\models\CapaServicio\CalificacionesModelo;
 use yii\helpers\ArrayHelper;
 use yii\data\ArrayDataProvider;
 
-class ListaHistorialCalificacionesUsuarioModel extends Model {
+class ListaHistorialCalificacionesChoferModel extends Model {
     //GetInfoCalificacion($CalificacionID, $ViajeID, $Quien, $ParaQuien, $Puntaje, $AgenciaID)
     public $dataProvider;
     public $PersonaID;
