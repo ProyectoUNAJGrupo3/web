@@ -6,7 +6,7 @@
 
 $(function () {
     $('#actualizarButton').click(function () {
-        var keys = $('#grid').yiiGridView('getSelectedRows');
+        var keys = $('#grid tr.success').attr('rowid');
         $.ajax({
             type: 'post',
             cache: false,
@@ -24,3 +24,7 @@ $(function () {
 
     });
 });
+$(function () {
+    $('#eliminarButton').click(function () {
+        var keys = $('#grid tr.success').attr('rowid');
+    })});

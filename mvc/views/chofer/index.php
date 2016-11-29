@@ -18,7 +18,7 @@ AppAssetPopups::register($this);
 
 Modal::begin([
     'id' => 'modal',
-    //'size' => 'modal-lg',
+        //'size' => 'modal-lg',
 ]);
 echo "<div id='modalContentChofer'></div>";
 Modal::end();
@@ -55,9 +55,7 @@ Modal::end();
                 <?php else: ?>
                     <?php $form = ActiveForm::begin(); ?>
                     <div id='botones-group'>
-                        <?= Html::button('Abrir ventana calificar', ['value' => Url::toRoute('/chofer/calificar_conducta_usuario'), 'class' => 'btn btn-primary', 'id' => 'modalButtonCalificarUsuario']); ?>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?= Html::submitButton('Cerrar', ['class' => 'btn btn-primary', 'id' => 'btn-cancelar']); ?>
+                        <?= Html::button('Calificar Usuario', ['value' => Url::toRoute('/chofer/calificar_conducta_usuario'), 'class' => 'btn btn-primary', 'id' => 'modalButtonCalificarUsuario']); ?>
                     </div>
                     <?php $form = ActiveForm::end(); ?>
                 <?php endif; ?>

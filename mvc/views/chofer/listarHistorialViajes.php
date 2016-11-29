@@ -17,15 +17,9 @@ AppAsset::register($this);
 <div class="container">
     <div class="well bs-component">
         <div class="row">
-            <!--<div class="site-contact">
-                <section id="main">
-                    <article>
-                        <div id="page-single-main">-->
-            <br />
             <h1>
                 <strong>Historial Viajes</strong>
             </h1>
-            <!--<div class="container-form" id="contenedor-formulario">-->
             <h1>
                 <?= Html::encode($this->title) ?>
             </h1>
@@ -58,10 +52,6 @@ AppAsset::register($this);
                 </div>
                 <?php $form = ActiveForm::end(); ?>
             <?php endif; ?>
-            <!--</div>  
-            </article>
-            </section>
-        </div>-->
         </div>
     </div>
 </div>
