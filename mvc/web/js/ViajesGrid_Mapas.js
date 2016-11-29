@@ -455,3 +455,16 @@ function initializeCenteredMap(StringCoord) {
 	}
 
 }
+
+function hearTheEvent(canal) {
+    var pusher = new Pusher('e8fe2051103b337d6497');
+
+    var notify = pusher.subscribe(canal.toString());
+
+
+    notify.bind('solicitudNueva', function (notification) {
+        console.log(notification.message);
+        window.alert("Llego una notificacion, hay una nueva solicitud de remis. ");
+
+    });
+}

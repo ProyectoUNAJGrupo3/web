@@ -59,7 +59,9 @@ Modal::end();
 
             });', \yii\web\View::POS_READY);
 $this->registerJs("var agenciaCoord = ". json_encode($info).";
-initializeCenteredMap(agenciaCoord)",\yii\web\View::POS_READY);
+var canal = ". json_encode($canalAgencia).";
+initializeCenteredMap(agenciaCoord);
+hearTheEvent(canal);",\yii\web\View::POS_READY);
 
                                 ?>
                             </div>

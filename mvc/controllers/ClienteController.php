@@ -68,13 +68,15 @@ class ClienteController extends Controller {
 
     public function actionIndex() {
         $model = new SolicitudRemiseriaModel();
-        if ($model->load(Yii::$app->request->post()) && ($model->GuardarViaje() === true)) {
+        $info = Yii::$app->user->identity->PersonaID;
 
+        if ($model->load(Yii::$app->request->post()) && ($model->GuardarViaje() === true)) {
+            Yii::$app->pusher->trigger($model->idAgencia,'solicitudNueva','un mensaje');
             //$data['message'] = 'hello world';
             //$pusher->trigger('my_channel', 'my_event', $data);
             return $this->redirect(['cliente/listar_historial_viajes']);
         }
-        return $this->render("index", ['model' => $model]);
+        return $this->render("index", ['model' => $model, 'idPersona'=> $info]);
     }
     /*
     public function actionCalificar_servicio() {
