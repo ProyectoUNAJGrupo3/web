@@ -108,4 +108,9 @@ class AltaViajeManualModel extends Model {
         }
         else return false;
     }
+    public function pushToChannel(){
+        $array['evento']='prueba';
+        Yii::$app->pusher->trigger( 'canal1' , 'evento' , $array);
+        
+    }
 }

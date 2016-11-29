@@ -8,6 +8,7 @@
 // 		    geocoder.geocode({ 'address': address}, geocodeResult);
 // 		});
 
+
 function geocodeResult(results, status) {
     // Verificamos el estatus
     if (status == 'OK') {
@@ -409,4 +410,22 @@ function calculateDistanceAndStuff(latLng) {
             alert("Algo anda mal y no andubo ):");
         }
     });
+}
+function setCenter(StringCoord) {
+    var latLng = getCoord(StringCoord);
+    console.log(latLng);
+    map.setCenter(latLng);
+}
+function doThePush() {
+    //var channel = $('#idAgencia').val();
+    //var pusher = new Pusher('e8fe2051103b337d6497');
+
+    //var notificationsChannel = pusher.subscribe('canal1');
+
+
+    //notificationsChannel.bind('evento', function (notification) {
+    //    console.log(notification.message);
+    //    var message = notification.message;
+    //    $('div.notification').text(message);
+    //});
 }
