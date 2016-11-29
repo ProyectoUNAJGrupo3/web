@@ -50,7 +50,7 @@ $this->title = 'Agencia';
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => '<span class="fa fa-home"  ></span> ' . Html::encode('Home'), 'url' => ['/agencia/index']],
+                    ['label' => '<span class="fa fa-suitcase"  ></span> ' . Html::encode('Viajes'), 'url' => ['/agencia/index']],
                     [
                         'label' => '<span class="fa fa-user-plus"></span> ' . Html::encode('Choferes'),
                         'items' => [
@@ -89,19 +89,13 @@ $this->title = 'Agencia';
                     [
                         'label' => '<span class="fa fa-star"  ></span> ' . Html::encode('Calificaciones'),
                         'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listado_calificaciones'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['#'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         /*  '<li class="divider"></li>',
                           ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Turno Tarde'), 'url' => ['/agencia/listar_viajes_turno_tarde_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                           '<li class="divider"></li>',
                           ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Turno Noche'), 'url' => ['/agencia/listar_viajes_turno_noche_agencia'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                           '<li class="divider"></li>', */
                         //  ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Listar Todos'), 'url' => ['/agencia/listar_viajes_totales_agencia'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
-                        ],
-                    ],
-                    [
-                        'label' => '<span class="fa fa-suitcase"  ></span> ' . Html::encode('Viajes'),
-                        'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/agencia/listado_viajes'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         ],
                     ],
                     Yii::$app->user->isGuest ? (

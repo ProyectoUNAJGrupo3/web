@@ -10,8 +10,8 @@ use app\assets\BootswatchAsset;
 
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
-//AppAssetAgencia::register($this);
-//AppAsset::register($this);
+AppAssetAgencia::register($this);
+AppAsset::register($this);
 /* @var $this yii\web\View */             //modifique el div class ="site-index" por el "agencia-index"
 $this->title = 'Service Remis';
 ?>
@@ -20,12 +20,11 @@ $this->title = 'Service Remis';
         <h1><b>Bienvenido Nombre Usuario</b></h1>
         <div class="row">
             <blockquote>
-                <div>
-                    <p style="text-align: justify">
-                        Mediante la aplicaci&oacute;n usted podr&aacute; gestionar su remiser&iacute;a de manera m&aacute;s eficiente y efectiva.
-                        Para ello usted cuenta con las posibilidad de agregar, actualizar y eliminar un empleado sea, un chofer o un/a telefonista.
-                        Adem&aacute;, usted podr&aacute; lsitar el historial de calificaciones y viajes de su agencia.
-                    </p>
+                <div style="text-align: justify">
+                    <p>Mediante la aplicaci&oacute;n usted podr&aacute; gestionar su remiser&iacute;a de manera m&aacute;s eficiente y efectiva.</p>
+                    <p></p>
+                    <p>Para ello usted cuenta con las posibilidad de agregar, actualizar y eliminar un empleado sea, un chofer o un/a telefonista.</p>
+                    <p></p>
                 </div>
             </blockquote>
         </div>

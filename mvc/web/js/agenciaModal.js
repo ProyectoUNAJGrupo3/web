@@ -24,3 +24,7 @@ $(function () {
 
     });
 });
+$(function () {
+    $('#eliminarButton').click(function () {
+        var keys = $('#grid tr.success').attr('rowid');
+    })});
