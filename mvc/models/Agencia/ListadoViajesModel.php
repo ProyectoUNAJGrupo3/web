@@ -4,6 +4,6 @@ namespace app\models\Agencia;
 
 use yii\base\Model;
 
-class ListaViajesTurnoNocheModel extends Model {
+class ListadoViajesModel extends Model {
     
 }
