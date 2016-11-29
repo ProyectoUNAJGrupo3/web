@@ -111,10 +111,11 @@ initializeCenteredMap(agenciaCoord)",\yii\web\View::POS_READY);
                             <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos,['prompt'=>'Seleccione vehiculo'])?>
 
                             <div class="btn-group">
-                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {
+                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-success','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {
 $("#processmodal").modal("hide");
 });']); ?>
-                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary btn-lg']) ?>
+                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary']) ?>
+                                <?= Html::a('Ver Solicitudes', ['/recepcionista/listasolicitudes'], ['class'=>'btn btn-primary']) ?>
                             </div>
                         </fieldset>
                     </div>
