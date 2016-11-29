@@ -68,7 +68,6 @@ class ClienteController extends Controller {
 
     public function actionIndex() {
         $model = new SolicitudRemiseriaModel();
-        $pusher = Yii::$app->pusher;
         if ($model->load(Yii::$app->request->post()) && ($model->GuardarViaje() === true)) {
 
             //$data['message'] = 'hello world';
