@@ -24,6 +24,7 @@ class AppAssetRecepcionista extends AssetBundle {
     public $js = [
         //'js/Viajes_Administrar.js',
         'js/ViajesModal.js',
+        'js/recepcionistaModal.js',
         'js/ViajesGrid_Mapas.js',
         'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry'
     ];
