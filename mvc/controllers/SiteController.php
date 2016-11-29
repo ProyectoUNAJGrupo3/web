@@ -15,6 +15,7 @@ use app\models\PSFormularioUsuarioModel;
 use app\models\PSFormularioSolicitudRegistrarAgencia;
 use app\models\InvalidoUsuarioModel;
 use app\models\RecuperarContraseniaModel;
+use app\models\NuevaContraseniaModel;
 
 class SiteController extends Controller {
 
@@ -174,8 +175,7 @@ class SiteController extends Controller {
             if (Yii::$app->user->identity->Estado == 1) {                            //se evalua si la cuenta esta validada, si ==1 es invalidada
                 Yii::$app->user->logout();                                          //se cierra la sesion y se muestra un mensaje
                 return $this->render('VistaInvalidoUsuarioDesdeLogin');
-    //            Yii::$app->session->setFlash('UsuarioNoValidado');
-    //            return $this->refresh();
+
             } else {
                 if (TipoUsuario::usuarioAdministrador(Yii::$app->user->identity->RolID)) {         //Se evalua el tipo de usuario enviandole el rolID del usuario logueado, que se almaceno en una variable de sesion de yii y se accede de esta manera Yii::$app->user->identity->RolID
                     return $this->redirect(['site/administrador']);
@@ -307,10 +307,46 @@ class SiteController extends Controller {
         $model = new InvalidoUsuarioModel();
         return $this->render("VistaInvalidoUsuarioDesdeLogin", ['model' => $model]);
     }
-    
+
     public function actionRecuperar_contrasenia() {
         $model = new RecuperarContraseniaModel();
+        if ($model->load(Yii::$app->request->post()) && ($model->buscarUsuario() === true)) {
+
+            $authKey = urlencode(uniqid());         // codigo unico generado
+            $id = urlencode((string) $model->personaID);                          //Tomo el id de la persona registrada y lo transformo en codigo url
+            $subject = "Nueva contraseña";
+            $body = "<h1>Haga click en el siguiente enlace para poder ingresar una contraseña nueva para su cuenta</h1>";
+            $server = $_SERVER['SERVER_NAME'];
+            if ($server === "localhost"){
+                $link = "http://" . $server .":".$_SERVER['SERVER_PORT']. Url::toRoute("site/nueva_contrasenia")."&id=" . $id."&key=".$authKey;     //url de enlace que direcciona al action setear la nueva contrasenia
+            }
+            else{
+                $link = "http://" . $_SERVER['SERVER_NAME'] . Url::toRoute("site/nueva_contrasenia")."&id=" . $id."&key=".$authKey;     //url de enlace que direcciona al action para setear la nueva contrasenia
+            }
+            $body .= "<a href='" . $link . "'>Ingrese nueva contraseña</a>";
+            Yii::$app->mailer->compose()
+                    ->setTo($model->correo)
+                    ->setFrom(Yii::$app->params["adminEmail"])
+                    ->setSubject($subject)
+                    ->setHtmlBody($body)
+                    ->send();
+            Yii::$app->session->setFlash($model->msj);
+            return $this->refresh();
+        }
+
         return $this->render("RecuperarContrasenia", ['model' => $model]);
+    }
+    public function actionNueva_contrasenia(){
+        $model = new NuevaContraseniaModel();
+        if (Yii::$app->request->get()) {
+
+            $id = Html::encode($_GET["id"]);
+            (int) $id;
+            if ($model->load(Yii::$app->request->post()) && ($model->ModificarRegistro($id) === true)) {
+                Yii::$app->session->setFlash('SeteoExitoso');
+            }
+        }
+        return $this->render("NuevaContrasenia", ['model'=>$model]);
     }
 
     private function actionAgregando() {
