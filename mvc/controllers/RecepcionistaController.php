@@ -57,7 +57,8 @@ class RecepcionistaController extends Controller {
         ],
         ];*/
     }
-    public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
+    public function actionIndex() {
+        $lala= Yii::$app->user->identity->AgenciaID;
         return $this->redirect(['alta_viaje_manual']);
     }
     public function actionAlta_viaje_manual() {                      //renderiza el index de la carpeta agencia dentro de views

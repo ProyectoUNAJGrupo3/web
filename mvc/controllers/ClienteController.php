@@ -15,6 +15,8 @@ use app\models\Usuario\ListaHistorialCalificacionesUsuarioModel;
 use app\models\Usuario\CalificacionServicioModel;
 use app\models\Agencia\ViajesGridModel;
 use app\models\Agencia\GridModel;
+use app\controllers\PusherController;
+
 
 class ClienteController extends Controller {
 
@@ -66,7 +68,11 @@ class ClienteController extends Controller {
 
     public function actionIndex() {
         $model = new SolicitudRemiseriaModel();
+        $pusher = Yii::$app->pusher;
         if ($model->load(Yii::$app->request->post()) && ($model->GuardarViaje() === true)) {
+
+            //$data['message'] = 'hello world';
+            //$pusher->trigger('my_channel', 'my_event', $data);
             return $this->redirect(['cliente/listar_historial_viajes']);
         }
         return $this->render("index", ['model' => $model]);

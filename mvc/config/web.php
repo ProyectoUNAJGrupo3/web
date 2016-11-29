@@ -32,10 +32,16 @@ $config = [
 			'port' => '587',
 			'encryption' => 'tls',
 			],
-
-
-
         ],
+     'pusher' => [
+            'class'     => 'br0sk\pusher\Pusher',
+            //Mandatory parameters
+            'appId'     => '275025',
+            'appKey'    => 'e8fe2051103b337d6497',
+            'appSecret' => 'b817f1a5ba24579406fb',
+            //Optional parameter
+            'options'   => ['encrypted' => false]
+      ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -53,7 +59,7 @@ $config = [
             'rules' => [
             ],
         ],
-         */
+          */
     ],
     'params' => $params,
 ];
