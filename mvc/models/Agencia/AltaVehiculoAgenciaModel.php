@@ -10,7 +10,6 @@ class AltaVehiculoAgenciaModel extends Model {
     public $marca;
     public $modelo;
     public $patente;
-    public $numeroSeguro;
     public $listaEstado;
 
     public function rules() {
@@ -28,7 +27,6 @@ class AltaVehiculoAgenciaModel extends Model {
             ['patente', 'match', 'pattern' => '/^[a-zA-Z 0-9]*$/', 'message' => 'Ingrese solo letras y números'],
             ['patente', 'match', 'pattern' => '/^.{6,9}$/', 'message' => 'Patente inválida'],
             ['listaEstado', 'safe', 'message' => 'Campo obligatorio'],
-            ['lsitaConductor', 'safe', 'message' => 'Campo obligatorio'],
         ];
     }
     public function registrarvehiculo()

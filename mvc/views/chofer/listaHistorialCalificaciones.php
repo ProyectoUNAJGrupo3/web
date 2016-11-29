@@ -5,7 +5,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\assets\AppAssetCliente;
+use app\assets\AppAssetChofer;
 //use app\assets\AppAssetWebSite;
 use yii\grid\GridView;
 use yii\helpers\BaseHtml;
@@ -19,22 +19,21 @@ use app\assets\BootswatchAsset;
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 /*BootswatchAsset::register($this);*/
 AppAsset::register($this);
-AppAssetCliente::register($this);
+AppAssetChofer::register($this);
 //AppAssetWebSite::register($this);
-/* @var $this yii\web\View */
-//$this->title = 'RemisYa';
+
 ?>
 <!--<div class="container">-->
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h4 class="panel-title">&ensp; &ensp;  Historial de Calificaciones</h4>
-        </div>
-        <div class="container">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="table-responsive">
-                        <!-- <div class="well bs-component">-->
-                        <?=
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title">&ensp; &ensp;  Historial de Calificaciones</h4>
+    </div>
+    <div class="container">
+        <div class="panel-body">
+            <div class="row">
+                <div class="table-responsive">
+                    <!-- <div class="well bs-component">-->
+                    <?=
                     GridView::widget([
                         'dataProvider' => $model->dataProvider,
                         'tableOptions' => ['class' => 'table table-bordered table-hover', 'style'=>'border-collapse: collapse; border: 3px solid #df691a; '],
@@ -43,7 +42,6 @@ AppAssetCliente::register($this);
                            ['class'  => 'yii\grid\CheckboxColumn','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Calificante</h5>','attribute' => 'Calificante','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Calificado</h5>','attribute' => 'Calificado','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Agencia</h5>','attribute' => 'AgenciaNombre','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Fecha</h5>','attribute' => 'Fecha','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Puntaje</h5>','attribute' => 'Puntaje','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Comentario</h5>','attribute' => 'Comentario','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
@@ -53,9 +51,9 @@ AppAssetCliente::register($this);
                                return ['rowid' => $key, 'onclick' => '$(this).addClass("success").siblings().removeClass("success");','style' => 'cursor:pointer'];
                            },
                         ]);
-                        ?>
-                    </div>
+                    ?>
                 </div>
             </div>
         </div>
+    </div>
 </div>

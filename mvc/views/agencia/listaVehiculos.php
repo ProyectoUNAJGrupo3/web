@@ -79,18 +79,19 @@ Modal::end();
                         ['header' => '<h5>Marca</h5>','attribute' => 'Marca','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                         ['header' => '<h5>Modelo</h5>','attribute' => 'Modelo','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                         ['header' => '<h5>Matricula</h5>','attribute' => 'Matricula','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-                    ],
+                        ['header' => '<h5>Estado</h5>','attribute' => 'Estado','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                        ],
                        'rowOptions' => function ($model, $key, $index, $grid) {
                            return ['rowid' => $key, 'onclick' => '$(this).addClass("success").siblings().removeClass("success");','style' => 'cursor:pointer'];
                        },
                ]);
                         ?>
                         <div id='botones-group'>
-                            <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_telefonista_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
+                            <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_vehiculo_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::Button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_recepcionista_agencia'),'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
+                            <?= Html::Button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_vehiculo_agencia'),'valor'=> 'actualizar','name' => 'submit', 'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary btn-lg','name' => 'submit', 'value' => 'Eliminar']); ?>
+                            <?= Html::Button('Eliminar', ['class' => 'btn btn-primary btn-lg','name' => 'submit', 'valor' => 'eliminar', 'id' => 'eliminarButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <?= Html::a('Cerrar', [('/agencia/index')],['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
                         </div>

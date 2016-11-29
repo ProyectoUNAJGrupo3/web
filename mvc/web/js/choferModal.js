@@ -1,4 +1,4 @@
-$(function () {
+﻿$(function () {
     $('#buttonAbrirCalificacion').click(function () {
         var keys = $('#grid').yiiGridView('getSelectedRows'); //var keys = $('#grid tr.success').attr('rowid'); 
         $.ajax({
@@ -29,11 +29,3 @@ $(function () {
         $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
     });
 });
-/*
-$(function () {
-    $('#modalButton').click(function () {
-        $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-    }
-    )
-});
-*/
