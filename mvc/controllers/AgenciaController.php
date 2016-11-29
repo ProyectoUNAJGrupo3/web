@@ -117,23 +117,25 @@ class AgenciaController extends Controller {
     public function actionActualizar_vehiculo_agencia() {
         if (isset(Yii::$app->session['actualizar'])) {
             $param = Yii::$app->session['actualizar'];
-        } else {
+        }
+        else {
             $param = null;
         }
 
         $model = new ActualizarVehiculoAgenciaModel();
-        if ($model->load(Yii::$app->request->post()) && ($model->modificarrecepcionista($param['PersonaID']) === true)) {
-            Yii::$app->session->setFlash('Recepcionista actualizado con exito');
-            return $this->redirect(['agencia/listar_choferes_agencia']);
+        if ($model->load(Yii::$app->request->post()) && ($model->modificarvehiculo($param['VehiculoID']) === true)) {
+            Yii::$app->session->setFlash('Vehiculo actualizado con exito');
+            return $this->redirect(['agencia/listar_vehiculo_agencia']);
         }
-        $model->setrecepcionista($param);
+        $model->setvehiculo($param);
         return $this->renderAjax("actualizarVehiculo", ['model' => $model]);
     }
 
     public function actionActualizar_chofer_agencia() {
         if (isset(Yii::$app->session['actualizar'])) {
             $param = Yii::$app->session['actualizar'];
-        } else {
+        }
+        else {
             $param = null;
         }
         $model = new ActualizarChoferModel();
@@ -149,37 +151,41 @@ class AgenciaController extends Controller {
     public function actionActualizar_recepcionista_agencia() {
         if (isset(Yii::$app->session['actualizar'])) {
             $param = Yii::$app->session['actualizar'];
-        } else {
+        }
+        else {
             $param = null;
         }
         $model = new ActualizarRecepcionistaModel();
         if ($model->load(Yii::$app->request->post()) && ($model->modificarrecepcionista($param['PersonaID']) === true)) {
             Yii::$app->session->setFlash('Recepcionista actualizado con exito');
-            return $this->redirect(['agencia/listar_choferes_agencia']);
+            return $this->redirect(['agencia/listar_recepcionistas_agencia']);
         }
         $model->setrecepcionista($param);
         return $this->render("actualizarRecepcionista", ['model' => $model]);
     }
-
     //**************************************************************************//
     //******************************Listar**************************************//
 
     public function actionListar_choferes_agencia() {
         $model = new GridModel();
         $model->setDataProviderChofer();
-        if (\Yii::$app->request->isPost) {
+        if (\Yii::$app->request->isPost)  {
             if (\Yii::$app->request->isAjax) {
-                $selection = (array) Yii::$app->request->post('keylist');
-                $personaselected = $model->dataProvider->allModels[$selection[0]];
+            switch (\Yii::$app->request->post('operaciones')){
+                case 'actualizar':
+                $selection=(array)Yii::$app->request->post('keylist');
+                $personaselected=$model->dataProvider->allModels[$selection[0]];
                 Yii::$app->session['actualizar'] = $personaselected;
-            } else {
+                break;
 
-                $selection = (array) Yii::$app->request->post('selection');
+                case 'eliminar':
+                $selection =(array)Yii::$app->request->post('keylist');
                 $personaSelected = $model->dataProvider->allModels[$selection[0]];
                 $model->eliminarEmpleado($personaSelected);
                 Yii::$app->session->setFlash('Chofer eliminado con exito');
                 return $this->refresh();
             }
+          }
         }
         return $this->render("listaChoferes", ['model' => $model]);
     }
@@ -187,18 +193,22 @@ class AgenciaController extends Controller {
     public function actionListar_recepcionistas_agencia() {
         $model = new GridModel();
         $model->setDataProviderrecepcionista();
-        if (\Yii::$app->request->isPost) {
+        if (\Yii::$app->request->isPost)  {
             if (\Yii::$app->request->isAjax) {
-                $selection = (array) Yii::$app->request->post('keylist');
-                $personaselected = $model->dataProvider->allModels[$selection[0]];
-                Yii::$app->session['actualizar'] = $personaselected;
-            } else {
+                switch (\Yii::$app->request->post('operaciones')){
+                    case 'actualizar':
+                        $selection=(array)Yii::$app->request->post('keylist');
+                        $personaselected=$model->dataProvider->allModels[$selection[0]];
+                        Yii::$app->session['actualizar'] = $personaselected;
+                        break;
 
-                $selection = (array) Yii::$app->request->post('selection');
-                $personaSelected = $model->dataProvider->allModels[$selection[0]];
-                $model->eliminarEmpleado($personaSelected);
-                Yii::$app->session->setFlash('Recepcionista eliminado con exito');
-                return $this->refresh();
+                    case 'eliminar':
+                        $selection =(array)Yii::$app->request->post('selection');
+                        $personaSelected = $model->dataProvider->allModels[$selection[0]];
+                        $model->eliminarEmpleado($personaSelected);
+                        Yii::$app->session->setFlash('Recepcionista eliminado con exito');
+                        return $this->refresh();
+                }
             }
         }
         return $this->render("listaRecepcionistas", ['model' => $model]);
@@ -207,17 +217,22 @@ class AgenciaController extends Controller {
     public function actionListar_vehiculo_agencia() {
         $model = new GridModel();
         $model->setDataProvidervehiculo();
-        if (\Yii::$app->request->isPost) {
+        if (\Yii::$app->request->isPost)  {
             if (\Yii::$app->request->isAjax) {
-                $selection = (array) Yii::$app->request->post('keylist');
-                $personaselected = $model->dataProvider->allModels[$selection[0]];
-                Yii::$app->session['actualizar'] = $personaselected;
-            } else {
-                $selection = (array) Yii::$app->request->post();
-                $vehiculoSelected = $model->dataProvider->allModels[$selection[0]];
-                $model->eliminarvehiculo($vehiculoSelected);
-                Yii::$app->session->setFlash('Vehiculo eliminado con exito');
-                return $this->refresh();
+                switch (\Yii::$app->request->post('operaciones')){
+                    case 'actualizar':
+                        $selection=(array)Yii::$app->request->post('keylist');
+                        $personaselected=$model->dataProvider->allModels[$selection[0]];
+                        Yii::$app->session['actualizar'] = $personaselected;
+                        break;
+
+                    case 'eliminar':
+                        $selection =(array) Yii::$app->request->post();
+                        $vehiculoSelected = $model->dataProvider->allModels[$selection[0]];
+                        $model->eliminarvehiculo($vehiculoSelected);
+                        Yii::$app->session->setFlash('Vehiculo eliminado con exito');
+                        return $this->refresh();
+                }
             }
         }
         return $this->render("listaVehiculos", ['model' => $model]);
@@ -237,7 +252,6 @@ class AgenciaController extends Controller {
         $model = new ListadoViajesModel();
         return $this->render("listadoViajes", ['model' => $model]);
     }
-
     public function actionListar_viajes_totales_agencia() {
 
         $model = new ViajesGridModel();
