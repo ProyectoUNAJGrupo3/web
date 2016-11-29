@@ -45,7 +45,7 @@ AppAssetCliente::register($this);
                 <?= $form->field($model, 'comentario')->textArea(['rows' => 7, 'column' => 4])->label('Comentario'); ?>
                 <div id='botones-group'>
                     <?= Html::submitButton('Calificar', ['class' => 'btn btn-primary', 'id' => 'btn-carga-calificacion']); ?>
-                    <?= Html::a('Cancelar', [('/cliente/listar_historial_viajes')],['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
+                    <?= Html::a('Cancelar', [('/cliente/lista_historial_viajes')],['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
                  </div>
                 <?php ActiveForm::end(); ?>
 
