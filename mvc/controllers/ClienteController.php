@@ -93,7 +93,7 @@ class ClienteController extends Controller {
         }
     }*/
 
-    public function actionListar_historial_calificaciones() {
+    public function actionLista_historial_calificaciones() {
         $model = new ListaHistorialCalificacionesUsuarioModel();
         $model->setDataProvider();
         return $this->render("listaHistorialCalificaciones", ['model' => $model]);
@@ -110,12 +110,12 @@ class ClienteController extends Controller {
         }
         if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion() === true)) {
             Yii::$app->session->setFlash('Calificacion Exitosa!');
-            return $this->redirect(['cliente/listar_historial_calificaciones']);
+            return $this->redirect(['cliente/lista_historial_calificaciones']);
             }
         return $this->renderAjax("calificarServicio", ['model' => $model]);
     }
 
-    public function actionListar_historial_viajes() {
+    public function actionLista_historial_viajes() {
         $model = new ListaHistorialViajesUsuarioModel();
         $model->setDataProvider();
         if (\Yii::$app->request->isPost)  {

@@ -52,19 +52,14 @@ $this->title = 'Usuario';
                     ['label' => '<span class="fa fa-car"></span> ' . Html::encode('Solicitar Servicio'), 'url' => ['/cliente/index']],
                     ['label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_viajes'],],
-                        //['label' => 'Solictar Servicio', 'url' => ['/cliente/solicitar_servicio_remis'],],
-                        //'<li class="divider"></li>',
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/lista_historial_viajes'],],
                      ],
                     ],
                     ['label' => '<span class="fa fa-star"></span> ' . Html::encode('Calificaciones'), 'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/listar_historial_calificaciones'],],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/cliente/lista_historial_calificaciones'],],
                         ],
                     ],
-                    ['label' => '<span class="fa fa-eye"></span> ' . Html::encode('Servicio Remisería'), 'items' => [
-                            ['label' => '<span class="fa fa-star"></span> ' . Html::encode('Calificar Servicio'), 'url' => ['/cliente/calificar_servicio_remis'],],
-                        ],
-                    ],
+
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']
                             ['label' => 'Login', 'url' => ['/site/login']]
