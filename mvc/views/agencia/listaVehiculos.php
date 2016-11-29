@@ -86,11 +86,11 @@ Modal::end();
                ]);
                         ?>
                         <div id='botones-group'>
-                            <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_telefonista_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
+                            <?= Html::button('Agregar', ['value' => Url::toRoute('agencia/alta_vehiculo_agencia'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::Button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_recepcionista_agencia'),'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
+                            <?= Html::Button('Actualizar', ['value' => Url::toRoute('agencia/actualizar_vehiculo_agencia'),'name' => 'actualizar', 'class' => 'btn btn-primary btn-lg', 'id' => 'actualizarButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary btn-lg','name' => 'submit', 'value' => 'Eliminar']); ?>
+                            <?= Html::submitButton('Eliminar', ['class' => 'btn btn-primary btn-lg','name' => 'eliminar', 'id' => 'eliminarButton']); ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <?= Html::a('Cerrar', [('/agencia/index')],['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
                         </div>

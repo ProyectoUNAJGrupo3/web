@@ -43,10 +43,22 @@ class ActualizarRecepcionistaModel extends Model {
         ];
     }
 
-    public function registrarrecepcionista() {
-        $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
+    public function setrecepcionista($parametro) {
+
+        $this->nombre = $parametro['Nombre'];
+        $this->apellido = $parametro['Apellido'];
+        $this->dni = $parametro['Documento'];
+        $this->telefono = $parametro['Telefono'];
+        $this->usuario = $parametro['Usuario'];
+        $this->contrasenia = $parametro['Password'];
+        $this->confirmarContrasenia = $parametro['Password'];
+
+    }
+    public function modificarrecepcionista($id)
+    {
+        $model = new PersonasModelo();
         $app = Yii::$app->user->identity->AgenciaID;
-        $model->RegistrarPersona("'$this->nombre'", "'$this->apellido'", "'$this->usuario'", "'$this->contrasenia'", "'$this->telefono'", null, "''", "''", "'0'", "'0'", "'2'", "'$this->dni'", "'$app'"); //genera el alta del recepcionista y lo guarda
+        $model->ModificarPersona("'$id'","'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'",null,"''","''","''","'0'","'0'","'3'","'$this->dni'","'$app'"); //genera el alta del chofer y lo guarda
         return true;
     }
 
