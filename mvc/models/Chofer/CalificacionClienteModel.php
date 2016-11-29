@@ -2,17 +2,15 @@
 
 namespace app\models\Chofer;
 
+use yii;
 use yii\base\Model;
+use app\models\CapaServicio\CalificacionesModelo;
 
-class CalificacionUsuarioModel extends Model {
-    /* public $numeroViaje;
-      public $nombreUsuario;
-      public $nombreChofer; */
+class CalificacionClienteModel extends Model {
 
     public $puntaje;
-    //public $fecha;
-    //dropDownList tipo empleado
     public $comentario;
+    public $viajeSelected;
 
     public function rules() {
         return[
@@ -22,10 +20,21 @@ class CalificacionUsuarioModel extends Model {
             //['nombreUsuario', 'required', 'message' => 'Campo obligatorio'],
             //['nombreChofer', 'required', 'message' => 'Campo obligatorio'],
             ['puntaje', 'required', 'message' => 'Campo obligatorio'],
-            // ['fecha', 'required', 'message' => 'Campo obligatorio'],
             ['comentario', 'required', 'message' => 'Campo obligatorio'],
-                //['comentario', 'match', 'pattern' => '/^[a-zA-Z_ 0-9]\d*$/', 'message' => 'Ingrese solo números'],
         ];
+    }
+    public function setUpdateInfo($viajeSelected){
+        $this->viajeSelected = $viajeSelected;
+    }
+
+    public function setCalificacion(){
+        $calificacion = new CalificacionesModelo();
+        $fechaCalificacion = date('Y-m-d H:i:s');
+        //$IDpersona = Yii::$app->user->identity->PersonaID;
+        // $IDagencia = Yii::$app->user->identity->AgenciaID;
+
+        $calificacion->RegistrarCalificacion($this->viajeSelected['ViajeID'], $this->viajeSelected['ChoferID'], $this->viajeSelected['ClienteID'],"'$this->puntaje'","'$fechaCalificacion'", "'$this->comentario'", $this->viajeSelected['AgenciaID']);
+        //RegistrarCalificacion($ViajeID, $Quien, $ParaQuien, $Puntaje, $Fecha, $Comentario, $AgenciaID)
     }
 
 }

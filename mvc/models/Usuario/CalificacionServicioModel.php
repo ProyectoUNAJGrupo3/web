@@ -1,7 +1,6 @@
 <?php
 
 namespace app\models\Usuario;
-
 use yii;
 use yii\base\Model;
 use app\models\CapaServicio\CalificacionesModelo;
@@ -15,6 +14,15 @@ class CalificacionServicioModel extends Model {
     //public $fecha;
     //dropDownList tipo empleado
     public $comentario;
+    public $viajeSelected;
+
+    public $viajeID;
+    public $Quien;
+    public $ParaQuien;
+    //public $Puntaje;
+    public $Fecha;
+    //public $Comentario;
+    public $AgenciaID;
 
     public function rules() {
         return[
@@ -30,8 +38,18 @@ class CalificacionServicioModel extends Model {
         ];
     }
 
-    public function setCalificaciones(){
+    public function setUpdateInfo($viajeSelected){
+        $this->viajeSelected = $viajeSelected;
+    }
 
+    public function setCalificacion(){
+        $calificacion = new CalificacionesModelo();
+        $fechaCalificacion = date('Y-m-d H:i:s');
+        //$IDpersona = Yii::$app->user->identity->PersonaID;
+       // $IDagencia = Yii::$app->user->identity->AgenciaID;
+
+        $calificacion->RegistrarCalificacion(/*"'1'"*/$this->viajeSelected['ViajeID'], /*"'4'"*/$this->viajeSelected['ClienteID'], /*"'3'"*/$this->viajeSelected['ChoferID'],"'$this->puntaje'","'$fechaCalificacion'", "'$this->comentario'", $this->viajeSelected['AgenciaID']);
+        //RegistrarCalificacion($ViajeID, $Quien, $ParaQuien, $Puntaje, $Fecha, $Comentario, $AgenciaID)
     }
 }
 
