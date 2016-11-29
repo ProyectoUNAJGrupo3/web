@@ -41,5 +41,24 @@ class ActualizarChoferModel extends Model {
             ['confirmarContrasenia', 'compare', 'compareAttribute' => 'contrasenia', 'on' => 'register', 'message' => 'Las constraseñas deben Coincidir'],
         ];
     }
+    public function setchofer($parametro) {
+
+    $this->nombre = $parametro['Nombre'];
+    $this->apellido = $parametro['Apellido'];
+    $this->dni = $parametro['Documento'];
+    $this->telefono = $parametro['Telefono'];
+    $this->usuario = $parametro['Usuario'];
+    $this->contrasenia = $parametro['Password'];
+    $this->confirmarContrasenia = $parametro['Password'];
+
+    }
+    public function modificarchofer($id)
+    {
+        $model = new PersonasModelo();
+        $app = Yii::$app->user->identity->AgenciaID;
+        $model->ModificarPersona("'$id'","'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'",null,"''","''","''","'0'","'0'","'3'","'$this->dni'","'$app'"); //genera el alta del chofer y lo guarda
+        return true;
+    }
 
 }
+

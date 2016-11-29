@@ -3,6 +3,8 @@
 namespace app\models\Agencia;
 
 use yii\base\Model;
+use app\models\CapaServicio\VehiculosModelo;
+use yii;
 
 class ActualizacionVehiculoModel extends Model {
 
@@ -10,9 +12,7 @@ class ActualizacionVehiculoModel extends Model {
     public $modelo;
     public $patente;
     public $anio;
-    public $numeroSeguro;
     public $estado;
-    public $conductor;
 
     public function rules() {
         return[
@@ -21,15 +21,15 @@ class ActualizacionVehiculoModel extends Model {
             ['marca', 'required', 'message' => 'Campo obligatorio'],
             ['marca', 'match', 'pattern' => '/^[a-zA-Z_ ]*$/', 'message' => 'Ingrese solo letras'],
             ['marca', 'match', 'pattern' => '/^.{3,20}$/', 'message' => 'Ingrese como mínimo 3 y como máximo 20 letras'],
-            
+
             ['modelo', 'required', 'message' => 'Campo obligatorio'],
             ['modelo', 'match', 'pattern' => '/^[a-zA-Z0-9_ ]*$/', 'message' => 'Ingrese solo letras'],
             ['modelo', 'match', 'pattern' => '/^.{3,50}$/', 'message' => 'Ingrese como mínimo 3 y como máximo 50 letras'],
-            
+
             ['patente', 'required', 'message' => 'Campo obligatorio'],
             ['patente', 'match', 'pattern' => '/^[a-zA-Z0-9_ ]*$/', 'message' => 'Ingrese solo letras y números'],
             ['patente', 'match', 'pattern' => '/^.{6,20}$/', 'message' => 'Ingrese como mínimo 6 y como máximo 20 letras'],
-            
+
             ['anio', 'required', 'message' => 'Campo obligatorio'],
             ['anio', 'match', 'pattern' => '/^[0-9]*$/', 'message' => 'Ingrese solo números'],
             ['anio', 'match', 'pattern' => '/^.{4,4}$/', 'message' => 'Ingrese un año válico'],
@@ -39,10 +39,26 @@ class ActualizacionVehiculoModel extends Model {
             ['numeroSeguro', 'required', 'message' => 'Campo obligatorio'],
             ['numeroSeguro', 'match', 'pattern' => '/^[1-9]\d*$/', 'message' => 'Ingrese solo números'],
             ['numeroSeguro', 'match', 'pattern' => '/^.{8,20}$/', 'message' => 'Ingrese como mínimo 8 y como máximo 20 números'],
-            
+
             ['listaEstado', 'safe', 'message' => 'Campo obligatorio'],
             ['lsitaConductor', 'safe', 'message' => 'Campo obligatorio'],
         ];
+    }
+    public function setvehiculo($parametro) {
+
+        $this->marca = $parametro['Nombre'];
+        $this->modelo  = $parametro['Apellido'];
+        $this->patente = $parametro['Documento'];
+        $this->anio  = $parametro['Telefono'];
+        $this->estado = $parametro['Usuario'];
+
+    }
+    public function modificarrecepcionista($id)
+    {
+        $model = new VehiculosModelo();
+        $app = Yii::$app->user->identity->AgenciaID;
+        $model->ModificarVehiculo("'$id'","'$this->patente'","'$this->modelo'","'$this->marca'","'$this->listaEstado'",null,null,"'$app'"); //genera el alta del chofer y lo guarda
+        return true;
     }
 
 }
