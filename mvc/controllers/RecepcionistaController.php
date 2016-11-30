@@ -58,7 +58,6 @@ class RecepcionistaController extends Controller {
         ];*/
     }
     public function actionIndex() {
-        $lala= Yii::$app->user->identity->AgenciaID;
         return $this->redirect(['alta_viaje_manual']);
     }
     public function actionAlta_viaje_manual() {                      //renderiza el index de la carpeta agencia dentro de views
@@ -68,11 +67,12 @@ class RecepcionistaController extends Controller {
         $model->setListVehiculos();
         $model->setTarifa();
         $info = $model->agenciaCoords();
+        $canal= Yii::$app->user->identity->AgenciaID;
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
             Yii::$app->session->setFlash('viajeCreado');
             return $this->refresh();
         }
-        return $this->render("altaViajeManual", ['model' => $model, 'info' => $info]);
+        return $this->render("altaViajeManual", ['model' => $model, 'info' => $info, 'canalAgencia'=>$canal]);
     }
     public function actionActualizarviaje() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ActualizarViajeModel();
