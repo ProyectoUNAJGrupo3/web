@@ -1,6 +1,6 @@
 $(function () {
     $('#buttonAbrirCalificacion').click(function () {
-        var keys = $('#grid').yiiGridView('getSelectedRows'); //var keys = $('#grid tr.success').attr('rowid'); 
+        var keys = $('#grid tr.success').attr('rowid'); 
         $.ajax({
             type: 'post',
             cache: false,
@@ -18,22 +18,3 @@ $(function () {
 
     });
 });
-
-$(function () {
-    $('#btn-carga-calificacion').click(function () {
-        $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-    });
-});
-$(function () {
-    $('#btn-cancelar').click(function () {
-        $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-    });
-});
-/*
-$(function () {
-    $('#modalButton').click(function () {
-        $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-    }
-    )
-});
-*/
