@@ -11,6 +11,7 @@ use app\models\Recepcionista\AutorizarSolicitudModel;
 use app\models\Recepcionista\ListaSolicitudesServicioModel;
 use app\models\Recepcionista\ListaSolicitudesOnlineModel;
 use yii\web\Response;
+use yii\db\Query;
 use yii\widgets\ActiveForm;
 class RecepcionistaController extends Controller {
     public $layout = 'mainRecepcionista';                           //se asocia al layout predeterminado
@@ -65,7 +66,7 @@ class RecepcionistaController extends Controller {
         $model->setDataProvider();
         $model->setListChoferes();
         $model->setListVehiculos();
-        $model->setTarifa(); 
+        $model->setTarifa();
         $info = $model->agenciaCoords();
         $canal= Yii::$app->user->identity->AgenciaID;
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
@@ -126,6 +127,7 @@ class RecepcionistaController extends Controller {
             $model->setUpdateInfo($viajeSelected);
             if ($model->load(Yii::$app->request->post()) && ($model->autorizarSolicitud() === true)) {
                 Yii::$app->session->setFlash('solicitudAutorizada','Solicitud autorizada.');
+                //Yii::$app->pusher->trigger('1','4','Aceptado');
                 return $this->redirect(['listasolicitudes']);
             }
         }
@@ -161,5 +163,23 @@ class RecepcionistaController extends Controller {
         }
         Yii::$app->session->setFlash(Yii::$app->session['operacion'], Yii::$app->session['message']);
         return $this->render('listaSolicitudesOnline', ['model' => $model]);
+    }
+    public function actionClienteslist($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query;
+            $query->select(["PersonaID as id","CONCAT(Apellido, ' ', Nombre) AS text"])
+                ->from('Personas')
+                ->where(['like', 'Apellido', $q])
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => ''];
+        }
+        return $out;
     }
 }
