@@ -22,7 +22,7 @@ class RecepcionistaController extends Controller {
                 'only' => ['index'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                     //el administrador tiene permisos sobre las siguientes acciones
-                    ['actions' => ['index'],
+                    ['actions' => ['index','alta_viaje_manual','actualizarviaje','listaviajes','listasolicitudes','autorizarsolicitud','clienteslist'],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
@@ -37,7 +37,7 @@ class RecepcionistaController extends Controller {
     }
     public function actions() {
         //Control de errores en caso de que se quiera acceder a las acciones de este controlador
-        /*if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
         if (Yii::$app->user->identity->RolID == 1) {                                                                //si el usuario es administrador
         Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
         } elseif (Yii::$app->user->identity->RolID == 2) {
@@ -56,7 +56,7 @@ class RecepcionistaController extends Controller {
         'error' => [
         'class' => 'yii\web\ErrorAction',
         ],
-        ];*/
+        ];
     }
     public function actionIndex() {
         return $this->redirect(['alta_viaje_manual']);
@@ -112,6 +112,12 @@ class RecepcionistaController extends Controller {
                         $model->ViajeOperacion($viajeSelected,$operacion);
                         Yii::$app->session['message'] = "Viaje cancelado correctamente";//GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
                         Yii::$app->session['operacion'] = "viajeCancelado";
+                        break;
+                    case 'enviar':
+                        $operacion = 0;//ENVIAR VIAJE
+                        $model->ViajeOperacion($viajeSelected,$operacion);
+                        Yii::$app->session['message'] = "Viaje enviado correctamente";//GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
+                        Yii::$app->session['operacion'] = "viajeEnviado";
                         break;
                 }
             }

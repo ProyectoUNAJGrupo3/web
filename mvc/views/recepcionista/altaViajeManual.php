@@ -97,12 +97,10 @@ var canal = ". json_encode($canalAgencia).";
 
                             $form->field($model, 'ClienteID')->widget(Select2::classname(), [
     'options' => ['placeholder' => 'Buscar un cliente...'],
-'pluginOptions' => [
+    'language' => 'es',
+    'pluginOptions' => [
     'allowClear' => true,
     'minimumInputLength' => 3,
-    'language' => [
-        'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
-    ],
     'ajax' => [
         'url' => Url::to(['recepcionista/clienteslist']),
         'dataType' => 'json',
@@ -142,17 +140,13 @@ var canal = ". json_encode($canalAgencia).";
                                     <?= $form->field($model, 'CanalVenta')->dropDownList([1 => 'Telefonico', 2 => 'Personal'],['options' => [ 2 => ['selected ' => true]]])->label("Canal de venta") ?>
                                 </div>
                                 <div class="col-md-6">
-                                    <?= $form->field($model, 'TipoViaje')->dropDownList([0 => 'Viaje Normal', 1 => 'Reserva'],['options' => [ 0 => ['selected ' => true]]])->label("Tipo de viaje") ?>
+                                    <?= $form->field($model, 'TipoViaje')->dropDownList([0 => 'Viaje Normal', 4 => 'Reserva'],['options' => [ 0 => ['selected ' => true]]])->label("Tipo de viaje") ?>
                                 </div>
                             </div>
                             <?= $form->field($model, 'Comentario')->textArea(['rows' => '4']) ?>
-                            <div class="btn-group">
-                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-success','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {
-$("#processmodal").modal("hide");
-});']); ?>
-                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary']) ?>
-                                <?= Html::a('Ver Solicitudes', ['/recepcionista/listasolicitudes'], ['class'=>'btn btn-primary']) ?>
-                            </div>
+                            <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-lg btn-primary','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {$("#processmodal").modal("hide");});']); ?>
+                            <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-lg btn-primary']) ?>
+                            <?= Html::a('Ver Solicitudes', ['/recepcionista/listasolicitudes'], ['class'=>'btn btn-lg btn-primary']) ?>
                         </fieldset>
                     </div>
                 </div>
