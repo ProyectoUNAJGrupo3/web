@@ -125,12 +125,11 @@ class RecepcionistaController extends Controller {
         {
             $viajeSelected = Yii::$app->session['autorizar'];
             $model->setUpdateInfo($viajeSelected);
-            Yii::$app->pusher->trigger('1','4','Aceptado');
-            /*if ($model->load(Yii::$app->request->post()) && ($model->autorizarSolicitud() === true)) {
+            if ($model->load(Yii::$app->request->post()) && ($model->autorizarSolicitud() === true)) {
                 Yii::$app->session->setFlash('solicitudAutorizada','Solicitud autorizada.');
-
+                //Yii::$app->pusher->trigger('1','4','Aceptado');
                 return $this->redirect(['listasolicitudes']);
-            }*/
+            }
         }
         else{
             $model->setListChoferes();
