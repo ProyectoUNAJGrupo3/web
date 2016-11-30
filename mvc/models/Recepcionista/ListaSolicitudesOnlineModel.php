@@ -24,6 +24,8 @@ class ListaSolicitudesOnlineModel extends Model {
     public $Choferes;
     public $Vehiculo;
     public $Vehiculos;
+    public $Canal;
+    public $ViajeTipo;
     public $coordenadas;
     public $AgenciaID;
 
@@ -58,24 +60,6 @@ class ListaSolicitudesOnlineModel extends Model {
             $data[$model['VehiculoID']] = $model['Marca'] . ' '. $model['Modelo'];
         $this->Vehiculos = $data;
 
-    }
-    public function registrarViaje()
-    {
-        $model = new ViajesModelo(); //crea un nuevo modelo de personamodelo
-        $this->setTarifa();
-
-        $fechaEmision = date('Y-m-d H:i:s');
-        $fechaViaje = date('Y-m-d H:i:s');
-
-        $viajeCreado = $model->RegistrarViaje($this->Chofer,$this->Vehiculo,$this->TarifaID,$turnoID,$this->AgenciaID,NULL,"'$fechaEmision'","'$fechaViaje'",1,"'$this->origen'","'$this->destino'","'$this->destinoTexto'", "'$this->origenTexto'","'COMENTARIO PRUEBA'", $this->ImporteTotal, $this->Distancia, 0);
-        $viajeCreado = array_shift($viajeCreado);
-        if (!is_null($viajeCreado['_Result']))
-        {
-            $this->Chofer = null;
-            $this->Vehiculo = null;
-            return true;
-        }
-        else return false;
     }
 
     public function ViajeOperacion($viajeSelected,$operacion)

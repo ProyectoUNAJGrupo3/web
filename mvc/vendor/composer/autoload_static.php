@@ -28,9 +28,18 @@ class ComposerStaticInitd68d322733195dcd7f426a9ada23fced
         array (
             'raoul2000\\bootswatch\\' => 21,
         ),
+        'k' => 
+        array (
+            'kartik\\select2\\' => 15,
+            'kartik\\base\\' => 12,
+        ),
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
+        ),
+        'b' => 
+        array (
+            'br0sk\\pusher\\' => 13,
         ),
         'F' => 
         array (
@@ -79,9 +88,21 @@ class ComposerStaticInitd68d322733195dcd7f426a9ada23fced
         array (
             0 => __DIR__ . '/..' . '/raoul2000/yii2-bootswatch-asset',
         ),
+        'kartik\\select2\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2',
+        ),
+        'kartik\\base\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
+        ),
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
+        ),
+        'br0sk\\pusher\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/br0sk/yii2-pusher',
         ),
         'Faker\\' => 
         array (
@@ -106,12 +127,19 @@ class ComposerStaticInitd68d322733195dcd7f426a9ada23fced
         ),
     );
 
+    public static $classMap = array (
+        'Pusher' => __DIR__ . '/..' . '/pusher/pusher-php-server/lib/Pusher.php',
+        'PusherException' => __DIR__ . '/..' . '/pusher/pusher-php-server/lib/Pusher.php',
+        'PusherInstance' => __DIR__ . '/..' . '/pusher/pusher-php-server/lib/Pusher.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitd68d322733195dcd7f426a9ada23fced::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitd68d322733195dcd7f426a9ada23fced::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInitd68d322733195dcd7f426a9ada23fced::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitd68d322733195dcd7f426a9ada23fced::$classMap;
 
         }, null, ClassLoader::class);
     }
