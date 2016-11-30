@@ -36,6 +36,11 @@ Modal::end();
 ?>
 <div class="container">
     <!--<div class="well bs-component">-->
+       <?= $this->registerJs(
+        "$( document ).ready(function() {
+ var channelInfo = ". json_encode($socketInfo).";
+doThePush(channelInfo)});",\yii\web\View::POS_READY);
+ ?>
 
     <?=
     GridView::widget(['id' => 'grid',
