@@ -60,8 +60,8 @@ Modal::end();
             });', \yii\web\View::POS_READY);
 $this->registerJs("var agenciaCoord = ". json_encode($info).";
 var canal = ". json_encode($canalAgencia).";
-initializeCenteredMap(agenciaCoord);
-hearTheEvent(canal);",\yii\web\View::POS_READY);
+ initializeCenteredMap(agenciaCoord);
+ hearTheEvent(canal);",\yii\web\View::POS_READY);
 
                                 ?>
                             </div>
@@ -111,6 +111,14 @@ hearTheEvent(canal);",\yii\web\View::POS_READY);
                             <?= $form->field($model, 'ImporteTotal')->input("text", ['maxlength' => '50','id' => 'importetotal'])->label("Importe aproximado"); ?>
                             <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes,['prompt'=>'Seleccione chofer'])?>
                             <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos,['prompt'=>'Seleccione vehiculo'])?>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'CanalVenta')->dropDownList([1 => 'Telefonico', 2 => 'Personal'],['options' => [ 2 => ['selected ' => true]]])->label("Canal de venta") ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'TipoViaje')->dropDownList([0 => 'Viaje Normal', 1 => 'Reserva'],['options' => [ 0 => ['selected ' => true]]])->label("Tipo de viaje") ?>
+                                </div>
+                            </div>
 
                             <div class="btn-group">
                                 <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-success','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {
