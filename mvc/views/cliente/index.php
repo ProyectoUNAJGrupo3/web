@@ -13,6 +13,7 @@ use yii\bootstrap\Button;
 use yii\bootstrap\Modal;
 use yii\helpers\BaseHtml;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 AppAssetCliente::register($this);
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
@@ -27,6 +28,7 @@ $this->title = 'Service Remis';
 <!--<div class="site-index">
     <div id="contenedor-home">-->
 <div class="panel panel-primary">
+<div id="LoadingBlocker">  <div style="background-image:url(img/Loading.gif)" id="LoadingImage"></div></div>
 
     <div class="panel-heading">
         <h4 class="panel-title">&ensp; &ensp;   BIENVENIDOS A REMIS YA</h4>
@@ -48,6 +50,7 @@ $this->title = 'Service Remis';
                                     <?= $this->registerJs('$(document).ready(function () {
                         initMap(true);
                         $("#btn-ver-remiserias").on("click", function() {doTheAjax()});
+
                         });', \yii\web\View::POS_READY);
                                     ?>
 

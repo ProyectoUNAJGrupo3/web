@@ -36,6 +36,11 @@ Modal::end();
 ?>
 <div class="container">
     <!--<div class="well bs-component">-->
+       <?= $this->registerJs(
+        "$( document ).ready(function() {
+ var channelInfo = ". json_encode($socketInfo).";
+doThePush(channelInfo)});",\yii\web\View::POS_READY);
+ ?>
 
     <?=
     GridView::widget(['id' => 'grid',
@@ -55,7 +60,7 @@ Modal::end();
             'ViajeTipo',
             'Estado',
             /*Probando agregar botones en la gridview*/
-            
+
             [ 'class' => 'yii\grid\ActionColumn',
                 'template' => '{Calificar}',
                 'buttonOptions' => [
@@ -66,6 +71,7 @@ Modal::end();
                 //'class' => 'btn btn-primary',
                 //'id' => 'modalButtonCalificar',
                 //['value' => Url::toRoute('/cliente/calificar_servicio')],
+                //Html::Button('Abrir ventana calificar', ['value' => Url::toRoute('/cliente/calificar_servicio'), 'class' => 'btn btn-primary', 'id' => 'buttonAbrirCalificacion']);
                 ],
             ],
         ],

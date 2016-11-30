@@ -11,6 +11,7 @@ use app\models\Recepcionista\AutorizarSolicitudModel;
 use app\models\Recepcionista\ListaSolicitudesServicioModel;
 use app\models\Recepcionista\ListaSolicitudesOnlineModel;
 use yii\web\Response;
+use yii\db\Query;
 use yii\widgets\ActiveForm;
 class RecepcionistaController extends Controller {
     public $layout = 'mainRecepcionista';                           //se asocia al layout predeterminado
@@ -21,7 +22,7 @@ class RecepcionistaController extends Controller {
                 'only' => ['index'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                     //el administrador tiene permisos sobre las siguientes acciones
-                    ['actions' => ['index'],
+                    ['actions' => ['index','alta_viaje_manual','actualizarviaje','listaviajes','listasolicitudes','autorizarsolicitud','clienteslist'],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
@@ -36,7 +37,7 @@ class RecepcionistaController extends Controller {
     }
     public function actions() {
         //Control de errores en caso de que se quiera acceder a las acciones de este controlador
-        /*if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
+        if (!Yii::$app->user->isGuest) {                                                                              //si el usuario esta logeado, o sea no es invitado
         if (Yii::$app->user->identity->RolID == 1) {                                                                //si el usuario es administrador
         Yii::$app->errorHandler->errorAction = 'agencia/error';                                               //se muestra la pantalla de error de agencia y su respectivo layout
         } elseif (Yii::$app->user->identity->RolID == 2) {
@@ -55,9 +56,9 @@ class RecepcionistaController extends Controller {
         'error' => [
         'class' => 'yii\web\ErrorAction',
         ],
-        ];*/
+        ];
     }
-    public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
+    public function actionIndex() {
         return $this->redirect(['alta_viaje_manual']);
     }
     public function actionAlta_viaje_manual() {                      //renderiza el index de la carpeta agencia dentro de views
@@ -67,11 +68,12 @@ class RecepcionistaController extends Controller {
         $model->setListVehiculos();
         $model->setTarifa();
         $info = $model->agenciaCoords();
+        $canal= Yii::$app->user->identity->AgenciaID;
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
             Yii::$app->session->setFlash('viajeCreado');
             return $this->refresh();
         }
-        return $this->render("altaViajeManual", ['model' => $model, 'info' => $info]);
+        return $this->render("altaViajeManual", ['model' => $model, 'info' => $info, 'canalAgencia'=>$canal]);
     }
     public function actionActualizarviaje() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new ActualizarViajeModel();
@@ -111,6 +113,12 @@ class RecepcionistaController extends Controller {
                         Yii::$app->session['message'] = "Viaje cancelado correctamente";//GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
                         Yii::$app->session['operacion'] = "viajeCancelado";
                         break;
+                    case 'enviar':
+                        $operacion = 0;//ENVIAR VIAJE
+                        $model->ViajeOperacion($viajeSelected,$operacion);
+                        Yii::$app->session['message'] = "Viaje enviado correctamente";//GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
+                        Yii::$app->session['operacion'] = "viajeEnviado";
+                        break;
                 }
             }
         }
@@ -125,6 +133,7 @@ class RecepcionistaController extends Controller {
             $model->setUpdateInfo($viajeSelected);
             if ($model->load(Yii::$app->request->post()) && ($model->autorizarSolicitud() === true)) {
                 Yii::$app->session->setFlash('solicitudAutorizada','Solicitud autorizada.');
+                Yii::$app->pusher->trigger($viajeSelected['AgenciaID'],$viajeSelected['ClienteID'],'Tu Remis Esta en Camino !');
                 return $this->redirect(['listasolicitudes']);
             }
         }
@@ -143,22 +152,40 @@ class RecepcionistaController extends Controller {
                 $viajeSelected=$model->dataProvider->allModels[$selection];
                 Yii::$app->session['autorizar'] = $viajeSelected; //CUANDO LA OPERACION ES ACTUALIZAR LE PASO LA SELECCION A LA OTRA VISTA (POPUP)
                 switch (\Yii::$app->request->post('viajeoperacion')) { //TOMA EL VIAJEOPERACION QUE LE PASA EN EL DATA DEL AJAX
-                    case 'cerrar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
+                    /*case 'cerrar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
                         $operacion = 3;//CERRAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
                         Yii::$app->session['message'] = "Viaje cerrado correctamente"; //GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
                         Yii::$app->session['operacion'] = "viajeCerrado";
-                        break;
-                    case 'cancelar':
+                        break;*/
+                    case 'rechazar':
                         $operacion = 2;//CANCELAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
-                        Yii::$app->session['message'] = "Viaje cancelado correctamente";//GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
-                        Yii::$app->session['operacion'] = "viajeCancelado";
+                        Yii::$app->session['message'] = "Solicitud rechazada correctamente";//GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
+                        Yii::$app->session['operacion'] = "solicitudRechazada";
                         break;
                 }
             }
         }
         Yii::$app->session->setFlash(Yii::$app->session['operacion'], Yii::$app->session['message']);
         return $this->render('listaSolicitudesOnline', ['model' => $model]);
+    }
+    public function actionClienteslist($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query;
+            $query->select(["PersonaID as id","CONCAT(Apellido, ' ', Nombre) AS text"])
+                ->from('Personas')
+                ->where(['like', 'Apellido', $q])
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => ''];
+        }
+        return $out;
     }
 }

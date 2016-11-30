@@ -24,4 +24,6 @@ class ListaHistorialViajesUsuarioModel extends Model {
         return true;
     }
 
+
+
 }

@@ -9,6 +9,7 @@ use app\models\CapaServicio\ViajesModelo;
 use app\models\CapaServicio\ChoferesModelo;
 use app\models\CapaServicio\VehiculosModelo;
 use app\models\CapaServicio\TurnosModelo;
+use app\models\CapaServicio\PersonasModelo;
 use yii\data\ArrayDataProvider;
 
 class ListaSolicitudesServicioModel extends Model {
@@ -32,7 +33,7 @@ class ListaSolicitudesServicioModel extends Model {
 
         $obj = new ViajesModelo();
         $this->dataProvider = new ArrayDataProvider([
-        'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,$this->AgenciaID,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,4),
+        'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,$this->AgenciaID,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,-1),
         'pagination' => [ 'pageSize' => 10 ],
         ]);
 
@@ -76,7 +77,6 @@ class ListaSolicitudesServicioModel extends Model {
         }
         else return false;
     }
-
     public function ViajeOperacion($viajeSelected,$operacion)
     {
         $model = new ViajesModelo(); //crea un nuevo modelo de personamodelo
