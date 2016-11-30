@@ -16,6 +16,8 @@ return array(
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'raoul2000\\bootswatch\\' => array($vendorDir . '/raoul2000/yii2-bootswatch-asset'),
+    'kartik\\select2\\' => array($vendorDir . '/kartik-v/yii2-widget-select2'),
+    'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'br0sk\\pusher\\' => array($vendorDir . '/br0sk/yii2-pusher'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),

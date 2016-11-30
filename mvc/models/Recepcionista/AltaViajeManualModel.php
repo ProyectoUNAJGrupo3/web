@@ -10,6 +10,7 @@ use app\models\CapaServicio\ChoferesModelo;
 use app\models\CapaServicio\VehiculosModelo;
 use app\models\CapaServicio\TarifasModelo;
 use app\models\CapaServicio\AgenciaModelo;
+use app\models\CapaServicio\PersonasModelo;
 use yii\data\ArrayDataProvider;
 
 class AltaViajeManualModel extends Model {
@@ -31,6 +32,7 @@ class AltaViajeManualModel extends Model {
     public $Comentario;
     public $CanalVenta;
     public $TipoViaje;
+    public $ClienteID;
     public function rules() {
         return[
             //([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
@@ -46,6 +48,7 @@ class AltaViajeManualModel extends Model {
             ['Comentario', 'required'],
             ['CanalVenta', 'required'],
             ['TipoViaje', 'required'],
+            ['ClienteID', 'required'],
 
         ];
     }
@@ -103,7 +106,7 @@ class AltaViajeManualModel extends Model {
 
         $fechaEmision = date('Y-m-d H:i:s');
         $fechaViaje = date('Y-m-d H:i:s');
-        $viajeCreado = $model->RegistrarViaje($this->Chofer,$this->Vehiculo,$this->TarifaID,$this->CanalVenta,$this->AgenciaID,NULL,"'$fechaEmision'","'$fechaViaje'",1,"'$this->origen'","'$this->destino'","'$this->destinoTexto'", "'$this->origenTexto'","'$this->Comentario'",str_replace(" $","",$this->ImporteTotal), str_replace(" Km","",$this->Distancia), $this->TipoViaje);
+        $viajeCreado = $model->RegistrarViaje($this->Chofer,$this->Vehiculo,$this->TarifaID,$this->CanalVenta,$this->AgenciaID,$this->ClienteID,"'$fechaEmision'","'$fechaViaje'",1,"'$this->origen'","'$this->destino'","'$this->destinoTexto'", "'$this->origenTexto'","'$this->Comentario'",str_replace(" $","",$this->ImporteTotal), str_replace(" Km","",$this->Distancia), $this->TipoViaje);
         $viajeCreado = array_shift($viajeCreado);
         if (!is_null($viajeCreado['_Result']))
         {
