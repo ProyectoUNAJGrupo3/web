@@ -416,16 +416,19 @@ function setCenter(StringCoord) {
     console.log(latLng);
     map.setCenter(latLng);
 }
-function doThePush(personaID) {
-    //var canal = $('#idAgencia').val();
-    //var pusher = new Pusher('e8fe2051103b337d6497');
 
-    //var notify = pusher.subscribe(canal.toString());
+function doThePush(socketInfo) {
+    if (socketInfo == "") return;
+    var splitedData = socketInfo.split(";");
+    if (splitedData.length != 2 || splitedData[0]=="") return;
+    var pusher = new Pusher('e8fe2051103b337d6497');
+
+    var notify = pusher.subscribe(splitedData[0].toString());
 
 
-    //notify.bind('personaID', function (notification) {
-    //    console.log(notification.message);
-    //    window.alert("Llego una notificacion, confirmaron tu solicitud de un remis. ")
+    notify.bind(splitedData[1], function (notification) {
+        console.log(notification.message);
+        window.alert("Llego una notificacion, confirmaron tu solicitud de un remis. ");
 
-    //});
+    });
 }
