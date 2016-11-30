@@ -65,7 +65,7 @@ class RecepcionistaController extends Controller {
         $model->setDataProvider();
         $model->setListChoferes();
         $model->setListVehiculos();
-        $model->setTarifa();
+        $model->setTarifa(); 
         $info = $model->agenciaCoords();
         $canal= Yii::$app->user->identity->AgenciaID;
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
