@@ -65,7 +65,7 @@ class RecepcionistaController extends Controller {
         $model->setDataProvider();
         $model->setListChoferes();
         $model->setListVehiculos();
-        $model->setTarifa();
+        $model->setTarifa(); 
         $info = $model->agenciaCoords();
         $canal= Yii::$app->user->identity->AgenciaID;
         if ($model->load(Yii::$app->request->post()) && ($model->registrarViaje() === true)) {
@@ -144,17 +144,17 @@ class RecepcionistaController extends Controller {
                 $viajeSelected=$model->dataProvider->allModels[$selection];
                 Yii::$app->session['autorizar'] = $viajeSelected; //CUANDO LA OPERACION ES ACTUALIZAR LE PASO LA SELECCION A LA OTRA VISTA (POPUP)
                 switch (\Yii::$app->request->post('viajeoperacion')) { //TOMA EL VIAJEOPERACION QUE LE PASA EN EL DATA DEL AJAX
-                    case 'cerrar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
+                    /*case 'cerrar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
                         $operacion = 3;//CERRAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
                         Yii::$app->session['message'] = "Viaje cerrado correctamente"; //GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
                         Yii::$app->session['operacion'] = "viajeCerrado";
-                        break;
-                    case 'cancelar':
+                        break;*/
+                    case 'rechazar':
                         $operacion = 2;//CANCELAR
                         $model->ViajeOperacion($viajeSelected,$operacion);
-                        Yii::$app->session['message'] = "Viaje cancelado correctamente";//GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
-                        Yii::$app->session['operacion'] = "viajeCancelado";
+                        Yii::$app->session['message'] = "Solicitud rechazada correctamente";//GUARDO EL MENSAJE FLASH Y LA OPERACION AQUI PARA UTILIZARLA ANTES DEL RENDER YA QUE DE LA FORMA NORMAL NO ME FUNCIONA EN ESTE CASO.
+                        Yii::$app->session['operacion'] = "solicitudRechazada";
                         break;
                 }
             }
