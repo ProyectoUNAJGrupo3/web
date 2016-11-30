@@ -117,7 +117,7 @@ class ClienteController extends Controller {
         }
         $model = new CalificacionServicioModel();
         if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion($viajeSelected) === true)) {
-            Yii::$app->session->setFlash('Calificacion Exitosa!');
+            Yii::$app->session->setFlash('Calificacion Exitosa');
             return $this->redirect(['cliente/lista_historial_calificaciones']);
             }
         $model->setUpdateInfo($viajeSelected);
