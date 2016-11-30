@@ -9,6 +9,7 @@ use app\models\CapaServicio\ViajesModelo;
 use app\models\CapaServicio\ChoferesModelo;
 use app\models\CapaServicio\VehiculosModelo;
 use app\models\CapaServicio\TurnosModelo;
+use app\models\CapaServicio\PersonasModelo;
 use yii\data\ArrayDataProvider;
 
 class ListaSolicitudesServicioModel extends Model {
@@ -76,7 +77,6 @@ class ListaSolicitudesServicioModel extends Model {
         }
         else return false;
     }
-
     public function ViajeOperacion($viajeSelected,$operacion)
     {
         $model = new ViajesModelo(); //crea un nuevo modelo de personamodelo

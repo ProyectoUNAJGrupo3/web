@@ -28,6 +28,11 @@ class ComposerStaticInitd68d322733195dcd7f426a9ada23fced
         array (
             'raoul2000\\bootswatch\\' => 21,
         ),
+        'k' => 
+        array (
+            'kartik\\select2\\' => 15,
+            'kartik\\base\\' => 12,
+        ),
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
@@ -82,6 +87,14 @@ class ComposerStaticInitd68d322733195dcd7f426a9ada23fced
         'raoul2000\\bootswatch\\' => 
         array (
             0 => __DIR__ . '/..' . '/raoul2000/yii2-bootswatch-asset',
+        ),
+        'kartik\\select2\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2',
+        ),
+        'kartik\\base\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
         ),
         'cebe\\markdown\\' => 
         array (
