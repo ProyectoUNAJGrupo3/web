@@ -416,16 +416,16 @@ function setCenter(StringCoord) {
     console.log(latLng);
     map.setCenter(latLng);
 }
-function doThePush() {
-    //var channel = $('#idAgencia').val();
+function doThePush(personaID) {
+    //var canal = $('#idAgencia').val();
     //var pusher = new Pusher('e8fe2051103b337d6497');
 
-    //var notificationsChannel = pusher.subscribe('canal1');
+    //var notify = pusher.subscribe(canal.toString());
 
 
-    //notificationsChannel.bind('evento', function (notification) {
+    //notify.bind('personaID', function (notification) {
     //    console.log(notification.message);
-    //    var message = notification.message;
-    //    $('div.notification').text(message);
+    //    window.alert("Llego una notificacion, confirmaron tu solicitud de un remis. ")
+
     //});
 }
