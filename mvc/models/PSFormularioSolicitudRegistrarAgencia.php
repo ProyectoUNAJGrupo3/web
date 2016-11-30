@@ -70,8 +70,9 @@ class PSFormularioSolicitudRegistrarAgencia extends Model {
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
         $model2 = new AgenciaModelo();
+        $password = crypt($this->contrasenia,Yii::$app->params["salt"]);
         $model2->RegistrarAgencia("'$this->nombreAgencia'","'$this->direccionAgencia'", "'$this->direccionCoordenadas'" , "'$this->telefonoAgencia'", "'$this->emailAgencia'", "'1'","'$this->CUIT'");
-        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->email'",NULL,NULL,"'0'","'1'","'1'","'$this->dni'","''"); //genera el alta del usuario y lo guarda
+        $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$password'","'$this->telefono'","'$this->email'",NULL,NULL,"'0'","'1'","'1'","'$this->dni'","''"); //genera el alta del usuario y lo guarda
 
         return true;
     }

@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
 	$('#actualizarButton').click(function () {
 		var keys = $('#viajes_grid tr.success').attr('rowid');
         $.ajax({
