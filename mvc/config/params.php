@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'empresaremisya@gmail.com',
+    'salt' => '00Está*-@es$una&Frase',
+
 ];

@@ -68,7 +68,7 @@ namespace Faker;
  * @property string $companyEmail
  * @property string $freeEmailDomain
  * @property string $safeEmailDomain
- * @property string $username
+ * @property string $userName
  * @property string $password
  * @method string password($minLength = 6, $maxLength = 20)
  * @property string $domainName

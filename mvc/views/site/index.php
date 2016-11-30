@@ -1,169 +1,96 @@
 <?php
 
-use dosamigos\google\maps\LatLng;
-use dosamigos\google\maps\services\DirectionsWayPoint;
-use dosamigos\google\maps\services\TravelMode;
-use dosamigos\google\maps\overlays\PolylineOptions;
-use dosamigos\google\maps\services\DirectionsRenderer;
-use dosamigos\google\maps\services\DirectionsService;
-use dosamigos\google\maps\overlays\InfoWindow;
-use dosamigos\google\maps\overlays\Marker;
-use dosamigos\google\maps\Map;
-use dosamigos\google\maps\services\DirectionsRequest;
-use dosamigos\google\maps\overlays\Polygon;
-use dosamigos\google\maps\layers\BicyclingLayer;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
-use app\assets\PSCssAsset;
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
+use yii\bootstrap\Modal;
+use app\assets\BootswatchAsset;
+use app\assets\AppAssetPopups;
 
-PSCssAsset::register($this);
-/* @var $this yii\web\View */
-$this->title = 'Service Remis';
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+BootswatchAsset::register($this);
+AppAssetPopups::register($this);
+
+
+Modal::begin([
+    'id' => 'modal',
+    //'size' => 'modal-lg',
+]);
+echo "<div id='modalContent'></div>";
+Modal::end();
 ?>
-<div class="site-index">
 
-    <!--<div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>-->
-
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places"></script>
-
-    <!--<div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>-->
-
-    <div id="contenedor-home">
-
-
-        <div id="titulo">
-            <div>
-                <h1 id="titulo-contenido" size="50px">Bienvenido a RemisYA</h1>
-            </div>
-        </div>
-
-        <div id="descripcion">
-            <strong>
-                <p>
-                    Por medio de la aplicaci&oacute;n usted podr&aacute; solicitar el servicio de remis prestado por las agencias.
-                    Para ello, usted contar&aacute; con la posiblidad de listar las agenias m&aacute;s cercanas y podr&aacute; pedir una prestaci&oacute;n
-                    mediante la opci&oacute;n "Solicitar Servicio Remiseria".
+<div class="wrap" style="background-image:url(img/remis2.jpg)">
+    <br />
+    <br />
+    <br />
+    <div class="jumbotron">
+        <h1>Bienvenidos a RemisYa!</h1>
+        <p>La primera aplicacion web en el mercado pensada para su Agencia y sus clientes..</p>
+        <p>Administre de manera mas eficaz la gestion, minimice costos y errores humanos, aproveche un nuevo canal de ventas.</p>
+        <?php ActiveForm::begin() ?>
+        <p>
+            <?= Html::button('Solicitar Remis', ['value' => Url::toRoute('/site/login'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
+        </p>
+        <?php ActiveForm::end() ?>
+    </div>
+</div>
+<div class="section-tout" style="background-color:#eaf1f1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="caracteristicasTitulo">
+                    <i class="fa fa-thumbs-up"></i>  Satisfacci&oacute;n a los requerimientos de los clientes
+                </h3>
+                <p class="caracteristicas"> Al brindarle una atenci&oacute;n r&aacute;pida y personalizada, pudiendo elegir la remiseria que m&aacute;s le convenga en ubicacion, precio y servicio. Entre otros beneficios, el cliente tiene acceso inmediato a su historial y estad&iacute;sticas de consumo.
                 </p>
-            </strong>
-        </div>
-
-        <div id="bar-buttons">
-            <div id="btn-bar">
-                <?= Html::button('Solicitar Servicio Remiseria', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-solcitar-remis']) ?>
-                <?= Html::button('Listar Remiserias', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-ver-remiserias']) ?>
-                <?= Html::button('Obtener ubicaci&oacute;n en el Mapa', ['class' => 'btn btn-primary', 'name' => 'contact-button', 'id' => 'btn-obtener-ubicacion-en-el-mapa']) ?>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="caracteristicasTitulo">
+                    <i class="fa fa-puzzle-piece"></i>Totalmente adaptable a sus necesidades
+                </h3>
+                <p class="caracteristicas">
+                    Adaptable a sus modalidades operativas y administrativas, ofreciendo la mejor alternativas de funcionamiento para uno o varios equipos y operadores.
+                </p>
             </div>
 
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="caracteristicasTitulo">
+                    <i class="fa fa-sitemap"></i>  Dise&ntilde;o espec&iacute;fico
+                </h3>
+                <p class="caracteristicas">
+                    Con la m&aacute;s amplia gama de plantillas, formularios, desarrollados y optimizados para la mas sencilla y completa administraci&oacute;n de Servicios de Remiser&iacute;a. Un software con m&uacute;ltiples herramientas que le permiten la posibilidad de realizar m&aacute;s tareas en menos tiempo y obtener datos precisos para la toma de decisiones.
+                </p>
+                <br />
+            </div>
 
-            <div id="mapHome"></div>
-            <div id="dvMapHome">
-                <?php
-                $coord = new LatLng(['lat' => 39.720089311812094, 'lng' => 2.91165944519042]);
-                $map = new Map([
-                    'center' => $coord,
-                    'zoom' => 14,
-                ]);
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="caracteristicasTitulo">
+                    <i class="fa fa-line-chart"></i>  Reducci&oacute;n de costos que optimizan las ganancias de negocio
+                </h3>
+                <p class="caracteristicas">
+                    Al posibilitar la disminuci&oacute;n de recursos de personal y tiempo destinados a tareas administrativas, a trav&eacute;s del ordenamiento y automatizaci&oacute;n de dichas tareas y por lo tanto, optimizando las ganancias de negocio.
+                </p>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="caracteristicasTitulo">
+                    <i class="fa fa-shield"></i>  Seguridad
+                </h3>
+                <p class="caracteristicas">
+                    Actualizaci&oacute;n de tecnolog&iacute;a al servicio del cliente. Veh&iacute;culos habilitados y con el seguro correpondiente. Seguimiento de la flota v&iacute;a web. Env&iacute;o de SMS con los datos del m&oacute;vil asignado.
+                </p>
+            </div>
 
-                // lets use the directions renderer
-                $home = new LatLng(['lat' => 39.720991014764536, 'lng' => 2.911801719665541]);
-                $school = new LatLng(['lat' => 39.719456079114956, 'lng' => 2.8979293346405166]);
-                $santo_domingo = new LatLng(['lat' => 39.72118906848983, 'lng' => 2.907628202438368]);
-
-                // setup just one waypoint (Google allows a max of 8)
-                $waypoints = [
-                    new DirectionsWayPoint(['location' => $santo_domingo])
-                ];
-
-                $directionsRequest = new DirectionsRequest([
-                    'origin' => $home,
-                    'destination' => $school,
-                    'waypoints' => $waypoints,
-                    'travelMode' => TravelMode::DRIVING
-                ]);
-
-                // Lets configure the polyline that renders the direction
-                $polylineOptions = new PolylineOptions([
-                    'strokeColor' => '#FFAA00',
-                    'draggable' => true
-                ]);
-
-                // Now the renderer
-                $directionsRenderer = new DirectionsRenderer([
-                    'map' => $map->getName(),
-                    'polylineOptions' => $polylineOptions
-                ]);
-
-                // Finally the directions service
-                $directionsService = new DirectionsService([
-                    'directionsRenderer' => $directionsRenderer,
-                    'directionsRequest' => $directionsRequest
-                ]);
-
-                // Thats it, append the resulting script to the map
-                $map->appendScript($directionsService->getJs());
-
-                // Lets add a marker now
-                $marker = new Marker([
-                    'position' => $coord,
-                    'title' => 'My Home Town',
-                ]);
-
-                // Provide a shared InfoWindow to the marker
-                $marker->attachInfoWindow(
-                        new InfoWindow([
-                    'content' => '<p>This is my super cool content</p>'
-                        ])
-                );
-
-                // Add marker to the map
-                $map->addOverlay($marker);
-
-                // Now lets write a polygon
-                $coords = [
-                    new LatLng(['lat' => 25.774252, 'lng' => -80.190262]),
-                    new LatLng(['lat' => 18.466465, 'lng' => -66.118292]),
-                    new LatLng(['lat' => 32.321384, 'lng' => -64.75737]),
-                    new LatLng(['lat' => 25.774252, 'lng' => -80.190262])
-                ];
-
-                $polygon = new Polygon([
-                    'paths' => $coords
-                ]);
-
-                // Add a shared info window
-                $polygon->attachInfoWindow(new InfoWindow([
-                    'content' => '<p>This is my super cool Polygon</p>'
-                ]));
-
-                // Add it now to the map
-                $map->addOverlay($polygon);
-
-
-                // Lets show the BicyclingLayer :)
-                $bikeLayer = new BicyclingLayer(['map' => $map->getName()]);
-
-                // Append its resulting script
-                $map->appendScript($bikeLayer->getJs());
-
-// Display the map -finally :)
-                echo $map->display()
-                ?>
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="caracteristicasTitulo">
+                    <i class="fa fa-users"></i>  Optimizaci&oacute;n del trabajo del personal operativo
+                </h3>
+                <p class="caracteristicas">
+                    Al llevar un detallado registro del estado de situaci&oacute;n de los todos los servicios y el personal asignado, y las unidades operativas.
+                </p>
             </div>
         </div>
     </div>

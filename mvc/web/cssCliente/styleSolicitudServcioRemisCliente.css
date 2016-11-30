@@ -1,0 +1,63 @@
+
+#nombreAgenciaSolicitudRemisUsuario,#nombreSolicitudRemisUsuario,#apellidoSolicitudRemisUsuario,#origenSolicitudRemisUsuario,#destinoSolicitudRemisUsuario{
+    font-size:16px;
+    width: 50%;
+    size:60px;
+    float:center;	
+}
+
+#listadoChoferes,#listadoCoches{
+    font-size:16px;
+    width: 50%;
+    height: 20%;
+    size:70px;
+    float:center;	
+}
+#btn-guardar{
+    margin-left: 0px;
+    font-size:16px;
+    size:16px;
+}
+#btn-cancelar-viaje{
+    font-size:20px;
+    size:70px;
+    margin-left: 00px;
+}
+
+#botones-group-viaje{
+    margin-top: 10px;
+    margin-left: 250px;
+    display:inline-block;
+    float: center;
+    position: relative;
+}
+#asterisco-solicitud-servicio{
+    color:red;
+}
+#LoadingBlocker
+ {
+ 	z-index: 999999;
+ 	min-height: 800px;
+     height: 100%;
+     min-width: 1200px;
+     width: 100%;
+ 	position: absolute;
+ 	top: 0;
+ 	left: 0;
+ 	background-color: #fff;
+ 	filter: alpha(opacity=50);
+ 	opacity: 0.5;
+ 	-moz-opacity: 0.5;
+     display: none;
+ }
+ 
+ #LoadingImage{
+ 	z-index: 999999;
+ 	position: absolute;
+     top: 350px;
+     left: 490px;
+     height: 30px;
+     width: 30px;
+ 
+     
+ }

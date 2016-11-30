@@ -16,7 +16,7 @@ To send a Message:
 * Create an instance of the ``Swift_Mailer`` class, using the Transport as
   it's constructor parameter.
 
-* Create a Message.setContraseña
+* Create a Message.
 
 * Send the message via the ``send()`` method on the Mailer object.
 

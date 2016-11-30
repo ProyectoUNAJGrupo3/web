@@ -248,11 +248,15 @@ class Swift_Transport_StreamBuffer extends Swift_ByteStream_AbstractFilterableIn
      */
     private function _establishSocketConnection()
     {
+		
+		
         $host = $this->_params['host'];
         if (!empty($this->_params['protocol'])) {
             $host = $this->_params['protocol'].'://'.$host;
         }
         $timeout = 15;
+		
+		
         if (!empty($this->_params['timeout'])) {
             $timeout = $this->_params['timeout'];
         }
@@ -260,6 +264,10 @@ class Swift_Transport_StreamBuffer extends Swift_ByteStream_AbstractFilterableIn
         if (!empty($this->_params['sourceIp'])) {
             $options['socket']['bindto'] = $this->_params['sourceIp'].':0';
         }
+//		$options['ssl']['verify_peer'] = FALSE;              //codigo agregado
+//		$options['ssl']['verify_peer_name'] = FALSE;         //codigo agregado
+		
+		
         if (isset($this->_params['stream_context_options'])) {
             $options = array_merge($options, $this->_params['stream_context_options']);
         }
