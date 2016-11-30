@@ -62,7 +62,8 @@ class PSFormularioUsuarioModel extends Model {
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
     //    $hash = Yii::$app->getSecurity()->generatePasswordHash($this->contrasenia);             por si se aplica
-        $persona = $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'1'","'4'",null,"''"); //genera el alta del usuario y lo guarda
+        $password = crypt($this->contrasenia,Yii::$app->params["salt"]);
+        $persona = $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$password'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'1'","'4'",null,"''"); //genera el alta del usuario y lo guarda
         $this->PersonaID = array_shift($persona)['_Result'];          //setea la variable PersonaID con el personaID de la persona registrada (el store devuelve mediante el _result el personaID
         return true;
     }

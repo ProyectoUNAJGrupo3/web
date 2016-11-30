@@ -6,9 +6,9 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\Chofer\CalificacionUsuarioModel;
-use app\models\Chofer\HistorialViajesModel;
-use app\models\Chofer\HistorialCalificacionesModel;
+use app\models\Chofer\CalificacionClienteModel;
+use app\models\Chofer\ListaHistorialViajesChoferModel;
+use app\models\Chofer\ListaHistorialCalificacionesChoferModel;
 use app\models\TipoUsuario;
 
 class ChoferController extends Controller {
@@ -26,10 +26,10 @@ class ChoferController extends Controller {
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
-                    return TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID);
-                    //Llamada al m?todo que comprueba si es un administrador
-                    //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
-                }
+                            return TipoUsuario::usuarioChofer(Yii::$app->user->identity->RolID);
+                            //Llamada al m?todo que comprueba si es un administrador
+                            //Retorno el metodo del modelo que comprueba el tipo de usuario que es por el rol (1,2,3,4) etc y que devuelve true o false
+                        }
                     ]
                 ]
             ]
@@ -60,26 +60,73 @@ class ChoferController extends Controller {
     }
 
     public function actionIndex() {                      //renderiza el index de la carpeta agencia dentro de views
-        $model = new HistorialViajesModel();
+        $model = new ListaHistorialViajesChoferModel();
         return $this->render('index', ['model' => $model]);
         //return $this->render('index');
     }
-
+    /*
     public function actionListar_historial_viajes() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new HistorialViajesModel();
         return $this->render('listarHistorialViajes', ['model' => $model]);
         //return $this->render('index');
-    }
-
+    }*/
+    /*
     public function actionListar_historial_calificaciones() {                      //renderiza el index de la carpeta agencia dentro de views
-        $model = new HistorialCalificacionesModel();
-        return $this->render('listarHistorialCalificaciones', ['model' => $model]);
-        //return $this->render('index');
-    }
-
+    $model = new HistorialCalificacionesModel();
+    return $this->render('listarHistorialCalificaciones', ['model' => $model]);
+    //return $this->render('index');
+    }*/
+    /*
     public function actionCalificar_conducta_usuario() {                      //renderiza el index de la carpeta agencia dentro de views
         $model = new CalificacionUsuarioModel();
         return $this->renderAjax('calificarUsuario', ['model' => $model]);
+    }*/
+
+    public function actionLista_historial_calificaciones() {
+        $model = new ListaHistorialCalificacionesChoferModel();
+        $model->setDataProvider();
+        return $this->render("listaHistorialCalificaciones", ['model' => $model]);
     }
 
+    public function actionActualizar_historial_calificaciones() { //para probar por error de PersonaID non
+        $model = new ListaHistorialCalificacionesChoferModel();
+        $viajeSelected = Yii::$app->session['actualizar'];
+        $model->setUpdateInfo($viajeSelected);
+        $model->setDataProviderActualizado();
+        if (\Yii::$app->request->isPost)  {
+        }
+        return $this->render("listaHistorialCalificaciones", ['model' => $model]);
+    }
+
+    public function actionCalificar_cliente() {
+        $model = new CalificacionClienteModel();
+        if (\Yii::$app->request->isPost)
+        {
+            $viajeSelected = Yii::$app->session['actualizar'];
+            $model->setUpdateInfo($viajeSelected);
+            Yii::$app->session->setFlash('Calificacion Exitosa!'); //no ejecuta
+            //return $this->redirect(['chofer/lista_historial_calificaciones']);  //ESTA ES LA LINEA QUE ME TIRA EL ERROR DE PERSONAID
+            }
+
+        if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion() === true)) {
+            Yii::$app->session->setFlash('Calificacion Exitosa!'); //no ejecuta
+            return $this->redirect(['chofer/lista_historial_calificaciones']); //no ejecuta
+        }
+        return $this->renderAjax("calificarCliente", ['model' => $model]);
+    }
+
+    public function actionLista_historial_viajes() {
+        $model = new ListaHistorialViajesChoferModel();
+        $model->setDataProvider();
+        if (\Yii::$app->request->isPost)  {
+            if (\Yii::$app->request->isAjax) {
+                $selection=(array)Yii::$app->request->post('keylist');
+                $personaselected=$model->dataProvider->allModels[$selection[0]];
+                Yii::$app->session['actualizar'] = $personaselected;
+
+            }
+            //else{}*/
+        }
+        return $this->render("listaHistorialViajes", ['model' => $model]);
+    }
 }

@@ -6,21 +6,24 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
+use app\assets\AppAssetChofer;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use app\assets\BootswatchAsset;
 use app\assets\AppAssetPopups;
 
+AppAssetChofer::register($this);
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
 //AppAsset::register($this);
-AppAssetPopups::register($this);
+//AppAssetPopups::register($this);
+//Html::button('Calificar Usuario', ['value' => Url::toRoute('/chofer/calificar_cliente'), 'class' => 'btn btn-primary', 'id' => 'modalButtonCalificarUsuario']);
 
 Modal::begin([
     'id' => 'modal',
         //'size' => 'modal-lg',
 ]);
-echo "<div id='modalContentChofer'></div>";
+echo "<div id='modalContent'></div>";
 Modal::end();
 ?>
 <div class="container">
@@ -28,7 +31,7 @@ Modal::end();
         <div class="row">
             <div class="col-lg-8">
                 <h1>
-                    <strong>Historial Viajes</strong>
+                    <strong>Home Chofer</strong>
                 </h1>
                 <h1>
                     <?= Html::encode($this->title) ?>
@@ -53,11 +56,6 @@ Modal::end();
                         <?php endif; ?>
                     </p>
                 <?php else: ?>
-                    <?php $form = ActiveForm::begin(); ?>
-                    <div id='botones-group'>
-                        <?= Html::button('Calificar Usuario', ['value' => Url::toRoute('/chofer/calificar_conducta_usuario'), 'class' => 'btn btn-primary', 'id' => 'modalButtonCalificarUsuario']); ?>
-                    </div>
-                    <?php $form = ActiveForm::end(); ?>
                 <?php endif; ?>
             </div>
         </div>

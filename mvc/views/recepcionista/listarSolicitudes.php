@@ -87,7 +87,7 @@ Modal::end();
                 ['header' => '<h5>Chofer</h5>','attribute' => 'ChoferNombre','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                 ['header' => '<h5>Marca</h5>','attribute' => 'VehiculoMarca','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                 ['header' => '<h5>Modelo</h5>','attribute' => 'VehiculoModelo','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-                ['header' => '<h5>Tipo de viaje</h5>','attribute' => 'ViajeTipo','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                ['header' => '<h5>Canal</h5>','attribute' => 'ViajeTipo','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                 ['header' => '<h5>Estado</h5>','attribute' => 'Estado','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ],
             'rowOptions' => function ($model, $key, $index, $grid) {

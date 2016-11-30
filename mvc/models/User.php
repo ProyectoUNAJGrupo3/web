@@ -107,12 +107,16 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validatePassword($Password)
     {
- /*/       if (Yii::$app->getSecurity()->validatePassword($Password, $this->Password)) {
-            return true;
-        } else {
-            return false;
+        if ($this->RolID==4){
+            if (hash_equals($this->Password, crypt($Password, $this->Password))) {           //Compara el hash con el password ingresado, si son iguales devuelve true
+                return true;
+            }
+            else{
+                return false;
+            }
+        }else{
+            return $this->Password === $Password;
         }
- /*/    return $this->Password === $Password;
     }
 
     public function getListaPersonas()

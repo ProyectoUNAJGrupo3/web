@@ -55,6 +55,7 @@ class AppAssetChofer extends AssetBundle {
         'js/Maps.js',
         'js/Mapas.js',
         'js/AperturaPopupLogin.js',
+        'js/choferModal.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

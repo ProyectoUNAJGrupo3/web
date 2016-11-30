@@ -17,5 +17,6 @@ return array(
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'raoul2000\\bootswatch\\' => array($vendorDir . '/raoul2000/yii2-bootswatch-asset'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
+    'br0sk\\pusher\\' => array($vendorDir . '/br0sk/yii2-pusher'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
 );

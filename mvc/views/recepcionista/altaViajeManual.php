@@ -59,7 +59,9 @@ Modal::end();
 
             });', \yii\web\View::POS_READY);
 $this->registerJs("var agenciaCoord = ". json_encode($info).";
-initializeCenteredMap(agenciaCoord)",\yii\web\View::POS_READY);
+var canal = ". json_encode($canalAgencia).";
+ initializeCenteredMap(agenciaCoord);
+ hearTheEvent(canal);",\yii\web\View::POS_READY);
 
                                 ?>
                             </div>
@@ -109,12 +111,21 @@ initializeCenteredMap(agenciaCoord)",\yii\web\View::POS_READY);
                             <?= $form->field($model, 'ImporteTotal')->input("text", ['maxlength' => '50','id' => 'importetotal'])->label("Importe aproximado"); ?>
                             <?= $form->field($model, 'Chofer')->dropDownList($model->Choferes,['prompt'=>'Seleccione chofer'])?>
                             <?= $form->field($model, 'Vehiculo')->dropDownList($model->Vehiculos,['prompt'=>'Seleccione vehiculo'])?>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'CanalVenta')->dropDownList([1 => 'Telefonico', 2 => 'Personal'],['options' => [ 2 => ['selected ' => true]]])->label("Canal de venta") ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'TipoViaje')->dropDownList([0 => 'Viaje Normal', 1 => 'Reserva'],['options' => [ 0 => ['selected ' => true]]])->label("Tipo de viaje") ?>
+                                </div>
+                            </div>
 
                             <div class="btn-group">
-                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-primary btn-lg','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {
+                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-success','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {
 $("#processmodal").modal("hide");
 });']); ?>
-                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary btn-lg']) ?>
+                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary']) ?>
+                                <?= Html::a('Ver Solicitudes', ['/recepcionista/listasolicitudes'], ['class'=>'btn btn-primary']) ?>
                             </div>
                         </fieldset>
                     </div>

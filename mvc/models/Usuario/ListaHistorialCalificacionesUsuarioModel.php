@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 use yii\data\ArrayDataProvider;
 
 class ListaHistorialCalificacionesUsuarioModel extends Model {
-    //GetInfoCalificacion($CalificacionID, $ViajeID,$Quien, $ParaQuien,$Puntaje, $AgenciaID)
+    //GetInfoCalificacion($CalificacionID, $ViajeID, $Quien, $ParaQuien, $Puntaje, $AgenciaID)
     public $dataProvider;
     public $PersonaID;
 

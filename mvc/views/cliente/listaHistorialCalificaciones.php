@@ -43,11 +43,10 @@ AppAssetCliente::register($this);
                            ['class'  => 'yii\grid\CheckboxColumn','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Calificante</h5>','attribute' => 'Calificante','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Calificado</h5>','attribute' => 'Calificado','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Nombre de Agencia</h5>','attribute' => 'AgenciaNombre','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Agencia</h5>','attribute' => 'AgenciaNombre','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Fecha</h5>','attribute' => 'Fecha','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Puntaje</h5>','attribute' => 'Puntaje','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Comentario</h5>','attribute' => 'Comentario','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Estado</h5>','attribute' => 'Estado','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
 
                         ],
                            'rowOptions' => function ($model, $key, $index, $grid) {

@@ -8,6 +8,7 @@
 // 		    geocoder.geocode({ 'address': address}, geocodeResult);
 // 		});
 
+
 function geocodeResult(results, status) {
     // Verificamos el estatus
     if (status == 'OK') {
@@ -409,4 +410,22 @@ function calculateDistanceAndStuff(latLng) {
             alert("Algo anda mal y no andubo ):");
         }
     });
+}
+function setCenter(StringCoord) {
+    var latLng = getCoord(StringCoord);
+    console.log(latLng);
+    map.setCenter(latLng);
+}
+function doThePush(personaID) {
+    //var canal = $('#idAgencia').val();
+    //var pusher = new Pusher('e8fe2051103b337d6497');
+
+    //var notify = pusher.subscribe(canal.toString());
+
+
+    //notify.bind('personaID', function (notification) {
+    //    console.log(notification.message);
+    //    window.alert("Llego una notificacion, confirmaron tu solicitud de un remis. ")
+
+    //});
 }
