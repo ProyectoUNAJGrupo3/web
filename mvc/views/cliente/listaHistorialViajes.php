@@ -32,7 +32,6 @@ echo "<div id='modalContent'></div>";
 Modal::end();
 ?>
 
-<<<<<<< HEAD
  <div class="panel panel-primary">
         <div class="panel-heading">
             <h4 class="panel-title">&ensp; &ensp;  Historial de Viajes</h4>
@@ -133,57 +132,9 @@ Modal::end();
                          ?>
  </div>
   </div>
-=======
-<?php $form = ActiveForm::begin(); ?>
-<br />
-<br />
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h4 class="panel-title">&ensp; &ensp; Listado de Vehiculos</h4>
-    </div>
-    <div class="container">
- <?= $this->registerJs(
+
+<?= $this->registerJs(
             "$( document ).ready(function() {
      var channelInfo = ". json_encode($socketInfo).";
     doThePush(channelInfo)});",\yii\web\View::POS_READY);
         ?>
-        <div class="panel-body">
-            <div class="row">
-                <div class="table-responsive">
-
-                    <?=
-    GridView::widget(['id' => 'grid',
-        'dataProvider' => $model->dataProvider,
-        'columns' => [
-            ['header' => '<h5>Nombre Agencia</h5>','attribute' =>'AgenciaNombre','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Origen Direccion</h5>','attribute' =>'OrigenDireccion','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Destino Direccion</h5>','attribute' =>'DestinoDireccion','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Nombre Chofer</h5>','attribute' =>'ChoferNombre','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Marca Vehiculo</h5>','attribute' =>'VehiculoMarca','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Modelo Vehiculo</h5>','attribute' =>'VehiculoModelo','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Fecha Salida</h5>','attribute' =>'FechaSalida','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Importe Total</h5>','attribute' =>'ImporteTotal','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Distancia en Km</h5>','attribute' =>'Distancia','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Tipo de viaje</h5>','attribute' =>'ViajeTipo','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ['header' => '<h5>Estado</h5>','attribute' =>'Estado','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-            ],
-            /*Row Option para seleccionar*/
-            'rowOptions' => function ($model, $key, $index, $grid) {
-               return ['rowid' => $key, 'onclick' => '$(this).addClass("success").siblings().removeClass("success");','style' => 'cursor:pointer'];
-                },
-               ]);
-
-                    ?>
-                    <?= Html::Button('Calificar Servicio', ['value' => Url::toRoute('cliente/calificar_servicio'), 'class' => 'btn btn-primary', 'id' => 'buttonAbrirCalificacion']); ?>
-                </div>
-            </div>
-            <?php ActiveForm::end(); ?>
-
-            <!--</div>
-                </article>
-                </section>
-            </div>-->
-        </div>
-    </div>
-</div>
->>>>>>> 3e8e1b4649c7dcf900c548037853110766bdd700
