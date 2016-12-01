@@ -26,28 +26,6 @@ AppAssetWebSite::register($this);
 <h1>
     <?= Html::encode($this->title) ?>
 </h1>
-<?php if (Yii::$app->session->hasFlash('Recepcionista eliminado con exito')): ?>
-    <div class="alert alert-dismissible alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Operacion exitosa!</strong>
-        <a href="#" class="alert-link">Recepcionista Eliminado correctamente</a>.
-    </div>
-<?php endif ?>
-<?php if (Yii::$app->session->hasFlash('Recepcionista creado con exito')): ?>
-    <div class="alert alert-dismissible alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Operacion exitosa!</strong>
-        <a href="#" class="alert-link">Recepcionista creado con exito</a>.
-    </div>
-<?php endif ?>
-<?php if (Yii::$app->session->hasFlash('Recepcionista actualizado con exito')): ?>
-    <div class="alert alert-dismissible alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Operacion exitosa!</strong>
-        <a href="#" class="alert-link">Recepcionista actualizado correctamente</a>.
-    </div>
-<?php endif ?>
-
 
 <?php $form = ActiveForm::begin(); ?>
 <br />
@@ -63,9 +41,23 @@ AppAssetWebSite::register($this);
             <div class="row">
                 <div class="table-responsive">
                 </div>
-                <?php ActiveForm::end(); ?>
+                <?=
+                GridView::widget([
+                    'dataProvider' => $model->dataProvider,
+                    'tableOptions' => ['class' => 'table table-bordered table-hover', 'style'=>'border-collapse: collapse; border: 3px solid #df691a; '],
+                    'columns' => [
+        ['header' => '<h5>Calificante</h5>','attribute' => 'Calificante','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+        ['header' => '<h5>Chofer</h5>','attribute' => 'Calificado','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+        ['header' => '<h5>Fecha</h5>','attribute' => 'Fecha','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+        ['header' => '<h5>Puntaje</h5>','attribute' => 'Puntaje','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+        ['header' => '<h5>Comentario</h5>','attribute' => 'Comentario','contentOptions' => ['style'=>'border-color:black;',],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+                    ]
+                    ]);
+                ?>
+
                 <div  style="text-align: center">
                     <?= Html::a('Cerrar', [('/agencia/index')], ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
+                    <?php ActiveForm::end(); ?>
                 </div>
             </div>
         </div>
