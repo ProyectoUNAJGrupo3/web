@@ -20,7 +20,7 @@ use yii\helpers\Url;
 
 $this->title = 'RemisYa';
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
-BootswatchAsset::register($this);
+/*BootswatchAsset::register($this);*/
 AppAssetChofer::register($this);
 AppAsset::register($this);
 
@@ -37,7 +37,7 @@ Modal::end();
     <div class="panel-heading">
         <h4 class="panel-title">&ensp; &ensp;  Historial de Viajes</h4>
     </div>
-    <div class="container">
+    <!--<div class="container">-->
         <div class="panel-body">
             <div class="row">
                 <div class="table-responsive">
@@ -84,15 +84,25 @@ Modal::end();
                            },
                     ]);
                     ?>
+                    </div>
+             </div>
+   
                          <div id='botones-group'>
                                 <?php $form = ActiveForm::begin(); ?>
                                 <?= Html::Button('Abrir ventana calificar', ['value' => Url::toRoute('/chofer/calificar_cliente'), 'class' => 'btn btn-primary', 'id' => 'buttonAbrirCalificacion']); ?>
                           </div>
+                       </div>
+                       </div>
+
+
+</div>
+
+
+
+
                              <?php $form = ActiveForm::end(); ?>
                              </br>
                                  </br>
 
-                       
-       </div>   
-    </div>
-</div>
+                     <!-- </div>     -->
+    

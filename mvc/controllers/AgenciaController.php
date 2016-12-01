@@ -245,11 +245,13 @@ class AgenciaController extends Controller {
 
     public function actionListado_calificaciones() {
         $model = new ListadoCalificacionesModel();
+        $model->setDataProvider();
         return $this->render("listadoCalificaciones", ['model' => $model]);
     }
 
     public function actionListado_viajes() {
-        $model = new ListadoViajesModel();
+        $model = new ViajesGridModel();
+        $model->setDataProvider();
         return $this->render("listadoViajes", ['model' => $model]);
     }
     public function actionListar_viajes_totales_agencia() {
