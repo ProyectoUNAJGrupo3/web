@@ -40,6 +40,7 @@ $(function () {
 });
 });
 
+/*JS de ADMINISTRADOR DE SOLICITUDES*/
 $(function () {
 	$('#autorizarButton').click(function () {
 		var keys = $('#solicitudes_grid tr.success').attr('rowid');
@@ -79,5 +80,26 @@ $(function () {
 		});
 
 		return false;
+	});
+});
+
+
+/*JS DE ADMINISTRADOR DE TARIFAS*/
+$(function () {
+	$('#tarifasbuttonsOperaciones :button').click(function () {
+		var keys = $('#tarifas_grid tr.success').attr('rowid');
+		var operacion = $(this).attr('operacion');
+		if (operacion!='agregar'){
+			$.ajax({
+			type: 'post',
+			cache: false,
+			data: { keylist: keys, tarifa_operacion:operacion },
+			processData: true,
+		});
+		}
+		if (operacion != 'eliminar')
+		{
+			$('#tarifa_modal').modal('show').find('#modalContent').load($(this).attr('value'));
+		}
 	});
 });
