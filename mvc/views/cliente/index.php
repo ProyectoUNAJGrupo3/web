@@ -50,8 +50,7 @@ $this->title = 'Service Remis';
                                     <?= $this->registerJs('$(document).ready(function () {
                         initMap(true);
                         $("#btn-ver-remiserias").on("click", function() {doTheAjax()});
-                        $("#btn-solcitar-remis").on("click", function() {doThePush()});
-                        
+
                         });', \yii\web\View::POS_READY);
                                     ?>
 
