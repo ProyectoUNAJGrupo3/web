@@ -66,6 +66,24 @@ Modal::end();
             <?= Yii::$app->session->getFlash('eliminarTarifaError') ?>
         </div>
         <?php endif; ?>
+        <?php if (Yii::$app->session->hasFlash('tarifaActualizada')): ?>
+        <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">X</button>
+            <h4>
+                <i class="icon fa fa-check"></i>Operacion realizada.
+            </h4>
+            <?= Yii::$app->session->getFlash('tarifaActualizada') ?>
+        </div>
+        <?php endif; ?>
+        <?php if (Yii::$app->session->hasFlash('actualizar_TarifaError')): ?>
+        <div class="alert alert-danger alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">X</button>
+            <h4>
+                <i class="icon fa fa-check"></i>Operacion cancelada.
+            </h4>
+            <?= Yii::$app->session->getFlash('actualizar_TarifaError') ?>
+        </div>
+        <?php endif; ?>
         <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]); ?>
         <div class="table-responsive">
             <?=
@@ -93,6 +111,7 @@ Modal::end();
         <?php Pjax::end(); ?>
         <div id="tarifasbuttonsOperaciones">
             <?= Html::button('Agregar',['value' => Url::toRoute('recepcionista/alta_tarifa'), 'class' => 'btn btn-lg btn-primary', 'id' => 'tarifa_agregarButton','operacion'=>'agregar',]);?>
+            <?= Html::button('Modificar',['value' => Url::toRoute('recepcionista/actualizar_tarifa'), 'class' => 'btn btn-lg btn-primary', 'id' => 'tarifa_actualizarButton','operacion'=>'actualizar',]);?>
             <?= Html::button('Eliminar',['value' => Url::toRoute('recepcionista/eliminar_tarifa'), 'class' => 'btn btn-lg btn-primary', 'id' => 'tarifa_eliminarButton','operacion'=>'eliminar',]);?>
         </div>
     </div>

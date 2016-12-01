@@ -206,12 +206,39 @@ class RecepcionistaController extends Controller {
 
     public function actionAlta_cliente() {
         $model = new AltaClienteModel();
-        return $this->render('altaCliente', ['model' => $model]);
+        if ($model->load(Yii::$app->request->post()) && ($model->altaCliente() === true)) {
+            Yii::$app->session->setFlash('clienteCreado', 'Cliente creado correctamente.');
+            return $this->redirect(['administrarcliente']);
+        }
+        else
+        {
+            if($model->hasErrors())
+            {
+                $errorMessage=$model->getErrors();
+                Yii::$app->session->setFlash('agregar_ClienteError', $errorMessage['agregar_ClienteError'][0]);
+                return $this->redirect(['administrarcliente']);
+            }
+        }
+        return $this->renderAjax('altaCliente', ['model' => $model]);
     }
-
     public function actionActualizar_cliente() {
         $model = new ActualizarClienteModel();
-        return $this->render('actualizarCliente', ['model' => $model]);
+        $clienteSelected = Yii::$app->session['actualizarCliente'];
+        $model->setAtributos($clienteSelected);
+        if ($model->load(Yii::$app->request->post()) && ($model->actualizarCliente($clienteSelected['PersonaID']) === true)) {
+            Yii::$app->session->setFlash('clienteActualizado', 'Cliente actualizado correctamente.');
+            return $this->redirect(['administrarcliente']);
+        }
+        else
+        {
+            if($model->hasErrors())
+            {
+                $errorMessage=$model->getErrors();
+                Yii::$app->session->setFlash('actualizar_ClienteError', $errorMessage['actualizar_ClienteError'][0]);
+                return $this->redirect(['administrarcliente']);
+            }
+        }
+        return $this->renderAjax('actualizarCliente', ['model' => $model]);
     }
 
     public function actionAlta_tarifa() {
@@ -232,7 +259,6 @@ class RecepcionistaController extends Controller {
         //$viajeSelected = Yii::$app->session['agregarTarifa'];
         return $this->renderAjax('altaTarifa', ['model' => $model]);
     }
-
     public function actionEliminar_tarifa() {
         $model = new EliminarTarifaModel();
         $tarifaSelected = Yii::$app->session['eliminarTarifa'];
@@ -251,13 +277,59 @@ class RecepcionistaController extends Controller {
         }
         return $this->render('administrarTarifa', ['model' => $model]);
     }
-
     public function actionActualizar_tarifa() {
         $model = new ActualizarTarifaModel();
-        return $this->render('actualizarTarifa', ['model' => $model]);
+        $tarifaSelected = Yii::$app->session['actualizarTarifa'];
+        $model->setAtributos($tarifaSelected);
+        if ($model->load(Yii::$app->request->post()) && ($model->actualizarTarifa($tarifaSelected['TarifaID']) === true)) {
+            Yii::$app->session->setFlash('tarifaActualizada', 'Tarifa actualizada correctamente.');
+            return $this->redirect(['administrartarifa']);
+        }
+        else
+        {
+            if($model->hasErrors())
+            {
+                $errorMessage=$model->getErrors();
+                Yii::$app->session->setFlash('actualizar_TarifaError', $errorMessage['actualizar_TarifaError'][0]);
+                return $this->redirect(['administrartarifa']);
+            }
+        }
+        return $this->renderAjax('actualizarTarifa', ['model' => $model]);
     }
+
     public function actionAdministrarcliente() {
         $model = new AdministrarClienteModel();
+        $model->setDataProvider();
+
+        if (\Yii::$app->request->isAjax) {
+            if (\Yii::$app->request->isPost) {
+                $selection = Yii::$app->request->post('keylist');
+                $clienteSelected = $model->dataProvider->allModels[$selection];
+
+                switch (\Yii::$app->request->post('cliente_operacion')) { //TOMA EL VIAJEOPERACION QUE LE PASA EN EL DATA DEL AJAX
+                    case 'eliminar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
+                        if ($model->eliminarCliente($clienteSelected['PersonaID']) === true) {
+                            Yii::$app->session->setFlash('clienteEliminado', 'Cliente eliminado correctamente.');
+                            return $this->redirect(['administrarcliente']);
+                        }
+                        else
+                        {
+                            if($model->hasErrors())
+                            {
+                                $errorMessage=$model->getErrors();
+                                Yii::$app->session->setFlash('eliminar_ClienteError', $errorMessage['eliminar_ClienteError'][0]);
+                                return $this->redirect(['administrarcliente']);
+                            }
+                        }
+                        break;
+                    case 'actualizar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
+                        Yii::$app->session['actualizarCliente'] = $clienteSelected;
+                        break;
+                }
+
+            }
+        }
+
         return $this->render('administrarCliente', ['model' => $model]);
     }
     public function actionAdministrartarifa() {
@@ -283,6 +355,9 @@ class RecepcionistaController extends Controller {
                                 return $this->redirect(['administrartarifa']);
                             }
                         }
+                        break;
+                    case 'actualizar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
+                        Yii::$app->session['actualizarTarifa'] = $tarifaSelected;
                         break;
                 }
 
