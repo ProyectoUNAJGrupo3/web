@@ -10,7 +10,11 @@ class CalificacionClienteModel extends Model {
 
     public $puntaje;
     public $comentario;
-    public $viajeSelected;
+
+    public $viajeID;
+    public $Quien;
+    public $ParaQuien;
+    public $AgenciaID;
 
     public function rules() {
         return[
@@ -24,16 +28,17 @@ class CalificacionClienteModel extends Model {
         ];
     }
     public function setUpdateInfo($viajeSelected){
-        $this->viajeSelected = $viajeSelected;
+        $this->viajeID = $viajeSelected['ViajeID'];
+        $this->Quien = $viajeSelected['ClienteID'];
+        $this->ParaQuien = $viajeSelected['ChoferID'];
+        $this->AgenciaID = $viajeSelected['AgenciaID'];
     }
 
-    public function setCalificacion(){
+    public function setCalificacion($viajeSelected){
         $calificacion = new CalificacionesModelo();
         $fechaCalificacion = date('Y-m-d H:i:s');
-        //$IDpersona = Yii::$app->user->identity->PersonaID;
-        // $IDagencia = Yii::$app->user->identity->AgenciaID;
-
-        $calificacion->RegistrarCalificacion($this->viajeSelected['ViajeID'], $this->viajeSelected['ChoferID'], $this->viajeSelected['ClienteID'],"'$this->puntaje'","'$fechaCalificacion'", "'$this->comentario'", $this->viajeSelected['AgenciaID']);
+        $calificacion->RegistrarCalificacion($viajeSelected['ViajeID'], $viajeSelected['ChoferID'], $viajeSelected['ClienteID'],"'$this->puntaje'","'$fechaCalificacion'", "'$this->comentario'", $viajeSelected['AgenciaID']);
+        return true;
         //RegistrarCalificacion($ViajeID, $Quien, $ParaQuien, $Puntaje, $Fecha, $Comentario, $AgenciaID)
     }
 

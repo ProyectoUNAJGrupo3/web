@@ -6,7 +6,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\AppAssetChofer;
-//use app\assets\AppAssetWebSite;
+use app\assets\AppAssetWebSite;
 use yii\grid\GridView;
 use yii\helpers\BaseHtml;
 use yii\widgets\ActiveForm;
@@ -20,10 +20,19 @@ raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 /*BootswatchAsset::register($this);*/
 AppAsset::register($this);
 AppAssetChofer::register($this);
-//AppAssetWebSite::register($this);
+AppAssetWebSite::register($this);
 
 ?>
-<!--<div class="container">-->
+<h1>
+    <?= Html::encode($this->title) ?>
+</h1>
+<?php if (Yii::$app->session->hasFlash('Calificacion Exitosa')): ?>
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Operacion exitosa!</strong>
+    <a href="#" class="alert-link">Cliente Calificado con Exito</a>.
+</div>
+<?php endif ?>
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4 class="panel-title">&ensp; &ensp;  Historial de Calificaciones</h4>
