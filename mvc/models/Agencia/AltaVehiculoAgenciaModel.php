@@ -31,9 +31,9 @@ class AltaVehiculoAgenciaModel extends Model {
     }
     public function registrarvehiculo()
     {
-        $model = new VehiculosModelo(); //crea un nuevo modelo de personamodelo
+        $model = new VehiculosModelo(); //crea un nuevo modelo de vehiculomodelo
         $app = Yii::$app->user->identity->AgenciaID;
-        $tiempo = time();
+        $tiempo = date('Y-m-d H:i:s');
         $model->RegistrarVehiculo("'$this->patente'","'$this->modelo'","'$this->marca'","'$this->listaEstado'","'$tiempo'",null,"'$app'"); //genera el alta del vehiculo y lo guarda
         return true;
     }

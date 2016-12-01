@@ -45,7 +45,6 @@ AppAssetWebSite::register($this);
                 GridView::widget(['id' => 'grid',
         'dataProvider' => $model->dataProvider,
         'columns' => [
-            ['header' => '<h5>Nombre Agencia</h5>','attribute' =>'AgenciaNombre','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Origen Direccion</h5>','attribute' =>'OrigenDireccion','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Destino Direccion</h5>','attribute' =>'DestinoDireccion','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
             ['header' => '<h5>Nombre Chofer</h5>','attribute' =>'ChoferNombre','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
