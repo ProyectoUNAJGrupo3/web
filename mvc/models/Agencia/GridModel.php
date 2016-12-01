@@ -50,10 +50,10 @@ class GridModel extends Model {
         $obj->EliminarPersona($persona['PersonaID']);
         return true;
     }
-    public function eliminarvehiculo($vehiculo)
+    public function eliminarvehiculo($vehiculoid)
     {
         $obj = new VehiculosModelo();
-        $obj->EliminarVehiculo($vehiculo['VehiculoID']);
+        $obj->EliminarVehiculo($vehiculoid);
         return true;
     }
 }
