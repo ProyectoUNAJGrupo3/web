@@ -75,7 +75,7 @@ class Pusher extends Component
 	 * @param bool $debug [optional]
 	 * @return bool|string
 	 */
-	public function trigger( $channels, $event, $data, $socket_id = null, $debug = false, $already_encoded = false )
+	public function triggerEvent( $channels, $event, $data, $socket_id = null, $debug = false, $already_encoded = false )
 	{
 		$this->_pusher->trigger( $channels, $event, $data, $socket_id, $debug, $already_encoded);
 	}
