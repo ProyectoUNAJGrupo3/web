@@ -61,7 +61,6 @@ class PSFormularioUsuarioModel extends Model {
     public function AltaRegistro()
     {
         $model = new PersonasModelo(); //crea un nuevo modelo de personamodelo
-    //    $hash = Yii::$app->getSecurity()->generatePasswordHash($this->contrasenia);             por si se aplica
         $password = crypt($this->contrasenia,Yii::$app->params["salt"]);
         $persona = $model->RegistrarPersona("'$this->nombre'","'$this->apellido'","'$this->usuario'","'$password'","'$this->telefono'","'$this->correo'","'$this->direccion'","'$this->coordenadas'","'0'","'1'","'4'",null,"''"); //genera el alta del usuario y lo guarda
         $this->PersonaID = array_shift($persona)['_Result'];          //setea la variable PersonaID con el personaID de la persona registrada (el store devuelve mediante el _result el personaID

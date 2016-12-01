@@ -39,16 +39,16 @@ class AltaViajeManualModel extends Model {
             //(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
             ['origenTexto', 'required', 'message' => 'Campo obligatorio'],
             ['destinoTexto', 'required', 'message' => 'Campo obligatorio'],
-            ['origen', 'required'],
-            ['destino','required'],
+            ['origen', 'string'],
+            ['destino','string'],
             ['Distancia', 'required', 'message' => 'Campo obligatorio'],
             ['ImporteTotal', 'required', 'message' => 'Campo obligatorio'],
-            ['Chofer', 'required', 'message' => 'Campo obligatorio'],
-            ['Vehiculo', 'required', 'message' => 'Campo obligatorio'],
-            ['Comentario', 'required'],
+            ['Chofer', 'string'],
+            ['Vehiculo', 'string'],
+            ['Comentario', 'string'],
             ['CanalVenta', 'required'],
             ['TipoViaje', 'required'],
-            ['ClienteID', 'required'],
+            ['ClienteID', 'string'],
 
         ];
     }

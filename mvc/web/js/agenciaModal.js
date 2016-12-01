@@ -15,7 +15,6 @@ $(function () {
             processData: true,
             success: function () {
                 $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-                alert('sucess');
             },
             error: function () {
                 alert('Error');

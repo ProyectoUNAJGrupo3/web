@@ -41,11 +41,14 @@ AppAssetCliente::register($this);
                     <u>Datos</u>
                     <u>Calificaci&oacute;n</u>
                 </h4>
+
                 <?= $form->field($model, 'puntaje')->dropDownList(['prompt' => 'Seleccione...', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10']) ?>
                 <?= $form->field($model, 'comentario')->textArea(['rows' => 7, 'column' => 4])->label('Comentario'); ?>
+
                 <div id='botones-group'>
-                    <?= Html::submitButton('Calificar', ['class' => 'btn btn-primary', 'id' => 'btn-carga-calificacion']); ?>
-                    <?= Html::a('Cancelar', [('/cliente/lista_historial_viajes')],['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
+                    <?= Html::submitButton('Calificar', ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-carga-calificacion']); ?>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?= Html::a('Cancelar', [('cliente/lista_historial_viajes')],['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
                  </div>
                 <?php ActiveForm::end(); ?>
 
