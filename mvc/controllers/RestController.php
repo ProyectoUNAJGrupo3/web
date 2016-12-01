@@ -28,8 +28,8 @@ class RestController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                      'search'=>['get'],
-                     //'view'=>['get'],
-                     //'create'=>['post'],
+                     'flashcliente'=>['get'],
+                     'flashrecepcion'=>['get'],
                      //'update'=>['post'],
                      //'delete' => ['delete'],
                      //'deleteall'=>['post'],
@@ -88,14 +88,17 @@ class RestController extends Controller
         
         $this->setHeader(200);
         Yii::$app->response->format = Response::FORMAT_JSON;
-        //Yii::$app->response->format = 'json';
         return Json::encode($result);
-        ////$model=$this->findModel($id);
         
-        //$this->setHeader(200);
-        //echo json_encode(array('status'=>1,'data'=>array_filter($model->attributes)),JSON_PRETTY_PRINT);
+    }
+    public function actionFlashcliente(){
+        Yii::$app->session->setFlash('Se confirmo tu viaje, el remis estara llegando en pocos minutos.');
         
-    } 
+    }
+    public function actionFlashrecepcion(){
+        Yii::$app->session->setFlash('Hay una nueva solicitud web, por favor dirigase a la pestaña web para aceptar/rechazar.');
+        
+    }
    private function setHeader($status)
      {
          

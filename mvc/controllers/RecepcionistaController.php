@@ -15,6 +15,7 @@ use app\models\Recepcionista\ListaSolicitudesOnlineModel;
 use app\models\Recepcionista\AltaClienteModel;
 use app\models\Recepcionista\ActualizarClienteModel;
 use app\models\Recepcionista\AltaTarifaModel;
+use app\models\Recepcionista\EliminarTarifaModel;
 use app\models\Recepcionista\ActualizarTarifaModel;
 use app\models\Recepcionista\AdministrarClienteModel;
 use app\models\Recepcionista\AdministrarTarifaModel;
@@ -147,7 +148,7 @@ class RecepcionistaController extends Controller {
             $model->setUpdateInfo($viajeSelected);
             if ($model->load(Yii::$app->request->post()) && ($model->autorizarSolicitud() === true)) {
                 Yii::$app->session->setFlash('solicitudAutorizada', 'Solicitud autorizada.');
-                Yii::$app->pusher->trigger($viajeSelected['AgenciaID'], $viajeSelected['ClienteID'], 'Tu Remis Esta en Camino !');
+                Yii::$app->pusher->triggerEvent($viajeSelected['AgenciaID'], $viajeSelected['ClienteID'], 'Tu Remis Esta en Camino !');
                 return $this->redirect(['listasolicitudes']);
             }
         } else {
@@ -215,19 +216,79 @@ class RecepcionistaController extends Controller {
 
     public function actionAlta_tarifa() {
         $model = new AltaTarifaModel();
-        return $this->render('altaTarifa', ['model' => $model]);
+        if ($model->load(Yii::$app->request->post()) && ($model->altaTarifa() === true)) {
+            Yii::$app->session->setFlash('tarifaCreada', 'Tarifa creada correctamente.');
+            return $this->redirect(['administrartarifa']);
+        }
+        else
+        {
+            if($model->hasErrors())
+            {
+                $errorMessage=$model->getErrors();
+                Yii::$app->session->setFlash('altaTarifaError', $errorMessage['altaTarifaError'][0]);
+                return $this->redirect(['administrartarifa']);
+            }
+        }
+        //$viajeSelected = Yii::$app->session['agregarTarifa'];
+        return $this->renderAjax('altaTarifa', ['model' => $model]);
+    }
+
+    public function actionEliminar_tarifa() {
+        $model = new EliminarTarifaModel();
+        $tarifaSelected = Yii::$app->session['eliminarTarifa'];
+        if ($model->load(Yii::$app->request->post()) && ($model->eliminarTarifa($tarifaSelected['TarifaID']) === true)) {
+            Yii::$app->session->setFlash('tarifaEliminada', 'Tarifa eliminada correctamente.');
+            return $this->redirect(['administrartarifa']);
+        }
+        else
+        {
+            if($model->hasErrors())
+            {
+                $errorMessage=$model->getErrors();
+                Yii::$app->session->setFlash('eliminarTarifaError', $errorMessage['eliminarTarifaError'][0]);
+                return $this->redirect(['administrartarifa']);
+            }
+        }
+        return $this->render('administrarTarifa', ['model' => $model]);
     }
 
     public function actionActualizar_tarifa() {
         $model = new ActualizarTarifaModel();
         return $this->render('actualizarTarifa', ['model' => $model]);
     }
-    public function actionAdministrar_cliente() {
+    public function actionAdministrarcliente() {
         $model = new AdministrarClienteModel();
         return $this->render('administrarCliente', ['model' => $model]);
     }
-    public function actionAdministrar_tarifa() {
+    public function actionAdministrartarifa() {
         $model = new AdministrarTarifaModel();
+        $model->setDataProvider();
+        if (\Yii::$app->request->isAjax) {
+            if (\Yii::$app->request->isPost) {
+                $selection = Yii::$app->request->post('keylist');
+                $tarifaSelected = $model->dataProvider->allModels[$selection];
+
+                switch (\Yii::$app->request->post('tarifa_operacion')) { //TOMA EL VIAJEOPERACION QUE LE PASA EN EL DATA DEL AJAX
+                    case 'eliminar':                                      //TOMA EL VALOR DEL VIAJEOPERACION SETEADO EN EL AJAX
+                        if ($model->eliminarTarifa($tarifaSelected['TarifaID']) === true) {
+                            Yii::$app->session->setFlash('tarifaEliminada', 'Tarifa eliminada correctamente.');
+                            return $this->redirect(['administrartarifa']);
+                        }
+                        else
+                        {
+                            if($model->hasErrors())
+                            {
+                                $errorMessage=$model->getErrors();
+                                Yii::$app->session->setFlash('eliminarTarifaError', $errorMessage['eliminarTarifaError'][0]);
+                                return $this->redirect(['administrartarifa']);
+                            }
+                        }
+                        break;
+                }
+
+            }
+        }
+
         return $this->render('administrarTarifa', ['model' => $model]);
     }
 
