@@ -21,6 +21,7 @@ use app\controllers\PusherController;
 class ClienteController extends Controller {
 
     public $layout = 'mainCliente';                                             //se asocia al layout predeterminado
+    
 
     public function behaviors() {
         return [
@@ -72,11 +73,12 @@ class ClienteController extends Controller {
 
         if ($model->load(Yii::$app->request->post()) && ($model->GuardarViaje() === true)) {
             Yii::$app->pusher->trigger($model->idAgencia,'solicitudNueva','un mensaje');
+            Yii::$app->session['channel'] = $model->idAgencia;
             //$data['message'] = 'hello world';
             //$pusher->trigger('my_channel', 'my_event', $data);
-            return $this->redirect(['cliente/listar_historial_viajes']);
+            return $this->redirect(['lista_historial_viajes']);
         }
-        return $this->render("index", ['model' => $model, 'idPersona'=> $info]);
+        return $this->render("index", ['model' => $model]);
     }
     /*
     public function actionCalificar_servicio() {
@@ -124,6 +126,8 @@ class ClienteController extends Controller {
 
     public function actionLista_historial_viajes() {
         $model = new ListaHistorialViajesUsuarioModel();
+        $info = Yii::$app->session['channel'].";" .Yii::$app->user->identity->PersonaID;
+
         $model->setDataProvider();
         if (\Yii::$app->request->isPost)  {
             if (\Yii::$app->request->isAjax) {
@@ -134,7 +138,7 @@ class ClienteController extends Controller {
             }
             //else{}*/
         }
-        return $this->render("listaHistorialViajes", ['model' => $model]);
+        return $this->render("listaHistorialViajes", ['model' => $model,'socketInfo'=> $info]);
     }
 
     /*

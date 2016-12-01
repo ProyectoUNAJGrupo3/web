@@ -14,7 +14,9 @@ use yii\helpers\ArrayHelper;
 use yii\bootstrap\Button;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use yii\web\JsExpression;
 use yii\widgets\Pjax;
+use kartik\select2\Select2;
 
 AppAssetRecepcionista::register($this);
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
@@ -28,9 +30,13 @@ Modal::begin([
 ]);
 echo "Procesando...";
 Modal::end();
+
 ?>
 
 <?php if (Yii::$app->session->hasFlash('viajeCreado')): ?>
+
+
+
 <div class="alert alert-dismissible alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>Operacion exitosa!</strong>
@@ -52,13 +58,17 @@ Modal::end();
                     </div>
                     <div class="panel-body">
                         <fieldset>
+                            <?= $form->field($model, 'origenTexto')->input("text", ['id'=>'origenTexto','readonly' => true])->label("Origen"); ?>
+                            <?= $form->field($model, 'origen')->hiddenInput(['id' => 'origencoordenada'])->label(false); ?>
+                            <?= $form->field($model, 'destinoTexto')->input("text", ['id' => 'destinoTexto','readonly' => true])->label("Destino"); ?>
+                            <?= $form->field($model, 'destino')->hiddenInput(['id' => 'destinocoordenada'])->label(false);?>
                             <div id="btn-bar">
                                 <?=
                                 $this->registerJs('$(document).ready(function () {
             $("#btn-ver-remiserias").on("click", function() {getRemiserias(true)});
 
             });', \yii\web\View::POS_READY);
-$this->registerJs("var agenciaCoord = ". json_encode($info).";
+                                $this->registerJs("var agenciaCoord = ". json_encode($info).";
 var canal = ". json_encode($canalAgencia).";
  initializeCenteredMap(agenciaCoord);
  hearTheEvent(canal);",\yii\web\View::POS_READY);
@@ -71,11 +81,9 @@ var canal = ". json_encode($canalAgencia).";
                                 </div>
                                 <input id="pac-input" class="controls" type="text" placeholder="Busca tu partido / barrio " />
                             </div>
-                            <?= $form->field($model, 'Comentario')->textArea(['rows' => '4']) ?>
                         </fieldset>
                     </div>
                 </div>
-
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default">
@@ -84,10 +92,26 @@ var canal = ". json_encode($canalAgencia).";
                     </div>
                     <div class="panel-body">
                         <fieldset>
-                            <?= $form->field($model, 'origenTexto')->input("text", ['id'=>'origenTexto','readonly' => true])->label("Origen"); ?>
-                            <?= $form->field($model, 'origen')->hiddenInput(['id' => 'origencoordenada'])->label(false); ?>
-                            <?= $form->field($model, 'destinoTexto')->input("text", ['id' => 'destinoTexto','readonly' => true])->label("Destino"); ?>
-                            <?= $form->field($model, 'destino')->hiddenInput(['id' => 'destinocoordenada'])->label(false);?>
+                            <?=
+
+
+                            $form->field($model, 'ClienteID')->widget(Select2::classname(), [
+    'options' => ['placeholder' => 'Buscar un cliente...'],
+    'language' => 'es',
+    'pluginOptions' => [
+    'allowClear' => true,
+    'minimumInputLength' => 3,
+    'ajax' => [
+        'url' => Url::to(['recepcionista/clienteslist']),
+        'dataType' => 'json',
+        'data' => new JsExpression('function(params) { return {q:params.term}; }')
+    ],
+    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+    'templateResult' => new JsExpression('function(cliente) { return cliente.text; }'),
+    'templateSelection' => new JsExpression('function (cliente) { return cliente.text; }'),
+],
+])->label("Cliente");
+                            ?>
                             <div class="row">
                                 <div class="col-md-4">
                                     <?= $form->field($model, 'Distancia')->input("text", ['id'=>'distancia','maxlength' => '50','readonly' => true])->label("Distancia"); ?>
@@ -116,17 +140,13 @@ var canal = ". json_encode($canalAgencia).";
                                     <?= $form->field($model, 'CanalVenta')->dropDownList([1 => 'Telefonico', 2 => 'Personal'],['options' => [ 2 => ['selected ' => true]]])->label("Canal de venta") ?>
                                 </div>
                                 <div class="col-md-6">
-                                    <?= $form->field($model, 'TipoViaje')->dropDownList([0 => 'Viaje Normal', 1 => 'Reserva'],['options' => [ 0 => ['selected ' => true]]])->label("Tipo de viaje") ?>
+                                    <?= $form->field($model, 'TipoViaje')->dropDownList([0 => 'Viaje Normal', 4 => 'Reserva'],['options' => [ 0 => ['selected ' => true]]])->label("Tipo de viaje") ?>
                                 </div>
                             </div>
-
-                            <div class="btn-group">
-                                <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-success','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {
-$("#processmodal").modal("hide");
-});']); ?>
-                                <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-primary']) ?>
-                                <?= Html::a('Ver Solicitudes', ['/recepcionista/listasolicitudes'], ['class'=>'btn btn-primary']) ?>
-                            </div>
+                            <?= $form->field($model, 'Comentario')->textArea(['rows' => '4']) ?>
+                            <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-lg btn-primary','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {$("#processmodal").modal("hide");});']); ?>
+                            <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-lg btn-primary']) ?>
+                            <?= Html::a('Ver Solicitudes', ['/recepcionista/listasolicitudes'], ['class'=>'btn btn-lg btn-primary']) ?>
                         </fieldset>
                     </div>
                 </div>
