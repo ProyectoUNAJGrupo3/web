@@ -6,7 +6,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\AppAssetChofer;
-//use app\assets\AppAssetWebSite;
+use app\assets\AppAssetWebSite;
 use yii\grid\GridView;
 use yii\helpers\BaseHtml;
 use yii\widgets\ActiveForm;
@@ -20,7 +20,7 @@ raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 /*BootswatchAsset::register($this);*/
 AppAsset::register($this);
 AppAssetChofer::register($this);
-//AppAssetWebSite::register($this);
+AppAssetWebSite::register($this);
 
 ?>
 <!--<div class="container">-->
