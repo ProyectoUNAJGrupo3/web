@@ -35,10 +35,10 @@ class AgenciaController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'alta_vehiculo_agencia', 'alta_chofer_agencia', 'alta_telefonista_agencia', 'actualizar_vehiculo_agencia',], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'only' => ['index', 'alta_vehiculo_agencia','alta_vehiculo_agencia', 'alta_chofer_agencia', 'alta_telefonista_agencia', 'actualizar_vehiculo_agencia','actualizar_chofer_agencia','actualizar_recepcionista_agencia','listar_choferes_agencia','listar_recepcionistas_agencia','listar_vehiculo_agencia','listado_calificaciones','listado_viajes'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                     //el administrador tiene permisos sobre las siguientes acciones
-                    ['actions' => ['index', 'alta_vehiculo_agencia', 'alta_chofer_agencia', 'alta_telefonista_agencia', 'actualizar_vehiculo_agencia',],
+                    ['actions' => ['index', 'alta_vehiculo_agencia','alta_vehiculo_agencia', 'alta_chofer_agencia', 'alta_telefonista_agencia', 'actualizar_vehiculo_agencia','actualizar_chofer_agencia','actualizar_recepcionista_agencia','listar_choferes_agencia','listar_recepcionistas_agencia','listar_vehiculo_agencia','listado_calificaciones','listado_viajes'],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
@@ -88,7 +88,7 @@ class AgenciaController extends Controller {
         $model = new AltaVehiculoAgenciaModel();
         if ($model->load(Yii::$app->request->post()) && ($model->registrarvehiculo() === true)) {
             Yii::$app->session->setFlash('vehiculo creado con exito');
-            return $this->redirect(['agencia/Listar_vehiculo_agencia']);
+            return $this->redirect(['agencia/listar_vehiculo_agencia']);
         }
         return $this->renderAjax("altaVehiculo", ['model' => $model]);
     }
@@ -238,10 +238,10 @@ class AgenciaController extends Controller {
         return $this->render("listaVehiculos", ['model' => $model]);
     }
 
-    public function actionListar_viajes_turno_maniana_agencia() {
-        $model = new ListaViajesTurnoManianaModel();
-        return $this->render("listaViajesTurnoManiana", ['model' => $model]);
-    }
+ //   public function actionListar_viajes_turno_maniana_agencia() {
+ //       $model = new ListaViajesTurnoManianaModel();
+ //       return $this->render("listaViajesTurnoManiana", ['model' => $model]);
+ //   }
 
     public function actionListado_calificaciones() {
         $model = new ListadoCalificacionesModel();
@@ -254,7 +254,7 @@ class AgenciaController extends Controller {
         $model->setDataProvider();
         return $this->render("listadoViajes", ['model' => $model]);
     }
-    public function actionListar_viajes_totales_agencia() {
+/*    public function actionListar_viajes_totales_agencia() {
 
         $model = new ViajesGridModel();
         $model->setDataProvider();
@@ -266,10 +266,10 @@ class AgenciaController extends Controller {
         return $this->render("listaViajesTotales", ['model' => $model]);
     }
 
-    public function actionGetTarifa() {
-        $model = new ViajesGridModel();
-        $model->setDataProvider();
-        return $this->render("listaViajesTotales", ['model' => $model]);
-    }
-
+//    public function actionGetTarifa() {
+//        $model = new ViajesGridModel();
+//        $model->setDataProvider();
+//        return $this->render("listaViajesTotales", ['model' => $model]);
+//    }
+*/
 }
