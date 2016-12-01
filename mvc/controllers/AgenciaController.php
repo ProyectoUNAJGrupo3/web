@@ -227,9 +227,9 @@ class AgenciaController extends Controller {
                         break;
 
                     case 'eliminar':
-                        $selection =(array) Yii::$app->request->post();
-                        $vehiculoSelected = $model->dataProvider->allModels[$selection[0]];
-                        $model->eliminarvehiculo($vehiculoSelected);
+                        $selection=(array)Yii::$app->request->post('keylist');
+                        $personaselected=$model->dataProvider->allModels[$selection[0]];
+                        $model->eliminarvehiculo($personaselected['VehiculoID']);
                         Yii::$app->session->setFlash('Vehiculo eliminado con exito');
                         return $this->refresh();
                 }
