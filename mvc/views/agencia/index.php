@@ -11,13 +11,13 @@ use app\assets\BootswatchAsset;
 raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
 BootswatchAsset::register($this);
 AppAssetAgencia::register($this);
-AppAsset::register($this);
+/*AppAsset::register($this);*/
 /* @var $this yii\web\View */             //modifique el div class ="site-index" por el "agencia-index"
 $this->title = 'Service Remis';
 ?>
 <div class="container">
     <div class="jumbotron">
-        <h1><b>Bienvenido Nombre Usuario</b></h1>
+        <h1><b>Bienvenido <?php echo Yii::$app->user->identity->Nombre?></b></h1>
         <div class="row">
             <blockquote>
                 <div>
