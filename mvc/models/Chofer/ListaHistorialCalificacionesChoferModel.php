@@ -22,7 +22,8 @@ class ListaHistorialCalificacionesChoferModel extends Model {
         $this->PersonaID = Yii::$app->user->identity->PersonaID;
         $obj = new CalificacionesModelo();
         $this->dataProvider = new ArrayDataProvider([
-        'allModels' => $obj->GetInfoCalificacion(null, null, $this->PersonaID, null, null, null)
+        'allModels' => $obj->GetInfoCalificacion(null, null, $this->PersonaID, null, null, null),
+                'pagination' => [ 'pageSize' => 10 ],
         ]);
 
         return true;

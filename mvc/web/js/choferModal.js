@@ -1,6 +1,7 @@
 ﻿$(function () {
     $('#buttonAbrirCalificacion').click(function () {
-        var keys = $('#grid').yiiGridView('getSelectedRows'); //var keys = $('#grid tr.success').attr('rowid'); 
+    	//var keys = $('#grid').yiiGridView('getSelectedRows'); //var keys = $('#grid tr.success').attr('rowid'); 
+    	var keys = $('#grid tr.success').attr('rowid');
         $.ajax({
             type: 'post',
             cache: false,
@@ -8,7 +9,7 @@
             processData: true,
             success: function () {
                 $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-                alert('Sucess');
+                //alert('Sucess');
             },
             error: function () {
                 alert('Error');
