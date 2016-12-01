@@ -148,7 +148,7 @@ class RecepcionistaController extends Controller {
             $model->setUpdateInfo($viajeSelected);
             if ($model->load(Yii::$app->request->post()) && ($model->autorizarSolicitud() === true)) {
                 Yii::$app->session->setFlash('solicitudAutorizada', 'Solicitud autorizada.');
-                //Yii::$app->pusher->trigger($viajeSelected['AgenciaID'], $viajeSelected['ClienteID'], 'Tu Remis Esta en Camino !');
+                Yii::$app->pusher->triggerEvent($viajeSelected['AgenciaID'], $viajeSelected['ClienteID'], 'Tu Remis Esta en Camino !');
                 return $this->redirect(['listasolicitudes']);
             }
         } else {
