@@ -40,6 +40,11 @@ Modal::end();
         <h4 class="panel-title">&ensp; &ensp; Listado de Vehiculos</h4>
     </div>
     <div class="container">
+ <?= $this->registerJs(
+            "$( document ).ready(function() {
+     var channelInfo = ". json_encode($socketInfo).";
+    doThePush(channelInfo)});",\yii\web\View::POS_READY);
+        ?>
         <div class="panel-body">
             <div class="row">
                 <div class="table-responsive">
