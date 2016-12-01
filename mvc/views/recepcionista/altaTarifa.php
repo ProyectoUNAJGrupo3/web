@@ -27,15 +27,15 @@ $this->title = 'RemisYa';
     </div>
     <div class="panel-body">
 
-        <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]); ?>
-        <div class="table-responsive">
-
-        </div>
-
+        <?php $form = ActiveForm::begin(); ?>
+        <?= $form->field($model, 'ViajeMinimo')->input("decimal", ['maxlength' => '10','id' => 'tarifa_viajeminimo'])->label("Precio de viaje minimo"); ?>
+        <?= $form->field($model, 'KmMinimo')->input("decimal", ['maxlength' => '10','id' => 'tarifa_km_minimo'])->label("Km Minimo"); ?>
+        <?= $form->field($model, 'PrecioKM')->input("decimal", ['maxlength' => '10','id' => 'tarifa_preciokm'])->label("Precio por Km"); ?>
+        <?= $form->field($model, 'Comision')->input("decimal", ['maxlength' => '10','id' => 'tarifa_comision'])->label("Porcentaje de comision"); ?>
+        <?= $form->field($model, 'Estado')->dropDownList([1 => 'Habilitado', 0 => 'Deshabilitado'],['options' => [ 1 => ['selected ' => true]]])->label("Estado") ?>
+            <?= Html::submitButton('Confirmar', ['class' => 'btn btn-lg btn-primary']); ?>
+            <?= Html::resetButton('Limpiar', ['class' => 'btn btn-lg btn-primary']); ?>
         <?php ActiveForm::end(); ?>
-        <div id="solicitudesbuttonsOperaciones">
-            <?= Html::button('Agregar', ['class' => 'btn btn-lg btn-primary', 'id' => 'autorizarButton', 'operacion' => 'autorizar',]); ?>
-            <?= Html::button('Cerrar', ['class' => 'btn btn-lg btn-primary', 'name' => 'submit', 'operacion' => 'rechazar']); ?>
-        </div>
+
     </div>
 </div>
