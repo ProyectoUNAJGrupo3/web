@@ -16,7 +16,7 @@ use app\models\Usuario\CalificacionServicioModel;
 use app\models\Agencia\ViajesGridModel;
 use app\models\Agencia\GridModel;
 use app\controllers\PusherController;
-
+use yii\helpers\Url;
 
 class ClienteController extends Controller {
 
@@ -27,10 +27,10 @@ class ClienteController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
+                'only' => ['index','Lista_historial_calificaciones','Calificar_servicio', 'Lista_historial_viajes'], //solo debe aplicarse a las acciones login, logout , admin,recepcionista, chofer y cliente. Todas las demas acciones no estan sujetas al control de acceso
                 'rules' => [                              //reglas
                     //el administrador tiene permisos sobre las siguientes acciones
-                    ['actions' => ['index'],
+                    ['actions' => ['index','Lista_historial_calificaciones','Calificar_servicio', 'Lista_historial_viajes'],
                         'allow' => true,
                         'roles' => ['@'], //El arroba es para el usuario autenticado
                         'matchCallback' => function ($rule, $action) {                    //permite escribir la l?gica de comprobaci?n de acceso arbitraria, las paginas que se intentan acceder solo pueden ser permitidas si es un...
@@ -109,18 +109,20 @@ class ClienteController extends Controller {
     }
 
     public function actionCalificar_servicio() {
-        $model = new CalificacionServicioModel();
-        if (\Yii::$app->request->isPost)
+
+        if (isset(Yii::$app->session['actualizar']))
         {
             $viajeSelected = Yii::$app->session['actualizar'];
-            $model->setUpdateInfo($viajeSelected);
-            //Yii::$app->session->setFlash('Calificacion Exitosa!');
-            //return $this->redirect(['cliente/listar_historial_calificaciones']);
         }
-        if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion() === true)) {
-            Yii::$app->session->setFlash('Calificacion Exitosa!');
+        else {
+            $viajeSelected = null;
+        }
+        $model = new CalificacionServicioModel();
+        if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion($viajeSelected) === true)) {
+            Yii::$app->session->setFlash('Calificacion Exitosa');
             return $this->redirect(['cliente/lista_historial_calificaciones']);
             }
+        $model->setUpdateInfo($viajeSelected);
         return $this->renderAjax("calificarServicio", ['model' => $model]);
     }
 

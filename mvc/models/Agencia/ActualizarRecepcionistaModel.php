@@ -58,7 +58,7 @@ class ActualizarRecepcionistaModel extends Model {
     {
         $model = new PersonasModelo();
         $app = Yii::$app->user->identity->AgenciaID;
-        $model->ModificarPersona("'$id'","'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'",null,"''","''","''","'0'","'0'","'3'","'$this->dni'","'$app'"); //genera el alta del chofer y lo guarda
+        $model->ModificarPersona("'$id'","'$this->nombre'","'$this->apellido'","'$this->usuario'","'$this->contrasenia'","'$this->telefono'",null,"''","''","''","'0'","'0'","'2'","'$this->dni'","'$app'"); //genera la modificacion de la recepcionista y lo guarda
         return true;
     }
 
