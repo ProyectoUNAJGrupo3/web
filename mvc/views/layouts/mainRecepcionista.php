@@ -58,6 +58,22 @@ $this->title = 'Recepcionista';
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Solicitudes Online'), 'url' => ['/recepcionista/listasolicitudes'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         ],
                     ],
+                    [
+                        'label' => '<span class="fa fa-users"></span> ' . Html::encode('Clientes'),
+                        'items' => [
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/recepcionista/administrarcliente'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                        //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Alta'), 'url' => ['/recepcionista/alta_cliente'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                        //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Modificacion'), 'url' => ['/recepcionista/actualizar_cliente'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                        ],
+                    ],
+                    [
+                        'label' => '<span class="fa fa-usd"></span> ' . Html::encode('Tarifas'),
+                        'items' => [
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/recepcionista/administrartarifa'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                        //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Alta'), 'url' => ['/recepcionista/alta_tarifa'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                        //['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Modificacion'), 'url' => ['/recepcionista/actualizar_tarifa'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                        ],
+                    ],
                     //['label' => 'Ver Solicitud', 'url' => ['recepcionista/ver_datos_solicitud_de_servicio']],
                     Yii::$app->user->isGuest ? (
                             //['label' => 'Login', 'url' => ['/site/login'], 'id'=>'btn-login','onClick()'=>'abrirLoginDesdeBotonLoginHeader()']

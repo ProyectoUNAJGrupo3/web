@@ -72,7 +72,7 @@ class ClienteController extends Controller {
         $info = Yii::$app->user->identity->PersonaID;
 
         if ($model->load(Yii::$app->request->post()) && ($model->GuardarViaje() === true)) {
-            Yii::$app->pusher->trigger($model->idAgencia,'solicitudNueva','un mensaje');
+            //Yii::$app->pusher->trigger($model->idAgencia,'solicitudNueva','un mensaje');
             Yii::$app->session['channel'] = $model->idAgencia;
             //$data['message'] = 'hello world';
             //$pusher->trigger('my_channel', 'my_event', $data);

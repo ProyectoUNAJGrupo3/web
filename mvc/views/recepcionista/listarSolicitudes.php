@@ -100,9 +100,10 @@ Modal::end();
         <?php ActiveForm::end(); ?>
         <?php Pjax::end(); ?>
         <div id="buttonsOperaciones">
-            <?= Html::button('Cerrar viaje',['value' => Url::toRoute('recepcionista/listaviajes'),'class' => 'btn btn-lg btn-primary','name'=>'submit','operacion'=>'cerrar']);?>
-            <?= Html::button('Cancelar viaje',['value' => Url::toRoute('recepcionista/listaviajes'),'class' => 'btn btn-lg btn-primary','name'=>'submit','operacion'=>'cancelar']);?>
-            <?= Html::button('Actualizar viaje',['value' => Url::toRoute('recepcionista/actualizarviaje'), 'class' => 'btn btn-lg btn-primary', 'id' => 'actualizarButton','operacion'=>'actualizar',]);?>
+            <?= Html::button('Cerrar',['value' => Url::toRoute('recepcionista/listaviajes'),'class' => 'btn btn-lg btn-primary','name'=>'submit','operacion'=>'cerrar']);?>
+            <?= Html::button('Cancelar',['value' => Url::toRoute('recepcionista/listaviajes'),'class' => 'btn btn-lg btn-primary','name'=>'submit','operacion'=>'cancelar']);?>
+            <?= Html::button('Actualizar',['value' => Url::toRoute('recepcionista/actualizarviaje'), 'class' => 'btn btn-lg btn-primary', 'id' => 'actualizarButton','operacion'=>'actualizar',]);?>
+            <?= Html::button('Enviar',['value' => Url::toRoute('recepcionista/listaviajes'),'class' => 'btn btn-lg btn-primary','name'=>'submit','operacion'=>'enviar']);?>
         </div>
     </div>
 </div>

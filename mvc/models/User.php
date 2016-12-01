@@ -107,7 +107,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validatePassword($Password)
     {
-        if ($this->RolID==4){
+        if ($this->RolID==4 or $this->RolID==1){
             if (hash_equals($this->Password, crypt($Password, $this->Password))) {           //Compara el hash con el password ingresado, si son iguales devuelve true
                 return true;
             }
