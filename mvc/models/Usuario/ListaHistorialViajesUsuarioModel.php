@@ -18,7 +18,8 @@ class ListaHistorialViajesUsuarioModel extends Model {
 
         $obj = new ViajesModelo();
         $this->dataProvider = new ArrayDataProvider([
-        'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,NULL,$this->PersonaID,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+        'allModels' => $obj->GetInfoViajes(NULL,NULL,NULL,NULL,NULL,NULL,$this->PersonaID,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+        'pagination' => [ 'pageSize' => 10 ],
         ]);
 
         return true;

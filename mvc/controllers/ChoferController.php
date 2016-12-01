@@ -126,8 +126,8 @@ class ChoferController extends Controller {
         $model->setDataProvider();
         if (\Yii::$app->request->isPost)  {
             if (\Yii::$app->request->isAjax) {
-                $selection=(array)Yii::$app->request->post('keylist');
-                $personaselected=$model->dataProvider->allModels[$selection[0]];
+                $selection=Yii::$app->request->post('keylist');
+                $personaselected=$model->dataProvider->allModels[$selection];
                 Yii::$app->session['actualizar'] = $personaselected;
 
             }
