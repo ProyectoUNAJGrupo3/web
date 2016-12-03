@@ -38,7 +38,6 @@ AppAssetWebSite::register($this);
         <div class="panel-heading">
             <h4 class="panel-title">&ensp; &ensp;  Historial de Calificaciones</h4>
         </div>
-        <div class="container">
             <div class="panel-body">
                 <div class="row">
                     <div class="table-responsive">
@@ -64,4 +63,3 @@ AppAssetWebSite::register($this);
                 </div>
             </div>
         </div>
-    </div>

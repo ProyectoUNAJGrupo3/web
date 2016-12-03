@@ -79,7 +79,6 @@ Modal::end();
                         ['header' => '<h5>Marca</h5>','attribute' => 'Marca','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                         ['header' => '<h5>Modelo</h5>','attribute' => 'Modelo','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                         ['header' => '<h5>Matricula</h5>','attribute' => 'Matricula','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
-                        ['header' => '<h5>Estado</h5>','attribute' => 'Estado','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
                         ],
                        'rowOptions' => function ($model, $key, $index, $grid) {
                            return ['rowid' => $key, 'onclick' => '$(this).addClass("success").siblings().removeClass("success");','style' => 'cursor:pointer'];

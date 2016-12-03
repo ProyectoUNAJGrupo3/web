@@ -8,7 +8,7 @@ $(function () {
             processData: true,
             success: function () {
                 $('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
-                alert('Sucess');
+                //alert('Sucess');
             },
             error: function () {
                 alert('Error');

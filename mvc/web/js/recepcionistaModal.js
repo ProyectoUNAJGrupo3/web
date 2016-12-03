@@ -1,3 +1,4 @@
+/*JS de ADMINISTRADOR DE VIAJES*/
 $(function () {
 	$('#actualizarButton').click(function () {
 		var keys = $('#viajes_grid tr.success').attr('rowid');
@@ -100,6 +101,27 @@ $(function () {
 		if (operacion != 'eliminar')
 		{
 			$('#tarifa_modal').modal('show').find('#modalContent').load($(this).attr('value'));
+		}
+	});
+});
+
+/*JS DE ADMINISTRADOR DE CLIENTES*/
+$(function () {
+	$('#clientesbuttonsOperaciones :button').click(function () {
+		var keys = $('#clientes_grid tr.success').attr('rowid');
+		var operacion = $(this).attr('operacion');
+		if (operacion != 'agregar')
+		{
+			$.ajax({
+				type: 'post',
+				cache: false,
+				data: { keylist: keys, cliente_operacion: operacion },
+				processData: true,
+			});
+		}
+		if (operacion != 'eliminar')
+		{
+			$('#cliente_modal').modal('show').find('#modalContent').load($(this).attr('value'));
 		}
 	});
 });

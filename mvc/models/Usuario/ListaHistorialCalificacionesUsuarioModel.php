@@ -17,7 +17,8 @@ class ListaHistorialCalificacionesUsuarioModel extends Model {
         $PersonaID = Yii::$app->user->identity->PersonaID;
         $obj = new CalificacionesModelo();
         $this->dataProvider = new ArrayDataProvider([
-        'allModels' => $obj->GetInfoCalificacion(null, null, $PersonaID, null, null, null)
+        'allModels' => $obj->GetInfoCalificacion(null, null, $PersonaID, null, null, null),
+        'pagination' => [ 'pageSize' => 10 ],
         ]);
 
         return true;

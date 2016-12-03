@@ -129,7 +129,6 @@ class ClienteController extends Controller {
     public function actionLista_historial_viajes() {
         $model = new ListaHistorialViajesUsuarioModel();
         $info = Yii::$app->session['channel'].";" .Yii::$app->user->identity->PersonaID;
-
         $model->setDataProvider();
         if (\Yii::$app->request->isPost)  {
             if (\Yii::$app->request->isAjax) {
