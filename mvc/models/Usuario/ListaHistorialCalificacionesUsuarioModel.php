@@ -11,13 +11,14 @@ use yii\data\ArrayDataProvider;
 class ListaHistorialCalificacionesUsuarioModel extends Model {
     //GetInfoCalificacion($CalificacionID, $ViajeID, $Quien, $ParaQuien, $Puntaje, $AgenciaID)
     public $dataProvider;
-    public $PersonaID;
+
 
     public function setDataProvider() {
-        $this->PersonaID = Yii::$app->user->identity->PersonaID;
+        $PersonaID = Yii::$app->user->identity->PersonaID;
         $obj = new CalificacionesModelo();
         $this->dataProvider = new ArrayDataProvider([
-        'allModels' => $obj->GetInfoCalificacion(null, null, $this->PersonaID, null, null, null)
+        'allModels' => $obj->GetInfoCalificacion(null, null, $PersonaID, null, null, null),
+        'pagination' => [ 'pageSize' => 10 ],
         ]);
 
         return true;

@@ -10,6 +10,11 @@ use app\models\Chofer\CalificacionClienteModel;
 use app\models\Chofer\ListaHistorialViajesChoferModel;
 use app\models\Chofer\ListaHistorialCalificacionesChoferModel;
 use app\models\TipoUsuario;
+use app\models\Agencia\ViajesGridModel;
+use app\models\Agencia\GridModel;
+use app\controllers\PusherController;
+use yii\helpers\Url;
+
 
 class ChoferController extends Controller {
 
@@ -87,7 +92,7 @@ class ChoferController extends Controller {
         $model->setDataProvider();
         return $this->render("listaHistorialCalificaciones", ['model' => $model]);
     }
-
+    /*
     public function actionActualizar_historial_calificaciones() { //para probar por error de PersonaID non
         $model = new ListaHistorialCalificacionesChoferModel();
         $viajeSelected = Yii::$app->session['actualizar'];
@@ -96,22 +101,23 @@ class ChoferController extends Controller {
         if (\Yii::$app->request->isPost)  {
         }
         return $this->render("listaHistorialCalificaciones", ['model' => $model]);
-    }
+    }*/
 
     public function actionCalificar_cliente() {
-        $model = new CalificacionClienteModel();
-        if (\Yii::$app->request->isPost)
+
+        if (isset(Yii::$app->session['actualizar']))
         {
             $viajeSelected = Yii::$app->session['actualizar'];
-            $model->setUpdateInfo($viajeSelected);
-            Yii::$app->session->setFlash('Calificacion Exitosa!'); //no ejecuta
-            //return $this->redirect(['chofer/lista_historial_calificaciones']);  //ESTA ES LA LINEA QUE ME TIRA EL ERROR DE PERSONAID
-            }
-
-        if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion() === true)) {
-            Yii::$app->session->setFlash('Calificacion Exitosa!'); //no ejecuta
-            return $this->redirect(['chofer/lista_historial_calificaciones']); //no ejecuta
         }
+        else {
+            $viajeSelected = null;
+        }
+        $model = new CalificacionClienteModel();
+        if ($model->load(Yii::$app->request->post()) && ($model->setCalificacion($viajeSelected) === true)) {
+            Yii::$app->session->setFlash('Calificacion Exitosa');
+            return $this->redirect(['chofer/lista_historial_calificaciones']);
+        }
+        $model->setUpdateInfo($viajeSelected);
         return $this->renderAjax("calificarCliente", ['model' => $model]);
     }
 
@@ -120,8 +126,8 @@ class ChoferController extends Controller {
         $model->setDataProvider();
         if (\Yii::$app->request->isPost)  {
             if (\Yii::$app->request->isAjax) {
-                $selection=(array)Yii::$app->request->post('keylist');
-                $personaselected=$model->dataProvider->allModels[$selection[0]];
+                $selection=Yii::$app->request->post('keylist');
+                $personaselected=$model->dataProvider->allModels[$selection];
                 Yii::$app->session['actualizar'] = $personaselected;
 
             }

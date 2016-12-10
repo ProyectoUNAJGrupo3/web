@@ -26,28 +26,6 @@ AppAssetWebSite::register($this);
 <h1>
     <?= Html::encode($this->title) ?>
 </h1>
-<?php if (Yii::$app->session->hasFlash('Recepcionista eliminado con exito')): ?>
-    <div class="alert alert-dismissible alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Operacion exitosa!</strong>
-        <a href="#" class="alert-link">Recepcionista Eliminado correctamente</a>.
-    </div>
-<?php endif ?>
-<?php if (Yii::$app->session->hasFlash('Recepcionista creado con exito')): ?>
-    <div class="alert alert-dismissible alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Operacion exitosa!</strong>
-        <a href="#" class="alert-link">Recepcionista creado con exito</a>.
-    </div>
-<?php endif ?>
-<?php if (Yii::$app->session->hasFlash('Recepcionista actualizado con exito')): ?>
-    <div class="alert alert-dismissible alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Operacion exitosa!</strong>
-        <a href="#" class="alert-link">Recepcionista actualizado correctamente</a>.
-    </div>
-<?php endif ?>
-
 
 <?php $form = ActiveForm::begin(); ?>
 <br />
@@ -63,9 +41,27 @@ AppAssetWebSite::register($this);
             <div class="row">
                 <div class="table-responsive">
                 </div>
-                <?php ActiveForm::end(); ?>
+                <?=
+                GridView::widget(['id' => 'grid',
+        'dataProvider' => $model->dataProvider,
+        'columns' => [
+            ['header' => '<h5>Origen Direccion</h5>','attribute' =>'OrigenDireccion','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Destino Direccion</h5>','attribute' =>'DestinoDireccion','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Nombre Chofer</h5>','attribute' =>'ChoferNombre','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Marca Vehiculo</h5>','attribute' =>'VehiculoMarca','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Modelo Vehiculo</h5>','attribute' =>'VehiculoModelo','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Fecha Salida</h5>','attribute' =>'FechaSalida','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Importe Total</h5>','attribute' =>'ImporteTotal','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Distancia en Km</h5>','attribute' =>'Distancia','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Tipo de viaje</h5>','attribute' =>'ViajeTipo','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ['header' => '<h5>Estado</h5>','attribute' =>'Estado','contentOptions' => ['style'=>'border-color:black;'],'headerOptions' => ['style'=>'border-color:black;background-color:#df691a;']],
+            ]
+               ]);
+                ?>
+
                 <div style="text-align: center">
                     <?= Html::a('Cerrar', [('/agencia/index')], ['class' => 'btn btn-primary btn-lg', 'id' => 'btn-cancelar']); ?>
+                    <?php ActiveForm::end(); ?>
                 </div>
             </div>
         </div>

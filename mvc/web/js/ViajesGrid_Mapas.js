@@ -381,6 +381,7 @@ function initMap(isindex) {
 		else
 		{
 			$('#coordenadas').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
+			$('#altacliente_coordenada').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
 			geocoder.geocode({ 'location': latlng }, function (results, status) {
 				if (status === google.maps.GeocoderStatus.OK)
 				{
@@ -388,6 +389,7 @@ function initMap(isindex) {
 					{
 
 						$('#psformulariousuariomodel-direccion').val(results[0].formatted_address);
+						$('#altacliente_direccion').val(results[0].formatted_address);
 						$('#pac-input').val(results[1].formatted_address);
 						//map.setZoom(11);
 						//var marker = new google.maps.Marker({
