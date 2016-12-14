@@ -85,9 +85,9 @@ BootswatchAsset::register($this);
                 <!--<hr style="border:1px solid gray;">-->
 
                 <span id="footer-copy-right" style="text-align:center"> 
-                    <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
-                    <i class="fa fa-phone-square"></i> &nbsp; 011-4369-4657 &nbsp; &nbsp; 011-4287-5324 &nbsp; &nbsp;
-                    <i class="fa fa-envelope"></i> &nbsp; administracion@remisya.com
+                     <i class="fa fa-map-marker"></i>   Contactenos:&nbsp; &nbsp; &nbsp; &nbsp;
+               <!--     <i class="fa fa-phone-square"></i> -->-&nbsp; P&aacute;gina de prueba &nbsp;- &nbsp;&nbsp;&nbsp;&nbsp;
+                     <i class="fa fa-envelope"></i> &nbsp; EmpresaRemisYa@gmail.com
                 </span>
             </div>
         </footer>
