@@ -190,7 +190,7 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticator implements Swift_Transport_Es
      */
     protected function sendMessage3($response, $username, $password, $timestamp, $client, Swift_Transport_SmtpAgent $agent, $v2 = true)
     {
-        list($domain, $username) = $this->getDomainAndusername($username);
+        list($domain, $username) = $this->getDomainAndUsername($username);
         //$challenge, $context, $targetInfoH, $targetName, $domainName, $workstation, $DNSDomainName, $DNSServerName, $blob, $ter
         list($challenge, , , , , $workstation, , , $blob) = $this->parseMessage2($response);
 
@@ -290,7 +290,7 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticator implements Swift_Transport_Es
      *
      * @return array
      */
-    protected function getDomainAndusername($name)
+    protected function getDomainAndUsername($name)
     {
         if (strpos($name, '\\') !== false) {
             return explode('\\', $name);

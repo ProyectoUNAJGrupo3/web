@@ -20,10 +20,15 @@ class AppAsset extends AssetBundle {
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/styleHomeComunATodasLasVistas.css',
+        'css/styleFooter.css',
+        'css/styleHeader.css',
+        'css/styleHomeAgencia.css',
+        'css/styleAccesoDenegado.css',
+        'css/styleQuienesSomos.css',
+        'css/styleLoginPopup.css',
     ];
     public $js = [
-        'js/Maps.js',
-        'js/Mapas.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

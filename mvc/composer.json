@@ -18,13 +18,17 @@
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "2amigos/yii2-google-maps-library": "*",
-        "yiisoft/yii2-jui": "^2.0"
+        "yiisoft/yii2-jui": "^2.0",
+        "yiisoft/yii2-gii": "^2.0",
+        "thomaspark/bootswatch": "^3.3",
+        "raoul2000/yii2-bootswatch-asset": "^1.2",
+        "pusher/pusher-php-server": "^2.6",
+        "br0sk/yii2-pusher": "0.*",
+        "kartik-v/yii2-widget-select2": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
-        "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*"
     },
     "config": {

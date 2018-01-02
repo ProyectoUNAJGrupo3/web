@@ -4,7 +4,7 @@ namespace Faker\Provider\ja_JP;
 
 class Internet extends \Faker\Provider\Internet
 {
-    protected static $usernameFormats = array(
+    protected static $userNameFormats = array(
         '{{lastNameAscii}}.{{firstNameAscii}}',
         '{{firstNameAscii}}.{{lastNameAscii}}',
         '{{firstNameAscii}}##',
@@ -40,9 +40,9 @@ class Internet extends \Faker\Provider\Internet
     /**
      * @example 'suzuki.taro'
      */
-    public function username()
+    public function userName()
     {
-        $format = static::randomElement(static::$usernameFormats);
+        $format = static::randomElement(static::$userNameFormats);
 
         return static::bothify($this->generator->parse($format));
     }

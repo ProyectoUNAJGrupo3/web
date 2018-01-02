@@ -37,7 +37,7 @@ describe('jquery-typeahead.js', function() {
     if (env['CI']) {
       host = 'localhost';
       port = 4445;
-      username = env['SAUCE_username'];
+      username = env['SAUCE_USERNAME'];
       password = env['SAUCE_ACCESS_KEY'];
     }
 

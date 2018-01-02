@@ -4,14 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749
+class ComposerStaticInitd68d322733195dcd7f426a9ada23fced
 {
     public static $files = array (
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -27,23 +24,22 @@ class ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
-        'd' => 
+        'r' => 
         array (
-            'dosamigos\\google\\maps\\' => 22,
+            'raoul2000\\bootswatch\\' => 21,
+        ),
+        'k' => 
+        array (
+            'kartik\\select2\\' => 15,
+            'kartik\\base\\' => 12,
         ),
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
         ),
-        'P' => 
+        'b' => 
         array (
-            'Psr\\Http\\Message\\' => 17,
-        ),
-        'G' => 
-        array (
-            'GuzzleHttp\\Psr7\\' => 16,
-            'GuzzleHttp\\Promise\\' => 19,
-            'GuzzleHttp\\' => 11,
+            'br0sk\\pusher\\' => 13,
         ),
         'F' => 
         array (
@@ -88,29 +84,25 @@ class ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
-        'dosamigos\\google\\maps\\' => 
+        'raoul2000\\bootswatch\\' => 
         array (
-            0 => __DIR__ . '/..' . '/2amigos/yii2-google-maps-library',
+            0 => __DIR__ . '/..' . '/raoul2000/yii2-bootswatch-asset',
+        ),
+        'kartik\\select2\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2',
+        ),
+        'kartik\\base\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
         ),
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
         ),
-        'Psr\\Http\\Message\\' => 
+        'br0sk\\pusher\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-        ),
-        'GuzzleHttp\\Psr7\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
-        ),
-        'GuzzleHttp\\Promise\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
-        ),
-        'GuzzleHttp\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+            0 => __DIR__ . '/..' . '/br0sk/yii2-pusher',
         ),
         'Faker\\' => 
         array (
@@ -135,12 +127,19 @@ class ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749
         ),
     );
 
+    public static $classMap = array (
+        'Pusher' => __DIR__ . '/..' . '/pusher/pusher-php-server/lib/Pusher.php',
+        'PusherException' => __DIR__ . '/..' . '/pusher/pusher-php-server/lib/Pusher.php',
+        'PusherInstance' => __DIR__ . '/..' . '/pusher/pusher-php-server/lib/Pusher.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticIniteb34d47de643d45e3b8f0fd652f7f749::$prefixesPsr0;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd68d322733195dcd7f426a9ada23fced::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd68d322733195dcd7f426a9ada23fced::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitd68d322733195dcd7f426a9ada23fced::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitd68d322733195dcd7f426a9ada23fced::$classMap;
 
         }, null, ClassLoader::class);
     }

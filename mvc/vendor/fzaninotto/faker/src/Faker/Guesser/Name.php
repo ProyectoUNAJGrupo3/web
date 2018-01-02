@@ -47,7 +47,7 @@ class Name
             case 'username':
             case 'login':
                 return function () use ($generator) {
-                    return $generator->username;
+                    return $generator->userName;
                 };
             case 'email':
             case 'emailaddress':
